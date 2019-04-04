@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.mapper.SystemMapper">
+
+<!--获取菜单-->
+    <select id="getMenuList" parameterType="java.util.Map" resultType="com.project.model.Menu">
+
+        select * from system_menu
+        where 1=1
+        <choose>
+            <when test="parentId != null  and parentId != '' ">
+                and parent =#{parentId}
+            </when>
+            <otherwise>
+                and parent =0
+            </otherwise>
+        </choose>
+        order  by orders
+    </select>
+
+
+    <select id="checkUser" parameterType="com.project.model.User" resultType="com.project.model.User">
+        select * from sdb_user
+        where username =#{username}
+        and password =#{password}
+        limit 1
+    </select>
+
+
+
+</mapper>
