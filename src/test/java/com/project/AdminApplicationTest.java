@@ -15,7 +15,8 @@ public class AdminApplicationTest {
 
         @Test
         public  void testIsExit() {
-            boolean b = context.containsBean("test");
-            System.out.println(b);
+            boolean b = context.containsBean("custConfig");
+            Object custConfig = context.getBean("custConfig");
+            System.out.println(custConfig);
         }
 }
