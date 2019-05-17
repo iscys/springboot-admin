@@ -1,5 +1,6 @@
 package com.project.config.interceptor;
 
+import com.project.model.Const;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,7 +15,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         if(uri.contains("js") ||uri.contains("login") ||uri.contains("css"))
         return true;
         else{
-            Object user = request.getSession().getAttribute("user");
+            Object user = request.getSession().getAttribute(Const.USER);
             if(user==null){
                 response.sendRedirect("/guide/login");
                 return false;

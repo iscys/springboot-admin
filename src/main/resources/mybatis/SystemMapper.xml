@@ -20,7 +20,7 @@
 
 
     <select id="checkUser" parameterType="com.project.model.User" resultType="com.project.model.User">
-        select * from sdb_user
+        select * from sys_user
         where username =#{username}
         and password =#{password}
         limit 1

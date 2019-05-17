@@ -26,7 +26,7 @@ layui.config({
 				password :paramObj.password
 			},
 			success: function (result) {
-				//console.log(result);//打印服务端返回的数据(调试用)
+
 				if(result.flag =="1"){
 					window.location.href = "/guide/index";
 				}else{

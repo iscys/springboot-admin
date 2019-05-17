@@ -2,8 +2,7 @@ package com.project.model;
 
 public class User {
 
-    private String openid;
-    private String unionid;
+
     private String nickname;
     private String sex;
     private String relname;
@@ -21,22 +20,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getOpenid() {
-        return openid;
-    }
-
-    public void setOpenid(String openid) {
-        this.openid = openid;
-    }
-
-    public String getUnionid() {
-        return unionid;
-    }
-
-    public void setUnionid(String unionid) {
-        this.unionid = unionid;
     }
 
     public String getNickname() {
