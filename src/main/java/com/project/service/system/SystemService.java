@@ -1,4 +1,4 @@
-package com.project.service;
+package com.project.service.system;
 
 import com.project.model.Menu;
 import com.project.model.ResultObject;

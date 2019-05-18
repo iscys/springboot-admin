@@ -4,7 +4,7 @@ import com.project.controller.BaseController;
 import com.project.model.MessageModel.ErrorMessage;
 import com.project.model.ResultObject;
 import com.project.model.User;
-import com.project.service.SystemService;
+import com.project.service.system.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;

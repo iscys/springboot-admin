@@ -1,9 +1,9 @@
-package com.project.service.impl;
+package com.project.service.system.impl;
 import com.project.model.Menu;
 import com.project.mapper.SystemMapper;
 import com.project.model.MessageModel;
 import com.project.model.User;
-import com.project.service.SystemService;
+import com.project.service.system.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
