@@ -3,6 +3,7 @@ package com.project.service.ocard.impl;
 import com.project.mapper.ocard.OcardMapper;
 import com.project.service.ocard.OcardService;
 import com.project.utils.DataPager;
+import com.project.utils.DateUtils;
 import com.project.utils.Layui;
 import com.project.utils.PageData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,14 @@ public class OcardServiceImpl implements OcardService {
         DataPager dp =DataPager.page(1,50,pd,total);
         List<Map<String,String>> ticketList=ocardMapper.getOilTicketList(pd);
         if(!CollectionUtils.isEmpty(ticketList)){
+            for(Map<String,String> ticket:ticketList){
+                String used_time =String.valueOf(ticket.get("used_time"));
+                if(used_time.equals("0")){
+                    ticket.put("used_time","未使用");
+                }else{
+                    ticket.put("used_time", DateUtils.timestamp2date(Long.valueOf(used_time)));
+                }
+            }
             return Layui.success(dp.getTotalRecords(),ticketList);
         }else{
             return Layui.empty();

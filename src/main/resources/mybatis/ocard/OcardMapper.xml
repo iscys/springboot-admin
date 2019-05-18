@@ -14,6 +14,7 @@
     from
     chuang_user_ticket
     limit #{startIndex},#{pageSize}
+    order by order_sn desc
    </select>
 
 
