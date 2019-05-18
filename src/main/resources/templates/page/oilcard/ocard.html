@@ -36,7 +36,7 @@
 			elem: '#spstable'
 			, height: 700
 			, url: '/ocard/ocardList' //数据接口
-			, title: '用户表'
+			, title: '油券列表'
 			, page: true //开启分页
 			,limit:50
 			,page:{
@@ -48,10 +48,11 @@
 					[
 						[ //表头
 							//{type: 'checkbox', fixed: 'left'},
-							{field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
-							, {field: 'username', title: '用户名', width: 80}
-							, {field: 'experience', title: '积分', width: 90, sort: true}
-							, {field: 'sex', title: '性别', width: 80, sort: true}
+
+							, {field: 'code', title: '油券号', width: 130, fixed: 'left'}
+							, {field: 'order_sn', title: '订单号', width: 130}
+							, {field: 'uid', title: '绑定状态', width: 80}
+							, {field: 'used_time', title: '使用时间', width: 80}
 							, {fixed: 'right', width: 165, align: 'center', toolbar: '#utils'}
 						]
 					]

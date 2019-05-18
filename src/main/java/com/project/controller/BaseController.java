@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import com.project.utils.PageData;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,5 +22,13 @@ public class BaseController {
     public HttpServletRequest getRequest() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         return request;
+    }
+
+    /**
+     * h请求信息封装到Map 中
+     * @return
+     */
+    public PageData getPageData(){
+        return new PageData(this.getRequest());
     }
 }

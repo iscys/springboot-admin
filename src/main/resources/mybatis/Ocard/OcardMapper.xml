@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.mapper.ocard.OcardMapper">
+
+
+   <select id="getOilTicketTotal" parameterType="com.project.utils.PageData" resultType="java.lang.Integer">
+    select count(1)
+    from
+    chuang_user_ticket
+   </select>
+
+    <select id="getOilTicketList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
+    select id,code,uid,is_used,order_id,order_sn,used_time,code_price
+    from
+    chuang_user_ticket
+    limit #{startIndex},#{pageSize}
+   </select>
+
+
+</mapper>

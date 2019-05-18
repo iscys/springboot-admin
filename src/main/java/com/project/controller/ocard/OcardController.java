@@ -3,6 +3,7 @@ package com.project.controller.ocard;
 import com.project.controller.BaseController;
 import com.project.service.ocard.OcardService;
 import com.project.utils.Layui;
+import com.project.utils.PageData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,15 +34,10 @@ public class OcardController extends BaseController {
     @ResponseBody
     public Layui ocardList(){
 
+        PageData pd = this.getPageData();
+        Layui ticketList= ocardService.getOilTicketList(pd);
 
-        List<Map<String,String>> data= new ArrayList<>();
-        HashMap<String,String> map =new HashMap<String,String>();
-        map.put("id","1");
-        map.put("username","111");
-        map.put("experience","90");
-        map.put("sex","那么");
-        data.add(map);
-        return Layui.success(1,data);
+        return ticketList;
     }
 
 }
