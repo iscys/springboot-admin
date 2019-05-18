@@ -41,7 +41,7 @@ public class GuideController extends BaseController {
     @RequestMapping("/login")
     public ModelAndView toLogin(){
         ModelAndView mv = this.getModelAndView();
-        mv.addObject("loginname","超级卖家后台管理登陆");
+        mv.addObject("loginname","超级卖家商业运营管理有限公司");
         mv.setViewName("page/login/login");
         return mv;
     }
