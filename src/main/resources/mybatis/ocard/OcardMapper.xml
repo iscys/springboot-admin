@@ -5,7 +5,7 @@
 
    <select id="getOilTicketTotal" parameterType="com.project.utils.PageData" resultType="java.lang.Integer">
     select count(1)
-    from
+    fromn
     chuang_user_ticket
    </select>
 
