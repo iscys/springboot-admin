@@ -5,7 +5,7 @@
 
 <body class="childrenBody">
 
-<table class="layui-hide" id="spstable" lay-filter="test"></table>
+<table class="layui-hide" id="spstable" lay-filter="spstable"></table>
 
 
 
@@ -72,11 +72,11 @@
 					}
 				}
 
-
+	/**
 		//监听行工具事件
-		table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+		table.on('tool(spstable)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
 			var data = obj.data //获得当前行数据
-					, layEvent = obj.event; //获得 lay-event 对应的值
+			layEvent = obj.event; //获得 lay-event 对应的值
 			if (layEvent === 'detail') {
 				layer.msg('查看操作');
 			} else if (layEvent === 'del') {
@@ -89,7 +89,7 @@
 				layer.msg('编辑操作');
 			}
 		})
-
+		**/
 	});
 
 </script>
