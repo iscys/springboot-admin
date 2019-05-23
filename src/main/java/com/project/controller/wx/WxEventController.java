@@ -5,6 +5,7 @@ import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
+import me.chanjar.weixin.mp.bean.message.WxMpXmlOutTextMessage;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -67,8 +68,14 @@ public class WxEventController {
         logger.info("----接收到了微信的请求---");
         WxMpXmlMessage wxMpXmlMessage = WxMpXmlMessage.fromXml(request.getInputStream());
         wxService.wxSubQrcode(wxMpXmlMessage);
-
-
+        WxMpXmlOutMessage wxMpXmlOutMessage = wxService.toRouter(wxMpXmlMessage);
+        response.setContentType("text/html;charset=utf-8");
+        //发送文本消息
+        PrintWriter writer = response.getWriter();
+        if(wxMpXmlOutMessage!=null) {
+            writer.write(wxMpXmlOutMessage.toXml());
+        }
+        writer.close();
     }
 
 
