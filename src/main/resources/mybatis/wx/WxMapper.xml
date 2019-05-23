@@ -159,6 +159,9 @@
             <if test="phone != null  and phone != '' ">
                 phone= #{phone},
             </if>
+            <if test="name != null  and name != '' ">
+                name= #{name},
+            </if>
             <if test="time != null  and time != '' ">
                 time= #{time},
             </if>
