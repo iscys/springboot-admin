@@ -39,14 +39,13 @@ public class SubscribeHandler implements WxMpMessageHandler {
         String eventKey = wxMessage.getEventKey();//业务员编号，如果是二维码扫描进来的
         String create_time =String.valueOf(wxMessage.getCreateTime());
         String from_user =wxMessage.getFromUser();//用户openid
+        HashMap<String, String> achieve =new HashMap<>();
         WxMpUser wxMpUser = wxMpService.getUserService().userInfo(from_user);//获取用户的信息
                 String unionid = wxMpUser.getUnionId();
-                HashMap<String, String> achieve =new HashMap<>();
                 achieve.put("openid", from_user);
                 achieve.put("time", create_time);
                 achieve.put("unionid", !StringUtils.isEmpty(unionid) ? unionid : "");
             if(!StringUtils.isEmpty(eventKey)) { //说明是通过扫描二维码进入的
-                achieve = new HashMap<>();
                 achieve.put("sceneId", eventKey);
                 achieve.put("type", "1");
                 //保存推广业绩
@@ -55,7 +54,9 @@ public class SubscribeHandler implements WxMpMessageHandler {
                 logger.info("---保存推广信息成功---");
             }
             HashMap<String,String> userInfo =new HashMap<>();
-            userInfo=achieve;
+            userInfo.put("openid",from_user);
+            userInfo.put("unionid", !StringUtils.isEmpty(unionid) ? unionid : "");
+            userInfo.put("time", create_time);
             userInfo.put("nickname",wxMpUser.getNickname());
             userInfo.put("headimgurl",wxMpUser.getHeadImgUrl());
             userInfo.put("sex", String.valueOf(wxMpUser.getSex()));
