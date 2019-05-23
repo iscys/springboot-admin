@@ -67,7 +67,7 @@ public class WxServiceImpl implements WxService, InitializingBean {
                 .end()
                 .rule()
                 .async(false)
-                .event(WxConsts.EventType.UNSUBSCRIBE)
+                .event(WxConsts.EventType.UNSUBSCRIBE)//处理取消关注事件
                 .handler(unsubscribeHandler)
                 .end()
                 .rule()

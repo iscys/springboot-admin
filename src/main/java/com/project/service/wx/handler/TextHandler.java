@@ -33,11 +33,15 @@ public class TextHandler implements WxMpMessageHandler {
         WxMpUser wxMpUser = wxMpService.getUserService().userInfo(from_user);//获取用户的信息
         String unionId = wxMpUser.getUnionId();
         //关注成功发送文本消息
+        //关注成功发送文本消息
         WxMpXmlOutTextMessage reText = WxMpXmlOutMessage.TEXT()
                 .fromUser(wxMessage.getToUser())
                 .toUser(wxMessage.getFromUser())
-                .content("欢迎关注超级卖家!~~ ")
+                .content("欢迎来到超级卖家\n" +
+                        "我们是购物终端、创业孵化基地、社区服务中心为一体，其中涉及农业、旅游、互联网、零售、服务、教育等多个行业。整合移动互联网和各大商业模式，打造新型的服务模式和商业模式。\n" +
+                        "会员体验资格请回复：姓名+手机号，等待程序上线，即可体验折扣加油优惠！")
                 .build();
         return reText;
+
     }
 }
