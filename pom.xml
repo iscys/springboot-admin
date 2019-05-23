@@ -23,13 +23,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-thymeleaf</artifactId>
             </dependency>
-
+<!--
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
                 <scope>test</scope>
             </dependency>
-
+-->
             <!--Alibaba 连接池-->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -69,6 +69,20 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>19.0</version>
+            </dependency>
+
+
+            <!-- 微信开发Java SDK公共模块 -->
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-common</artifactId>
+                <version>3.1.0</version>
+            </dependency>
+            <!-- 微信公众号Java SDK-->
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-mp</artifactId>
+                <version>3.1.0</version>
             </dependency>
 
         </dependencies>

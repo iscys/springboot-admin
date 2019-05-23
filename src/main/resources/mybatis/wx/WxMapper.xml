@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.mapper.wx.WxMpper">
+
+<!--保存业务员业绩-->
+<insert id="saveTuiGuangAchievement" parameterType="java.util.Map">
+    insert  into
+     sdb_buyers_wx_tuiguang_achievement
+     <trim prefix="(" suffix=")"  suffixOverrides=",">
+         <if test="openid != null  and openid != '' ">
+             openid,
+         </if>
+         <if test="unionid != null  and unionid != '' ">
+             unionid,
+         </if>
+         <if test="time != null  and time != '' ">
+             time,
+         </if>
+         <if test="sceneId != null  and time != '' ">
+             sceneId,
+         </if>
+     </trim>
+    <trim prefix="values(" suffix=")"  suffixOverrides=",">
+        <if test="openid != null  and openid != '' ">
+            #{openid},
+        </if>
+        <if test="unionid != null  and unionid != '' ">
+            #{unionid},
+        </if>
+        <if test="time != null  and time != '' ">
+            #{time},
+        </if>
+        <if test="sceneId != null  and time != '' ">
+            #{sceneId},
+        </if>
+    </trim>
+
+</insert>
+
+<!--保存关注的用户-->
+<insert id="saveTuiGuangUserInfo" parameterType="java.util.Map">
+    insert  into
+    sdb_buyers_wx_tuiguang_fans
+    <trim prefix="(" suffix=")"  suffixOverrides=",">
+        <if test="openid != null  and openid != '' ">
+            openid,
+        </if>
+        <if test="unionid != null  and unionid != '' ">
+            unionid,
+        </if>
+        <if test="nickname != null  and nickname != '' ">
+            nickname,
+        </if>
+        <if test="headimgurl != null  and headimgurl != '' ">
+            headimgurl,
+        </if>
+        <if test="sex != null  and sex != '' ">
+            sex,
+        </if>
+        <if test="qrScene != null  and qrScene != '' ">
+            qrScene,
+        </if>
+        <if test="country != null  and country != '' ">
+            country,
+        </if>
+        <if test="city != null  and city != '' ">
+            city,
+        </if>
+        <if test="province != null  and province != '' ">
+            province,
+        </if>
+        <if test="phone != null  and phone != '' ">
+            phone,
+        </if>
+        <if test="time != null  and time != '' ">
+            time,
+        </if>
+    </trim>
+    <trim prefix="values(" suffix=")"  suffixOverrides=",">
+        <if test="openid != null  and openid != '' ">
+            #{openid},
+        </if>
+        <if test="unionid != null  and unionid != '' ">
+            #{unionid},
+        </if>
+        <if test="nickname != null  and nickname != '' ">
+            #{nickname},
+        </if>
+        <if test="headimgurl != null  and headimgurl != '' ">
+            #{headimgurl},
+        </if>
+        <if test="sex != null  and sex != '' ">
+            #{sex},
+        </if>
+        <if test="qrScene != null  and qrScene != '' ">
+            #{qrScene},
+        </if>
+        <if test="country != null  and country != '' ">
+            #{country},
+        </if>
+        <if test="city != null  and city != '' ">
+            #{city},
+        </if>
+        <if test="province != null  and province != '' ">
+            #{province},
+        </if>
+        <if test="phone != null  and phone != '' ">
+            #{phone},
+        </if>
+        <if test="time != null  and time != '' ">
+            #{time},
+        </if>
+    </trim>
+
+</insert>
+
+  <!--用户取消关注取消推广信息-->
+    <update id="cancelTuiguang" parameterType="java.util.Map">
+         update sdb_buyers_wx_tuiguang_achievement
+         set type ='0'
+         where 1=1
+        <if test="openid != null  and openid != '' ">
+          and  openid= #{openid}
+        </if>
+        <if test="unionid != null  and unionid != '' ">
+            and  unionid= #{unionid}
+        </if>
+
+    </update>
+    <!--得到用户的信息-->
+    <select id="getTuiGuangUserInfo" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from
+        sdb_buyers_wx_tuiguang_fans
+        where 1=1
+        <if test="openid != null  and openid != '' ">
+            and  openid= #{openid}
+        </if>
+        <if test="unionid != null  and unionid != '' ">
+            and  unionid= #{unionid}
+        </if>
+    </select>
+
+    <update id="updateTuiGuangUserInfo" parameterType="java.util.Map">
+            update  sdb_buyers_wx_tuiguang_fans
+        <trim prefix="SET"  suffixOverrides=",">
+
+            <if test="nickname != null  and nickname != '' ">
+                nickname=  #{nickname},
+            </if>
+            <if test="headimgurl != null  and headimgurl != '' ">
+                headimgurl= #{headimgurl},
+            </if>
+            <if test="sex != null  and sex != '' ">
+                sex= #{sex},
+            </if>
+            <if test="qrScene != null  and qrScene != '' ">
+                qrScene= #{qrScene},
+            </if>
+            <if test="phone != null  and phone != '' ">
+                phone= #{phone},
+            </if>
+            <if test="time != null  and time != '' ">
+                time= #{time},
+            </if>
+        </trim>
+        where 1=1
+        <if test="openid != null  and openid != '' ">
+            and openid = #{openid}
+        </if>
+        <if test="unionid != null  and unionid != '' ">
+            and unionid= #{unionid}
+        </if>
+
+    </update>
+
+</mapper>
