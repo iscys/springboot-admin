@@ -28,6 +28,11 @@ public class Layui {
         return new Layui(2, Const.NO_DATA,0,null);
     }
 
+    public static Layui error(){
+
+        return new Layui(3, Const.NO_DATA,0,null);
+    }
+
     public Layui(int code, String msg, int count, Object data) {
         this.code = code;
         this.msg = msg;
