@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.mapper.wx.WxTuiGuangMapper">
+
+
+    <select id="getTuiGuangTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+       select count(1)
+       from (
+        select count(1) as achive ,us.name ,us.sceneId
+        from
+        sdb_buyers_wx_tuiguang_achievement ac
+        left join
+         sdb_buyers_wx_tuiguang us
+        on
+        ac.sceneId =us.sceneId
+        where 1=1
+        group by ac.sceneId, name
+        ) a
+    </select>
+
+    <select id="getTuiGuangList" parameterType="java.util.Map" resultType="java.util.Map">
+        select count(1) as achive ,us.name ,us.sceneId
+         from
+        sdb_buyers_wx_tuiguang_achievement ac
+        left join
+        sdb_buyers_wx_tuiguang us
+        on ac.sceneId =us.sceneId
+        where 1=1
+     <!--   and date_format(ac.create_time,'%Y-%m-%d') < STR_TO_DATE('2019-08-19','%Y-%m-%d')-->
+        group by ac.sceneId, name
+        limit #{startIndex},#{pageSize}
+    </select>
+
+<select id="getWxCodeTicket" parameterType="com.project.utils.PageData" resultType="java.util.Map">
+
+        select id,sceneId,name,ticket from
+        sdb_buyers_wx_tuiguang
+        where 1=1
+    <if test="sceneId != null  and sceneId != '' ">
+      and   sceneId =#{sceneId}
+    </if>
+    <if test="ticket != null  and ticket != '' ">
+        and ticket =#{ticket}
+    </if>
+    <if test="id != null  and id != '' ">
+        and id =#{id}
+    </if>
+</select>
+
+</mapper>

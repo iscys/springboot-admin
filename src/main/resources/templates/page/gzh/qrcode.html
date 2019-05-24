@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<span th:insert="head::common_js_css"></span>
+
+<body class="childrenBody">
+
+<div th:if="${null!=ticket}">
+	<img th:src="${ticket.ticket}" style="height: inherit; width: inherit;">
+</div>
+
+</body>
+</html>
