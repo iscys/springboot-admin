@@ -21,7 +21,7 @@ public class ToolsUtils {
 
 
     public static void main(String[] args) {
-        System.out.println(checkMobileNumber("wqeqweds1"));
+
     }
 
 }
