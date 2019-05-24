@@ -98,6 +98,7 @@ public class TextHandler implements WxMpMessageHandler {
             return reText;
         }
         //关注成功发送文本消息
+        //https://blog.csdn.net/lanbuff/article/details/52450579 微信emoji表情代码
         WxMpXmlOutTextMessage reText = WxMpXmlOutMessage.TEXT()
                 .fromUser(wxMessage.getToUser())
                 .toUser(wxMessage.getFromUser())
