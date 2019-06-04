@@ -86,7 +86,7 @@
 		//表单重载
 
 		$(".search_btn").on("click",function(){
-			if($("#order_sn").val().length!=0){
+
 				table.reload("tableList",{
 					page: {
 						curr: 1 //重新从第 1 页开始
@@ -95,7 +95,6 @@
 						order_sn: $("#order_sn").val()  //搜索的关键字
 					}
 				})
-			}
 		})
 
 
