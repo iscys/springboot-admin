@@ -4,7 +4,18 @@
 <span th:insert="head::common_js_css"></span>
 
 <body class="childrenBody">
+<blockquote class="layui-elem-quote quoteBox">
+	<form class="layui-form">
+		<!--layui-input-inline-->
+		<div class="layui-form-item">
+			<label class="layui-form-label">输入框</label>
+			<div class="layui-input-block">
+				<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+			</div>
+		</div>
 
+	</form>
+</blockquote>
 <table class="layui-hide" id="spstable" lay-filter="spstable"></table>
 
 
@@ -31,7 +42,7 @@
 		//执行一个 table 实例
 		table.render({
 			elem: '#spstable'
-			, height:'full-20'//窗口-20
+			, height:'full-150'//窗口-20
 			, url: '/ocard/ocardList' //数据接口
 			, title: '油券列表'
 			, page: true //开启分页
