@@ -2,6 +2,7 @@ package com.project.service.ocard.impl;
 
 import com.project.mapper.ocard.OcardMapper;
 import com.project.model.OilCardTicket;
+import com.project.model.ResultObject;
 import com.project.service.ocard.OcardService;
 import com.project.utils.DataPager;
 import com.project.utils.DateUtils;
@@ -66,5 +67,11 @@ public class OcardServiceImpl implements OcardService {
     @Override
     public OilCardTicket getOcardTicketInfo(PageData pd) {
         return ocardMapper.getOcardTicketInfo(pd);
+    }
+
+    @Override
+    public ResultObject updateExpress(PageData pd) {
+        ocardMapper.updateExpress(pd);
+        return ResultObject.success(null);
     }
 }

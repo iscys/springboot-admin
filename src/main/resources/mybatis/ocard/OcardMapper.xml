@@ -90,4 +90,21 @@
         </if>
     </select>
 
+
+    <update id="updateExpress" parameterType="com.project.utils.PageData">
+       update
+         chuang_user_ticket_card_address
+
+        <trim prefix="SET"  suffixOverrides=",">
+
+            <if test="express_name != null  and express_name != '' ">
+                express_name=  #{express_name},
+            </if>
+            <if test="express_mobile != null  and express_mobile != '' ">
+                express_mobile= #{express_mobile},
+            </if>
+        </trim>
+         where id=#{id}
+    </update>
+
 </mapper>

@@ -2,6 +2,7 @@ package com.project.controller.ocard;
 
 import com.project.controller.BaseController;
 import com.project.model.OilCardTicket;
+import com.project.model.ResultObject;
 import com.project.service.ocard.OcardService;
 import com.project.utils.Layui;
 import com.project.utils.PageData;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -95,6 +97,22 @@ public class OcardController extends BaseController {
         mv.addObject("ticket",ticket);
         mv.setViewName("page/oilcard/ocardTicketInfo");
         return mv;
+    }
+
+    @PostMapping("/updateExpress")
+    @ResponseBody
+    public ResultObject updateExpress(){
+        logger.info("--更新配送人信息---");
+        PageData pd = this.getPageData();
+        ModelAndView mv = this.getModelAndView();
+        try {
+            ResultObject result = ocardService.updateExpress(pd);
+            return result;
+        }catch(Exception e){
+            return ResultObject.error(null);
+        }
+
+
     }
 
 }

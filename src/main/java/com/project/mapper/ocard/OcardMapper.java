@@ -17,4 +17,6 @@ public interface OcardMapper {
     int getOcardTicketTotal(PageData pd);
 
     OilCardTicket getOcardTicketInfo(PageData pd);
+
+     void updateExpress(PageData pd);
 }
