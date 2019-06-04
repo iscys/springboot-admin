@@ -15,13 +15,12 @@
 			</div>
 			<label class="layui-form-label">油券号</label>
 			<div class="layui-input-inline">
-				<input type="text" name="ticket_sn" placeholder="请输入油券"  class="layui-input">
+				<input type="text" name="ticket_sn" id ="code" placeholder="请输入油券"  class="layui-input">
 			</div>
 			<label class="layui-form-label">选项</label>
 			<div class="layui-input-inline">
 				<select>
 						<option value=""></option>
-						<option th:each="in ,inStat:${select}" th:value="${inStat.index}" th:text="${in}"></option>
 				</select>
 			</div>
 		<div>
@@ -100,7 +99,8 @@
 						curr: 1 //重新从第 1 页开始
 					},
 					where: {
-						order_sn: $("#order_sn").val()  //搜索的关键字
+						order_sn: $("#order_sn").val() , //搜索的关键字
+						order: $("#code").val()
 					}
 				})
 		})
