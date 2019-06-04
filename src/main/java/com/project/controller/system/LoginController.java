@@ -11,12 +11,12 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 
-@RestController
 @RequestMapping("/auth")
 public class LoginController extends BaseController{
 
@@ -28,6 +28,7 @@ public class LoginController extends BaseController{
      * @return
      */
     @RequestMapping("/login")
+    @ResponseBody
     public ResultObject checkLogin(@ModelAttribute User user, HttpSession session){
 
         if(StringUtils.isEmpty(user.getUsername())){
@@ -55,6 +56,7 @@ public class LoginController extends BaseController{
      */
     @RequestMapping("/logout")
     public String logout(User user, HttpSession session){
+        session.removeAttribute(Const.USER);
         return "redirect:/guide/index";
     }
 
