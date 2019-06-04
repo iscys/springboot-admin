@@ -7,12 +7,20 @@
     select count(1)
     from
     chuang_user_ticket
+       where 1=1
+       <if test="order_sn !=null  and parentId != '' ">
+           and order_sn=#{order_sn}
+       </if>
    </select>
 
     <select id="getOilTicketList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
     select id,code,uid,is_used,order_id,order_sn,used_time,code_price
     from
     chuang_user_ticket
+    where 1=1
+    <if test="order_sn !=null  and parentId != '' ">
+        and order_sn=#{order_sn}
+    </if>
     order by order_sn desc
     limit #{startIndex},#{pageSize}
 
