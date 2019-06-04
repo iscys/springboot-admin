@@ -62,4 +62,9 @@ public class OcardServiceImpl implements OcardService {
         List<OilCardTicket> ticketList=ocardMapper.getOcardTicketList(pd);
         return  Layui.success(dp.getTotalRecords(),ticketList);
     }
+
+    @Override
+    public OilCardTicket getOcardTicketInfo(PageData pd) {
+        return ocardMapper.getOcardTicketInfo(pd);
+    }
 }

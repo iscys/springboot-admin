@@ -74,4 +74,20 @@
         limit #{startIndex},#{pageSize}
     </select>
 
+
+    <select id="getOcardTicketInfo"  parameterType="com.project.utils.PageData" resultType="com.project.model.OilCardTicket">
+        select * from
+         chuang_user_ticket_card_address
+         where 1=1
+        <if test="order_sn !=null  and order_sn != '' ">
+            and order_sn =#{order_sn}
+        </if>
+        <if test="id !=null  and id != '' ">
+            and id =#{id}
+        </if>
+        <if test="order_id !=null  and order_id != '' ">
+            and order_id =#{order_id}
+        </if>
+    </select>
+
 </mapper>

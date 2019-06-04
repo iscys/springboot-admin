@@ -1,6 +1,7 @@
 package com.project.controller.ocard;
 
 import com.project.controller.BaseController;
+import com.project.model.OilCardTicket;
 import com.project.service.ocard.OcardService;
 import com.project.utils.Layui;
 import com.project.utils.PageData;
@@ -81,14 +82,17 @@ public class OcardController extends BaseController {
     }
 
     /**
-     * 油券实体卡列表
+     * 油券实体卡信息
      * @return
      */
     @RequestMapping("/ocardTicketInfo")
     @ResponseBody
     public ModelAndView ocardTicketInfo(){
         logger.info("--油券实体卡详情---");
+        PageData pd = this.getPageData();
         ModelAndView mv = this.getModelAndView();
+        OilCardTicket ticket = ocardService.getOcardTicketInfo(pd);
+        mv.addObject("ticket",ticket);
         mv.setViewName("page/oilcard/ocardTicketInfo");
         return mv;
     }

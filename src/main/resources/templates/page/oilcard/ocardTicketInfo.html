@@ -9,58 +9,58 @@
     <div class="layui-form-item">
         <label class="layui-form-label">配送订单 </label>
         <div class="layui-input-inline">
-            <input type="text" class="layui-input"  readonly="readonly">
+            <input th:value="${ticket.getOrder_sn()}" type="text" class="layui-input"  readonly="readonly">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">接收人 </label>
         <div class="layui-input-inline">
-            <input type="text" class="layui-input"  readonly="readonly">
+            <input th:value="${ticket.getRealname()}" type="text" class="layui-input"  readonly="readonly">
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">接收人电话 </label>
         <div class="layui-input-inline">
-            <input type="text" class="layui-input"  readonly="readonly">
+            <input th:value="${ticket.getMobile()}" type="text" class="layui-input"  readonly="readonly">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">接收人省 </label>
         <div class="layui-input-inline">
-            <input type="text" class="layui-input"  readonly="readonly">
+            <input th:value="${ticket.getProv()}" type="text" class="layui-input"  readonly="readonly">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">接收人市 </label>
         <div class="layui-input-inline">
-            <input type="text" class="layui-input"  readonly="readonly">
+            <input th:value="${ticket.getCity()}" type="text" class="layui-input"  readonly="readonly">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">接收人区 </label>
         <div class="layui-input-inline">
-            <input type="text" class="layui-input"  readonly="readonly">
+            <input th:value="${ticket.getDist()}"type="text" class="layui-input"  readonly="readonly">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">接收人地址 </label>
         <div class="layui-input-inline">
-            <input type="text" class="layui-input"  readonly="readonly">
+            <input th:value="${ticket.getAddress()}" type="text" class="layui-input"  readonly="readonly">
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">配送人 </label>
         <div class="layui-input-inline">
-            <input type="text" class="layui-input"  readonly="readonly">
+            <input th:value="${ticket.getExpress_name()}" type="text" class="layui-input"  readonly="readonly">
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">配送人电话 </label>
         <div class="layui-input-inline">
-            <input type="text" class="layui-input"  readonly="readonly">
+            <input th:value="${ticket.getExpress_mobile()}" type="text" class="layui-input"  readonly="readonly">
         </div>
     </div>
 

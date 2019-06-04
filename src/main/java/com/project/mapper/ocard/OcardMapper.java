@@ -15,4 +15,6 @@ public interface OcardMapper {
     List<OilCardTicket> getOcardTicketList(PageData pd);
 
     int getOcardTicketTotal(PageData pd);
+
+    OilCardTicket getOcardTicketInfo(PageData pd);
 }
