@@ -26,6 +26,12 @@ public class OcardController extends BaseController {
     @RequestMapping("/index")
     public ModelAndView orderList(){
         ModelAndView mv = this.getModelAndView();
+        ArrayList<String> select =new ArrayList<>();
+        select.add("油卡");
+        select.add("实体卡");
+        select.add("我的卡");
+        select.add("渠道卡");
+        mv.addObject("select",select);
         mv.setViewName("page/oilcard/ocard");
         return mv;
     }
