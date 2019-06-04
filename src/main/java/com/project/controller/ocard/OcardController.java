@@ -80,4 +80,17 @@ public class OcardController extends BaseController {
         return ticketList;
     }
 
+    /**
+     * 油券实体卡列表
+     * @return
+     */
+    @RequestMapping("/ocardTicketInfo")
+    @ResponseBody
+    public ModelAndView ocardTicketInfo(){
+        logger.info("--油券实体卡详情---");
+        ModelAndView mv = this.getModelAndView();
+        mv.setViewName("page/oilcard/ocardTicketInfo");
+        return mv;
+    }
+
 }
