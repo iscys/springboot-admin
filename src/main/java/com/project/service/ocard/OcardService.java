@@ -8,4 +8,6 @@ import java.util.List;
 public interface OcardService {
 
     Layui getOilTicketList(PageData pd);
+
+    Layui getOcardTicketList(PageData pd);
 }

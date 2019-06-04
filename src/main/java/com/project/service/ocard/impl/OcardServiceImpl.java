@@ -1,6 +1,7 @@
 package com.project.service.ocard.impl;
 
 import com.project.mapper.ocard.OcardMapper;
+import com.project.model.OilCardTicket;
 import com.project.service.ocard.OcardService;
 import com.project.utils.DataPager;
 import com.project.utils.DateUtils;
@@ -44,5 +45,21 @@ public class OcardServiceImpl implements OcardService {
             return Layui.empty();
         }
 
+    }
+
+    /**
+     * 油券实体卡列表
+     * @param pd
+     * @return
+     */
+    @Override
+    public Layui getOcardTicketList(PageData pd) {
+        int total=ocardMapper.getOcardTicketTotal(pd);
+        if(total ==0){
+            return Layui.empty();
+        }
+        DataPager dp =DataPager.page(1,50,pd,total);
+        List<OilCardTicket> ticketList=ocardMapper.getOcardTicketList(pd);
+        return  Layui.success(dp.getTotalRecords(),ticketList);
     }
 }

@@ -13,14 +13,16 @@
 			<div class="layui-input-inline">
 				<input type="text" name="order_sn" id ="order_sn" placeholder="请输入订单号"  class="layui-input">
 			</div>
-			<label class="layui-form-label">油券号</label>
+			<label class="layui-form-label">接受人手机号</label>
 			<div class="layui-input-inline">
-				<input type="text" name="ticket_sn" id ="code" placeholder="请输入油券"  class="layui-input">
+				<input type="text" name="ticket_sn" id ="mobile" placeholder="请输入收货人手机号"  class="layui-input">
 			</div>
-			<label class="layui-form-label">选项</label>
+			<label class="layui-form-label">签收状态</label>
 			<div class="layui-input-inline">
-				<select>
-						<option value=""></option>
+				<select id="status-receive">
+					<option value=""></option>
+					<option value="0">未签收</option>
+					<option value="1">已签收</option>
 				</select>
 			</div>
 		<div>
@@ -61,7 +63,7 @@
 			method:'post'
 			,elem: '#spstable'
 			, height:'full-150'//窗口-20
-			, url: '/ocard/ocardList' //数据接口
+			, url: '/ocard/ocardTicketList' //数据接口
 			, title: '油券列表'
 			, page: true //开启分页
 			,limit:50
@@ -78,12 +80,13 @@
 							{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left',templet: function (d) {
 								return d.LAY_TABLE_INDEX+1;//id index 从第一个开始
 							}}
-							, {field: 'code', title: '油券号', width: 320}
+							, {field: 'uid', title: '用户id', width: 120}
+							, {field: 'order_id', title: '订单id', width: 120}
 							, {field: 'order_sn', title: '订单号', width:320}
-							, {field: 'uid', title: '绑定状态', width: 100,templet:function(d){
-								return bindstat(d.uid)
-							}}
-							, {field: 'used_time', title: '使用时间', width: 300}
+							, {field: 'realname', title: '接收人姓名', width: 100}
+							, {field: 'mobile', title: '接收人电话', width: 300}
+							, {field: 'express_name', title: '配送人姓名', width: 300}
+							, {field: 'express_mobile', title: '配送人电话', width: 300}
 							, {fixed: 'right', width: 165, align: 'center', toolbar: '#utils'}
 						]
 					]
@@ -99,8 +102,9 @@
 						curr: 1 //重新从第 1 页开始
 					},
 					where: {
-						order_sn: $("#order_sn").val() , //搜索的关键字
-						code: $("#code").val()
+						status: $("#status-receive").val() ,//搜索的关键字
+						mobile:$("#mobile").val(),
+						order_sn:$("#order_sn").val(),
 					}
 				})
 		})
