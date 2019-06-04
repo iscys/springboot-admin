@@ -113,12 +113,12 @@
 		//监听行工具事件
 		table.on('tool(spstable)', function (obj) {
 			var data = obj.data //获得当前行数据
-			var name =data.name;
+			var name =data.realname;
 			layEvent = obj.event; //获得 lay-event 对应的值
 			if (layEvent === 'detail') {
 				layer.open({
-					title:	'实体卡配送详情',
-					area:["40%","60%"],
+					title:	name+'实体卡配送详情',
+					area:["30%","70%"],
 					type: 2,
 					content: ['/ocard/ocardTicketInfo?id='+data.id, 'no']
 				});
