@@ -7,6 +7,7 @@ import com.project.model.ResultObject;
 import com.project.model.User;
 import com.project.service.system.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-
+@Controller
 @RequestMapping("/auth")
 public class LoginController extends BaseController{
 
