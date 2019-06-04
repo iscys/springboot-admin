@@ -19,10 +19,8 @@
 			<label class="layui-form-label">选项</label>
 			<div class="layui-input-inline">
 				<select>
-					<option value=""></option>
-					<div th:each="in ,inStat:${select}">
-						<option th:value="${inStat.index}" th:text="${in}"></option>
-					</div>
+						<option value=""></option>
+						<option th:each="in ,inStat:${select}" th:value="${inStat.index}" th:text="${in}"></option>
 				</select>
 			</div>
 		<div>
