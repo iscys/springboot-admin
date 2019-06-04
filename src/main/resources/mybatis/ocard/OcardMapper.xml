@@ -44,9 +44,12 @@
             <if test="status !=null  and status != '' ">
                 and ta.status =#{status}
             </if>
-        <if test="mobile !=null  and mobile != '' ">
+            <if test="mobile !=null  and mobile != '' ">
             and ta.mobile =#{mobile}
-        </if>
+            </if>
+            <if test="order_sn !=null  and order_sn != '' ">
+            and ta.order_sn =#{order_sn}
+            </if>
                 )
                 a
     </select>
@@ -64,6 +67,9 @@
         </if>
         <if test="mobile !=null  and mobile != '' ">
             and ta.mobile =#{mobile}
+        </if>
+        <if test="order_sn !=null  and order_sn != '' ">
+            and ta.order_sn =#{order_sn}
         </if>
         limit #{startIndex},#{pageSize}
     </select>
