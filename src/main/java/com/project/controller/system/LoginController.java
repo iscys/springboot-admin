@@ -1,6 +1,7 @@
 package com.project.controller.system;
 
 import com.project.controller.BaseController;
+import com.project.model.Const;
 import com.project.model.MessageModel.ErrorMessage;
 import com.project.model.ResultObject;
 import com.project.model.User;
@@ -46,6 +47,18 @@ public class LoginController extends BaseController{
         return ResultObject.success(checkResult);
     }
 
+    /**
+     * 退出登录
+     * @param user
+     * @param session
+     * @return
+     */
+    @RequestMapping("/logout")
+    public ModelAndView logout(User user, HttpSession session){
+        session.removeAttribute(Const.USER);
+        ModelAndView mv = this.getModelAndView();
+        return mv;
+    }
 
     /**
      * 注册用户
