@@ -9,12 +9,12 @@
         select count(1) as achive ,us.name ,us.sceneId
         from
         sdb_buyers_wx_tuiguang_achievement ac
-        left join
+        right join
          sdb_buyers_wx_tuiguang us
         on
         ac.sceneId =us.sceneId
         where 1=1
-        group by ac.sceneId, name
+        group by us.sceneId, name
         ) a
     </select>
 
@@ -22,12 +22,12 @@
         select count(1) as achive ,us.name ,us.sceneId
          from
         sdb_buyers_wx_tuiguang_achievement ac
-        left join
+        right join
         sdb_buyers_wx_tuiguang us
         on ac.sceneId =us.sceneId
         where 1=1
      <!--   and date_format(ac.create_time,'%Y-%m-%d') < STR_TO_DATE('2019-08-19','%Y-%m-%d')-->
-        group by ac.sceneId, name
+        group by us.sceneId, name
         limit #{startIndex},#{pageSize}
     </select>
 
