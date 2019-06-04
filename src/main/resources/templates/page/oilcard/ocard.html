@@ -4,7 +4,8 @@
 <span th:insert="head::common_js_css"></span>
 
 <body class="childrenBody">
-<blockquote class="layui-elem-quote quoteBox">
+<blockquote class="layui-elem-quote quoteBox">选择条件
+	<hr>
 	<form class="layui-form">
 		<!--layui-input-inline-->
 		<div class="layui-form-item">
@@ -60,7 +61,7 @@
 		table.render({
 			method:'post'
 			,elem: '#spstable'
-			, height:'full-110'//窗口-20
+			, height:'full-145'//窗口-20
 			, url: '/ocard/ocardList' //数据接口
 			, title: '油券列表'
 			, page: true //开启分页
