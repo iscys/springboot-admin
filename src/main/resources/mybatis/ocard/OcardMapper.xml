@@ -45,7 +45,7 @@
                 and ta.status =#{status}
             </if>
         <if test="mobile !=null  and mobile != '' ">
-            and o.mobile =#{mobile}
+            and ta.mobile =#{mobile}
         </if>
                 )
                 a
@@ -63,7 +63,7 @@
             and ta.status =#{status}
         </if>
         <if test="mobile !=null  and mobile != '' ">
-            and o.mobile =#{mobile}
+            and ta.mobile =#{mobile}
         </if>
         limit #{startIndex},#{pageSize}
     </select>
