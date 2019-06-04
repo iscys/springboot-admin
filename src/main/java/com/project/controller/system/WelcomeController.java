@@ -13,9 +13,7 @@ public class WelcomeController extends BaseController {
      * @return
      */
     @RequestMapping("/")
-    public ModelAndView welCome(){
-        ModelAndView mv = this.getModelAndView();
-        mv.setViewName("index");
-        return mv;
+    public String welCome(){
+        return "redirect:/guide/index";
     }
 }
