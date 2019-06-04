@@ -117,6 +117,8 @@
 			layEvent = obj.event; //获得 lay-event 对应的值
 			if (layEvent === 'detail') {
 				layer.open({
+					shadeClose: true,
+					shade: 0.8,
 					skin: 'layui-layer-lan',
 					title:	name+'实体卡配送详情',
 					area:["30%","70%"],
