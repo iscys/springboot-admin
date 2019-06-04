@@ -36,7 +36,7 @@ public class OcardServiceImpl implements OcardService {
                 if(used_time.equals("0")){
                     ticket.put("used_time","未使用");
                 }else{
-                    ticket.put("used_time", DateUtils.timestamp2date(Long.valueOf(used_time)));
+                    ticket.put("used_time", DateUtils.secondamp2date(Long.valueOf(used_time)));
                 }
             }
             return Layui.success(dp.getTotalRecords(),ticketList);
