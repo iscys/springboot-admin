@@ -101,6 +101,9 @@
 
                     if(result.flag =="1"){
                         layer.msg("修改成功", {icon: 1});
+                        var index=parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+
                     }else{
                         layer.msg(result.error, {icon: 5});
                     }
