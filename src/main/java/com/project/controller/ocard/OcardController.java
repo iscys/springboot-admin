@@ -30,6 +30,17 @@ public class OcardController extends BaseController {
         return mv;
     }
 
+    /**
+     * 实体卡
+     * @return
+     */
+    @RequestMapping("/ticketIndex")
+    public ModelAndView ocardTicketList(){
+        ModelAndView mv = this.getModelAndView();
+        mv.setViewName("page/oilcard/ocardTicket");
+        return mv;
+    }
+
     @RequestMapping("/ocardList")
     @ResponseBody
     public Layui ocardList(){
