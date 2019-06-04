@@ -11,6 +11,9 @@
        <if test="order_sn !=null  and order_sn != '' ">
            and order_sn=#{order_sn}
        </if>
+       <if test="code !=null  and code != '' ">
+           and code=#{code}
+       </if>
    </select>
 
     <select id="getOilTicketList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
@@ -21,6 +24,9 @@
     <if test="order_sn !=null  and order_sn != '' ">
         and order_sn=#{order_sn}
     </if>
+        <if test="code !=null  and code != '' ">
+            and code=#{code}
+        </if>
     order by order_sn desc
     limit #{startIndex},#{pageSize}
 
