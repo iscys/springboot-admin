@@ -8,7 +8,7 @@
     from
     chuang_user_ticket
        where 1=1
-       <if test="order_sn !=null  and parentId != '' ">
+       <if test="order_sn !=null  and order_sn != '' ">
            and order_sn=#{order_sn}
        </if>
    </select>
@@ -18,7 +18,7 @@
     from
     chuang_user_ticket
     where 1=1
-    <if test="order_sn !=null  and parentId != '' ">
+    <if test="order_sn !=null  and order_sn != '' ">
         and order_sn=#{order_sn}
     </if>
     order by order_sn desc
