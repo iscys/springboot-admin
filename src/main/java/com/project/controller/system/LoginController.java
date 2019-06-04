@@ -54,10 +54,8 @@ public class LoginController extends BaseController{
      * @return
      */
     @RequestMapping("/logout")
-    public ModelAndView logout(User user, HttpSession session){
-        session.removeAttribute(Const.USER);
-        ModelAndView mv = this.getModelAndView();
-        return mv;
+    public String logout(User user, HttpSession session){
+        return "redirect:/guide/index";
     }
 
     /**
