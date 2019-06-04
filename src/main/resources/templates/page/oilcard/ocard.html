@@ -8,11 +8,20 @@
 	<form class="layui-form">
 		<!--layui-input-inline-->
 		<div class="layui-form-item">
-			<label class="layui-form-label">输入框</label>
-			<div class="layui-input-block">
-				<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+			<label class="layui-form-label">订单号</label>
+			<div class="layui-input-inline">
+				<input type="text" name="order_sn" placeholder="请输入订单号"  class="layui-input">
 			</div>
+			<label class="layui-form-label">油券号</label>
+			<div class="layui-input-inline">
+				<input type="text" name="ticket_sn" placeholder="请输入油券"  class="layui-input">
+			</div>
+		<div>
+			<a class="layui-btn search_btn" data-type="reload">搜索</a>
 		</div>
+		</div>
+
+
 
 	</form>
 </blockquote>
@@ -42,7 +51,7 @@
 		//执行一个 table 实例
 		table.render({
 			elem: '#spstable'
-			, height:'full-150'//窗口-20
+			, height:'full-110'//窗口-20
 			, url: '/ocard/ocardList' //数据接口
 			, title: '油券列表'
 			, page: true //开启分页
