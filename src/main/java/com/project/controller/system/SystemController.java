@@ -1,6 +1,8 @@
 package com.project.controller.system;
 
+import com.project.model.Const;
 import com.project.model.Menu;
+import com.project.model.User;
 import com.project.service.system.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +26,8 @@ public class SystemController {
      */
     @RequestMapping("menu")
     public List<Menu> menuList(HttpSession session){
-        List<Menu> menuList = sysService.getMenuList();
+        User user = (User) session.getAttribute(Const.USER);
+        List<Menu> menuList = sysService.getMenuList(user);
         return menuList;
     }
 
