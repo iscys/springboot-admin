@@ -212,6 +212,7 @@ layui.config({
 		$(this).parent("li").siblings().removeClass("layui-nav-itemed");
 	})
 
+	/**
 	//公告层
 	function showNotice(){
 		layer.open({
@@ -240,6 +241,7 @@ layui.config({
 	        }
 	    });
 	}
+
 	//判断是否处于锁屏状态(如果关闭以后则未关闭浏览器之前不再显示)
 	if(window.sessionStorage.getItem("lockcms") != "true" && window.sessionStorage.getItem("showNotice") != "true"){
 		showNotice();
@@ -247,7 +249,7 @@ layui.config({
 	$(".showNotice").on("click",function(){
 		showNotice();
 	})
-
+	 **/
 	//刷新后还原打开的窗口
 	if(window.sessionStorage.getItem("menu") != null){
 		menu = JSON.parse(window.sessionStorage.getItem("menu"));
