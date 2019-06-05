@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+
 @Service
 public class SystemServiceImpl implements SystemService {
 
@@ -20,18 +20,35 @@ public class SystemServiceImpl implements SystemService {
      * @return
      */
     @Override
-    public List<Menu> getMenuList() {
-
+    public List<Menu> getMenuList(User user) {
+        String priStr = user.getPri();
+        String[] priArray = priStr.split(",");
+        List<String> priList = Arrays.asList(priArray);
         HashMap<String,String> param =new HashMap<>();
         //父级菜单
         List<Menu> listMenu= systemMapper.getMenuList(param);
-        for(Menu parentMenu:listMenu){
-            //获取子集菜单
+        Iterator<Menu> parIter = listMenu.iterator();
+        while(parIter.hasNext()){
+            Menu parentMenu = parIter.next();
             String parentId = parentMenu.getId();
-            param.put("parentId",parentId);
-            List<Menu> subMenuList = systemMapper.getMenuList(param);
-            parentMenu.setChildren(subMenuList);
+            if(priList.contains(parentId)) {
+                param.put("parentId", parentId);
+                //子菜单
+                List<Menu> subMenuList = systemMapper.getMenuList(param);
+                Iterator<Menu> subIter = subMenuList.iterator();
+                while(subIter.hasNext()){
+                    Menu sub = subIter.next();
+                    String subid = sub.getId();
+                    if(!priList.contains(subid)) {
+                        subIter.remove();
+                    }
+                }
+                parentMenu.setChildren(subMenuList);
+            }else{
+                parIter.remove();
+            }
         }
+
         return listMenu;
     }
 

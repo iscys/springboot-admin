@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface SystemService {
 
-    List<Menu> getMenuList();
+    List<Menu> getMenuList(User user);
 
     User checkUser(User user);
 }
