@@ -13,6 +13,15 @@ public class User {
     private String phone;
     private String password;
     private String username;
+    private String pri;
+
+    public String getPri() {
+        return pri;
+    }
+
+    public void setPri(String pri) {
+        this.pri = pri;
+    }
 
     public String getUsername() {
         return username;
