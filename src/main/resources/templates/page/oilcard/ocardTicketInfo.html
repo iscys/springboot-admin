@@ -87,6 +87,10 @@
             var name =$("#express_name").val();
             var mobile =$("#express_mobile").val();
             var id =$("#orid").val();
+            if(name.length==0||mobile.length==0||id.length==0){
+                layer.msg("配送人以及手机不能为空", {icon: 5});
+                return;
+            }
             $.ajax({
                 //几个参数需要注意一下
                 type: "POST",//方法类型
