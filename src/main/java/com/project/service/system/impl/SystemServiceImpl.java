@@ -21,6 +21,7 @@ public class SystemServiceImpl implements SystemService {
      */
     @Override
     public List<Menu> getMenuList(User user) {
+        //权限数组
         String priStr = user.getPri();
         String[] priArray = priStr.split(",");
         List<String> priList = Arrays.asList(priArray);
