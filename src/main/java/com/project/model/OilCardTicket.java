@@ -19,6 +19,15 @@ public class OilCardTicket implements Serializable {
     private String express_time;
     private String status;
     private String create_time;
+    private String create_times;
+
+    public String getCreate_times() {
+        return create_times;
+    }
+
+    public void setCreate_times(String create_times) {
+        this.create_times = create_times;
+    }
 
     public String getId() {
         return id;
