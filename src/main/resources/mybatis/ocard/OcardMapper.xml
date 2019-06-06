@@ -71,6 +71,7 @@
         <if test="order_sn !=null  and order_sn != '' ">
             and ta.order_sn =#{order_sn}
         </if>
+        order by ta.order_sn desc
         limit #{startIndex},#{pageSize}
     </select>
 
