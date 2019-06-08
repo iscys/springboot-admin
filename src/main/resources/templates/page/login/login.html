@@ -1,69 +1,120 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <span th:insert="head::common_js_css"></span>
 <head>
-	<meta charset="utf-8">
-	<title>后台登陆</title>
+	<!--所有的地址会基于此地址进行拼接-->
+	<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/login.css" media="all" />
-	<style>
-		html,body {
-			height: 100%;
+	<style type="text/css">
+		video {
+			position: fixed;
+			right:0;
+			bottom: 0;
+			min-width: 100%;
+			min-height: 100%;
+			width: auto;
+			height: auto;
+			z-index: -9999;
+			/*灰色调*/
+			/*-webkit-filter:grayscale(100%)*/
 		}
 	</style>
 </head>
-	<div class="video_mask"></div>
-	<div class="login">
-	    <h1 th:text="${loginname}"></h1>
-	    <form class="layui-form" method="post">
-	    	<div class="layui-form-item">
-				<input class="layui-input" name="username" placeholder="用户名" lay-verify="required" type="text" autocomplete="off">
-		    </div>
-		    <div class="layui-form-item">
-				<input class="layui-input" name="password" placeholder="密码" lay-verify="required" type="password" autocomplete="off">
-		    </div>
 
-			<button class="layui-btn login_btn" lay-submit="" lay-filter="login">登录</button>
-		</form>
+<body>
+
+<!--autoplay用来使其自动播放，muted用来使其静音，loop为循环播放-->
+<video src="/video/login.mp4" type="video/mp4" autoplay muted loop class="video-bg" >
+	很抱歉，你的浏览器不支持播放视频
+</video>
+
+<!--
+<nav class="navbar  clearFloat my-navbar"    role="navigation">
+	<div class="container-fluid" id="navbar">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#" style="color: whitesmoke">Acoustic</a>
+		</div>
+
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav" id="mytab">
+				<li class="" id=""><a href="" style="color: whitesmoke">开始旅程</a></li>
+				<li class="" id=""><a href="" style="color: whitesmoke">关于live</a></li>
+				<li class="" id="AboutUs"><a style="color: whitesmoke">关于我们</a></li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a  style="color: whitesmoke">登录</a></li>
+				<li><a  style="color: whitesmoke">注册</a> </li>
+
+			</ul>
+		</div>
+
+	</div>
+</nav>
+-->
+<div class="container my-content" >
+	<!--
+	<h1 style="background-color: rgba(255,255,255,0);color: whitesmoke;padding-bottom: 25px";>超级卖家</h1>
+	-->
+	<div style="padding: 15px 50px 10px;">
+		<div class="login">
+			<h1 th:text="${loginname}"></h1>
+			<form class="layui-form" method="post">
+				<div class="layui-form-item">
+					<input class="layui-input" name="username" placeholder="用户名" lay-verify="required" type="text" autocomplete="off">
+				</div>
+				<div class="layui-form-item">
+					<input class="layui-input" name="password" placeholder="密码" lay-verify="required" type="password" autocomplete="off">
+				</div>
+
+				<button class="layui-btn login_btn" lay-submit="" lay-filter="login">登录</button>
+			</form>
+		</div>
 	</div>
 
-	<script>
-		layui.config({
-			base : "js/"
-		}).use(['form','layer'],function(){
-			var form = layui.form,
-					layer = parent.layer === undefined ? layui.layer : parent.layer;
+</div>
 
-
-			//登录按钮事件
-			form.on("submit(login)",function(data){
-				var paramObj =data.field;
-				$.ajax({
-					//几个参数需要注意一下
-					type: "POST",//方法类型
-					dataType: "json",//预期服务器返回的数据类型
-					url: "/auth/login" ,//url
-					data:{
-						username :paramObj.username,
-						password :paramObj.password
-					},
-					success: function (result) {
-
-						if(result.flag =="1"){
-							window.location.href = "/guide/index";
-						}else{
-
-							layer.msg(result.error, {icon: 5});
-						}
-					},
-					error : function() {
-
-						layer.msg("服务器出错了～～", {icon: 5});
-					}
-				});
-				return false;
-			})
-		})
-
-	</script>
+</div>
+</footer>
 </body>
+
+<script>
+
+	layui.config({
+		base : "js/"
+	}).use(['form','layer'],function(){
+		var form = layui.form,
+				layer = parent.layer === undefined ? layui.layer : parent.layer;
+
+
+		//登录按钮事件
+		form.on("submit(login)",function(data){
+			var paramObj =data.field;
+			$.ajax({
+				//几个参数需要注意一下
+				type: "POST",//方法类型
+				dataType: "json",//预期服务器返回的数据类型
+				url: "/auth/login" ,//url
+				data:{
+					username :paramObj.username,
+					password :paramObj.password
+				},
+				success: function (result) {
+
+					if(result.flag =="1"){
+						window.location.href = "/guide/index";
+					}else{
+
+						layer.msg(result.error, {icon: 5});
+					}
+				},
+				error : function() {
+
+					layer.msg("服务器出错了～～", {icon: 5});
+				}
+			});
+			return false;
+		})
+	})
+
+</script>
 </html>
