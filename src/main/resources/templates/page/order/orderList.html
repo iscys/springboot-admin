@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<span th:insert="head::common_js_css_bootstrap"></span>
+<body>
+<div class="container-fluid" id="main-container">
+	<div id="page-content" class="clearfix">
+		<div class="row-fluid">
+			<div class="row-fluid">
+				<br/>
+				<form action="/order/index" method="post" class="form-inline" name="Form" id="Form">
+					<input type="hidden" name="flag" id="flag" value="">
+					<!-- ---+搜索条件 start+----- -->
+					<div class="form-group">
+						<label >订单号</label>
+						<input type="text" class="form-control" id="exampleInputName2" placeholder="订单号">
+					</div>
+					<div class="form-group">
+						<label>用户uid</label>
+						<input type="email" class="form-control" id="uid" placeholder="uid">
+					</div>
+					<button type="submit" class="btn btn-default">查询</button>
+					<!-- ---+搜索条件 end+----- -->
+
+					<br/>
+					<br/>
+					<table id="table_report"
+						   class="table table-bordered table-hover">
+						<thead>
+						<tr>
+							<th class='center' style="min-width:3%">No</th>
+							<th class='center' style="min-width: 7%">作者头像</th>
+							<th class='center' style="min-width: 7%">作者昵称</th>
+							<th class='center' style="min-width: 10%">商品图片</th>
+							<th class='center' style="min-width: 8%">商品名称</th>
+							<th class='center' style="min-width: 8%">素材预览</th>
+							<th class='center' style="min-width: 5%">素材类型</th>
+							<th class='center' style="min-width: 10%">提交时间</th>
+							<th class='center' style="min-width: 15%">操作数据</th>
+							<th class='center' style="min-width: 13%">是否有效</th>
+							<th class='center' style="min-width: 9%">是否精选</th>
+							<th class='center' style="min-width: 9%">审核状态</th>
+							<th class='center' style="min-width: 13%">操作</th>
+
+						</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+
+
+				</form>
+
+			</div>
+
+		</div>
+	</div>
+	<!--/#page-content-->
+</div>
+
+<!--/.fluid-container#main-container-->
+<!-- 返回顶部  -->
+<a href="#" id="btn-scroll-up" class="btn btn-small btn-inverse"> <i
+		class="icon-double-angle-up icon-only"></i>
+</a>
+
+
+<script type="text/javascript">
+	function reloadPage() {
+
+		location.reload();
+
+	};
+	$(top.hangge());
+	//检索
+	function search(){
+		top.jzts();
+		if ($('#checkbox1').attr('checked')){
+			document.getElementById("approve_state").value = "0";
+		}
+		else{
+			document.getElementById("approve_state").value = "";
+		}
+		$("#Form").submit();
+	}
+
+
+
+
+
+	function toAction(action){
+		$('#Form').attr('action',action);
+		$('#Form').submit();
+	}
+</script>
+
+</body>
+
+</html>
