@@ -15,7 +15,7 @@ public class OrderController extends BaseController {
 
     public ModelAndView index(){
         PageData pd = this.getPageData();
-        DataPager dataPager=DataPager.page_self(1,890,pd,50);
+        DataPager dataPager=DataPager.page_self(1,50,pd,890);
         dataPager.setRecords(1);
         dataPager.setFormId("Form");
         ModelAndView mv = this.getModelAndView();

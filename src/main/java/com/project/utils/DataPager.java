@@ -207,10 +207,10 @@ public class DataPager implements Serializable {
 		int pageSize=pageS;
 
 		if(pd.getString("pageNum")!=null){
-			pageNum=Integer.valueOf(pd.getString("page"));
+			pageNum=Integer.valueOf(pd.getString("pageNum"));
 		}
 		if(pd.get("pageSize")!=null){
-			pageSize=Integer.valueOf(pd.getString("limit"));
+			pageSize=Integer.valueOf(pd.getString("pageSize"));
 		}
 		DataPager dp =new DataPager(pageNum, num, pageSize);
 		pd.put("startIndex", dp.getStartIndex());
