@@ -12,11 +12,11 @@
 					<!-- ---+搜索条件 start+----- -->
 					<div class="form-group">
 						<label >订单号</label>
-						<input type="text" class="form-control" id="exampleInputName2" placeholder="订单号">
+						<input type="text" name="order" class="form-control" id="exampleInputName2" placeholder="订单号">
 					</div>
 					<div class="form-group">
 						<label>用户uid</label>
-						<input type="email" class="form-control" id="uid" placeholder="uid">
+						<input type="email" name="em" class="form-control" id="uid" placeholder="uid">
 					</div>
 					<button type="submit" class="btn btn-default">查询</button>
 					<!-- ---+搜索条件 end+----- -->
@@ -46,8 +46,9 @@
 
 						</tbody>
 					</table>
-
-
+					<div th:if="${dataPager.getRecords()!=null}">
+                    <span th:insert="page::page_common"></span>
+					</div>
 				</form>
 
 			</div>

@@ -1,6 +1,6 @@
-<div lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="page_common" lang="en" xmlns:th="http://www.thymeleaf.org">
 <div id="page">
-    <link rel="stylesheet" href="<%=basePath%>/css/page.css?20180907" />
+    <link rel="stylesheet" href="/css/page.css?20180907" />
     <input type="hidden" name="pageNum" id="hide_pageNum" th:value="${dataPager.pageNum}"/>
     <input type="hidden" id="hide_nextPageNum" th:value="${dataPager.nextPageNum}" />
     <input type="hidden" id="hide_prePageNum" th:value="${dataPager.prePageNum}" />
@@ -15,14 +15,13 @@
     <font class="msgc" color="red"></font>
     <!-- <a href="javascript:;" class="n" style="color:#99a1a7;cursor:text">共${dataPager.totalRecords}条记录</a> -->
     <!-- <a href="javascript:;" class="n" style="color:#99a1a7;cursor:text">选择每页要显示的行数</a> -->
-    <!--
+
     <select id="pageSize" name="pageSize" onchange="sub2('');">
-        <option value="30"  <c:if test="${dataPager.pageSize ==30}">selected="selected"</c:if>>30条/页</option>
-        <option value="50" <c:if test="${dataPager.pageSize ==50}">selected="selected"</c:if>>50 条/页</option>
-        <option value="100" <c:if test="${dataPager.pageSize ==100}">selected="selected"</c:if>>100条/页</option>
-        <option value="500" <c:if test="${dataPager.pageSize ==500}">selected="selected"</c:if>>500条/页</option>
+        <option value="30" th:selected="${dataPager.pageSize ==30}">30条/页</option>
+        <option value="50" th:selected ="${dataPager.pageSize ==50}">50 条/页</option>
+        <option value="50" th:selected ="${dataPager.pageSize ==100}">100 条/页</option>
     </select>
-    -->
+
     &nbsp;&nbsp;
     <button href="javascript:void(0)" class=" btns" onClick="skip(event);">确定</button>
 
