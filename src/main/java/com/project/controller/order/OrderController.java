@@ -12,8 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class OrderController extends BaseController {
 
     @RequestMapping("/index")
+
     public ModelAndView index(){
-        DataPager dataPager=new DataPager(1,890,50);
+        PageData pd = this.getPageData();
+        DataPager dataPager=DataPager.page_self(1,890,pd,50);
         dataPager.setRecords(1);
         dataPager.setFormId("Form");
         ModelAndView mv = this.getModelAndView();
