@@ -79,12 +79,24 @@
 
 <script>
 
+
+	function GetQueryString(name) {
+
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r != null) return decodeURIComponent(r[2]);
+		return null;
+	}
+
+
 	layui.config({
 		base : "js/"
 	}).use(['form','layer'],function(){
 		var form = layui.form,
 				layer = parent.layer === undefined ? layui.layer : parent.layer;
 
+		var redirect=GetQueryString('redirect');
+		console.log(redirect);
 
 		//登录按钮事件
 		form.on("submit(login)",function(data){
@@ -101,7 +113,13 @@
 				success: function (result) {
 
 					if(result.flag =="1"){
+
+						if(redirect==null){
 						window.location.href = "/guide/index";
+						}else{
+							window.location.href = redirect;
+						}
+
 					}else{
 
 						layer.msg(result.error, {icon: 5});

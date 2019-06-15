@@ -58,7 +58,7 @@ public class LoginController extends BaseController{
     @RequestMapping("/logout")
     public String logout(User user, HttpSession session){
         session.removeAttribute(Const.USER);
-        return "redirect:/guide/index";
+        return "redirect:/";
     }
 
     /**
