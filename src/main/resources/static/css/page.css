@@ -1,0 +1,167 @@
+#page{
+    font:14px arial;
+    white-space:nowrap;
+    padding-left:35px;
+    text-align: right;
+    /* margin-bottom: 100px; */
+    height: 60px;
+
+}
+
+#page>a,#page strong{
+    display:inline-block;
+    vertical-align:text-bottom;
+    height:66px;
+    text-align:center;
+    text-decoration:none;
+    background:#fff;
+    vertical-align: bottom
+}
+
+#page a{
+    cursor:pointer
+}
+
+#page a:hover{
+    background:0
+}
+
+
+
+#page .pc{
+    width: 22px;
+    height:22px;
+    cursor:pointer;
+    font-size: 14px;
+    color: #4d4d4d;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 22px;
+    margin-right:10px;
+}
+
+#page .fk{
+    height:40px;
+    cursor:pointer
+}
+
+#page strong .fk,#page strong .pc{
+    cursor:auto
+}
+#page  .dian
+{
+    font-size:22px;
+    line-height:12px;
+    text-align: center;
+}
+
+#page .fk .c-icon-bear-pn{
+    top:-3px;
+    position:relative
+}
+
+#page .fkd .c-icon-bear-pn{
+    top:3px;
+    position:relative
+}
+
+#page .fk_cur .c-icon-bear-p{
+    top:-2px;
+    position:relative
+}
+
+#page strong .pc{
+
+    background-color:#f5f5f5 ;
+    color:#767676;
+    border-radius: 3px;
+}
+#pageSize {
+    height:26px;
+    min-width:85px;
+    line-height: 26px;
+    padding: 0 10px;
+    margin:0 20px;
+}
+#pageSize:focus
+{
+    outline: none;
+    box-shadow: none;
+    border:1px solid #70A548;
+}
+.btns {
+    height:26px;
+    font-size: 14px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 26px;
+    background: #70A548;
+    padding:0 10px;
+    border: 0;
+
+}
+#page .topage
+{
+    font-size: 15px;
+    color: #4d4d4d;
+    letter-spacing: 0;
+    line-height: 22px;
+
+}
+#page #pageNumInput
+{
+    height:26px;
+    width:40px;
+    font-weight:bold;
+    text-align:center;
+    line-height:26px;
+    background: #fdfdfd;
+    border:1px solid #e1e1e1;
+    border-radius: 2px;
+    font-size: 12px;
+    color: #858585;
+    letter-spacing: 0;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+#page #pageNumInput:focus{
+    border:1px solid #70A548;
+    box-shadow: 0;
+}
+.nikpage {
+    height:100px;
+}
+.pageDevice {
+    display: inline;
+}
+.pageDevice a{
+    text-decoration:none
+}
+.pageDevice a, .pageDevice span {
+    min-width: 22px;
+    height:22px;
+    display: inline-block;
+    cursor:pointer;
+    font-size: 14px;
+    color: #4d4d4d;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 22px;
+    margin-right:10px;
+    cursor:auto
+}
+.pageDevice span{
+    font-size: 20px;
+}
+.pageDevice .active{
+    font-size: 14px;
+    background-color:#f5f5f5 ;
+    color:#767676;
+    border-radius: 3px;
+}
+.pageDevice .prev,.pageDevice .next
+{
+    display: none;
+}
