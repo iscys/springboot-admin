@@ -1,0 +1,107 @@
+<div lang="en" xmlns:th="http://www.thymeleaf.org">
+<div id="page">
+    <link rel="stylesheet" href="<%=basePath%>/css/page.css?20180907" />
+    <input type="hidden" name="pageNum" id="hide_pageNum" th:value="${dataPager.pageNum}"/>
+    <input type="hidden" id="hide_nextPageNum" th:value="${dataPager.nextPageNum}" />
+    <input type="hidden" id="hide_prePageNum" th:value="${dataPager.prePageNum}" />
+    <input type="hidden" id="hide_formId" th:value="${dataPager.formId}" />
+    <input type="hidden" id="totalPageNum" th:value="${dataPager.totalPage}" />
+    <input type="hidden" id ="layerID" value=""  />
+
+    <p class="pageDevice"></p>
+    <q class="topage" style="margin-left:30px">到第</q>
+    <input class="n" type="text" name="num" id="pageNumInput" />
+    <q class="topage">页</q>
+    <font class="msgc" color="red"></font>
+    <!-- <a href="javascript:;" class="n" style="color:#99a1a7;cursor:text">共${dataPager.totalRecords}条记录</a> -->
+    <!-- <a href="javascript:;" class="n" style="color:#99a1a7;cursor:text">选择每页要显示的行数</a> -->
+    <!--
+    <select id="pageSize" name="pageSize" onchange="sub2('');">
+        <option value="30"  <c:if test="${dataPager.pageSize ==30}">selected="selected"</c:if>>30条/页</option>
+        <option value="50" <c:if test="${dataPager.pageSize ==50}">selected="selected"</c:if>>50 条/页</option>
+        <option value="100" <c:if test="${dataPager.pageSize ==100}">selected="selected"</c:if>>100条/页</option>
+        <option value="500" <c:if test="${dataPager.pageSize ==500}">selected="selected"</c:if>>500条/页</option>
+    </select>
+    -->
+    &nbsp;&nbsp;
+    <button href="javascript:void(0)" class=" btns" onClick="skip(event);">确定</button>
+
+
+    <script src="/js/highlight.min.js" ></script>
+    <script src="/js/jquery.pagination.js" ></script>
+    <script type="text/javascript">
+        function sub2(obj) {
+            if (obj == '') {
+                $("#hide_pageNum").val("1");
+            }
+            var hide_formId = $("#hide_formId").val();
+            $("#" + hide_formId).submit();
+        }
+
+        function subForm(obj) {
+            var hide_formId = $("#hide_formId").val();
+            $("#hide_pageNum").val(obj);
+            $("#" + hide_formId).submit();
+
+        }
+
+        function skip(event) {
+            event.preventDefault();
+            var pageNum = $("#pageNumInput").val();
+            var hide_formId = $("#hide_formId").val();
+            var totalPageNum = $("#totalPageNum").val();
+            var reg = new RegExp("^[0-9]+$");
+            if (pageNum != "" & pageNum != null) {
+                if (reg.test(pageNum)) {
+                    if (totalPageNum < pageNum || pageNum < 1) {
+                        $(".msgc").text("页码不在总页码内");
+                    } else {
+                        $("#hide_pageNum").val(pageNum);
+                        $("#" + hide_formId).submit();
+                    }
+                } else {
+                    $(".msgc").text("请输入合法数字");
+                }
+            } else {
+                $(".msgc").text("不可以不填");
+            }
+
+        };
+        //控件分页
+        $(function(){
+
+            var  pageNum = $("#hide_pageNum").val();
+            var  totalPageNum = $("#totalPageNum").val();
+            var page = 4;
+            function pagename(pageNum,totalPageNum){
+                if(pageNum == 1 ||  pageNum == totalPageNum){
+                    page = 4;
+                }else if(pageNum ==2 ||  pageNum == totalPageNum-1 ){
+                    page = 3;
+                }else{
+                    page = 2;
+                }
+
+            }
+
+            pagename(pageNum,totalPageNum)
+            $(".pageDevice").pagination({
+                coping: true,
+                homePage: '1',
+                current:pageNum,
+                pageCount:totalPageNum,
+                endPage: totalPageNum,
+                mode:'unfixed',
+                isHide:	true,
+                count : page,
+                callback: function (api) {
+                    pageNum = api.getCurrent()
+                    subForm(pageNum);
+                }
+            });
+
+        })
+
+    </script>
+</div>
+</div>
