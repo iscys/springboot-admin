@@ -168,7 +168,7 @@ public class DataPager implements Serializable {
 	}
 	
 	/**
-	 * 设置分页详情数据，用于简化分页操作
+	 * 设置分页详情数据，用于简化分页操作,适用于layui
 	 * @param pageN   :当前页码数 ，会被pd 动态修改
 	 * @param pageS		：展示的数据数量，会被pd 动态修改
 	 * @param pd	：前台传过来的PageData
@@ -193,4 +193,31 @@ public class DataPager implements Serializable {
 		
 		return dp;
 	}
+	/**
+	 * 设置分页详情数据，用于简化分页操作,自定义
+	 * @param pageN   :当前页码数 ，会被pd 动态修改
+	 * @param pageS		：展示的数据数量，会被pd 动态修改
+	 * @param pd	：前台传过来的PageData
+	 * @param num	:数据总数量，一般我们是从数据库中查询获取的
+	 * @return
+	 * cys
+	 */
+	public static DataPager page_self(int pageN, int pageS,PageData pd,Integer num) {
+		int pageNum=pageN;
+		int pageSize=pageS;
+
+		if(pd.getString("pageNum")!=null){
+			pageNum=Integer.valueOf(pd.getString("page"));
+		}
+		if(pd.get("pageSize")!=null){
+			pageSize=Integer.valueOf(pd.getString("limit"));
+		}
+		DataPager dp =new DataPager(pageNum, num, pageSize);
+		pd.put("startIndex", dp.getStartIndex());
+		pd.put("pageSize", pageSize);
+		pd.put("total", dp.getTotalRecords());
+
+		return dp;
+	}
+
 }
