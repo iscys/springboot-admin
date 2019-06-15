@@ -7,7 +7,7 @@ import java.io.Serializable;
  * <br/>作用1: 可接收页面收集到的数据使用
  * <br/>作用2: 可作为map集合使用
  * <br/>作用3: 可作为分页数据使用
- * <br/>作者: yanpengjie 
+ * <br/>作者: cys
  * <br/>日期: 2015年1月4日 下午8:55:16 
  */
 public class DataPager implements Serializable {
