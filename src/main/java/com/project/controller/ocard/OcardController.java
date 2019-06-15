@@ -4,6 +4,7 @@ import com.project.controller.BaseController;
 import com.project.model.OilCardTicket;
 import com.project.model.ResultObject;
 import com.project.service.ocard.OcardService;
+import com.project.utils.DataPager;
 import com.project.utils.Layui;
 import com.project.utils.PageData;
 import org.slf4j.Logger;
@@ -38,6 +39,11 @@ public class OcardController extends BaseController {
     public ModelAndView orderList(){
         logger.info("--油券路由---");
         ModelAndView mv = this.getModelAndView();
+        logger.info("--油券列表---");
+        PageData pd = this.getPageData();
+        DataPager dataPager= ocardService.getOilTicketList(pd);
+        mv.addObject("dataPager",dataPager);
+        mv.addObject("pd",pd);
         mv.setViewName("page/oilcard/ocard");
         return mv;
     }
@@ -54,19 +60,6 @@ public class OcardController extends BaseController {
         return mv;
     }
 
-    /**
-     * 油券列表
-     * @return
-     */
-    @RequestMapping("/ocardList")
-    @ResponseBody
-    public Layui ocardList(){
-        logger.info("--油券列表---");
-        PageData pd = this.getPageData();
-        Layui ticketList= ocardService.getOilTicketList(pd);
-
-        return ticketList;
-    }
 
 
 

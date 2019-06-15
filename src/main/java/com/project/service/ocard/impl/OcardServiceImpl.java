@@ -27,27 +27,24 @@ public class OcardServiceImpl implements OcardService {
      * @return
      */
     @Override
-    public Layui getOilTicketList(PageData pd) {
-
-        int total=ocardMapper.getOilTicketTotal(pd);
-        DataPager dp =DataPager.page(1,50,pd,total);
-        List<Map<String,String>> ticketList=ocardMapper.getOilTicketList(pd);
-        if(!CollectionUtils.isEmpty(ticketList)){
-            for(Map<String,String> ticket:ticketList){
-                String used_time =String.valueOf(ticket.get("used_time"));
-                if(used_time.equals("0")){
-                    ticket.put("used_time","未使用");
-                }else{
+    public DataPager getOilTicketList(PageData pd) {
+        int total = ocardMapper.getOilTicketTotal(pd);
+        DataPager dp = DataPager.page_self(1, 50, pd, total);
+        List<Map<String, String>> ticketList = ocardMapper.getOilTicketList(pd);
+        if (!CollectionUtils.isEmpty(ticketList)) {
+            for (Map<String, String> ticket : ticketList) {
+                String used_time = String.valueOf(ticket.get("used_time"));
+                if (used_time.equals("0")) {
+                    ticket.put("used_time", "未使用");
+                } else {
                     ticket.put("used_time", DateUtils.secondamp2date(Long.valueOf(used_time)));
                 }
             }
-            return Layui.success(dp.getTotalRecords(),ticketList);
-        }else{
-            return Layui.empty();
         }
-
+        dp.setFormId("Form");
+        dp.setRecords(ticketList);
+        return dp;
     }
-
     /**
      * 油券实体卡列表
      * @param pd
