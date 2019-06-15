@@ -9,7 +9,6 @@
 			<div class="row-fluid">
 				<br/>
 				<form action="/order/index" method="post" class="form-inline" name="Form" id="Form">
-					<input type="hidden" name="flag" id="flag" value="">
 					<!-- ---+搜索条件 start+----- -->
 					<div class="form-group">
 						<label >订单号</label>
@@ -67,32 +66,7 @@
 
 
 <script type="text/javascript">
-	function reloadPage() {
 
-		location.reload();
-
-	};
-	$(top.hangge());
-	//检索
-	function search(){
-		top.jzts();
-		if ($('#checkbox1').attr('checked')){
-			document.getElementById("approve_state").value = "0";
-		}
-		else{
-			document.getElementById("approve_state").value = "";
-		}
-		$("#Form").submit();
-	}
-
-
-
-
-
-	function toAction(action){
-		$('#Form').attr('action',action);
-		$('#Form').submit();
-	}
 </script>
 
 </body>
