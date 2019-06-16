@@ -24,7 +24,7 @@
 					<!-- ---+搜索条件 end+----- -->
 					<hr>
 					<table id="table_report"
-						   class="table">
+						   class="table ">
 						<thead>
 						<tr>
 							<th class='center' style="min-width:3%">No</th>
@@ -38,13 +38,13 @@
 						</thead>
 						<tbody th:if="${dataPager.getRecords()!=null}">
 						<tr th:each="record,recordStat:${dataPager.getRecords()}">
-							<th th:text="${recordStat.index+1}"></th>
-							<th th:text="${record.code}"></th>
-							<th th:text="${record.order_sn}"></th>
-							<th th:text="${record.uid}"></th>
-							<th th:text="${record.is_used}"></th>
-							<th th:text="${record.used_time}"></th>
-							<th th:text="${record.code_price}"></th>
+							<td th:text="${recordStat.index+1}"></td>
+							<td th:text="${record.code}"></td>
+							<td th:text="${record.order_sn}"></td>
+							<td th:text="${record.uid}"></td>
+							<td th:text="${record.is_used}"></td>
+							<td th:text="${record.used_time}"></td>
+							<td th:text="${record.code_price}"></td>
 
 						</tr>
 						</tbody>
