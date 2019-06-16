@@ -52,7 +52,7 @@
             var reg = new RegExp("^[0-9]+$");
             if (pageNum != "" & pageNum != null) {
                 if (reg.test(pageNum)) {
-                    if (totalPageNum < pageNum || pageNum < 1) {
+                    if (parseInt(totalPageNum) < parseInt(pageNum) || parseInt(pageNum) < 1) {
                         $(".msgc").text("页码不在总页码内");
                     } else {
                         $("#hide_pageNum").val(pageNum);
