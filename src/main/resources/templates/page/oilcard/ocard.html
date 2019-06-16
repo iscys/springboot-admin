@@ -74,14 +74,11 @@
 
 <script type="text/javascript">
 
-
-
-
-
 	layui.use(['laydate','layer',], function() {
 		var laydate = layui.laydate //日期
 				, layer = layui.layer //弹层
 	});
+
 
 	function addInfo(){
 
@@ -90,7 +87,12 @@
 			area:["100%","100%"],
 			type: 2,
 			closeBtn: 0, //不显示关闭按钮
-			content: '/ocard/add'
+			content: '/ocard/add',
+			end:function(){
+				console.log("111");
+				$("#Form").submit();
+
+			}
 		})
 	}
 </script>

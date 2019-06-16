@@ -2,7 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <span th:insert="head::common_js_css_bootstrap"></span>
 <body>
-
+<div>
+    <span onclick="cancelToast()" class="btn btn-info ">返回</span>
+</div>
 <div>
     icon图标2：<br>
     <img  src="" style="height: 130px;width: 130px;">
@@ -11,6 +13,13 @@
 	            <input id="icon2_url" name="icon2_url" type="file">
 	        </span>
 </div>
+
+
+
+
+
+
+
 
 <script>
 
@@ -23,6 +32,14 @@
             var imgurl = this.result;
             $(event).siblings("img").prop("src" , imgurl);
         };
+    }
+
+    //取消
+    function cancelToast(){
+
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index);
+
     }
 </script>
 </body>
