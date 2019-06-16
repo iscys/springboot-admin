@@ -42,7 +42,7 @@
 		</thead>
 		<tbody th:if="${dataPager.getRecords()!=null}">
 		<tr th:each="record,recordStat:${dataPager.getRecords()}">
-			<th th:text="${recordStat.index}"></th>
+			<th th:text="${recordStat.index+1}"></th>
 			<th th:text="${record.code}"></th>
 			<th th:text="${record.order_sn}"></th>
 			<th th:text="${record.uid}"></th>
