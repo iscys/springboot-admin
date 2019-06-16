@@ -8,6 +8,17 @@
 		<div class="row-fluid">
 			<div class="row-fluid">
 				<br/>
+
+				<div>
+					icon图标2：<br>
+					<img  src="" style="height: 130px;width: 130px;">
+					<span  onchange="c(this,'icon2_url')" class="btn btn-success fileinput-button">
+	            <span>上传</span>
+	            <input id="icon2_url" name="icon2_url" type="file">
+	        </span>
+				</div>
+
+
 				<form action="/ocard/index" method="post" class="form-inline" name="Form" id="Form">
 					<!-- ---+搜索条件 start+----- -->
 					<div class="form-group">
@@ -72,6 +83,16 @@
 
 <script type="text/javascript">
 
+	function c(event, previewid) {
+		var r = new FileReader();
+		f = document.getElementById(previewid).files[0];
+
+		r.readAsDataURL(f);
+		r.onload = function (e) {
+			var imgurl = this.result;
+			$(event).siblings("img").prop("src" , imgurl);
+		};
+	}
 </script>
 
 </body>
