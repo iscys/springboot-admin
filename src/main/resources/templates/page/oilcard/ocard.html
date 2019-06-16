@@ -9,16 +9,6 @@
 			<div class="row-fluid">
 				<br/>
 
-				<div>
-					icon图标2：<br>
-					<img  src="" style="height: 130px;width: 130px;">
-					<span  onchange="c(this,'icon2_url')" class="btn btn-success fileinput-button">
-	            <span>上传</span>
-	            <input id="icon2_url" name="icon2_url" type="file">
-	        </span>
-				</div>
-
-
 				<form action="/ocard/index" method="post" class="form-inline" name="Form" id="Form">
 					<!-- ---+搜索条件 start+----- -->
 					<div class="form-group">
@@ -30,6 +20,7 @@
 						<input type="email" name="em" class="form-control" id="uid" placeholder="uid">
 					</div>
 					<button type="submit" class="btn btn-default">查询</button>
+					<span  onclick="addInfo()" class="btn btn-info ">添加信息</span>
 					<!-- ---+搜索条件 end+----- -->
 					<hr>
 					<table id="table_report"
@@ -83,15 +74,24 @@
 
 <script type="text/javascript">
 
-	function c(event, previewid) {
-		var r = new FileReader();
-		f = document.getElementById(previewid).files[0];
 
-		r.readAsDataURL(f);
-		r.onload = function (e) {
-			var imgurl = this.result;
-			$(event).siblings("img").prop("src" , imgurl);
-		};
+
+
+
+	layui.use(['laydate','layer',], function() {
+		var laydate = layui.laydate //日期
+				, layer = layui.layer //弹层
+	});
+
+	function addInfo(){
+
+		layer.open({
+			title:false,
+			area:["100%","100%"],
+			type: 2,
+			closeBtn: 0, //不显示关闭按钮
+			content: '/ocard/add'
+		})
 	}
 </script>
 

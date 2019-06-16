@@ -48,6 +48,18 @@ public class OcardController extends BaseController {
         return mv;
     }
 
+
+    /**
+     * 油券路由
+     * @return
+     */
+    @RequestMapping("/add")
+    public ModelAndView addInfo(){
+        ModelAndView mv = this.getModelAndView();
+        mv.setViewName("page/oilcard/ocard_add");
+        return mv;
+    }
+
     /**
      * 实体卡路由
      * @return ModelAndView
