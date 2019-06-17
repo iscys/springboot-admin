@@ -35,11 +35,14 @@ public class DriverServiceImpl implements DriverService {
             result.forEach(questionAndAns->{
                 questionAndAns.setSubject(subject);
                 questionAndAns.setModel(model);
-                questionAndAns.setFormat_answer(QuestionAndAns.formatAnswer(questionAndAns.getAnswer()));
-                System.out.println(questionAndAns);
+                QuestionAndAns.formatData(questionAndAns);
+                logger.info("插入题库：{}",questionAndAns);
                 driverMapper.enterBank(questionAndAns);
             });
+
+            logger.info("初始化题库 类型：{} 科目：{} 题目成功，共：{} 条数据 ",model,subject,result.size());
         }
+
         return ResultObject.success(null);
     }
 }

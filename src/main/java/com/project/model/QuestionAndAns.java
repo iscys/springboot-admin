@@ -2,6 +2,7 @@ package com.project.model;
 
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.util.StringUtils;
 
 @Data
 @ToString
@@ -19,6 +20,7 @@ public class QuestionAndAns {
     private String url;
     private String model;//驾照类型c1 c2 b1 b2 a1 a2
     private String subject;//科目1 科目4
+    private String type;//0 判断选择 1 单选 2 多选
 
 
     //接口备注：
@@ -79,4 +81,20 @@ public class QuestionAndAns {
     return res;
     }
 
+    public static void formatData(QuestionAndAns questionAndAns) {
+        String format_answer = formatAnswer(questionAndAns.getAnswer());
+        questionAndAns.setFormat_answer(format_answer);
+        if(StringUtils.isEmpty(questionAndAns.getItem1())&&
+                StringUtils.isEmpty(questionAndAns.getItem2())){
+            questionAndAns.setItem1("正确");
+            questionAndAns.setItem2("错误");
+            questionAndAns.setType("0");
+
+        }else if(format_answer.length()>=2){
+            questionAndAns.setType("2");
+        }else{
+            questionAndAns.setType("1");
+        }
+
+    }
 }
