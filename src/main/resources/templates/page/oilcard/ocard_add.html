@@ -14,7 +14,13 @@
 	        </span>
 </div>
 
-
+<ul>
+    <li style="vertical-align: middle">
+        <input type="hidden" id="isUploadPic" name="isUploadPic" value="0">
+        <input type="button" class="btn-solid" value="上传图片" style="width:120px;" onclick="toPICUpload('${goodsInfo.goods.goods_id}')" />
+        <span class="explain">按住ctrl可同时批量选择多张图片上传，建议图片宽度为750px</span>
+        <input type="button" class="btn-solid" value="删除所有主图" style="width:120px;float: right;" onclick="deleteAllZPIC()" />
+    </li>
 
 
 
