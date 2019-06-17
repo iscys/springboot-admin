@@ -5,7 +5,7 @@
     <insert id="enterBank" parameterType="com.project.model.QuestionAndAns">
 
         insert  into
-        sdb_jiaoxiao_question_bank
+        sdb_jiaxiao_question_bank
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="question != null  and question != '' ">
                 question,
