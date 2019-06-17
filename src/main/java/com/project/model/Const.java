@@ -12,5 +12,5 @@ public class Const {
 
 
 
-    public static final String JIAPXIAPI="http://api.avatardata.cn/Jztk/Query?key=d1c4e14cf0ef47b1b40284f46be9cd99&model=%s&subject=%s&format=true&testType=order";
+    public static final String JIAPXIAPI="http://v.juhe.cn/jztk/query?key=f3653c439947f2d03a672e74c01c5d99&model=%s&subject=%s&format=true&testType=order";
 }
