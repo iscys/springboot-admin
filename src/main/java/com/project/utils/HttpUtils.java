@@ -1,5 +1,6 @@
 package com.project.utils;
 
+import com.project.model.JiaoXiaoApiModel;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -107,6 +108,11 @@ public class HttpUtils {
 
     }
 
+    public static void main(String[] args)throws Exception {
+        String s = HttpUtils.INSTANCE.doGet("http://api.avatardata.cn/Jztk/Query?key=d1c4e14cf0ef47b1b40284f46be9cd99&model=c1&subject=1&format=true&testType=order");
+        JiaoXiaoApiModel apiResult = GsonUtils.fromJson(s, JiaoXiaoApiModel.class);
+        System.out.println(apiResult.getResult().size());
 
+    }
 
 }

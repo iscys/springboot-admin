@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.mapper.driver.DriverTestMapper">
+
+    <insert id="enterBank" parameterType="com.project.model.QuestionAndAns">
+
+        insert  into
+        sdb_jiaoxiao_question_bank
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="question != null  and question != '' ">
+                question,
+            </if>
+            <if test="answer != null  and answer != '' ">
+                answer,
+            </if>
+            <if test="format_answer != null  and format_answer != '' ">
+                format_answer,
+            </if>
+            <if test="item1 != null  and item1 != '' ">
+                item1,
+            </if>
+            <if test="item2 != null  and item2 != '' ">
+                item2,
+            </if>
+            <if test="item3 != null  and item3 != '' ">
+                item3,
+            </if>
+            <if test="item4 != null  and item4 != '' ">
+                item4,
+            </if>
+            <if test="explains != null  and explains != '' ">
+                explains,
+            </if>
+            <if test="url != null  and url != '' ">
+                url,
+            </if>
+            <if test="model != null  and model != '' ">
+                model,
+            </if>
+            <if test="subject != null  and subject != '' ">
+                subject,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")"  suffixOverrides=",">
+            <if test="question != null  and question != '' ">
+                #{question},
+            </if>
+            <if test="answer != null  and answer != '' ">
+                #{answer},
+            </if>
+            <if test="format_answer != null  and format_answer != '' ">
+                #{format_answer},
+            </if>
+            <if test="item1 != null  and item1 != '' ">
+                #{item1},
+            </if>
+            <if test="item2 != null  and item2 != '' ">
+                #{item2},
+            </if>
+            <if test="item3 != null  and item3 != '' ">
+                #{item3},
+            </if>
+            <if test="item4 != null  and item4 != '' ">
+                #{item4},
+            </if>
+            <if test="explains != null  and explains != '' ">
+                #{explains},
+            </if>
+            <if test="url != null  and url != '' ">
+                #{url},
+            </if>
+            <if test="model != null  and model != '' ">
+                #{model},
+            </if>
+            <if test="subject != null  and subject != '' ">
+                #{subject},
+            </if>
+
+        </trim>
+    </insert>
+</mapper>
