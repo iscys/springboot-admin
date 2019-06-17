@@ -17,6 +17,8 @@ public class DriverTestController {
 
     /**
      *初始化题库，将题库录入数据库中
+     * model c1 c2 a1 a2 b1 b2
+     * subject  1 (科目1) 4（ 科目4）
      */
     @PostMapping ("/enter")
     public ResultObject enter(QuestionAndAns qaa) throws Exception{
