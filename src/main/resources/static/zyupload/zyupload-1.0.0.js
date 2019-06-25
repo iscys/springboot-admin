@@ -1648,7 +1648,6 @@ var ZYFILE = {
 				
 				if(para.dragDrop){
 					// 创建带有拖动的html
-					html += '<form id="uploadForm" action="'+para.url+'" method="post" enctype="multipart/form-data">';
 					html += '	<div class="upload_box">';
 					html += '		<div class="upload_main">';
 					html += '			<div class="upload_choose">';
@@ -1664,7 +1663,6 @@ var ZYFILE = {
 		            html += '				<div id="status_info" class="info">选中0张文件，共0B。</div>';
 		            html += '				<div class="btns">';
 		            html += '					<div class="webuploader_pick">继续选择</div>';
-		            html += '					<div class="upload_btn">开始上传</div>';
 		            html += '				</div>';
 		            html += '			</div>';
 					html += '			<div id="preview" class="upload_preview"></div>';
@@ -1674,12 +1672,10 @@ var ZYFILE = {
 					html += '		</div>';
 					html += '		<div id="uploadInf" class="upload_inf"></div>';
 					html += '	</div>';
-					html += '</form>';
 				}else{
 					var imgWidth = parseInt(para.itemWidth.replace("px", ""))-15;
 					
 					// 创建不带有拖动的html
-					html += '<form id="uploadForm" action="'+para.url+'" method="post" enctype="multipart/form-data">';
 					html += '	<div class="upload_box">';
 					html += '		<div class="upload_main single_main">';
 		            html += '			<div class="status_bar">';
@@ -1705,7 +1701,6 @@ var ZYFILE = {
 					html += '		</div>';
 					html += '		<div id="uploadInf" class="upload_inf"></div>';
 					html += '	</div>';
-					html += '</form>';
 				}
 				
 	            $(self).append(html).css({"width":para.width,"height":para.height});
