@@ -4,6 +4,12 @@
 <span th:insert="head::common_js_css"></span>
 <head>
 	<link rel="stylesheet" href="/css/main.css" media="all" />
+	<style>
+		.layui-layout-admin .layui-body {
+			top: 60px;
+			bottom: 0px;
+		}
+	</style>
 </head>
 <body class="main_body">
 	<div class="layui-layout layui-layout-admin">
@@ -87,17 +93,17 @@
 				</ul>
 				<div class="layui-tab-content clildFrame">
 					<div class="layui-tab-item layui-show">
-						<iframe src="/ocard/ticketIndex"></iframe>
+						<iframe src="/home/index"></iframe>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- 底部 -->
-
+<!--
 		<div class="layui-footer footer">
 			<p>copyright @2019</p>
 		</div>
-
+-->
 	</div>
 
 	<!-- 移动导航 -->

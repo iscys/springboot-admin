@@ -12,3 +12,6 @@
     -ms-filter: 'alpha(opacity=0)';
     font-size: 200px;
 }
+.center{
+    text-align: center;
+}

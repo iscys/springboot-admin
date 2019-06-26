@@ -4,13 +4,16 @@
 <head th:insert="head::common_uploadFile"></head>
 
 <body>
-<div>
-    <span onclick="cancelToast()" class="btn btn-info ">返回</span>
-</div>
-<div class="container-fluid" id="main-container">
-    <div id="page-content" class="clearfix">
 
-<form action="/ocard/update" method="post" enctype="multipart/form-data" >
+<div>
+    <span onclick="cancelToast()" class="btn btn-lg btn-default " style="border: 0px"><</span>
+</div>
+<div class="container-fluid"  style="width:880px; margin: auto">
+
+
+
+<form class="form-inline" action="/ocard/update" method="post" enctype="multipart/form-data" >
+    <!--
     <span id ="xxxx">dianji</span>
     <div>
         驾校图标：<br>
@@ -20,17 +23,25 @@
 	            <input id="icon2_url" name="icon2_url" type="file">
 	        </span>
     </div>
-
-<div id="zyupload" class="zyupload"></div>
-
-
+    -->
+   <h5>驾校图片上传：</h5>
+    <div id="zyupload" class="zyupload"></div>
+    <h5>驾校位置：</h5>
+    <div id="container" style="height: 360px;width: 100%; margin: auto"></div>
+    <br>
+    <div class="form-group">
+        <label >X坐标(纬度)</label><!--纬度-->
+        <input disabled="disabled" type="text" name="x_location" class="form-control" id="x_location" >
+    </div>&nbsp;&nbsp;&nbsp;
+    <div class="form-group">
+        <label>Y坐标（经度）</label><!--经度-->
+        <input disabled="disabled" type="text" name="y_location" class="form-control" id="y_location" >
+    </div>
 </form>
-
-</div>
 </div>
 </body>
 
-
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=TJHBZ-A56CV-5J6P5-UDCKM-POXQK-YZBG2"></script>
 <script>
 
     function c(event, previewid) {
@@ -55,10 +66,35 @@
 
 <script type="text/javascript">
     $(function(){
+
+        //tencent map
+        //直接加载地图
+        //初始化地图函数  自定义函数名init
+        function init() {
+            //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
+            var map = new qq.maps.Map(document.getElementById("container"), {
+                center: new qq.maps.LatLng(32.70931112969933,109.02059555053711),      // 地图的中心地理坐标。
+                zoom:8                                                 // 地图的中心地理坐标。
+            });
+
+            //添加监听事件
+            qq.maps.event.addListener(map, 'click', function(event) {
+                $("#y_location").val(event.latLng.getLng());
+                $("#x_location").val(event.latLng.getLat());
+            });
+
+        }
+
+        //调用初始化函数地图
+        init();
+
+
+
+
         // 初始化插件
         $("#zyupload").zyUpload({
             width            :   "850px",                 // 宽度
-            height           :   "230px",                 // 宽度
+            height           :   "",                 // 宽度
             itemWidth        :   "140px",                 // 文件项的宽度
             itemHeight       :   "115px",                 // 文件项的高度
             url              :   "",  // 上传文件的路径

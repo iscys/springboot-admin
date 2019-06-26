@@ -20,6 +20,28 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+
+/**
+ * 登录：
+ *
+ *
+ * 报名：
+ *  报名信息+支付成功=>第三方报名系统后台
+ *
+ * 驾校配置：
+ *  驾校坐标
+ *  驾校相册
+ *  驾校二维码
+ *  驾校套餐
+ *  天眼查
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
 @Controller
 @RequestMapping("/wx")
 public class WxEventController {

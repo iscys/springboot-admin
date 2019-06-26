@@ -14,8 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -117,6 +122,21 @@ public class OcardController extends BaseController {
             return ResultObject.error(null);
         }
 
+
+    }
+
+
+    /**
+     * 油券路由
+     * @return
+     */
+    @RequestMapping("/update")
+    @ResponseBody
+    public String update(MultipartFile[] files,MultipartFile file,String name,HttpServletRequest req){
+        System.out.println("111");
+        System.out.println(file.getResource().getFilename());
+
+        return "111111";
 
     }
 
