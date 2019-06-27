@@ -54,7 +54,7 @@
         limit 1
     </select>
 
-    <insert id="save" parameterType="com.project.model.school.SchoolModel">
+    <insert id="save" parameterType="com.project.utils.PageData">
         insert into sdb_school
         (school_name)values (#{school_name})
     </insert>
