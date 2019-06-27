@@ -22,9 +22,16 @@
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">驾校认证</label>
+        <label class="layui-form-label">驾校编码</label>
         <div class="layui-input-block">
             <input type="text" name="school_code" required  lay-verify="required" placeholder="请输入驾校code"  class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">驾校联系电话</label>
+        <div class="layui-input-block">
+            <input type="text" name="school_phone" id="school_phone" required  lay-verify="required" placeholder="请输入驾校code"  class="layui-input">
         </div>
     </div>
     <div>
@@ -43,21 +50,28 @@
     <br>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">X坐标(纬度)</label>
+        <label class="layui-form-label">纬度坐标</label>
         <div class="layui-input-inline">
-            <input type="text"  id="school_location_x" name="x_location" required lay-verify="required"  disabled class="layui-input">
+            <input type="text"  name="school_location_x" id="x_location" required lay-verify="required"  disabled class="layui-input">
         </div>
-        <label class="layui-form-label">Y坐标（经度)</label>
+        <label class="layui-form-label">经度坐标</label>
         <div class="layui-input-inline">
-            <input type="text" id="school_location_y" name="y_location" required lay-verify="required"  disabled class="layui-input">
+            <input type="text" name="school_location_y" id="y_location" required lay-verify="required"  disabled class="layui-input">
         </div>
     </div>
 
     <br>
-    <div class="form-group">
-        <label>驾校详细地址(请手动输入)：</label><!--经度-->
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">驾校详细地址(请手动输入)</label>
+        <div class="layui-input-block">
+            <textarea name="school_location" placeholder="请输入完整的驾校地址" class="layui-textarea"></textarea>
+        </div>
+    </div>
 
-        <textarea style="width: 850px" name="school_location" class="form-control" id="school_location" ></textarea>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn">立即提交</button>
+        </div>
     </div>
 </form>
 </div>
