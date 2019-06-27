@@ -8,9 +8,11 @@ import com.project.utils.PageData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 
 /**
  * 驾校列表以及配置
@@ -50,5 +52,17 @@ public class DriverHomeController extends BaseController {
         mv.addObject("pd",schoolModel);
         mv.setViewName("page/school/school_update");
         return mv;
+    }
+
+    @RequestMapping("/save")
+    @ResponseBody
+    public String save(HttpServletRequest req){
+        PageData pd = this.getPageData();
+        try {
+            homeService.save(pd);
+        }catch (Exception e){
+            return "Fail";
+        }
+        return "success";
     }
 }

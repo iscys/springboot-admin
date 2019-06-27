@@ -7,11 +7,13 @@ import com.project.utils.DataPager;
 import com.project.utils.PageData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
 
 @Service
+@Transactional
 public class DriverHomeServiceImpl implements DriverHomeService {
 
     @Autowired
@@ -35,5 +37,13 @@ public class DriverHomeServiceImpl implements DriverHomeService {
     public SchoolModel getSchoolDetail(PageData pd) {
        SchoolModel model= homeMapper.getSchoolDetail(pd);
         return model;
+    }
+
+    @Override
+    public void save(PageData pd) throws Exception{
+
+            homeMapper.save(pd);
+            int i =1/0;
+
     }
 }

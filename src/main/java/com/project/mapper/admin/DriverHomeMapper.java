@@ -14,4 +14,6 @@ public interface DriverHomeMapper  {
     List<HashMap<String, String>> getHomeList(PageData pd);
 
     SchoolModel getSchoolDetail(PageData pd);
+
+    void save(PageData pd);
 }

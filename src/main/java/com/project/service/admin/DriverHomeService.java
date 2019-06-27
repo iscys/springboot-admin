@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 
 
 public interface DriverHomeService  {
@@ -16,4 +17,6 @@ public interface DriverHomeService  {
     DataPager getHomeList(PageData pd);
 
     SchoolModel getSchoolDetail(PageData pd);
+
+    void save(PageData pd) throws Exception;
 }
