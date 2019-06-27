@@ -30,8 +30,27 @@
         <if test="school_code !=null  and school_code != '' ">
             and a.school_code=#{school_code}
         </if>
+        <if test="school_phone !=null  and school_phone != '' ">
+            and a.school_phone=#{school_phone}
+        </if>
     limit #{startIndex},#{pageSize}
 
    </select>
 
+    <select id="getSchoolDetail" resultType="com.project.model.school.SchoolModel" parameterType="com.project.utils.PageData">
+        select * from
+        sdb_school
+        where 1=1
+        and flag ='1'
+        <if test="id !=null  and id != '' ">
+            and id=#{id}
+        </if>
+        <if test="school_name !=null  and school_name != '' ">
+            and school_name=#{school_name}
+        </if>
+        <if test="school_name !=null  and school_name != '' ">
+            and school_code=#{school_code}
+        </if>
+        limit 1
+    </select>
 </mapper>

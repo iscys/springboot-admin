@@ -1,6 +1,7 @@
 package com.project.mapper.admin;
 
 
+import com.project.model.school.SchoolModel;
 import com.project.utils.PageData;
 
 import java.util.HashMap;
@@ -11,4 +12,6 @@ public interface DriverHomeMapper  {
     Integer getHomeCount(PageData pd);
 
     List<HashMap<String, String>> getHomeList(PageData pd);
+
+    SchoolModel getSchoolDetail(PageData pd);
 }

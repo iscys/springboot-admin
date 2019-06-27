@@ -1,6 +1,7 @@
 package com.project.controller.admin.dirverHome;
 
 import com.project.controller.BaseController;
+import com.project.model.school.SchoolModel;
 import com.project.service.admin.DriverHomeService;
 import com.project.utils.DataPager;
 import com.project.utils.PageData;
@@ -38,6 +39,16 @@ public class DriverHomeController extends BaseController {
     public ModelAndView addSchool(HttpServletRequest req){
         ModelAndView mv = this.getModelAndView();
         mv.setViewName("page/school/school_add");
+        return mv;
+    }
+
+    @RequestMapping("/to_update")
+    public ModelAndView to_update(HttpServletRequest req){
+        ModelAndView mv = this.getModelAndView();
+        PageData pd = this.getPageData();
+        SchoolModel schoolModel=homeService.getSchoolDetail(pd);
+        mv.addObject("pd",schoolModel);
+        mv.setViewName("page/school/school_update");
         return mv;
     }
 }

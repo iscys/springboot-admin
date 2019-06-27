@@ -1,6 +1,7 @@
 package com.project.service.admin.impl;
 
 import com.project.mapper.admin.DriverHomeMapper;
+import com.project.model.school.SchoolModel;
 import com.project.service.admin.DriverHomeService;
 import com.project.utils.DataPager;
 import com.project.utils.PageData;
@@ -28,5 +29,11 @@ public class DriverHomeServiceImpl implements DriverHomeService {
         dataPager.setRecords(result);
         dataPager.setFormId("Form");
         return dataPager;
+    }
+
+    @Override
+    public SchoolModel getSchoolDetail(PageData pd) {
+       SchoolModel model= homeMapper.getSchoolDetail(pd);
+        return model;
     }
 }
