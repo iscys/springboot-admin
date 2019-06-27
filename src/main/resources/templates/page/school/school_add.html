@@ -12,30 +12,52 @@
 
 
 
-<form class="form-inline" action="/ocard/update" method="post" enctype="multipart/form-data" >
-    <!--
-    <span id ="xxxx">dianji</span>
+<form  action="/ocard/update" method="post" enctype="multipart/form-data" >
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">驾校名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="school_name" required  lay-verify="required" placeholder="请输入驾校名称"  class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">驾校认证</label>
+        <div class="layui-input-block">
+            <input type="text" name="school_code" required  lay-verify="required" placeholder="请输入驾校code"  class="layui-input">
+        </div>
+    </div>
     <div>
-        驾校图标：<br>
+        <h5>驾校图标上传：</h5>
         <img  src="" style="height: 130px;width: 130px;">
-        <span  onchange="c(this,'icon2_url')" class="btn btn-success fileinput-button">
+        <span  onchange="c(this,'school_face')" class="btn btn-success fileinput-button">
 	            <span>上传</span>
-	            <input id="icon2_url" name="icon2_url" type="file">
+	            <input id="school_face" name="school_face" type="file">
 	        </span>
     </div>
-    -->
-   <h5>驾校图片上传：</h5>
+
+   <h5>驾校图片相册上传：</h5>
     <div id="zyupload" class="zyupload"></div>
-    <h5>驾校位置：</h5>
+    <h5>驾校位置(请选择详细坐标地址，以便更好的定位距离)：</h5>
     <div id="container" style="height: 360px;width: 100%; margin: auto"></div>
     <br>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">X坐标(纬度)</label>
+        <div class="layui-input-inline">
+            <input type="text"  id="school_location_x" name="x_location" required lay-verify="required"  disabled class="layui-input">
+        </div>
+        <label class="layui-form-label">Y坐标（经度)</label>
+        <div class="layui-input-inline">
+            <input type="text" id="school_location_y" name="y_location" required lay-verify="required"  disabled class="layui-input">
+        </div>
+    </div>
+
+    <br>
     <div class="form-group">
-        <label >X坐标(纬度)</label><!--纬度-->
-        <input disabled="disabled" type="text" name="x_location" class="form-control" id="x_location" >
-    </div>&nbsp;&nbsp;&nbsp;
-    <div class="form-group">
-        <label>Y坐标（经度）</label><!--经度-->
-        <input disabled="disabled" type="text" name="y_location" class="form-control" id="y_location" >
+        <label>驾校详细地址(请手动输入)：</label><!--经度-->
+
+        <textarea style="width: 850px" name="school_location" class="form-control" id="school_location" ></textarea>
     </div>
 </form>
 </div>
