@@ -34,9 +34,19 @@
             <input type="text" name="school_phone" id="school_phone" th:value="${pd.getSchool_phone()}"   lay-verify="required" placeholder="请输入驾校code"  class="layui-input">
         </div>
     </div>
+
     <div>
-        <h5>驾校图标上传：</h5>
+        <h5>驾校icon图标上传：</h5>
         <img  src="" style="height: 130px;width: 130px;">
+        <span  onchange="c(this,'school_icon')" class="btn btn-success fileinput-button">
+	            <span>上传</span>
+	            <input id="school_icon" name="school_icon" type="file">
+	        </span>
+    </div>
+
+    <div>
+        <h5>驾校门面图片上传：</h5>
+        <img  src="" style="height: 300px;width: 640px;">
         <span  onchange="c(this,'school_face')" class="btn btn-success fileinput-button">
 	            <span>上传</span>
 	            <input id="school_face" name="school_face" type="file">
