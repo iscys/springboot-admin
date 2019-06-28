@@ -236,9 +236,15 @@
                         processData: false,//用于对data参数进行序列化处理 这里必须false
                         contentType: false, //必须
             			success: function (result) {
-            			    console.log(result);
-                            cancelToast();
-            				//console.log(result);//打印服务端返回的数据(调试用)
+                            //console.log(result);//打印服务端返回的数据(调试用)
+                            if(result.flag =="1"){
+                                layer.msg("提交成功");
+                                window.setTimeout(cancelToast(),2100);
+                            }else{
+                                layer.msg("提交失败，请稍后再试");
+                                $("#sub").show();
+                            }
+
 
             			},
             			error : function() {
