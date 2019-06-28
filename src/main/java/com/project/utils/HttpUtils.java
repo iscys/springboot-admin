@@ -52,7 +52,7 @@ public class HttpUtils {
      * @return
      * @throws Exception
      */
-    public String doPost(String url,String param) throws Exception{
+    public String doPost(String url,String param){
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httppost =new HttpPost(url);
         try {
@@ -82,15 +82,15 @@ public class HttpUtils {
      * @return
      * @throws Exception
      */
-    public String doPost(String url, HashMap<String,String> param) throws Exception{
+    public String doPost(String url, HashMap<String,String> param) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httppost =new HttpPost(url);
         try {
-            httppost.addHeader("accept", "*/*");
-            httppost.addHeader("connection", "Keep-Alive");
-            httppost.addHeader("user-agent",
-                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-            httppost.addHeader("Content-Type", "application/x-www-form-urlencoded");
+            //httppost.addHeader("accept", "*/*");
+            //httppost.addHeader("connection", "Keep-Alive");
+            //httppost.addHeader("user-agent",
+             //       "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+           // httppost.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
             List<BasicNameValuePair> pair = new ArrayList<BasicNameValuePair>();
             for (Map.Entry<String, String> entry : param.entrySet()) {

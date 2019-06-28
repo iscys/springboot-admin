@@ -128,4 +128,34 @@
             </if>
         </trim>
     </insert>
+
+    <insert id="saveSchoolAlbum" parameterType="com.project.model.school.Album">
+        insert into sdb_school_album
+        <trim prefix="(" suffix=")"  suffixOverrides=",">
+
+        <if test="school_id != null  and school_id != '' ">
+            school_id,
+        </if>
+            <if test="img_url != null  and img_url != '' ">
+                img_url,
+            </if>
+        <if test="orders != null  and orders != '' ">
+            orders,
+        </if>
+        </trim>
+        <trim prefix="values(" suffix=")"  suffixOverrides=",">
+
+            <if test="school_id != null  and school_id != '' ">
+                #{school_id},
+            </if>
+            <if test="img_url != null  and img_url != '' ">
+                #{img_url},
+            </if>
+            <if test="orders != null  and orders != '' ">
+                #{orders},
+            </if>
+        </trim>
+
+
+    </insert>
 </mapper>

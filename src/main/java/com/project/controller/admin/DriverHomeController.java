@@ -1,6 +1,7 @@
 package com.project.controller.admin.dirverHome;
 
 import com.project.controller.BaseController;
+import com.project.model.ResultObject;
 import com.project.model.school.SchoolModel;
 import com.project.service.admin.DriverHomeService;
 import com.project.utils.DataPager;
@@ -57,13 +58,14 @@ public class DriverHomeController extends BaseController {
 
     @RequestMapping("/save")
     @ResponseBody
-    public String save(MultipartFile school_icon,MultipartFile school_face,MultipartFile[] files){
+    public ResultObject save(MultipartFile school_icon, MultipartFile school_face, MultipartFile[] files){
         PageData pd = this.getPageData();
         try {
             PageData result = homeService.save(pd,school_icon,school_face,files);
+
+            return ResultObject.success(null);
         }catch (Exception e){
-            return "Fail";
+            return ResultObject.error(null);
         }
-        return "success";
     }
 }

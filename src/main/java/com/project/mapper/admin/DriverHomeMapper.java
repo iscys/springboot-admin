@@ -1,6 +1,7 @@
 package com.project.mapper.admin;
 
 
+import com.project.model.school.Album;
 import com.project.model.school.SchoolModel;
 import com.project.utils.PageData;
 
@@ -16,4 +17,6 @@ public interface DriverHomeMapper  {
     SchoolModel getSchoolDetail(PageData pd);
 
     void save(PageData pd);
+
+    void saveSchoolAlbum(Album album);
 }

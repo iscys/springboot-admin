@@ -78,6 +78,13 @@
             <textarea name="school_location" id="school_location" th:text="${pd.getSchool_location()}"  placeholder="请输入完整的驾校地址" class="layui-textarea"></textarea>
         </div>
     </div>
+    <br>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">驾校简介描述</label>
+        <div class="layui-input-block">
+            <textarea name="school_describe" th:text="${pd.getSchool_describe()}" id="school_describe" placeholder="驾校简介" class="layui-textarea"></textarea>
+        </div>
+    </div>
 
     <div class="layui-form-item">
         <div class="layui-input-block">

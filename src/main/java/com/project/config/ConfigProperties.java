@@ -13,5 +13,6 @@ public class ConfigProperties {
 
     private String destdir;
     private String imgUrl;
+    private String applyUrl;
 
 }

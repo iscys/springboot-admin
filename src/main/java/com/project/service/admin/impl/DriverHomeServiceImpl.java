@@ -2,6 +2,7 @@ package com.project.service.admin.impl;
 
 import com.project.config.ConfigProperties;
 import com.project.mapper.admin.DriverHomeMapper;
+import com.project.model.school.Album;
 import com.project.model.school.SchoolModel;
 import com.project.service.admin.DriverHomeService;
 import com.project.utils.DataPager;
@@ -86,7 +87,7 @@ public class DriverHomeServiceImpl implements DriverHomeService {
         if(!destFaceFile.exists()){
             boolean flag= destFaceFile.mkdirs();
             if(!flag){
-                logger.error("创建文件夹：{}失败",destDir);
+                logger.error("创建文件夹：{}失败",destFaceFile);
             }
         }
 
@@ -96,6 +97,34 @@ public class DriverHomeServiceImpl implements DriverHomeService {
         faceOutputStream.close();
         pd.put("school_face",properties.getImgUrl()+face_dir+face_uuid+"."+face_suffix);
         homeMapper.save(pd);
+
+        String album_dir="/album/";
+        String albums=properties.getDestdir()+album_dir;
+        File album_file =new File(albums);
+        if(!album_file.exists()){
+            boolean flag= album_file.mkdirs();
+            if(!flag){
+                logger.error("创建文件夹：{}失败",album_file);
+            }
+        }
+        String ids=pd.get("id").toString();
+
+        for(int i=0;i<files.length;i++){
+            MultipartFile file=files[i];
+            Album album =new Album();
+            album.setSchool_id(ids);
+            album.setOrders(i);
+            InputStream album_input = file.getInputStream();
+            String album_suffix=ToolsUtils.getFileSuffix(file.getResource().getFilename());
+            String album_uuid=ToolsUtils.idGenerate();
+            FileOutputStream albumOutputStream =new FileOutputStream(albums+album_uuid+"."+album_suffix);
+            IOUtils.copy(album_input,albumOutputStream);
+            album_input.close();
+            albumOutputStream.close();
+            album.setImg_url(properties.getImgUrl()+album_dir+album_uuid+"."+album_suffix);
+            homeMapper.saveSchoolAlbum(album);
+
+        }
         return pd;
     }
 }
