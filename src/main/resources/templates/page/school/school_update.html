@@ -13,18 +13,19 @@
 
 
 <form  action="/ocard/update" method="post" enctype="multipart/form-data" >
+    <input type="text" name="id" id="id" th:value="${pd.getId()}"  lay-verify="required" placeholder="请输入驾校名称"  class="layui-input">
 
     <div class="layui-form-item">
         <label class="layui-form-label">驾校名称</label>
         <div class="layui-input-block">
-            <input type="text" name="school_name" th:value="${pd.getSchool_name()}"  lay-verify="required" placeholder="请输入驾校名称"  class="layui-input">
+            <input type="text" name="school_name" id="school_name" th:value="${pd.getSchool_name()}"   class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">驾校编码</label>
         <div class="layui-input-block">
-            <input type="text" name="school_code" th:value="${pd.getSchool_code()}"  lay-verify="required" placeholder="请输入驾校code"  class="layui-input">
+            <input type="text" id="school_code" name="school_code" th:value="${pd.getSchool_code()}"   placeholder="请输入驾校code"  class="layui-input">
         </div>
     </div>
 
@@ -74,7 +75,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">驾校详细地址(请手动输入)</label>
         <div class="layui-input-block">
-            <textarea name="school_location" th:text="${pd.getSchool_location()}"  placeholder="请输入完整的驾校地址" class="layui-textarea"></textarea>
+            <textarea name="school_location" id="school_location" th:text="${pd.getSchool_location()}"  placeholder="请输入完整的驾校地址" class="layui-textarea"></textarea>
         </div>
     </div>
 
