@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,10 +57,10 @@ public class DriverHomeController extends BaseController {
 
     @RequestMapping("/save")
     @ResponseBody
-    public String save(HttpServletRequest req){
+    public String save(MultipartFile school_icon,MultipartFile school_face,MultipartFile[] files){
         PageData pd = this.getPageData();
         try {
-            homeService.save(pd);
+            PageData result = homeService.save(pd,school_icon,school_face,files);
         }catch (Exception e){
             return "Fail";
         }
