@@ -17,14 +17,14 @@
     <div class="layui-form-item">
         <label class="layui-form-label">驾校名称</label>
         <div class="layui-input-block">
-            <input type="text" name="school_name" required  lay-verify="required" placeholder="请输入驾校名称"  class="layui-input">
+            <input type="text" name="school_name" id="school_name"  placeholder="请输入驾校名称"  class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">驾校编码</label>
         <div class="layui-input-block">
-            <input type="text" name="school_code" required  lay-verify="required" placeholder="请输入驾校code"  class="layui-input">
+            <input type="text" name="school_code" id="school_code"  placeholder="请输入驾校code"  class="layui-input">
         </div>
     </div>
 
@@ -75,13 +75,13 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">驾校详细地址(请手动输入)</label>
         <div class="layui-input-block">
-            <textarea name="school_location" placeholder="请输入完整的驾校地址" class="layui-textarea"></textarea>
+            <textarea name="school_location" id="school_location" placeholder="请输入完整的驾校地址" class="layui-textarea"></textarea>
         </div>
     </div>
 
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn">立即提交</button>
+            <div class="layui-btn" id="sub">立即提交</div>
         </div>
     </div>
 </form>
@@ -180,6 +180,72 @@
             }
              **/
         });
+
+
+        $("#sub").click(function(){
+            var formData = new FormData();
+            var school_face=$("#school_face").get(0).files[0];
+            var school_icon=$("#school_icon").get(0).files[0];
+            var school_location_x=$("#x_location").val();
+            var school_location_y=$("#y_location").val();
+            var school_location=$("#school_location").val();
+            var school_phone=$("#school_phone").val();
+            var school_code=$("#school_code").val();
+            var school_name=$("#school_name").val();
+            var message='';
+            if(ASSERT(school_name)){
+                message='驾校名称不能为空'
+            }else if (ASSERT(school_phone)){
+                message='驾校电话不能为空'
+            } else if(ASSERT(school_code)){
+                message='驾校编码不能为空'
+            }else if(ASSERT(school_face)){
+                message='驾校门面图片不能为空'
+            }else if(ASSERT(school_icon)){
+                message='驾校icon图片不能为空'
+            }else if(ASSERT(school_location_x)){
+                message='驾校坐标不能为空'
+            }else if(ASSERT(school_location_y)){
+                message='驾校坐标不能为空'
+            }else if(ASSERT(school_location)){
+                message='驾校详细地址不能为空'
+            }
+
+            console.log(message);
+            if(message!=''){
+                layer.msg(message);
+                return false;
+            }
+            $.each(window.ZYFILE.uploadFile, function(k, v){
+                formData.append("files", v); //加入文件对象
+            } );
+            formData.append("school_face",school_face);
+            formData.append("school_icon",school_icon);
+            formData.append("school_name",school_name);
+            formData.append("school_code",school_code);
+            formData.append("school_phone",school_phone);
+            formData.append("school_location",school_location);
+            formData.append("school_location_x",school_location_x);
+            formData.append("school_location_y",school_location_y);
+
+            $.ajax({
+            			type: "POST",//方法类型
+            			dataType: "json",//预期服务器返回的数据类型
+            			url: "/home/save" ,//url
+            			data:formData,
+                        processData: false,//用于对data参数进行序列化处理 这里必须false
+                        contentType: false, //必须
+            			success: function (result) {
+            				//console.log(result);//打印服务端返回的数据(调试用)
+
+            			},
+            			error : function() {
+
+
+            			}
+            		});
+
+        })
 
         /**
 $("#xxxx").click(function(){
