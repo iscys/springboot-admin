@@ -13,7 +13,7 @@
 
 
 <form  action="/ocard/update" method="post" enctype="multipart/form-data" >
-    <input type="hidden" name="id" id="id" th:value="${pd.getId()}"   class="layui-input">
+    <input type="hidden" name="id" id="school_id" th:value="${pd.getId()}"   class="layui-input">
 
     <div class="layui-form-item">
         <label class="layui-form-label">驾校名称</label>
@@ -198,6 +198,10 @@
             var school_phone=$("#school_phone").val();
             var school_code=$("#school_code").val();
             var school_name=$("#school_name").val();
+            var school_id=$("#school_id").val();
+            var school_describe=$("#school_describe").val();
+
+
             var message='';
             if(ASSERT(school_name)){
                 message='驾校名称不能为空'
@@ -221,14 +225,21 @@
             $.each(window.ZYFILE.uploadFile, function(k, v){
                 formData.append("files", v); //加入文件对象
             } );
-            formData.append("school_face",school_face);
-            formData.append("school_icon",school_icon);
+            formData.append("id",school_id);
+            if(!ASSERT(school_face)) {
+                formData.append("school_face", school_face);
+            }
+            if(!ASSERT(school_icon)) {
+                formData.append("school_icon", school_icon);
+            }
             formData.append("school_name",school_name);
             formData.append("school_code",school_code);
             formData.append("school_phone",school_phone);
             formData.append("school_location",school_location);
             formData.append("school_location_x",school_location_x);
             formData.append("school_location_y",school_location_y);
+            formData.append("school_describe",school_describe);
+
             $("#sub").hide();
             $.ajax({
                 type: "POST",//方法类型

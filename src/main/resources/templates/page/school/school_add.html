@@ -199,6 +199,7 @@
             var school_phone=$("#school_phone").val();
             var school_code=$("#school_code").val();
             var school_name=$("#school_name").val();
+            var school_describe=$("#school_describe").val();
             var message='';
             if(ASSERT(school_name)){
                 message='驾校名称不能为空'
@@ -216,6 +217,8 @@
                 message='驾校坐标不能为空'
             }else if(ASSERT(school_location)){
                 message='驾校详细地址不能为空'
+            }else if(ASSERT(school_describe)){
+                message='驾校简介不能为空';
             }
 
             console.log(message);
@@ -234,6 +237,8 @@
             formData.append("school_location",school_location);
             formData.append("school_location_x",school_location_x);
             formData.append("school_location_y",school_location_y);
+            formData.append("school_describe",school_describe);
+
             $("#sub").hide();
             $.ajax({
             			type: "POST",//方法类型
