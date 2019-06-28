@@ -19,4 +19,6 @@ public interface DriverHomeMapper  {
     void save(PageData pd);
 
     void saveSchoolAlbum(Album album);
+
+    void updateShool(PageData pd);
 }

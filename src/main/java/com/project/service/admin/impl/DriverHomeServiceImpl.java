@@ -98,7 +98,12 @@ public class DriverHomeServiceImpl implements DriverHomeService {
             faceOutputStream.close();
             pd.put("school_face", properties.getImgUrl() + face_dir + face_uuid + "." + face_suffix);
         }
-        homeMapper.save(pd);
+        if(null==pd.get("id")) {
+            homeMapper.save(pd);
+        }else{
+            //todo update
+            homeMapper.updateShool(pd);
+        }
 
 
         String album_dir="/album/";
