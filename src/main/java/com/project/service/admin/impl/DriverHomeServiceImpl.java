@@ -90,7 +90,7 @@ public class DriverHomeServiceImpl implements DriverHomeService {
             }
         }
 
-        FileOutputStream faceOutputStream =new FileOutputStream(destDir+icon_uuid+"."+icon_suffix);
+        FileOutputStream faceOutputStream =new FileOutputStream(destDir+face_uuid+"."+icon_suffix);
         IOUtils.copy(face,faceOutputStream);
         face.close();
         faceOutputStream.close();
