@@ -227,7 +227,7 @@
             formData.append("school_location",school_location);
             formData.append("school_location_x",school_location_x);
             formData.append("school_location_y",school_location_y);
-
+            $("#sub").hide();
             $.ajax({
             			type: "POST",//方法类型
             			dataType: "json",//预期服务器返回的数据类型
@@ -236,75 +236,20 @@
                         processData: false,//用于对data参数进行序列化处理 这里必须false
                         contentType: false, //必须
             			success: function (result) {
+                            cancelToast();
             				//console.log(result);//打印服务端返回的数据(调试用)
 
             			},
             			error : function() {
 
-
+                            $("#sub").show();
             			}
             		});
 
         })
 
-        /**
-$("#xxxx").click(function(){
-    $.each(window.ZYFILE.uploadFile, function(k, v){
-        var fileObj2 = document.getElementById("icon2_url").files[0];
-        var fileObj = v;
-        var formFile = new FormData();
-        formFile.append("logs", fileObj2); //加入文件对象
-        formFile.append("file", fileObj); //加入文件对象
-        formFile.append("name", "123456"); //加入文件对象
-        console.log(v);
-        $.ajax({
-            //window.ZYFILE.uploadFile
-            type: "POST",//方法类型
-            dataType: "json",//预期服务器返回的数据类型
-            url: "/ocard/update" ,//url
-            data:formFile,
-            processData: false,//用于对data参数进行序列化处理 这里必须false
-            contentType: false, //必须
-            success: function (result) {
-                //console.log(result);//打印服务端返回的数据(调试用)
-
-            },
-            error : function() {
 
 
-            }
-        });
-    });
-})
-**/
-
-        $("#xxxx").click(function(){
-            alert("1111");
-            var fileObj = document.getElementById("icon2_url").files[0];
-            var formFile = new FormData();
-            formFile.append("file", fileObj); //加入文件对象
-            $.each(window.ZYFILE.uploadFile, function(k, v){
-                formFile.append("files", v); //加入文件对象
-            } )
-            console.log(1,formFile);
-            $.ajax({
-                //window.ZYFILE.uploadFile
-            			type: "POST",//方法类型
-            			dataType: "json",//预期服务器返回的数据类型
-            			url: "/ocard/update" ,//url
-            			data:formFile,
-                        processData: false,//用于对data参数进行序列化处理 这里必须false
-                        contentType: false, //必须
-            			success: function (result) {
-            				//console.log(result);//打印服务端返回的数据(调试用)
-
-            			},
-            			error : function() {
-
-
-            			}
-            		});
-        })
 
     });
 
