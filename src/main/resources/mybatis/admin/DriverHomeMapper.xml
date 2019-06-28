@@ -55,7 +55,77 @@
     </select>
 
     <insert id="save" parameterType="com.project.utils.PageData">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            select LAST_INSERT_ID()
+        </selectKey>
         insert into sdb_school
-        (school_name)values (#{school_name})
+        <trim prefix="(" suffix=")"  suffixOverrides=",">
+
+            <if test="school_name != null  and school_name != '' ">
+                school_name,
+            </if>
+            <if test="school_icon != null  and school_icon != '' ">
+                school_icon,
+            </if>
+            <if test="school_face != null  and school_face != '' ">
+                school_face,
+            </if>
+            <if test="school_phone != null  and school_phone != '' ">
+                school_phone,
+            </if>
+            <if test="school_describe != null  and school_describe != '' ">
+                school_describe,
+            </if>
+            <if test="school_code != null  and school_code != '' ">
+                school_code,
+            </if>
+            <if test="school_wxsmall_url != null  and school_wxsmall_url != '' ">
+                school_wxsmall_url,
+            </if>
+            <if test="school_location != null  and school_location != '' ">
+                school_location,
+            </if>
+            <if test="school_location_x != null  and school_location_x != '' ">
+                school_location_x,
+            </if>
+            <if test="school_location_y != null  and school_location_y != '' ">
+                school_location_y,
+            </if>
+
+        </trim>
+
+        <trim prefix="values(" suffix=")"  suffixOverrides=",">
+
+            <if test="school_name != null  and school_name != '' ">
+                #{school_name},
+            </if>
+            <if test="school_icon != null  and school_icon != '' ">
+                #{school_icon},
+            </if>
+            <if test="school_face != null  and school_face != '' ">
+                #{school_face},
+            </if>
+            <if test="school_phone != null  and school_phone != '' ">
+                #{school_phone},
+            </if>
+            <if test="school_describe != null  and school_describe != '' ">
+                #{school_describe},
+            </if>
+            <if test="school_code != null  and school_code != '' ">
+                #{school_code},
+            </if>
+            <if test="school_wxsmall_url != null  and school_wxsmall_url != '' ">
+                #{school_wxsmall_url},
+            </if>
+            <if test="school_location != null  and school_location != '' ">
+                #{school_location},
+            </if>
+            <if test="school_location_x != null  and school_location_x != '' ">
+                #{school_location_x},
+            </if>
+            <if test="school_location_y != null  and school_location_y != '' ">
+                #{school_location_y},
+            </if>
+        </trim>
     </insert>
 </mapper>
