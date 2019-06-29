@@ -200,7 +200,7 @@
                     'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
                     'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
                     'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
-                    'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                     'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
                     'anchor', 'link', 'unlink'
                 ],
                 //uploadJson : '<%=basePath%>goods/saveGoodsDetailsPic?goods_id='+"${goodsInfo.goods.goods_id}",
@@ -222,7 +222,7 @@
             var school_phone=$("#school_phone").val();
             var school_code=$("#school_code").val();
             var school_name=$("#school_name").val();
-            var school_describe=$("#school_describe").val();
+            var school_describe=editor.html();
             var message='';
             if(ASSERT(school_name)){
                 message='驾校名称不能为空'

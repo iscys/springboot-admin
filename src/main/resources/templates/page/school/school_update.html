@@ -2,6 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="head::common_js_css_bootstrap"></head>
 <head th:insert="head::common_uploadFile"></head>
+<head th:insert="head::kindeditor"></head>
+
 
 <body>
 
@@ -82,7 +84,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">驾校简介描述</label>
         <div class="layui-input-block">
-            <textarea name="school_describe" th:text="${pd.getSchool_describe()}" id="school_describe" placeholder="驾校简介" class="layui-textarea"></textarea>
+            <textarea name="school_describe" th:text="${pd.getSchool_describe()}" id="school_describe" style="width:100%;height:400px;"></textarea>
         </div>
     </div>
 
@@ -188,6 +190,24 @@
              **/
         });
 
+        //富文本
+        //富文本编译器
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#school_describe',{
+                items:[
+                    'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+                    'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                    'anchor', 'link', 'unlink'
+                ],
+                //uploadJson : '<%=basePath%>goods/saveGoodsDetailsPic?goods_id='+"${goodsInfo.goods.goods_id}",
+            });
+        });
+
         $("#sub").click(function(){
             var formData = new FormData();
             var school_face=$("#school_face").get(0).files[0];
@@ -199,7 +219,7 @@
             var school_code=$("#school_code").val();
             var school_name=$("#school_name").val();
             var school_id=$("#school_id").val();
-            var school_describe=$("#school_describe").val();
+            var school_describe=editor.html();
 
 
             var message='';
