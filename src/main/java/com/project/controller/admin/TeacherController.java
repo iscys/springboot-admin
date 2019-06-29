@@ -1,6 +1,7 @@
 package com.project.controller.admin;
 
 import com.project.controller.BaseController;
+import com.project.model.ResultObject;
 import com.project.model.school.SchoolModel;
 import com.project.service.admin.TeacherService;
 import com.project.utils.DataPager;
@@ -11,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +59,17 @@ public class TeacherController extends BaseController {
       //  mv.addObject("pd",schoolModel);
         mv.setViewName("page/school/teacher_update");
         return mv;
+    }
+
+
+    @RequestMapping("/save")
+    @ResponseBody
+    public ResultObject save(MultipartFile teacher_img){
+        PageData pd = this.getPageData();
+        return ResultObject.success(null);
+
+
+
     }
 
 
