@@ -234,5 +234,6 @@
         select id ,school_name
         from
         sdb_school
+        and flag='1'
     </select>
 </mapper>
