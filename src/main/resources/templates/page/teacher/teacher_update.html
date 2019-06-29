@@ -131,9 +131,7 @@
         var teacher_sex=$("input[name='teacher_sex']:checked").val();
         var teacher_describe=editor.html();
         var message='';
-        if(ASSERT(teacher_img)){
-            message='教练图片不能为空'
-        }else if (ASSERT(teacher_apply)){
+        if (ASSERT(teacher_apply)){
             message='教练入行时间不能为空'
         } else if(ASSERT(teacher_name)){
             message='教练姓名不能为空'
@@ -154,7 +152,10 @@
             return false;
         }
 
-        formData.append("teacher_img",teacher_img);
+        if(!ASSERT(teacher_img)) {
+            formData.append("teacher_img",teacher_img);
+        }
+
         formData.append("teacher_apply",teacher_apply);
         formData.append("teacher_name",teacher_name);
         formData.append("teacher_phone",teacher_phone);
