@@ -35,7 +35,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">教练名字</label>
         <div class="layui-input-block">
-            <input type="text" name="teacher_name" id="teacher_name"  placeholder="请输入教练名字"  class="layui-input">
+            <input type="text" name="teacher_name" id="teacher_name" required lay-verify="required"  placeholder="请输入教练名字"  class="layui-input">
         </div>
     </div>
 
@@ -43,7 +43,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">教练从业时间</label>
         <div class="layui-input-block">
-            <input type="text" name="teacher_apply" id="teacher_apply" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            <input type="text" name="teacher_apply" id="teacher_apply"  required lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
         </div>
     </div>
 
@@ -59,7 +59,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">教练推荐排序</label>
         <div class="layui-input-block">
-            <input type="number" name="orders" id="orders"  placeholder="教练推荐排序，输入数字"  class="layui-input">
+            <input type="number" name="orders" id="orders"  placeholder="教练推荐排序，输入数字" required lay-verify="required"  class="layui-input">
         </div>
     </div>
 
