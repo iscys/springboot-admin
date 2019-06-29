@@ -147,38 +147,10 @@
         </trim>
     </insert>
 
-    <insert id="saveSchoolAlbum" parameterType="com.project.model.school.Album">
-        insert into sdb_school_album
-        <trim prefix="(" suffix=")"  suffixOverrides=",">
-
-        <if test="school_id != null  and school_id != '' ">
-            school_id,
-        </if>
-            <if test="img_url != null  and img_url != '' ">
-                img_url,
-            </if>
-        <if test="orders != null  and orders != '' ">
-            orders,
-        </if>
-        </trim>
-        <trim prefix="values(" suffix=")"  suffixOverrides=",">
-
-            <if test="school_id != null  and school_id != '' ">
-                #{school_id},
-            </if>
-            <if test="img_url != null  and img_url != '' ">
-                #{img_url},
-            </if>
-            <if test="orders != null  and orders != '' ">
-                #{orders},
-            </if>
-        </trim>
 
 
-    </insert>
-
-    <update id="updateShool" parameterType="com.project.utils.PageData">
-      update sdb_school
+    <update id="updateTeacher" parameterType="com.project.utils.PageData">
+      update sdb_school_teacher
         <trim prefix="SET"  suffixOverrides=",">
 
             <if test="school_code != null  and school_code != '' ">
@@ -217,17 +189,4 @@
     </update>
 
 
-    <select id="getSchoolAlbum" parameterType="com.project.model.school.Album" resultType="com.project.model.school.Album">
-      select * from
-      sdb_school_album
-      where 1=1
-      and flag ='1'
-        <if test="school_id != null  and school_id != '' ">
-            and school_id= #{school_id}
-        </if>
-        <if test="id != null  and id != '' ">
-            and id= #{id}
-        </if>
-
-    </select>
 </mapper>
