@@ -63,15 +63,20 @@ public class TeacherController extends BaseController {
 
 
     @RequestMapping("/save")
-    @ResponseBody
-    public ResultObject save(MultipartFile teacher_img){
+    public String save(MultipartFile teacher_img){
         PageData pd = this.getPageData();
+        ModelAndView mv = this.getModelAndView();
         try {
             ResultObject result = teacherService.saveTeacher(teacher_img, pd);
-            return result;
+            if(result.getFlag().equals("1")){
+                return "redirect:/teacher/index";
+            }else{
+                mv.setViewName("/error");
+                return "redirect:/error";
+            }
+
         }catch (Exception e){
-            logger.error("保存教练信息失败：{}",e.getMessage());
-            return ResultObject.error(null);
+            return "redirect:/error";
 
         }
 
