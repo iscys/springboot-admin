@@ -9,4 +9,8 @@ public interface TeacherMapper {
     Integer getTeacherCount(PageData pd);
 
     List<HashMap<String, String>> getTeacherList(PageData pd);
+
+    void saveTeacher(PageData pd);
+
+    void updateTeacher(PageData pd);
 }

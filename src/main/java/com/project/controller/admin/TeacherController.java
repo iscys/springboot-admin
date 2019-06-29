@@ -66,7 +66,14 @@ public class TeacherController extends BaseController {
     @ResponseBody
     public ResultObject save(MultipartFile teacher_img){
         PageData pd = this.getPageData();
-        return ResultObject.success(null);
+        try {
+            ResultObject result = teacherService.saveTeacher(teacher_img, pd);
+            return result;
+        }catch (Exception e){
+            logger.error("保存教练信息失败：{}",e.getMessage());
+            return ResultObject.error(null);
+
+        }
 
 
 
