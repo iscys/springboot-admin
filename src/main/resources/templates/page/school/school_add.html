@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="head::common_js_css_bootstrap"></head>
 <head th:insert="head::common_uploadFile"></head>
-
+<head th:insert="head::kindeditor"></head>
 <body>
 
 <div>
@@ -82,7 +82,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">驾校简介描述</label>
         <div class="layui-input-block">
-            <textarea name="school_describe" id="school_describe" placeholder="驾校简介" class="layui-textarea"></textarea>
+            <textarea name="school_describe" id="school_describe" style="width:100%;height:400px;"></textarea>
         </div>
     </div>
 
@@ -187,6 +187,29 @@
             }
              **/
         });
+
+
+        //富文本
+        //富文本编译器
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#school_describe',{
+                items:[
+                    'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+                    'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                    'anchor', 'link', 'unlink'
+                ],
+                //uploadJson : '<%=basePath%>goods/saveGoodsDetailsPic?goods_id='+"${goodsInfo.goods.goods_id}",
+            });
+        });
+
+
+
+
 
 
         $("#sub").click(function(){
