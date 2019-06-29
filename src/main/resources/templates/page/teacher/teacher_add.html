@@ -11,30 +11,32 @@
 
 
 
-<form  class="layui-form" action="/ocard/update" method="post" enctype="multipart/form-data" >
+<form  class="layui-form" action="/teacher/save" method="post" enctype="multipart/form-data" >
 
     <div class="layui-form-item">
         <label class="layui-form-label">所属驾校</label>
-        <div class="layui-input-inline">
+        <div class="layui-input-block">
             <select id ="school_id" name="school_id" >
-                <option value=""></option>
-                <option value="0">写作</option>
-                <option value="1" selected="">阅读</option>
-                <option value="2">游戏</option>
-                <option value="3">音乐</option>
-                <option value="4">旅行</option>
+                <option th:each="sc,scStat:${list}" th:value="${sc.getId()}" th:text="${sc.getSchool_name()}"></option>
+
             </select>
         </div>
+    </div>
 
-        <div class="layui-inline">
-            <label class="layui-form-label">教练名字</label>
-            <div class="layui-input-inline">
-                <input type="text" name="teacher_name" id="teacher_name"  placeholder="请输入教练名字"  class="layui-input">
-            </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">教练名字</label>
+        <div class="layui-input-block">
+            <input type="text" name="teacher_name" id="teacher_name"  placeholder="请输入教练名字"  class="layui-input">
         </div>
     </div>
 
 
+    <div class="layui-form-item">
+        <label class="layui-form-label">教练从业时间</label>
+        <div class="layui-input-block">
+            <input type="text" name="teacher_apply" id="teacher_apply" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
 
 
     <div class="layui-form-item">
@@ -97,6 +99,12 @@
             , element = layui.element //元素操作
             , slider = layui.slider //滑块
             ,form = layui.form
+
+        //日期
+        laydate.render({
+            elem: '#teacher_apply'
+        });
+
 
 
     });

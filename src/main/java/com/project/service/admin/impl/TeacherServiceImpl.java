@@ -1,7 +1,9 @@
 package com.project.service.admin.impl;
 
 
+import com.project.mapper.admin.DriverHomeMapper;
 import com.project.mapper.admin.TeacherMapper;
+import com.project.model.school.SchoolModel;
 import com.project.service.admin.TeacherService;
 import com.project.utils.DataPager;
 import com.project.utils.PageData;
@@ -22,6 +24,9 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Autowired
     private TeacherMapper teacherMapper;
+    @Autowired
+    private DriverHomeMapper homeMapper;
+
 
     @Override
     public DataPager getTeacherList(PageData pd) {
@@ -31,5 +36,11 @@ public class TeacherServiceImpl implements TeacherService {
         dataPager.setRecords(result);
         dataPager.setFormId("Form");
         return dataPager;
+    }
+
+    @Override
+    public List<SchoolModel> getAllSchoolList(PageData pd) {
+
+        return homeMapper.getAllSchoolList(pd);
     }
 }

@@ -228,4 +228,11 @@
         </if>
 
     </select>
+
+    <select id="getAllSchoolList" parameterType="com.project.utils.PageData" resultType="com.project.model.school.SchoolModel">
+
+        select id ,school_name
+        from
+        sdb_school
+    </select>
 </mapper>

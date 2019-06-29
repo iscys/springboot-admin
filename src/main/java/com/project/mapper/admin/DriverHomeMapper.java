@@ -23,4 +23,6 @@ public interface DriverHomeMapper  {
     void updateShool(PageData pd);
 
     List<Album> getSchoolAlbum(Album album);
+
+    List<SchoolModel> getAllSchoolList(PageData pd);
 }

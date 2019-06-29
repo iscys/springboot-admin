@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/teacher")
@@ -37,9 +38,12 @@ public class TeacherController extends BaseController {
     public ModelAndView to_add(HttpServletRequest req){
         ModelAndView mv = this.getModelAndView();
         PageData pd = this.getPageData();
+        List<SchoolModel> slist= teacherService.getAllSchoolList(pd);
         //DataPager dataPager= homeService.getHomeList(pd);
         //mv.addObject("dataPager",dataPager);
         mv.addObject("pd",pd);
+        mv.addObject("list",slist);
+
         mv.setViewName("page/teacher/teacher_add");
         return mv;
     }
