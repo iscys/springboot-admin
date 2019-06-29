@@ -47,10 +47,10 @@ public class DriverHomeController extends BaseController {
     }
 
     @RequestMapping("/to_update")
-    public ModelAndView to_update(HttpServletRequest req){
+    public ModelAndView to_update(SchoolModel school){
         ModelAndView mv = this.getModelAndView();
-        PageData pd = this.getPageData();
-        SchoolModel schoolModel=homeService.getSchoolDetail(pd);
+        //PageData pd = this.getPageData();
+        SchoolModel schoolModel=homeService.getSchoolDetail(school);
         mv.addObject("pd",schoolModel);
         mv.setViewName("page/school/school_update");
         return mv;

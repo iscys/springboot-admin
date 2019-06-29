@@ -18,7 +18,9 @@
    </select>
 
     <select id="getHomeList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
-    select a.id,a.school_name,a.school_location,a.school_phone,a.school_code,a.create_time,
+    select a.id,a.school_name,a.school_location,a.school_phone,a.school_code,
+        date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time,
+    a.school_location,a.school_location_x,a.school_location_y,
     (select count(1) from sdb_school_album al where al.school_id=a.id and al.flag='1') as album_count
         from
         sdb_school a
@@ -37,7 +39,7 @@
 
    </select>
 
-    <select id="getSchoolDetail" resultType="com.project.model.school.SchoolModel" parameterType="com.project.utils.PageData">
+    <select id="getSchoolDetail" resultType="com.project.model.school.SchoolModel" parameterType="com.project.model.school.SchoolModel">
         select * from
         sdb_school
         where 1=1
@@ -48,7 +50,7 @@
         <if test="school_name !=null  and school_name != '' ">
             and school_name=#{school_name}
         </if>
-        <if test="school_name !=null  and school_name != '' ">
+        <if test="school_code !=null  and school_code != '' ">
             and school_code=#{school_code}
         </if>
         limit 1
@@ -158,4 +160,58 @@
 
 
     </insert>
+
+    <update id="updateShool" parameterType="com.project.utils.PageData">
+      update sdb_school
+        <trim prefix="SET"  suffixOverrides=",">
+
+            <if test="school_code != null  and school_code != '' ">
+                school_code=  #{school_code},
+            </if>
+            <if test="school_name != null  and school_name != '' ">
+                school_name= #{school_name},
+            </if>
+            <if test="school_icon != null  and school_icon != '' ">
+                school_icon= #{school_icon},
+            </if>
+            <if test="school_face != null  and school_face != '' ">
+                school_face= #{school_face},
+            </if>
+            <if test="school_location != null  and school_location != '' ">
+                school_location= #{school_location},
+            </if>
+            <if test="school_location_x != null  and school_location_x != '' ">
+                school_location_x= #{school_location_x},
+            </if>
+            <if test="school_location_y != null  and school_location_y != '' ">
+                school_location_y= #{school_location_y},
+            </if>
+            <if test="school_phone != null  and school_phone != '' ">
+                school_phone= #{school_phone},
+            </if>
+            <if test="school_describe != null  and school_describe != '' ">
+                school_describe= #{school_describe},
+            </if>
+        </trim>
+
+      where 1=1
+        <if test="id != null  and id != '' ">
+            and id= #{id}
+        </if>
+    </update>
+
+
+    <select id="getSchoolAlbum" parameterType="com.project.model.school.Album" resultType="com.project.model.school.Album">
+      select * from
+      sdb_school_album
+      where 1=1
+      and flag ='1'
+        <if test="school_id != null  and school_id != '' ">
+            and school_id= #{school_id}
+        </if>
+        <if test="id != null  and id != '' ">
+            and id= #{id}
+        </if>
+
+    </select>
 </mapper>

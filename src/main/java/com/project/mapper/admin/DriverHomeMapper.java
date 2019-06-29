@@ -14,11 +14,13 @@ public interface DriverHomeMapper  {
 
     List<HashMap<String, String>> getHomeList(PageData pd);
 
-    SchoolModel getSchoolDetail(PageData pd);
+    SchoolModel getSchoolDetail(SchoolModel sch);
 
     void save(PageData pd);
 
     void saveSchoolAlbum(Album album);
 
     void updateShool(PageData pd);
+
+    List<Album> getSchoolAlbum(Album album);
 }

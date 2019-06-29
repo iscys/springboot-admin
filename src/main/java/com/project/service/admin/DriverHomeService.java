@@ -10,7 +10,7 @@ public interface DriverHomeService  {
 
     DataPager getHomeList(PageData pd);
 
-    SchoolModel getSchoolDetail(PageData pd);
+    SchoolModel getSchoolDetail(SchoolModel schoolModel);
 
     PageData save(PageData pd, MultipartFile school_icon, MultipartFile school_face, MultipartFile[] files) throws Exception;
 }

@@ -49,8 +49,8 @@ public class DriverHomeServiceImpl implements DriverHomeService {
     }
 
     @Override
-    public SchoolModel getSchoolDetail(PageData pd) {
-       SchoolModel model= homeMapper.getSchoolDetail(pd);
+    public SchoolModel getSchoolDetail(SchoolModel schoolModel) {
+       SchoolModel model= homeMapper.getSchoolDetail(schoolModel);
         return model;
     }
 

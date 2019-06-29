@@ -18,5 +18,9 @@ public class SchoolModel {
             private String school_location_y;
             private String flag;
             private String create_time;
-    
+            private int feedback_count;//驾校评论数
+            private String star;//驾校星级
+
+
+
 }
