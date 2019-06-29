@@ -147,33 +147,31 @@
       update sdb_school_teacher
         <trim prefix="SET"  suffixOverrides=",">
 
-            <if test="school_code != null  and school_code != '' ">
-                school_code=  #{school_code},
+            <if test="school_id != null  and school_id != '' ">
+                school_id=  #{school_id},
             </if>
-            <if test="school_name != null  and school_name != '' ">
-                school_name= #{school_name},
+            <if test="teacher_name != null  and teacher_name != '' ">
+                teacher_name= #{teacher_name},
             </if>
-            <if test="school_icon != null  and school_icon != '' ">
-                school_icon= #{school_icon},
+            <if test="teacher_img != null  and teacher_img != '' ">
+                teacher_img= #{teacher_img},
             </if>
-            <if test="school_face != null  and school_face != '' ">
-                school_face= #{school_face},
+            <if test="teacher_apply != null  and teacher_apply != '' ">
+                teacher_apply= #{teacher_apply},
             </if>
-            <if test="school_location != null  and school_location != '' ">
-                school_location= #{school_location},
+            <if test="teacher_describe != null  and teacher_describe != '' ">
+                teacher_describe= #{teacher_describe},
             </if>
-            <if test="school_location_x != null  and school_location_x != '' ">
-                school_location_x= #{school_location_x},
+            <if test="teacher_phone != null  and teacher_phone != '' ">
+                teacher_phone= #{teacher_phone},
             </if>
-            <if test="school_location_y != null  and school_location_y != '' ">
-                school_location_y= #{school_location_y},
+            <if test="flag != null  and flag != '' ">
+                flag= #{flag},
             </if>
-            <if test="school_phone != null  and school_phone != '' ">
-                school_phone= #{school_phone},
+            <if test="orders != null  and orders != '' ">
+                orders= #{orders},
             </if>
-            <if test="school_describe != null  and school_describe != '' ">
-                school_describe= #{school_describe},
-            </if>
+
         </trim>
 
       where 1=1
