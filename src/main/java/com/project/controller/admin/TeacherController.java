@@ -68,20 +68,16 @@ public class TeacherController extends BaseController {
 
 
     @RequestMapping("/save")
-    public String save(MultipartFile teacher_img){
+    @ResponseBody
+    public ResultObject save(MultipartFile teacher_img){
         PageData pd = this.getPageData();
         ModelAndView mv = this.getModelAndView();
         try {
             ResultObject result = teacherService.saveTeacher(teacher_img, pd);
-            if(result.getFlag().equals("1")){
-                return "redirect:/teacher/index";
-            }else{
-                mv.setViewName("/error");
-                return "redirect:/error";
-            }
-
+            return result;
         }catch (Exception e){
-            return "redirect:/error";
+            logger.error("保存修改教练配置异常：{}",e.getMessage());
+            return ResultObject.error(null);
 
         }
 
