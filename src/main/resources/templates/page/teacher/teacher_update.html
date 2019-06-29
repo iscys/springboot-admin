@@ -21,6 +21,7 @@
 
 
     <form  class="layui-form" action="/teacher/save" method="post" enctype="multipart/form-data" >
+        <input type="hidden" th:value="${teacher.getId()}" name="id" id="id" required lay-verify="required"   class="layui-input">
 
         <div class="layui-form-item">
             <label class="layui-form-label">所属驾校</label>
@@ -85,7 +86,7 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">教练简介描述</label>
             <div class="layui-input-block">
-                <textarea th:text="${teacher.getTeacher_describe()}" name="teacher_describe" id="teacher_describe" style="width:100%;height:400px;"></textarea>
+                <textarea required  lay-verify="required" th:text="${teacher.getTeacher_describe()}" name="teacher_describe" id="teacher_describe" style="width:100%;height:400px;"></textarea>
             </div>
         </div>
 
