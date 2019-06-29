@@ -15,74 +15,57 @@
 <form  action="/ocard/update" method="post" enctype="multipart/form-data" >
 
     <div class="layui-form-item">
-        <label class="layui-form-label">驾校名称</label>
+        <label class="layui-form-label">所属驾校</label>
         <div class="layui-input-block">
-            <input type="text" name="school_name" id="school_name"  placeholder="请输入驾校名称"  class="layui-input">
+            <select id ="school_id" name="school_id" >
+                <option value=""></option>
+                <option value="0">写作</option>
+                <option value="1" selected="">阅读</option>
+                <option value="2">游戏</option>
+                <option value="3">音乐</option>
+                <option value="4">旅行</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">教练名字</label>
+        <div class="layui-input-block">
+            <input type="text" name="teacher_name" id="teacher_name"  placeholder="请输入教练名字"  class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">驾校编码</label>
+        <label class="layui-form-label">教练推荐排序</label>
         <div class="layui-input-block">
-            <input type="text" name="school_code" id="school_code"  placeholder="请输入驾校code"  class="layui-input">
+            <input type="number" name="orders" id="orders"  placeholder="教练推荐排序，输入数字"  class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">驾校联系电话</label>
+        <label class="layui-form-label">教练联系电话</label>
         <div class="layui-input-block">
-            <input type="text" name="school_phone" id="school_phone" required  lay-verify="required" placeholder="请输入驾校code"  class="layui-input">
+            <input type="text" name="teacher_phone" id="teacher_phone" required  lay-verify="required" placeholder="请输入教练联系电话"  class="layui-input">
         </div>
     </div>
 
 
     <div>
-        <h5>驾校icon图标上传：</h5>
+        <label class="layui-form-label">教练头像上传：</label>
         <img  src="" style="height: 130px;width: 130px;">
-        <span  onchange="c(this,'school_icon')" class="btn btn-success fileinput-button">
+        <span  onchange="c(this,'teacher_img')" class="btn btn-success fileinput-button">
 	            <span>上传</span>
-	            <input id="school_icon" name="school_icon" type="file">
+	            <input id="teacher_img" name="teacher_img" type="file">
 	        </span>
     </div>
 
-    <div>
-        <h5>驾校门面图片上传：</h5>
-        <img  src="" style="height: 300px;width: 640px;">
-        <span  onchange="c(this,'school_face')" class="btn btn-success fileinput-button">
-	            <span>上传</span>
-	            <input id="school_face" name="school_face" type="file">
-	        </span>
-    </div>
-
-   <h5>驾校图片相册上传：</h5>
-    <div id="zyupload" class="zyupload"></div>
-    <h5>驾校位置(请选择详细坐标地址，以便更好的定位距离)：</h5>
-    <div id="container" style="height: 360px;width: 100%; margin: auto"></div>
-    <br>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">纬度坐标</label>
-        <div class="layui-input-inline">
-            <input type="text"  name="school_location_x" id="x_location"  disabled class="layui-input">
-        </div>
-        <label class="layui-form-label">经度坐标</label>
-        <div class="layui-input-inline">
-            <input type="text" name="school_location_y" id="y_location"  disabled class="layui-input">
-        </div>
-    </div>
 
     <br>
     <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">驾校详细地址(请手动输入)</label>
+        <label class="layui-form-label">教练简介描述</label>
         <div class="layui-input-block">
-            <textarea name="school_location" id="school_location" placeholder="请输入完整的驾校地址" class="layui-textarea"></textarea>
-        </div>
-    </div>
-    <br>
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">驾校简介描述</label>
-        <div class="layui-input-block">
-            <textarea name="school_describe" id="school_describe" style="width:100%;height:400px;"></textarea>
+            <textarea name="teacher_describe" id="teacher_describe" style="width:100%;height:400px;"></textarea>
         </div>
     </div>
 
@@ -119,80 +102,12 @@
 </script>
 
 <script type="text/javascript">
+
     $(function(){
-
-        //tencent map
-        //直接加载地图
-        //初始化地图函数  自定义函数名init
-        function init() {
-            //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
-            var map = new qq.maps.Map(document.getElementById("container"), {
-                center: new qq.maps.LatLng(32.70931112969933,109.02059555053711),      // 地图的中心地理坐标。
-                zoom:8                                                 // 地图的中心地理坐标。
-            });
-
-            //添加监听事件
-            qq.maps.event.addListener(map, 'click', function(event) {
-                $("#y_location").val(event.latLng.getLng());
-                $("#x_location").val(event.latLng.getLat());
-            });
-
-        }
-
-        //调用初始化函数地图
-        init();
-
-
-
-
-        // 初始化插件
-        $("#zyupload").zyUpload({
-            width            :   "850px",                 // 宽度
-            height           :   "",                 // 宽度
-            itemWidth        :   "140px",                 // 文件项的宽度
-            itemHeight       :   "115px",                 // 文件项的高度
-            url              :   "",  // 上传文件的路径
-            fileType         :   ["jpg","png","txt","js","exe","jpeg"],// 上传文件的类型
-            fileSize         :   51200000,                // 上传文件的大小
-            multiple         :   true,                    // 是否可以多个文件上传
-            dragDrop         :   true,                    // 是否可以拖动上传文件
-            tailor           :   true,                    // 是否可以裁剪图片
-            del              :   true,                    // 是否可以删除文件
-            finishDel        :   false,  				  // 是否在上传文件完成后删除预览
-
-            /**
-
-            onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
-                console.info("当前选择了以下文件：");
-                console.info(selectFiles);
-            },
-            onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
-                console.info("当前删除了此文件：");
-                console.info(file.name);
-            },
-            onSuccess: function(file, response){          // 文件上传成功的回调方法
-                console.info("此文件上传成功：");
-                console.info(file.name);
-                console.info("此文件上传到服务器地址：");
-                console.info(response);
-                $("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
-            },
-            onFailure: function(file, response){          // 文件上传失败的回调方法
-                console.info("此文件上传失败：");
-                console.info(file.name);
-            },
-            onComplete: function(response){           	  // 上传完成的回调方法
-                console.info("文件上传完成");
-                console.info(response);
-            }
-             **/
-        });
-
-
         //富文本
         //富文本编译器
         KindEditor.ready(function(K) {
-            window.editor = K.create('#school_describe',{
+            window.editor = K.create('#teacher_describe',{
                 items:[
                     'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
                     'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',

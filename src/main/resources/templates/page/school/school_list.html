@@ -24,10 +24,10 @@
 						<input type="text" name="school_phone" th:value="${pd.get('school_phone')}" class="form-control" id="school_phone" placeholder="驾校电话">
 					</div>
 					<button type="submit" class="btn btn-default">查询</button>
-					<span  onclick="addInfo()" class="btn btn-info ">添加信息</span>
 					<!-- ---+搜索条件 end+----- -->
 					<hr>
 
+					<span  onclick="addInfo()" class="btn btn-info " style="float: right">添加驾校信息</span>
 
 					<!--列表数据 start-->
 					<table id="table_report"
@@ -39,6 +39,7 @@
 							<th class='center' style="min-width: 10%">驾校编码</th>
 							<th class='center' style="min-width: 9%">驾校电话</th>
 							<th class='center' style="min-width: 8%">图片相册数量</th>
+							<th class='center' style="min-width: 8%">推荐排序</th>
 							<th class='center' style="min-width: 7%">时间</th>
 							<th class='center' style="min-width: 7%">查看编辑</th>
 						</tr>
@@ -50,6 +51,7 @@
 							<td class='center' th:text="${record.school_code}"></td>
 							<td class='center' th:text="${record.school_phone}"></td>
 							<td class='center' th:text="${record.album_count}"></td>
+							<td class='center' th:text="${record.orders}"></td>
 							<td class='center' th:text="${record.create_time}"></td>
 							<td>
 								<span class="btn btn-danger"  th:onclick="updateAndLook([[${record.id}]]);" >编辑查看</span>

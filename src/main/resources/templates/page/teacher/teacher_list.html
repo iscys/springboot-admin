@@ -9,7 +9,7 @@
 			<div class="row-fluid">
 				<br/>
 
-				<form action="/home/index" method="post" class="form-inline" name="Form" id="Form">
+				<form action="/teacher/index" method="post" class="form-inline" name="Form" id="Form">
 					<!-- ---+搜索条件 start+----- -->
 					<div class="form-group">
 						<label >驾校名称</label>
@@ -20,50 +20,54 @@
 						<input type="text" name="school_code" th:value="${pd.get('school_code')}" class="form-control" id="school_code" placeholder="驾校编码">
 					</div>
 					<div class="form-group">
-						<label>驾校电话</label>
-						<input type="text" name="school_phone" th:value="${pd.get('school_phone')}" class="form-control" id="school_phone" placeholder="驾校电话">
+						<label>教练电话</label>
+						<input type="text" name="teacher_phone" th:value="${pd.get('teacher_phone')}" class="form-control" id="teacher_phone" placeholder="教练电话">
+					</div>
+					<div class="form-group">
+						<label>教练名字</label>
+						<input type="text" name="teacher_name" th:value="${pd.get('teacher_name')}" class="form-control" id="teacher_name" placeholder="教练名字">
 					</div>
 					<button type="submit" class="btn btn-default">查询</button>
-					<span  onclick="addInfo()" class="btn btn-info ">添加信息</span>
 					<!-- ---+搜索条件 end+----- -->
 					<hr>
 
 
 					<!--列表数据 start-->
+					<span  onclick="addInfo()" class="btn btn-info " style="float: right">添加教练信息</span>
 					<table id="table_report"
 						   class="table ">
 						<thead>
 						<tr>
 							<th class='center' style="min-width:3%">No</th>
 							<th class='center' style="min-width: 10%">驾校名称</th>
-							<th class='center' style="min-width: 10%">驾校编码</th>
-							<th class='center' style="min-width: 9%">驾校电话</th>
-							<th class='center' style="min-width: 8%">图片相册数量</th>
+							<th class='center' style="min-width: 10%">教练名字</th>
+							<th class='center' style="min-width: 9%">教练电话</th>
+							<th class='center' style="min-width: 8%">教练推荐排序</th>
 							<th class='center' style="min-width: 7%">时间</th>
 							<th class='center' style="min-width: 7%">查看编辑</th>
 						</tr>
 						</thead>
-						<!--
+
 						<tbody th:if="${dataPager.getRecords()!=null}">
 						<tr th:each="record,recordStat:${dataPager.getRecords()}">
 							<td class='center' th:text="${recordStat.index+1}"></td>
 							<td class='center' th:text="${record.school_name}"></td>
-							<td class='center' th:text="${record.school_code}"></td>
-							<td class='center' th:text="${record.school_phone}"></td>
-							<td class='center' th:text="${record.album_count}"></td>
+							<td class='center' th:text="${record.teacher_name}"></td>
+							<td class='center' th:text="${record.teacher_phone}"></td>
+							<td class='center' th:text="${record.orders}"></td>
 							<td class='center' th:text="${record.create_time}"></td>
 							<td>
 								<span class="btn btn-danger"  th:onclick="updateAndLook([[${record.id}]]);" >编辑查看</span>
 							</td>
 						</tr>
 						</tbody>
-						-->
+
 					</table>
-					<!--
+
 					<div th:if="${dataPager.getRecords()!=null}">
 						<span th:insert="page::page_common"></span>
 					</div>
--->
+
 				</form>
 
 
@@ -98,7 +102,7 @@
 			area:["100%","100%"],
 			type: 2,
 			closeBtn: 0, //不显示关闭按钮
-			content: '/home/to_add',
+			content: '/teacher/to_add',
 			end:function(){
 				//窗口关闭触发
 				$("#Form").submit();

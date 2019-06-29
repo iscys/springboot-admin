@@ -1,45 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.project.mapper.admin.DriverHomeMapper">
+<mapper namespace="com.project.mapper.admin.TeacherMapper">
 
 
-   <select id="getHomeCount" parameterType="com.project.utils.PageData" resultType="java.lang.Integer">
-    select count(1)
-    from
-       sdb_school
+   <select id="getTeacherCount" parameterType="com.project.utils.PageData" resultType="java.lang.Integer">
+       select count(1)
+       from
+       sdb_school_teacher a
+       LEFT join sdb_school b
+       on a.school_id =b.id
        where 1=1
-       and flag ='1'
+       and a.flag ='1'
        <if test="school_name !=null  and school_name != '' ">
-           and school_name=#{school_name}
+           and b.school_name=#{school_name}
        </if>
        <if test="school_code !=null  and school_code != '' ">
-           and school_code=#{school_code}
+           and b.school_code=#{school_code}
+       </if>
+       <if test="teacher_phone !=null  and teacher_phone != '' ">
+           and a.teacher_phone=#{teacher_phone}
+       </if>
+       <if test="teacher_name !=null  and teacher_name != '' ">
+           and a.teacher_name=#{teacher_name}
        </if>
    </select>
 
-    <select id="getHomeList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
-    select a.id,a.school_name,a.school_location,a.school_phone,a.school_code,a.orders,
-        date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time,
-        a.school_location_x,a.school_location_y,
+    <select id="getTeacherList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
 
-        ROUND((select sum(star) from sdb_school_feedback f WHERE f.school_id=a.id)
-        /(select count(1) from sdb_school_feedback f1 WHERE f1.school_id=a.id),1)
-        as star,
-
-        (select count(1) from sdb_school_album al where al.school_id=a.id and al.flag='1')
-        as album_count
-        from
-        sdb_school a
-    where 1=1
-        and flag ='1'
+      select a.id,b.school_name, a.teacher_name,a.teacher_phone,a.teacher_sex,a.teacher_img,
+      a.orders,
+      date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time from
+        sdb_school_teacher a
+        left  join  sdb_school b
+        on a.school_id =b.id
+      where 1=1
+        and a.flag ='1'
         <if test="school_name !=null  and school_name != '' ">
-            and a.school_name=#{school_name}
+            and b.school_name=#{school_name}
         </if>
         <if test="school_code !=null  and school_code != '' ">
-            and a.school_code=#{school_code}
+            and b.school_code=#{school_code}
         </if>
-        <if test="school_phone !=null  and school_phone != '' ">
-            and a.school_phone=#{school_phone}
+        <if test="teacher_phone !=null  and teacher_phone != '' ">
+            and a.teacher_phone=#{teacher_phone}
+        </if>
+        <if test="teacher_name !=null  and teacher_name != '' ">
+            and a.teacher_name=#{teacher_name}
         </if>
     limit #{startIndex},#{pageSize}
 

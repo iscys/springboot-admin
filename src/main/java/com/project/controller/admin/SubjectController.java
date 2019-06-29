@@ -22,4 +22,5 @@ public class SubjectController extends BaseController {
         mv.setViewName("page/teacher/teacher_list");
         return mv;
     }
+
 }
