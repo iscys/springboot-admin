@@ -50,7 +50,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
-                .excludePathPatterns("api/**,/wx/**","zyupload/**","/js/**","/layui/**","/css/**","/bootstrap/**");
+                .excludePathPatterns("api/**,/wx/**","zyupload/**","/js/**","/kindeditor/**","/layui/**","/css/**","/bootstrap/**");
     }
 
 
