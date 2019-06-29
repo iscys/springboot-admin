@@ -47,6 +47,7 @@
         <if test="teacher_name !=null  and teacher_name != '' ">
             and a.teacher_name=#{teacher_name}
         </if>
+        order by a.orders
     limit #{startIndex},#{pageSize}
 
    </select>

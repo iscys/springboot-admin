@@ -41,6 +41,7 @@
         <if test="school_phone !=null  and school_phone != '' ">
             and a.school_phone=#{school_phone}
         </if>
+        order by a.orders
     limit #{startIndex},#{pageSize}
 
    </select>
