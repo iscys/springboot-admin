@@ -1,5 +1,6 @@
 package com.project.mapper.admin;
 
+import com.project.model.school.Teacher;
 import com.project.utils.PageData;
 
 import java.util.HashMap;
@@ -13,4 +14,6 @@ public interface TeacherMapper {
     void saveTeacher(PageData pd);
 
     void updateTeacher(PageData pd);
+
+    Teacher getTeacherDetail(Teacher teacher);
 }

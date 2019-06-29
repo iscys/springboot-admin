@@ -6,6 +6,7 @@ import com.project.mapper.admin.DriverHomeMapper;
 import com.project.mapper.admin.TeacherMapper;
 import com.project.model.ResultObject;
 import com.project.model.school.SchoolModel;
+import com.project.model.school.Teacher;
 import com.project.service.admin.TeacherService;
 import com.project.utils.DataPager;
 import com.project.utils.PageData;
@@ -93,5 +94,11 @@ public class TeacherServiceImpl implements TeacherService {
             teacherMapper.updateTeacher(pd);
         }
         return ResultObject.success(null);
+    }
+
+    @Override
+    public Teacher getTeacherDetail(Teacher teacher) {
+
+        return teacherMapper.getTeacherDetail(teacher);
     }
 }

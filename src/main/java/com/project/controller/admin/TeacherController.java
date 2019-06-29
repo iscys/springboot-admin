@@ -3,6 +3,7 @@ package com.project.controller.admin;
 import com.project.controller.BaseController;
 import com.project.model.ResultObject;
 import com.project.model.school.SchoolModel;
+import com.project.model.school.Teacher;
 import com.project.service.admin.TeacherService;
 import com.project.utils.DataPager;
 import com.project.utils.DateUtils;
@@ -52,12 +53,16 @@ public class TeacherController extends BaseController {
     }
 
     @RequestMapping("/to_update")
-    public ModelAndView to_update(SchoolModel school){
+    public ModelAndView to_update(Teacher teacher){
         ModelAndView mv = this.getModelAndView();
-        //PageData pd = this.getPageData();
-        //SchoolModel schoolModel=homeService.getSchoolDetail(school);
-      //  mv.addObject("pd",schoolModel);
-        mv.setViewName("page/school/teacher_update");
+        PageData pd = this.getPageData();
+        List<SchoolModel> slist= teacherService.getAllSchoolList(pd);
+        mv.addObject("pd",pd);
+        mv.addObject("list",slist);
+        Teacher resT=teacherService.getTeacherDetail(teacher);
+        mv.addObject("teacher",resT);
+        //  mv.addObject("pd",schoolModel);
+        mv.setViewName("page/teacher/teacher_update");
         return mv;
     }
 

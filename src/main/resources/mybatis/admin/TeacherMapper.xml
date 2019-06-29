@@ -52,27 +52,20 @@
 
    </select>
 
-    <select id="getTeacherDetail" resultType="com.project.model.school.SchoolModel" parameterType="com.project.model.school.SchoolModel">
-        select a.*,
-
-        ROUND((select sum(star) from sdb_school_feedback f WHERE f.school_id=a.id)
-        /(select count(1) from sdb_school_feedback f1 WHERE f1.school_id=a.id),1)
-        as star,
-
-        (select count(1) from sdb_school_feedback f1 WHERE f1.school_id=a.id)
-        as feedback_count
+    <select id="getTeacherDetail" resultType="com.project.model.school.Teacher" parameterType="com.project.model.school.Teacher">
+        select a.*
          from
-        sdb_school a
+        sdb_school_teacher a
         where 1=1
-        and flag ='1'
+        and a.flag ='1'
         <if test="id !=null  and id != '' ">
             and a.id=#{id}
         </if>
-        <if test="school_name !=null  and school_name != '' ">
-            and a.school_name=#{school_name}
+        <if test="teacher_name !=null  and teacher_name != '' ">
+            and a.teacher_name=#{teacher_name}
         </if>
-        <if test="school_code !=null  and school_code != '' ">
-            and a.school_code=#{school_code}
+        <if test="teacher_phone !=null  and teacher_phone != '' ">
+            and a.teacher_phone=#{teacher_phone}
         </if>
         limit 1
     </select>
