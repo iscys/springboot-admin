@@ -11,6 +11,9 @@
        on a.school_id =b.id
        where 1=1
        and a.flag ='1'
+       <if test="school_id !=null  and school_id != '' ">
+           and b.school_id=#{school_id}
+       </if>
        <if test="school_name !=null  and school_name != '' ">
            and b.school_name=#{school_name}
        </if>
@@ -35,6 +38,9 @@
         on a.school_id =b.id
       where 1=1
         and a.flag ='1'
+        <if test="school_id !=null  and school_id != '' ">
+            and b.school_id=#{school_id}
+        </if>
         <if test="school_name !=null  and school_name != '' ">
             and b.school_name=#{school_name}
         </if>
