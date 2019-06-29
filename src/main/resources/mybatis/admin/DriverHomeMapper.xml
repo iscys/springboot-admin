@@ -20,8 +20,14 @@
     <select id="getHomeList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
     select a.id,a.school_name,a.school_location,a.school_phone,a.school_code,
         date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time,
-    a.school_location,a.school_location_x,a.school_location_y,
-    (select count(1) from sdb_school_album al where al.school_id=a.id and al.flag='1') as album_count
+        a.school_location_x,a.school_location_y,
+
+        ROUND((select sum(star) from sdb_school_feedback f WHERE f.school_id=a.id)
+        /(select count(1) from sdb_school_feedback f1 WHERE f1.school_id=a.id),2)
+        as star,
+
+        (select count(1) from sdb_school_album al where al.school_id=a.id and al.flag='1')
+        as album_count
         from
         sdb_school a
     where 1=1
