@@ -19,7 +19,7 @@ public class SchoolController extends BaseController {
     private SchoolService schoolService;
 
     /**
-     * 小程序首页信息
+     * 小程序首页信息，轮播广告位
      */
     @PostMapping("/index")
     public ResultObject index(){
@@ -31,6 +31,24 @@ public class SchoolController extends BaseController {
         }catch (Exception e){
 
         return ResultObject.error(null);
+        }
+
+
+    }
+
+    /**
+     * 驾校列表
+     */
+    @PostMapping("/driver")
+    public ResultObject driver(){
+
+        try {
+            PageData pd = this.getPageData();
+            ResultObject result = schoolService.driverList(pd);
+            return result;
+        }catch (Exception e){
+
+            return ResultObject.error(null);
         }
 
 

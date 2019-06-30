@@ -13,4 +13,6 @@ public interface SchoolService {
     ResultObject getSchoolAlbum(SchoolModel schoolModel)throws Exception;
 
     ResultObject index(PageData pd)throws Exception;
+
+    ResultObject driverList(PageData pd)throws Exception;
 }

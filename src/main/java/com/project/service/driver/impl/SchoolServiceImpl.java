@@ -1,10 +1,12 @@
 package com.project.service.driver.impl;
 
 
+import com.project.mapper.admin.BannerMapper;
 import com.project.mapper.admin.DriverHomeMapper;
 import com.project.model.Const;
 import com.project.model.ResultObject;
 import com.project.model.school.Album;
+import com.project.model.school.Banner;
 import com.project.model.school.Mark;
 import com.project.model.school.SchoolModel;
 import com.project.service.admin.MarkService;
@@ -28,6 +30,8 @@ public class SchoolServiceImpl implements SchoolService {
     private DriverHomeMapper homeMapper;
     @Autowired
     private MarkService markService;
+    @Autowired
+    private BannerMapper bannerMapper;
 
     /**
      * 查看驾校具体信息
@@ -55,6 +59,25 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public ResultObject index(PageData pd) throws Exception {
+
+        Banner banner =new Banner();
+        banner.setType("0");
+        List<Banner> carousel=bannerMapper.getAllBanner(banner);
+        banner =new Banner();
+        banner.setType("1");
+        //广告位图片
+        List<Banner> ad_bannerList=bannerMapper.getAllBanner(banner);
+        banner=null;
+        HashMap<String,Object> res =new HashMap<String,Object>();
+        res.put("carousel",carousel);
+        res.put("ad",ad_bannerList);
+
+
+        return ResultObject.success(res);
+    }
+
+    @Override
+    public ResultObject driverList(PageData pd)throws Exception {
         String pageNum = pd.getString("pageNum");
         if(StringUtils.isEmpty(pageNum)||pageNum.equals("0")){
             pageNum ="1";
@@ -79,6 +102,7 @@ public class SchoolServiceImpl implements SchoolService {
                     Mark mark1 =new Mark();
                     mark1.setId(m);
                     Mark markDetail = markService.getMarkDetail(mark1);
+                    mark1=null;
                     if(null !=markDetail) {
                         strL.add(markDetail.getMark());
                     }
@@ -91,6 +115,7 @@ public class SchoolServiceImpl implements SchoolService {
         res.put("pageNum",Integer.valueOf(pageNum));//c传过来到页数
         res.put("totalPage",page.getTotalPage());//总页数
         res.put("school_list",lists);
+
         return ResultObject.success(res);
     }
 }
