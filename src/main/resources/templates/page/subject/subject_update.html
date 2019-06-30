@@ -137,13 +137,13 @@
         //var teacher_describe=editor.html();
         var message='';
         if(ASSERT(school_id)){
-            message='教练图片不能为空'
+            message='请选择驾校'
         }else if (ASSERT(subject)){
-            message='教练入行时间不能为空'
+            message='请选择驾照类型'
         } else if(ASSERT(subject_name)){
-            message='教练姓名不能为空'
+            message='请配置套餐名字'
         }else if(ASSERT(price)){
-            message='教练手机号不能为空'
+            message='请输入套餐价格'
         }
 
         if(message!=''){
