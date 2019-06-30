@@ -111,6 +111,9 @@
             <if test="orders != null  and orders != '' ">
                 orders,
             </if>
+            <if test="mark != null  and mark != '' ">
+                mark,
+            </if>
 
         </trim>
 
@@ -148,6 +151,9 @@
             </if>
             <if test="orders != null  and orders != '' ">
                 #{orders},
+            </if>
+            <if test="mark != null  and mark != '' ">
+                #{mark},
             </if>
         </trim>
     </insert>
