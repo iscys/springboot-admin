@@ -119,31 +119,22 @@
 
     $("#sub").click(function(){
         var formData = new FormData();
-        var teacher_img=$("#teacher_img").get(0).files[0];
-        var teacher_apply=$("#teacher_apply").val();
-        var teacher_name=$("#teacher_name").val();
-        var teacher_phone=$("#teacher_phone").val();
-        var orders=$("#orders").val();
         var school_id=$("#school_id").val();
-        var teacher_sex=$("input[name='teacher_sex']:checked").val();
-        var teacher_describe=editor.html();
+        var subject=$("#subject").val();
+        var subject_name=$("#subject_name").val();
+        var price=$("#price").val();
+        //var teacher_img=$("#teacher_img").get(0).files[0];
+        // var teacher_sex=$("input[name='teacher_sex']:checked").val();
+        //var teacher_describe=editor.html();
         var message='';
-        if(ASSERT(teacher_img)){
+        if(ASSERT(school_id)){
             message='教练图片不能为空'
-        }else if (ASSERT(teacher_apply)){
+        }else if (ASSERT(subject)){
             message='教练入行时间不能为空'
-        } else if(ASSERT(teacher_name)){
+        } else if(ASSERT(subject_name)){
             message='教练姓名不能为空'
-        }else if(ASSERT(teacher_phone)){
+        }else if(ASSERT(price)){
             message='教练手机号不能为空'
-        }else if(ASSERT(orders)){
-            message='教练默认排序不能为空'
-        }else if(ASSERT(school_id)){
-            message='驾校ID不能为空'
-        }else if(ASSERT(teacher_sex)){
-            message='教练性别不能为空'
-        }else if(ASSERT(teacher_describe)){
-            message='教练描述不能为空'
         }
 
         if(message!=''){
@@ -151,20 +142,16 @@
             return false;
         }
 
-        formData.append("teacher_img",teacher_img);
-        formData.append("teacher_apply",teacher_apply);
-        formData.append("teacher_name",teacher_name);
-        formData.append("teacher_phone",teacher_phone);
-        formData.append("orders",orders);
         formData.append("school_id",school_id);
-        formData.append("teacher_sex",teacher_sex);
-        formData.append("teacher_describe",teacher_describe);
+        formData.append("subject",subject);
+        formData.append("subject_name",subject_name);
+        formData.append("price",price);
 
         $("#sub").hide();
         $.ajax({
             type: "POST",//方法类型
             dataType: "json",//预期服务器返回的数据类型
-            url: "/teacher/save" ,//url
+            url: "/subject/save" ,//url
             data:formData,
             processData: false,//用于对data参数进行序列化处理 这里必须false
             contentType: false, //必须
