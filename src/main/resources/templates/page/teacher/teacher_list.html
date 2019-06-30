@@ -12,8 +12,12 @@
 				<form action="/teacher/index" method="post" class="form-inline" name="Form" id="Form">
 					<!-- ---+搜索条件 start+----- -->
 					<div class="form-group">
-						<label >驾校名称</label>
-						<input type="text" name="school_name" th:value="${pd.get('school_name')}" class="form-control" id="school_name" placeholder="驾校名称">
+						<label>驾校名称</label>
+						<select id="school_id" name="school_id" class="form-control">
+							<option value="">请选择驾校名称  </option>
+							<option th:each="sc,scStat:${list}" th:value="${sc.getId()} " th:selected="${sc.getId().equals(pd.get('school_id'))}" th:text="${sc.getSchool_name()}"></option>
+
+						</select>
 					</div>
 					<div class="form-group">
 						<label>驾校编码</label>
