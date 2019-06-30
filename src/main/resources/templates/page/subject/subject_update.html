@@ -31,13 +31,20 @@
                 </select>
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否有效</label>
+            <div class="layui-input-block">
+                <input type="radio" name="flag" value="1" title="有效" th:checked="${subject.getFlag().equals('1')}">
+                <input type="radio" name="flag" value="0" title="无效" th:checked="${subject.getFlag().equals('0')}">
+            </div>
+        </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">驾照类型</label>
             <div class="layui-input-block">
                 <select id ="subject" name="subject" >
-                    <option value="C1">C1</option>
-                    <option value="C2">C2</option>
+                    <option value="C1" th:selected="${subject.getSubject().equals('C1')}">C1</option>
+                    <option value="C2" th:selected="${subject.getSubject().equals('C2')}">C2</option>
 
                 </select>
             </div>
@@ -49,14 +56,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">班级类型(名字)</label>
             <div class="layui-input-block">
-                <input type="text" name="subject_name" id="subject_name"  placeholder="输入班级类型 示例：速成班" required lay-verify="required"  class="layui-input">
+                <input type="text" th:value="${subject.getSubject_name()}" name="subject_name" id="subject_name"  placeholder="输入班级类型 示例：速成班" required lay-verify="required"  class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">价钱</label>
             <div class="layui-input-block">
-                <input type="text" name="price" id="price" required  lay-verify="required" placeholder="请输入套餐价钱 示例：2899"  class="layui-input">
+                <input type="text" name="price" th:value="${subject.getPrice()}" id="price" required  lay-verify="required" placeholder="请输入套餐价钱 示例：2899"  class="layui-input">
             </div>
         </div>
 
@@ -124,7 +131,7 @@
         var subject_name=$("#subject_name").val();
         var price=$("#price").val();
         //var teacher_img=$("#teacher_img").get(0).files[0];
-        // var teacher_sex=$("input[name='teacher_sex']:checked").val();
+        var flag=$("input[name='flag']:checked").val();
         //var teacher_describe=editor.html();
         var message='';
         if(ASSERT(school_id)){
@@ -146,6 +153,7 @@
         formData.append("subject",subject);
         formData.append("subject_name",subject_name);
         formData.append("price",price);
+        formData.append("flag",flag);
 
         $("#sub").hide();
         $.ajax({

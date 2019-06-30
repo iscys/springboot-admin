@@ -3,6 +3,7 @@ package com.project.controller.admin;
 import com.project.controller.BaseController;
 import com.project.model.ResultObject;
 import com.project.model.school.SchoolModel;
+import com.project.model.school.Subject;
 import com.project.model.school.Teacher;
 import com.project.service.admin.SubjectService;
 import com.project.service.admin.TeacherService;
@@ -57,17 +58,17 @@ public class SubjectController extends BaseController {
         mv.setViewName("page/subject/subject_add");
         return mv;
     }
-    /**
+
 
     @RequestMapping("/to_update")
-    public ModelAndView to_update(Teacher teacher){
+    public ModelAndView to_update(Subject subject){
         ModelAndView mv = this.getModelAndView();
         PageData pd = this.getPageData();
         List<SchoolModel> slist= teacherService.getAllSchoolList(pd);
         mv.addObject("pd",pd);
         mv.addObject("list",slist);
-        Teacher resT=subjectService.getTeacherDetail(teacher);
-        mv.addObject("teacher",resT);
+        Subject resT=subjectService.getSubjectDetail(subject);
+        mv.addObject("subject",resT);
         //  mv.addObject("pd",schoolModel);
         mv.setViewName("page/subject/subject_update");
         return mv;
@@ -76,11 +77,11 @@ public class SubjectController extends BaseController {
 
     @RequestMapping("/save")
     @ResponseBody
-    public ResultObject save(MultipartFile teacher_img){
+    public ResultObject save(){
         PageData pd = this.getPageData();
         ModelAndView mv = this.getModelAndView();
         try {
-            ResultObject result = subjectService.saveTeacher(teacher_img, pd);
+            ResultObject result = subjectService.saveSubject(pd);
             return result;
         }catch (Exception e){
             logger.error("保存修改教练配置异常：{}",e.getMessage());
@@ -93,6 +94,6 @@ public class SubjectController extends BaseController {
     }
 
 
-**/
+
 
 }

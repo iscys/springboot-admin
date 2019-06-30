@@ -31,6 +31,13 @@
             </select>
         </div>
     </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否有效</label>
+        <div class="layui-input-block">
+            <input type="radio" name="flag" value="1" title="有效" checked="">
+            <input type="radio" name="flag" value="0" title="无效">
+        </div>
+    </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">驾照类型</label>
@@ -124,7 +131,7 @@
         var subject_name=$("#subject_name").val();
         var price=$("#price").val();
         //var teacher_img=$("#teacher_img").get(0).files[0];
-        // var teacher_sex=$("input[name='teacher_sex']:checked").val();
+         var flag=$("input[name='flag']:checked").val();
         //var teacher_describe=editor.html();
         var message='';
         if(ASSERT(school_id)){
@@ -146,6 +153,7 @@
         formData.append("subject",subject);
         formData.append("subject_name",subject_name);
         formData.append("price",price);
+        formData.append("flag",flag);
 
         $("#sub").hide();
         $.ajax({

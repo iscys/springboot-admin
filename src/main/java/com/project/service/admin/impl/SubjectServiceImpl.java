@@ -1,6 +1,8 @@
 package com.project.service.admin.impl;
 
 import com.project.mapper.admin.SubjectMapper;
+import com.project.model.ResultObject;
+import com.project.model.school.Subject;
 import com.project.service.admin.SubjectService;
 import com.project.utils.DataPager;
 import com.project.utils.PageData;
@@ -26,5 +28,22 @@ public class SubjectServiceImpl implements SubjectService {
         dataPager.setRecords(result);
         dataPager.setFormId("Form");
         return dataPager;
+    }
+
+    @Override
+    public ResultObject saveSubject(PageData pd) throws Exception {
+        if(null ==pd.get("id")) {
+            subjectMapper.saveSubject(pd);
+        }else{
+            subjectMapper.updateSubject(pd);
+        }
+        return ResultObject.success(null);
+
+    }
+
+    @Override
+    public Subject getSubjectDetail(Subject subject) {
+
+        return subjectMapper.getSubjectDetail(subject);
     }
 }
