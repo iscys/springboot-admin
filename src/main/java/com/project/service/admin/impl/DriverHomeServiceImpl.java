@@ -42,7 +42,7 @@ public class DriverHomeServiceImpl implements DriverHomeService {
     public DataPager getHomeList(PageData pd) {
         Integer total =homeMapper.getHomeCount(pd);
         DataPager dataPager = DataPager.page_self(1,50,pd,total);
-        List<HashMap<String,String>> result= homeMapper.getHomeList(pd);
+        List<HashMap<String,Object>> result= homeMapper.getHomeList(pd);
         dataPager.setRecords(result);
         dataPager.setFormId("Form");
         return dataPager;
