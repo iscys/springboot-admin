@@ -32,6 +32,8 @@ public class TeacherController extends BaseController {
         ModelAndView mv = this.getModelAndView();
         PageData pd = this.getPageData();
         DataPager dataPager= teacherService.getTeacherList(pd);
+        List<SchoolModel> slist= teacherService.getAllSchoolList(pd);
+        mv.addObject("list",slist);
         mv.addObject("dataPager",dataPager);
         mv.addObject("pd",pd);
         mv.setViewName("page/teacher/teacher_list");

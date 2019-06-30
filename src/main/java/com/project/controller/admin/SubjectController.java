@@ -36,8 +36,10 @@ public class SubjectController extends BaseController {
         ModelAndView mv = this.getModelAndView();
         PageData pd = this.getPageData();
         DataPager dataPager= subjectService.getSubjectList(pd);
+        List<SchoolModel> slist= teacherService.getAllSchoolList(pd);
         mv.addObject("dataPager",dataPager);
         mv.addObject("pd",pd);
+        mv.addObject("list",slist);
         mv.setViewName("page/subject/subject_list");
         return mv;
     }

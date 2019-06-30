@@ -12,7 +12,7 @@
        where 1=1
        and a.flag ='1'
        <if test="school_id !=null  and school_id != '' ">
-           and b.school_id=#{school_id}
+           and b.id=#{school_id}
        </if>
        <if test="school_name !=null  and school_name != '' ">
            and b.school_name=#{school_name}
@@ -30,7 +30,7 @@
 
     <select id="getTeacherList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
 
-      select a.id,b.school_name, a.teacher_name,a.teacher_phone,a.teacher_sex,a.teacher_img,
+      select a.id,a.school_id,b.school_name, a.teacher_name,a.teacher_phone,a.teacher_sex,a.teacher_img,
       a.orders,
       date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time from
         sdb_school_teacher a
@@ -39,7 +39,7 @@
       where 1=1
         and a.flag ='1'
         <if test="school_id !=null  and school_id != '' ">
-            and b.school_id=#{school_id}
+            and b.id=#{school_id}
         </if>
         <if test="school_name !=null  and school_name != '' ">
             and b.school_name=#{school_name}
