@@ -13,4 +13,8 @@ public interface MarkMapper {
     List<HashMap<String, String>> getMarkList(PageData pd);
 
     Mark getMarkDetail(Mark mark);
+
+    void updateMark(PageData pd);
+
+    void saveMark(PageData pd);
 }

@@ -1,6 +1,7 @@
 package com.project.controller.admin;
 
 import com.project.controller.BaseController;
+import com.project.model.ResultObject;
 import com.project.model.school.Mark;
 import com.project.model.school.SchoolModel;
 import com.project.service.admin.MarkService;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,5 +49,23 @@ public class SchoolMarkController extends BaseController {
         ModelAndView mv = this.getModelAndView();
         mv.setViewName("page/mark/mark_add");
         return mv;
+    }
+
+    @RequestMapping("/save")
+    @ResponseBody
+    public ResultObject save(){
+        PageData pd = this.getPageData();
+        ModelAndView mv = this.getModelAndView();
+        try {
+            ResultObject result = markService.saveMark(pd);
+            return result;
+        }catch (Exception e){
+            logger.error("保存修改标记配置异常：{}",e.getMessage());
+            return ResultObject.error(null);
+
+        }
+
+
+
     }
 }
