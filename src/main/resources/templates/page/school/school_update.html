@@ -100,6 +100,14 @@
         </div>
     </div>
 
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">驾校标签</label>
+        <div class="layui-input-block mark">
+            <input type="checkbox"  th:each="mark :${marks}" th:value="${mark.getId()}" th:title="${mark.getMark()}"
+                   th:checked="${mark.getPri()==1}" lay-skin="primary" >
+        </div>
+    </div>
+
     <div>
         <h5>驾校icon图标上传：</h5>
         <img  th:src="${pd.getSchool_icon()}" style="height: 130px;width: 130px;">
@@ -150,13 +158,7 @@
         </div>
     </div>
 
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">驾校标签</label>
-        <div class="layui-input-block mark">
-            <input type="checkbox"  th:each="mark :${marks}" th:value="${mark.getId()}" th:title="${mark.getMark()}"
-                   th:checked="${mark.getPri()==1}" lay-skin="primary" >
-        </div>
-    </div>
+
 
     <div class="layui-form-item">
         <div class="layui-input-block">
