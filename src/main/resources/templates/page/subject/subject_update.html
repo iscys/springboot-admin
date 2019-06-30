@@ -49,14 +49,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">班级类型(名字)</label>
             <div class="layui-input-block">
-                <input type="text" name="subject_name" id="subject_name"  placeholder="输入班级类型" required lay-verify="required"  class="layui-input">
+                <input type="text" name="subject_name" id="subject_name"  placeholder="输入班级类型 示例：速成班" required lay-verify="required"  class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">价钱</label>
             <div class="layui-input-block">
-                <input type="text" name="price" id="price" required  lay-verify="required" placeholder="请输入套餐价钱"  class="layui-input">
+                <input type="text" name="price" id="price" required  lay-verify="required" placeholder="请输入套餐价钱 示例：2899"  class="layui-input">
             </div>
         </div>
 
@@ -198,7 +198,23 @@
 
 
 
-
+        //富文本
+        //富文本编译器
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#teacher_describe',{
+                items:[
+                    'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+                    'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                    'anchor', 'link', 'unlink'
+                ],
+                uploadJson : '/home/img',
+            });
+        });
 
 
 
