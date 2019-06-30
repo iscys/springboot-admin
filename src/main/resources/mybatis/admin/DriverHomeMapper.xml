@@ -18,7 +18,7 @@
    </select>
 
     <select id="getHomeList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
-    select a.id,a.school_name,a.school_location,a.school_phone,a.school_code,a.orders,
+    select a.id,a.school_name,a.school_location,a.school_phone,a.school_code,a.orders,a.school_icon
         date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time,
         a.school_location_x,a.school_location_y,a.mark,
 
