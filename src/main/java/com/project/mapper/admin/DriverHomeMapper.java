@@ -12,7 +12,7 @@ public interface DriverHomeMapper  {
 
     Integer getHomeCount(PageData pd);
 
-    List<HashMap<String, String>> getHomeList(PageData pd);
+    List<HashMap<String, Object>> getHomeList(PageData pd);
 
     SchoolModel getSchoolDetail(SchoolModel sch);
 
