@@ -45,6 +45,13 @@
         </div>
     </div>
 
+    <div class="layui-form-item">
+        <label class="layui-form-label">驾校推荐排序</label>
+        <div class="layui-input-block">
+            <input type="number" name="orders" id="orders" th:value="${pd.getOrders()}" placeholder="输入驾校推荐的排序"  class="layui-input">
+        </div>
+    </div>
+
     <div>
         <h5>驾校icon图标上传：</h5>
         <img  th:src="${pd.getSchool_icon()}" style="height: 130px;width: 130px;">
@@ -226,6 +233,7 @@
             var school_code=$("#school_code").val();
             var school_name=$("#school_name").val();
             var school_id=$("#school_id").val();
+            var orders=$("#orders").val();
             var school_describe=editor.html();
 
 
@@ -242,9 +250,10 @@
                 message='驾校坐标不能为空'
             }else if(ASSERT(school_location)){
                 message='驾校详细地址不能为空'
+            }else if(ASSERT(orders)){
+                message='输入驾校推荐排序'
             }
 
-            console.log(message);
             if(message!=''){
                 layer.msg(message);
                 return false;
@@ -260,6 +269,7 @@
                 formData.append("school_icon", school_icon);
             }
             formData.append("school_name",school_name);
+            formData.append("orders",orders);
             formData.append("school_code",school_code);
             formData.append("school_phone",school_phone);
             formData.append("school_location",school_location);

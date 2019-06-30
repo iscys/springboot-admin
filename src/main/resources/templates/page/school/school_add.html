@@ -36,13 +36,20 @@ margin-left: 130px;
         </div>
     </div>
 
+
+
     <div class="layui-form-item">
         <label class="layui-form-label">驾校联系电话</label>
         <div class="layui-input-block">
             <input type="text" name="school_phone" id="school_phone" required  lay-verify="required" placeholder="请输入驾校联系电话"  class="layui-input">
         </div>
     </div>
-
+    <div class="layui-form-item">
+        <label class="layui-form-label">驾校推荐排序</label>
+        <div class="layui-input-block">
+            <input type="number" name="orders" id="orders"  placeholder="输入驾校推荐的排序"  class="layui-input">
+        </div>
+    </div>
 
     <div>
         <h5>驾校icon图标上传：</h5>
@@ -230,6 +237,7 @@ margin-left: 130px;
             var school_phone=$("#school_phone").val();
             var school_code=$("#school_code").val();
             var school_name=$("#school_name").val();
+            var orders=$("#orders").val();
             var school_describe=editor.html();
             var message='';
             if(ASSERT(school_name)){
@@ -250,9 +258,10 @@ margin-left: 130px;
                 message='驾校详细地址不能为空'
             }else if(ASSERT(school_describe)){
                 message='驾校简介不能为空';
+            }else if(ASSERT(orders)){
+                message='输入驾校推荐排序'
             }
 
-            console.log(message);
             if(message!=''){
                 layer.msg(message);
                 return false;
@@ -261,6 +270,7 @@ margin-left: 130px;
                 formData.append("files", v); //加入文件对象
             } );
             formData.append("school_face",school_face);
+            formData.append("orders",orders);
             formData.append("school_icon",school_icon);
             formData.append("school_name",school_name);
             formData.append("school_code",school_code);

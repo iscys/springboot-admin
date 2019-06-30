@@ -108,6 +108,9 @@
             <if test="school_location_y != null  and school_location_y != '' ">
                 school_location_y,
             </if>
+            <if test="orders != null  and orders != '' ">
+                orders,
+            </if>
 
         </trim>
 
@@ -142,6 +145,9 @@
             </if>
             <if test="school_location_y != null  and school_location_y != '' ">
                 #{school_location_y},
+            </if>
+            <if test="orders != null  and orders != '' ">
+                #{orders},
             </if>
         </trim>
     </insert>
@@ -206,6 +212,9 @@
             </if>
             <if test="school_describe != null  and school_describe != '' ">
                 school_describe= #{school_describe},
+            </if>
+            <if test="orders != null  and orders != '' ">
+                orders= #{orders},
             </if>
         </trim>
 
