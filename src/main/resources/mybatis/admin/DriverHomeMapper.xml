@@ -114,6 +114,9 @@
             <if test="mark != null  and mark != '' ">
                 mark,
             </if>
+            <if test="flag != null  and flag != '' ">
+                flag,
+            </if>
 
         </trim>
 
@@ -154,6 +157,9 @@
             </if>
             <if test="mark != null  and mark != '' ">
                 #{mark},
+            </if>
+            <if test="flag != null  and flag != '' ">
+                #{flag},
             </if>
         </trim>
     </insert>
@@ -221,6 +227,12 @@
             </if>
             <if test="orders != null  and orders != '' ">
                 orders= #{orders},
+            </if>
+            <if test="flag != null  and flag != '' ">
+                flag= #{flag},
+            </if>
+            <if test="mark != null  and mark != '' ">
+                mark= #{mark},
             </if>
         </trim>
 
