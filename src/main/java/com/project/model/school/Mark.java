@@ -8,6 +8,8 @@ public class Mark {
     private String mark;
     private String flag;
     private String create_time;
+    private int pri;
+
 
 
 }

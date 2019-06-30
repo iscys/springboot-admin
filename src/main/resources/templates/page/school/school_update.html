@@ -154,7 +154,7 @@
         <label class="layui-form-label">驾校标签</label>
         <div class="layui-input-block mark">
             <input type="checkbox"  th:each="mark :${marks}" th:value="${mark.getId()}" th:title="${mark.getMark()}"
-                   th:checked="${pd.getMark().contains(mark.getId())}" lay-skin="primary" >
+                   th:checked="${mark.getPri()==1}" lay-skin="primary" >
         </div>
     </div>
 

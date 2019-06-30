@@ -60,7 +60,7 @@ public class SchoolMarkController extends BaseController {
             ResultObject result = markService.saveMark(pd);
             return result;
         }catch (Exception e){
-            logger.error("保存修改标记配置异常：{}",e.getMessage());
+            logger.error("保存修改驾校配置异常：{}",e.getMessage());
             return ResultObject.error(null);
 
         }
