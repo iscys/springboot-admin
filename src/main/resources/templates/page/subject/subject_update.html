@@ -21,74 +21,45 @@
 
 
     <form  class="layui-form" action="/teacher/save" method="post" enctype="multipart/form-data" >
-        <input type="hidden" th:value="${teacher.getId()}" name="id" id="id" required lay-verify="required"   class="layui-input">
 
         <div class="layui-form-item">
             <label class="layui-form-label">所属驾校</label>
             <div class="layui-input-block">
                 <select id ="school_id" name="school_id" >
-                    <option th:each="sc,scStat:${list}" th:selected="${sc.getId().equals(teacher.getSchool_id())}" th:value="${sc.getId()}" th:text="${sc.getSchool_name()}"></option>
+                    <option th:each="sc,scStat:${list}" th:value="${sc.getId()}" th:text="${sc.getSchool_name()}"></option>
 
                 </select>
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">教练名字</label>
+            <label class="layui-form-label">驾照类型</label>
             <div class="layui-input-block">
-                <input type="text" th:value="${teacher.getTeacher_name()}" name="teacher_name" id="teacher_name" required lay-verify="required"  placeholder="请输入教练名字"  class="layui-input">
+                <select id ="subject" name="subject" >
+                    <option value="C1">C1</option>
+                    <option value="C2">C2</option>
+
+                </select>
             </div>
         </div>
 
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">教练从业时间</label>
-            <div class="layui-input-block">
-                <input type="text" th:value="${teacher.getTeacher_apply()}" name="teacher_apply" id="teacher_apply"  required lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-            </div>
-        </div>
 
 
         <div class="layui-form-item">
-            <label class="layui-form-label">性别</label>
+            <label class="layui-form-label">班级类型(名字)</label>
             <div class="layui-input-block">
-                <input type="radio" name="teacher_sex" value="1" title="男" th:checked="${teacher.getTeacher_sex()=='1'}">
-                <input type="radio" name="teacher_sex" value="2" title="女" th:checked="${teacher.getTeacher_sex()=='2'}">
+                <input type="text" name="subject_name" id="subject_name"  placeholder="输入班级类型" required lay-verify="required"  class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">教练推荐排序</label>
+            <label class="layui-form-label">价钱</label>
             <div class="layui-input-block">
-                <input type="number" name="orders" id="orders" th:value="${teacher.getOrders()}" placeholder="教练推荐排序，输入数字" required lay-verify="required"  class="layui-input">
+                <input type="text" name="price" id="price" required  lay-verify="required" placeholder="请输入套餐价钱"  class="layui-input">
             </div>
         </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">教练联系电话</label>
-            <div class="layui-input-block">
-                <input type="text" name="teacher_phone" th:value="${teacher.getTeacher_phone()}" id="teacher_phone" required  lay-verify="required" placeholder="请输入教练联系电话"  class="layui-input">
-            </div>
-        </div>
-
-
-        <div>
-            <label class="layui-form-label">教练头像上传：</label>
-            <img  th:src="${teacher.getTeacher_img()}" style="height: 130px;width: 130px;">
-            <span  onchange="c(this,'teacher_img')" class="btn btn-success fileinput-button">
-	            <span>上传</span>
-	            <input id="teacher_img" name="teacher_img" type="file">
-	        </span>
-        </div>
-
-
-        <br>
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">教练简介描述</label>
-            <div class="layui-input-block">
-                <textarea  th:text="${teacher.getTeacher_describe()}" name="teacher_describe" id="teacher_describe" style="width:100%;height:400px;"></textarea>
-            </div>
-        </div>
 
         <div class="layui-form-item">
             <div class="layui-input-block">
@@ -120,6 +91,32 @@
     });
 
 
+
+
+
+
+
+
+
+    function c(event, previewid) {
+        var r = new FileReader();
+        f = document.getElementById(previewid).files[0];
+
+        r.readAsDataURL(f);
+        r.onload = function (e) {
+            var imgurl = this.result;
+            $(event).siblings("img").prop("src" , imgurl);
+        };
+    }
+
+    //取消
+    function cancelToast(){
+
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index);
+
+    }
+
     $("#sub").click(function(){
         var formData = new FormData();
         var teacher_img=$("#teacher_img").get(0).files[0];
@@ -131,7 +128,9 @@
         var teacher_sex=$("input[name='teacher_sex']:checked").val();
         var teacher_describe=editor.html();
         var message='';
-        if (ASSERT(teacher_apply)){
+        if(ASSERT(teacher_img)){
+            message='教练图片不能为空'
+        }else if (ASSERT(teacher_apply)){
             message='教练入行时间不能为空'
         } else if(ASSERT(teacher_name)){
             message='教练姓名不能为空'
@@ -152,11 +151,7 @@
             return false;
         }
 
-        if(!ASSERT(teacher_img)) {
-            formData.append("teacher_img",teacher_img);
-        }
-        formData.append("id",$("#id").val());
-
+        formData.append("teacher_img",teacher_img);
         formData.append("teacher_apply",teacher_apply);
         formData.append("teacher_name",teacher_name);
         formData.append("teacher_phone",teacher_phone);
@@ -194,28 +189,6 @@
     })
 
 
-
-
-
-
-    function c(event, previewid) {
-        var r = new FileReader();
-        f = document.getElementById(previewid).files[0];
-
-        r.readAsDataURL(f);
-        r.onload = function (e) {
-            var imgurl = this.result;
-            $(event).siblings("img").prop("src" , imgurl);
-        };
-    }
-
-    //取消
-    function cancelToast(){
-
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        parent.layer.close(index);
-
-    }
 </script>
 
 <script type="text/javascript">
@@ -225,23 +198,7 @@
 
 
 
-        //富文本
-        //富文本编译器
-        KindEditor.ready(function(K) {
-            window.editor = K.create('#teacher_describe',{
-                items:[
-                    'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
-                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
-                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
-                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
-                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
-                    'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
-                    'anchor', 'link', 'unlink'
-                ],
-                uploadJson : '/home/img',
-            });
-        });
+
 
 
 
