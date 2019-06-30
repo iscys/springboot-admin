@@ -102,6 +102,13 @@
         </div>
     </div>
 
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">驾校标签</label>
+        <div class="layui-input-block mark">
+            <input type="checkbox"  th:each="mark :${marks}" th:value="${mark.getId()}" th:title="${mark.getMark()}" lay-skin="primary" >
+        </div>
+    </div>
+
     <div class="layui-form-item">
         <div class="layui-input-block">
             <div class="layui-btn" id="sub">修改提交</div>
@@ -235,6 +242,8 @@
             var school_id=$("#school_id").val();
             var orders=$("#orders").val();
             var school_describe=editor.html();
+            var flag=$("input[name='flag']:checked").val();
+
 
 
             var message='';
@@ -269,6 +278,7 @@
                 formData.append("school_icon", school_icon);
             }
             formData.append("school_name",school_name);
+            formData.append("flag",flag);
             formData.append("orders",orders);
             formData.append("school_code",school_code);
             formData.append("school_phone",school_phone);

@@ -30,6 +30,14 @@ margin-left: 130px;
     </div>
 
     <div class="layui-form-item">
+        <label class="layui-form-label">是否有效</label>
+        <div class="layui-input-block">
+            <input type="radio" name="flag" value="1" title="有效" checked="">
+            <input type="radio" name="flag" value="0" title="无效">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
         <label class="layui-form-label">驾校编码</label>
         <div class="layui-input-block">
             <input type="text" name="school_code" id="school_code"  placeholder="请输入驾校code"  class="layui-input">
@@ -103,8 +111,8 @@ margin-left: 130px;
 
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">驾校标签</label>
-        <div class="layui-input-block">
-            <input type="checkbox" th:each="mark :${marks}" th:value="${mark.getId()}" th:title="${mark.getMark()}" lay-skin="primary" >
+        <div class="layui-input-block mark">
+            <input type="checkbox"  th:each="mark :${marks}" th:value="${mark.getId()}" th:title="${mark.getMark()}" lay-skin="primary" >
         </div>
     </div>
 
@@ -253,6 +261,12 @@ margin-left: 130px;
 
 
         $("#sub").click(function(){
+            var arr=[];
+            $(".mark input[type='checkbox']:checked").each(function(index,item){
+                arr.push($(this).val());
+            })
+            console.log(arr);
+
             var formData = new FormData();
             var school_face=$("#school_face").get(0).files[0];
             var school_icon=$("#school_icon").get(0).files[0];
@@ -264,6 +278,8 @@ margin-left: 130px;
             var school_name=$("#school_name").val();
             var orders=$("#orders").val();
             var school_describe=editor.html();
+            var flag=$("input[name='flag']:checked").val();
+
             var message='';
             if(ASSERT(school_name)){
                 message='驾校名称不能为空'
@@ -295,6 +311,8 @@ margin-left: 130px;
                 formData.append("files", v); //加入文件对象
             } );
             formData.append("school_face",school_face);
+            formData.append("flag",flag);
+
             formData.append("orders",orders);
             formData.append("school_icon",school_icon);
             formData.append("school_name",school_name);
@@ -304,6 +322,7 @@ margin-left: 130px;
             formData.append("school_location_x",school_location_x);
             formData.append("school_location_y",school_location_y);
             formData.append("school_describe",school_describe);
+            formData.append("mark",arr);
 
             $("#sub").hide();
             $.ajax({
