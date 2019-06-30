@@ -20,7 +20,7 @@
 
 
 
-    <form  class="layui-form" action="/teacher/save" method="post" enctype="multipart/form-data" >
+    <form  class="layui-form" action="/mark/save" method="post" enctype="multipart/form-data" >
 
         <input type="hidden" name="id" id="id" th:value="${pd.getId()}" >
 
@@ -113,7 +113,7 @@
 
         formData.append("mark",mark);
         formData.append("flag",flag);
-        formData.append("flag",$("#id").val());
+        formData.append("id",$("#id").val());
 
         $("#sub").hide();
         $.ajax({
