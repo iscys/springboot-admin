@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="head::common_js_css_bootstrap"></head>
+<head th:insert="head::kindeditor"></head>
+<style>
+
+    .layui-form-label {
+        width: 130px;
+    }
+    .layui-input-block {
+        margin-left: 130px;
+    }
+</style>
+<body>
+
+<div>
+    <span onclick="cancelToast()" class="btn btn-lg btn-default " style="border: 0px">返回</span>
+</div>
+<div class="container-fluid"  style="width:880px; margin: auto">
+
+
+
+    <form  class="layui-form" action="/mark/save" method="post" enctype="multipart/form-data" >
+
+        <input type="hidden" name="id" id="id" th:value="${pd.getId()}" >
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否有效</label>
+            <div class="layui-input-block">
+                <input type="radio" name="flag" value="1" title="有效" th:checked="${pd.getFlag().equals('1')}">
+                <input type="radio" name="flag" value="0" title="无效" th:checked="${pd.getFlag().equals('0')}">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">标签</label>
+            <div class="layui-input-block">
+                <input type="text" name="mark" id="mark" th:value="${pd.getMark()}" placeholder="输入标签" required lay-verify="required"  class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <span class="layui-btn" id="sub">立即提交</span>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+<script>
+
+    layui.use(['form','laydate', 'laypage', 'layer', 'table', 'carousel', 'element', 'slider'], function() {
+        var laydate = layui.laydate //日期
+            , laypage = layui.laypage //分页
+            , layer = layui.layer //弹层
+            , table = layui.table //表格
+            , element = layui.element //元素操作
+            , slider = layui.slider //滑块
+            ,form = layui.form
+
+        //日期
+        laydate.render({
+            elem: '#teacher_apply'
+        });
+
+
+
+    });
+
+
+
+
+
+
+
+
+
+    function c(event, previewid) {
+        var r = new FileReader();
+        f = document.getElementById(previewid).files[0];
+
+        r.readAsDataURL(f);
+        r.onload = function (e) {
+            var imgurl = this.result;
+            $(event).siblings("img").prop("src" , imgurl);
+        };
+    }
+
+    //取消
+    function cancelToast(){
+
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index);
+
+    }
+
+    $("#sub").click(function(){
+        var formData = new FormData();
+        var mark=$("#mark").val();
+        var flag=$("input[name='flag']:checked").val();
+        var message='';
+        if(ASSERT(mark)){
+            message='请添加标签'
+        }
+
+        if(message!=''){
+            layer.msg(message);
+            return false;
+        }
+
+        formData.append("mark",mark);
+        formData.append("flag",flag);
+        formData.append("id",$("#id").val());
+
+        $("#sub").hide();
+        $.ajax({
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/mark/save" ,//url
+            data:formData,
+            processData: false,//用于对data参数进行序列化处理 这里必须false
+            contentType: false, //必须
+            success: function (result) {
+                //console.log(result);//打印服务端返回的数据(调试用)
+                if(result.flag =="1"){
+                    layer.msg("提交成功");
+                    window.setTimeout(cancelToast(),2100);
+                }else{
+                    layer.msg("提交失败，请稍后再试");
+                    $("#sub").show();
+                }
+
+
+            },
+            error : function() {
+
+                $("#sub").show();
+            }
+        });
+
+    })
+
+
+</script>
+
+<script type="text/javascript">
+
+    $(function(){
+
+
+
+
+        //富文本
+        //富文本编译器
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#teacher_describe',{
+                items:[
+                    'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+                    'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                    'anchor', 'link', 'unlink'
+                ],
+                uploadJson : '/home/img',
+            });
+        });
+
+
+
+    });
+
+</script>
+</body>
+</html>
