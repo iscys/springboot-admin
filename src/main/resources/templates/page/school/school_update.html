@@ -21,7 +21,7 @@
 
 
 
-<form  action="/ocard/update" method="post" enctype="multipart/form-data" >
+<form  action="/ocard/update" method="post" enctype="multipart/form-data" class="layui-form">
     <input type="hidden" name="id" id="school_id" th:value="${pd.getId()}"   class="layui-input">
 
     <div class="layui-form-item">
@@ -120,6 +120,8 @@
 
 <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=TJHBZ-A56CV-5J6P5-UDCKM-POXQK-YZBG2"></script>
 <script>
+
+
 
     function c(event, previewid) {
         var r = new FileReader();
@@ -230,6 +232,11 @@
         });
 
         $("#sub").click(function(){
+
+            var arr=[];
+            $(".mark input[type='checkbox']:checked").each(function(index,item){
+                arr.push($(this).val());
+            })
             var formData = new FormData();
             var school_face=$("#school_face").get(0).files[0];
             var school_icon=$("#school_icon").get(0).files[0];
@@ -286,6 +293,7 @@
             formData.append("school_location_x",school_location_x);
             formData.append("school_location_y",school_location_y);
             formData.append("school_describe",school_describe);
+            formData.append("mark",arr);
 
             $("#sub").hide();
             $.ajax({

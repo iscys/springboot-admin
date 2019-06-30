@@ -70,7 +70,10 @@ public class DriverHomeController extends BaseController {
 
     @RequestMapping("/to_update")
     public ModelAndView to_update(SchoolModel school){
+        PageData pd = this.getPageData();
         ModelAndView mv = this.getModelAndView();
+        List<Mark> marks = markService.allMark(pd);
+        mv.addObject("marks",marks);
         //PageData pd = this.getPageData();
         SchoolModel schoolModel=homeService.getSchoolDetail(school);
         mv.addObject("pd",schoolModel);
