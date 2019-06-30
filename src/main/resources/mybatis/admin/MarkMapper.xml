@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.mapper.admin.MarkMapper">
+
+
+   <select id="getMarkCount" parameterType="com.project.utils.PageData" resultType="java.lang.Integer">
+       select count(1)
+       from
+       sdb_school_mark a
+       where 1=1
+        and flag ='1'
+
+   </select>
+
+    <select id="getMarkList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
+
+      select * from sdb_school_mark a
+      where 1=1
+      and flag ='1'
+      limit #{startIndex},#{pageSize}
+
+   </select>
+
+    <select id="getMarkDetail" resultType="com.project.model.school.Mark" parameterType="com.project.model.school.Mark">
+        select a.*
+         from
+        sdb_school_mark a
+        where 1=1
+        and a.flag ='1'
+        <if test="id !=null  and id != '' ">
+            and a.id=#{id}
+        </if>
+        limit 1
+    </select>
+
+    <insert id="saveMark" parameterType="com.project.utils.PageData">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into sdb_school_mark
+        <trim prefix="(" suffix=")"  suffixOverrides=",">
+
+            <if test="mark != null  and mark != '' ">
+                mark,
+            </if>
+            <if test="flag != null  and flag != '' ">
+                flag,
+            </if>
+
+
+
+        </trim>
+
+        <trim prefix="values(" suffix=")"  suffixOverrides=",">
+
+            <if test="mark != null  and mark != '' ">
+                #{mark},
+            </if>
+            <if test="flag != null  and flag != '' ">
+                #{flag},
+            </if>
+
+        </trim>
+    </insert>
+
+
+
+    <update id="updateTeacher" parameterType="com.project.utils.PageData">
+      update sdb_school_mark
+        <trim prefix="SET"  suffixOverrides=",">
+
+            <if test="mark != null  and mark != '' ">
+                mark=  #{mark},
+            </if>
+            <if test="flag != null  and flag != '' ">
+                flag= #{flag},
+            </if>
+        </trim>
+
+      where 1=1
+        <if test="id != null  and id != '' ">
+            and id= #{id}
+        </if>
+    </update>
+
+
+</mapper>
