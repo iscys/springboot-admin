@@ -84,4 +84,11 @@
     </update>
 
 
+    <select id="getAllMark" parameterType="com.project.utils.PageData" resultType="com.project.model.school.Mark">
+    select id,mark
+    from
+    sdb_school_mark
+    where flag ='1'
+    </select>
+
 </mapper>
