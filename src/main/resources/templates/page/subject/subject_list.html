@@ -40,9 +40,9 @@
 						<tr>
 							<th class='center' style="min-width:3%">No</th>
 							<th class='center' style="min-width: 10%">驾校名称</th>
-							<th class='center' style="min-width: 10%">教练名字</th>
-							<th class='center' style="min-width: 9%">教练电话</th>
-							<th class='center' style="min-width: 8%">教练推荐排序</th>
+							<th class='center' style="min-width: 10%">驾照类型</th>
+							<th class='center' style="min-width: 9%">班级级别</th>
+							<th class='center' style="min-width: 8%">价钱</th>
 							<th class='center' style="min-width: 7%">时间</th>
 							<th class='center' style="min-width: 7%">查看编辑</th>
 						</tr>
@@ -52,12 +52,12 @@
 						<tr th:each="record,recordStat:${dataPager.getRecords()}">
 							<td class='center' th:text="${recordStat.index+1}"></td>
 							<td class='center' th:text="${record.school_name}"></td>
-							<td class='center' th:text="${record.teacher_name}"></td>
-							<td class='center' th:text="${record.teacher_phone}"></td>
-							<td class='center' th:text="${record.orders}"></td>
+							<td class='center' th:text="${record.subject}"></td>
+							<td class='center' th:text="${record.subject_name}"></td>
+							<td class='center' th:text="${record.price}"></td>
 							<td class='center' th:text="${record.create_time}"></td>
-							<td>
-								<span class="btn btn-danger"  th:onclick="updateAndLook([[${record.id}]]);" >编辑查看</span>
+							<td class='center'>
+								<span  class="btn btn-danger"  th:onclick="updateAndLook([[${record.id}]]);" >编辑查看</span>
 							</td>
 						</tr>
 						</tbody>

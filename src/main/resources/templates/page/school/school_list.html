@@ -53,8 +53,8 @@
 							<td class='center' th:text="${record.album_count}"></td>
 							<td class='center' th:text="${record.orders}"></td>
 							<td class='center' th:text="${record.create_time}"></td>
-							<td>
-								<span class="btn btn-danger"  th:onclick="updateAndLook([[${record.id}]]);" >编辑查看</span>
+							<td class='center'>
+								<span  class="btn btn-danger"  th:onclick="updateAndLook([[${record.id}]]);" >编辑查看</span>
 							</td>
 						</tr>
 						</tbody>

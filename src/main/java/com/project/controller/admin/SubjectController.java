@@ -4,6 +4,7 @@ import com.project.controller.BaseController;
 import com.project.model.ResultObject;
 import com.project.model.school.SchoolModel;
 import com.project.model.school.Teacher;
+import com.project.service.admin.SubjectService;
 import com.project.service.admin.TeacherService;
 import com.project.utils.DataPager;
 import com.project.utils.PageData;
@@ -27,13 +28,14 @@ import java.util.List;
 public class SubjectController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
+    private SubjectService subjectService;
+    @Autowired
     private TeacherService teacherService;
-
     @RequestMapping("/index")
     public ModelAndView teacherList(HttpServletRequest req){
         ModelAndView mv = this.getModelAndView();
         PageData pd = this.getPageData();
-        DataPager dataPager= teacherService.getTeacherList(pd);
+        DataPager dataPager= subjectService.getSubjectList(pd);
         mv.addObject("dataPager",dataPager);
         mv.addObject("pd",pd);
         mv.setViewName("page/subject/subject_list");
@@ -53,6 +55,7 @@ public class SubjectController extends BaseController {
         mv.setViewName("page/subject/subject_add");
         return mv;
     }
+    /**
 
     @RequestMapping("/to_update")
     public ModelAndView to_update(Teacher teacher){
@@ -61,7 +64,7 @@ public class SubjectController extends BaseController {
         List<SchoolModel> slist= teacherService.getAllSchoolList(pd);
         mv.addObject("pd",pd);
         mv.addObject("list",slist);
-        Teacher resT=teacherService.getTeacherDetail(teacher);
+        Teacher resT=subjectService.getTeacherDetail(teacher);
         mv.addObject("teacher",resT);
         //  mv.addObject("pd",schoolModel);
         mv.setViewName("page/subject/subject_update");
@@ -75,7 +78,7 @@ public class SubjectController extends BaseController {
         PageData pd = this.getPageData();
         ModelAndView mv = this.getModelAndView();
         try {
-            ResultObject result = teacherService.saveTeacher(teacher_img, pd);
+            ResultObject result = subjectService.saveTeacher(teacher_img, pd);
             return result;
         }catch (Exception e){
             logger.error("保存修改教练配置异常：{}",e.getMessage());
@@ -88,6 +91,6 @@ public class SubjectController extends BaseController {
     }
 
 
-
+**/
 
 }
