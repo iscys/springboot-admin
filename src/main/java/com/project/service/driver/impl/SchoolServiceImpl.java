@@ -112,7 +112,7 @@ public class SchoolServiceImpl implements SchoolService {
             map.put("tag",strL);
         }
         HashMap<String,Object> res =new HashMap<String,Object>();
-        res.put("pageNum",Integer.valueOf(pageNum));//c传过来到页数
+        res.put("pageNum",page.getPageNum());//c传过来到页数
         res.put("totalPage",page.getTotalPage());//总页数
         res.put("school_list",lists);
 
