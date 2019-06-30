@@ -3,8 +3,10 @@ package com.project.controller.admin.dirverHome;
 import com.project.config.ConfigProperties;
 import com.project.controller.BaseController;
 import com.project.model.ResultObject;
+import com.project.model.school.Mark;
 import com.project.model.school.SchoolModel;
 import com.project.service.admin.DriverHomeService;
+import com.project.service.admin.MarkService;
 import com.project.utils.DataPager;
 import com.project.utils.GsonUtils;
 import com.project.utils.PageData;
@@ -25,6 +27,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 驾校列表以及配置
@@ -40,6 +43,9 @@ public class DriverHomeController extends BaseController {
     private DriverHomeService homeService;
     @Autowired
     private ConfigProperties properties;
+    @Autowired
+    private MarkService markService;
+
 
     @RequestMapping("/index")
     public ModelAndView homeList(HttpServletRequest req){
@@ -54,7 +60,10 @@ public class DriverHomeController extends BaseController {
 
     @RequestMapping("/to_add")
     public ModelAndView addSchool(HttpServletRequest req){
+        PageData pd = this.getPageData();
+        List<Mark> marks = markService.allMark(pd);
         ModelAndView mv = this.getModelAndView();
+        mv.addObject("marks",marks);
         mv.setViewName("page/school/school_add");
         return mv;
     }

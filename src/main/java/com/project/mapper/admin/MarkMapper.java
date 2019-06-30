@@ -17,4 +17,6 @@ public interface MarkMapper {
     void updateMark(PageData pd);
 
     void saveMark(PageData pd);
+
+    List<Mark> getAllMark(PageData pd);
 }

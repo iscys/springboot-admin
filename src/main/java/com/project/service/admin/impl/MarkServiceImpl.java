@@ -45,4 +45,11 @@ public class MarkServiceImpl implements MarkService {
 
     }
 
+    @Override
+    public List<Mark> allMark(PageData pd){
+
+        return markMapper.getAllMark(pd);
+
+    }
+
 }

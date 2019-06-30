@@ -21,6 +21,8 @@ public class SchoolModel {
             private int feedback_count;//驾校评论数
             private String star;//驾校星级
             private String orders;//驾校星级
+            private String mark;//标签
+
 
 
 
