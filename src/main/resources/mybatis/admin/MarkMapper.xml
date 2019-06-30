@@ -65,7 +65,7 @@
 
 
 
-    <update id="updateTeacher" parameterType="com.project.utils.PageData">
+    <update id="updateMark" parameterType="com.project.utils.PageData">
       update sdb_school_mark
         <trim prefix="SET"  suffixOverrides=",">
 
