@@ -21,6 +21,7 @@
 
 
     <form  class="layui-form" action="/teacher/save" method="post" enctype="multipart/form-data" >
+        <input type="hidden" th:value="${subject.getId()}" name="id" id="id"  placeholder="输入班级类型 示例：速成班" required lay-verify="required"  class="layui-input">
 
         <div class="layui-form-item">
             <label class="layui-form-label">所属驾校</label>
@@ -126,6 +127,7 @@
 
     $("#sub").click(function(){
         var formData = new FormData();
+        var id=$("#id").val();
         var school_id=$("#school_id").val();
         var subject=$("#subject").val();
         var subject_name=$("#subject_name").val();
@@ -149,6 +151,7 @@
             return false;
         }
 
+        formData.append("id",id);
         formData.append("school_id",school_id);
         formData.append("subject",subject);
         formData.append("subject_name",subject_name);

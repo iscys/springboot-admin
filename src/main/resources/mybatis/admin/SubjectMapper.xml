@@ -73,7 +73,7 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             select LAST_INSERT_ID()
         </selectKey>
-        insert into sdb_school_teacher
+        insert into sdb_school_subject
         <trim prefix="(" suffix=")"  suffixOverrides=",">
 
             <if test="school_id != null  and school_id != '' ">
@@ -126,7 +126,7 @@
 
 
     <update id="updateSubject" parameterType="com.project.utils.PageData">
-      update sdb_school_teacher
+      update sdb_school_subject
         <trim prefix="SET"  suffixOverrides=",">
 
             <if test="school_id != null  and school_id != '' ">
@@ -145,7 +145,7 @@
                 mark= #{mark},
             </if>
             <if test="price != null  and price != '' ">
-                #{price},
+                price= #{price},
             </if>
 
         </trim>
