@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="head::common_js_css_bootstrap"></head>
+<head th:insert="head::common_uploadFile"></head>
+<head th:insert="head::kindeditor"></head>
+<style>
+    .layui-form-label {
+        width: 130px;
+    }
+    .layui-input-block {
+        margin-left: 130px;
+    }
+</style>
+
+<body>
+
+<div>
+    <span onclick="cancelToast()" class="btn btn-lg btn-default " style="border: 0px">返回</span>
+</div>
+<div class="container-fluid"  style="width:880px; margin: auto">
+
+
+
+<form  action="/ocard/update" method="post" enctype="multipart/form-data" >
+    <input type="hidden" name="id" id="school_id" th:value="${pd.getId()}"   class="layui-input">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">驾校名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="school_name" id="school_name" th:value="${pd.getSchool_name()}"   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">驾校编码</label>
+        <div class="layui-input-block">
+            <input type="text" id="school_code" name="school_code" th:value="${pd.getSchool_code()}"   placeholder="请输入驾校code"  class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">驾校联系电话</label>
+        <div class="layui-input-block">
+            <input type="text" name="school_phone" id="school_phone" th:value="${pd.getSchool_phone()}"   lay-verify="required" placeholder="请输入驾校联系电话"  class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">驾校推荐排序</label>
+        <div class="layui-input-block">
+            <input type="number" name="orders" id="orders" th:value="${pd.getOrders()}" placeholder="输入驾校推荐的排序"  class="layui-input">
+        </div>
+    </div>
+
+    <div>
+        <h5>驾校icon图标上传：</h5>
+        <img  th:src="${pd.getSchool_icon()}" style="height: 130px;width: 130px;">
+        <span  onchange="c(this,'school_icon')" class="btn btn-success fileinput-button">
+	            <span>上传</span>
+	            <input id="school_icon" name="school_icon" type="file">
+	        </span>
+    </div>
+
+    <div>
+        <h5>驾校门面图片上传：</h5>
+        <img  th:src="${pd.getSchool_face()}" style="height: 300px;width: 640px;">
+        <span  onchange="c(this,'school_face')" class="btn btn-success fileinput-button">
+	            <span>上传</span>
+	            <input id="school_face" name="school_face" type="file">
+	        </span>
+    </div>
+
+   <h5>驾校图片相册上传：</h5>
+    <div id="zyupload" class="zyupload"></div>
+    <h5>驾校位置(请选择详细坐标地址，以便更好的定位距离)：</h5>
+    <div id="container" style="height: 360px;width: 100%; margin: auto"></div>
+    <br>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">纬度坐标</label>
+        <div class="layui-input-inline">
+            <input type="text"  name="school_location_x" id="x_location" th:value="${pd.getSchool_location_x()}"   disabled class="layui-input">
+        </div>
+        <label class="layui-form-label">经度坐标</label>
+        <div class="layui-input-inline">
+            <input type="text" name="school_location_y" th:value="${pd.getSchool_location_y()}" id="y_location"   disabled class="layui-input">
+        </div>
+    </div>
+
+    <br>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">驾校详细地址(请手动输入)</label>
+        <div class="layui-input-block">
+            <textarea name="school_location" id="school_location" th:text="${pd.getSchool_location()}"  placeholder="请输入完整的驾校地址" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <br>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">驾校简介描述</label>
+        <div class="layui-input-block">
+            <textarea name="school_describe" th:text="${pd.getSchool_describe()}" id="school_describe" style="width:100%;height:400px;"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <div class="layui-btn" id="sub">修改提交</div>
+        </div>
+    </div>
+</form>
+</div>
+</body>
+
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=TJHBZ-A56CV-5J6P5-UDCKM-POXQK-YZBG2"></script>
+<script>
+
+    function c(event, previewid) {
+        var r = new FileReader();
+        f = document.getElementById(previewid).files[0];
+
+        r.readAsDataURL(f);
+        r.onload = function (e) {
+            var imgurl = this.result;
+            $(event).siblings("img").prop("src" , imgurl);
+        };
+    }
+
+    //取消
+    function cancelToast(){
+
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index);
+
+    }
+</script>
+
+<script type="text/javascript">
+    $(function(){
+
+        //tencent map
+        //直接加载地图
+        //初始化地图函数  自定义函数名init
+        function init() {
+            //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
+            var map = new qq.maps.Map(document.getElementById("container"), {
+                center: new qq.maps.LatLng(32.70931112969933,109.02059555053711),      // 地图的中心地理坐标。
+                zoom:8                                                 // 地图的中心地理坐标。
+            });
+
+            //添加监听事件
+            qq.maps.event.addListener(map, 'click', function(event) {
+                $("#y_location").val(event.latLng.getLng());
+                $("#x_location").val(event.latLng.getLat());
+            });
+
+        }
+
+        //调用初始化函数地图
+        init();
+
+
+
+
+        // 初始化插件
+        $("#zyupload").zyUpload({
+            width            :   "850px",                 // 宽度
+            height           :   "",                 // 宽度
+            itemWidth        :   "140px",                 // 文件项的宽度
+            itemHeight       :   "115px",                 // 文件项的高度
+            url              :   "",  // 上传文件的路径
+            fileType         :   ["jpg","png","txt","js","exe","jpeg"],// 上传文件的类型
+            fileSize         :   51200000,                // 上传文件的大小
+            multiple         :   true,                    // 是否可以多个文件上传
+            dragDrop         :   true,                    // 是否可以拖动上传文件
+            tailor           :   true,                    // 是否可以裁剪图片
+            del              :   true,                    // 是否可以删除文件
+            finishDel        :   false,  				  // 是否在上传文件完成后删除预览
+
+            /**
+
+            onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+                console.info("当前选择了以下文件：");
+                console.info(selectFiles);
+            },
+            onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+                console.info("当前删除了此文件：");
+                console.info(file.name);
+            },
+            onSuccess: function(file, response){          // 文件上传成功的回调方法
+                console.info("此文件上传成功：");
+                console.info(file.name);
+                console.info("此文件上传到服务器地址：");
+                console.info(response);
+                $("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
+            },
+            onFailure: function(file, response){          // 文件上传失败的回调方法
+                console.info("此文件上传失败：");
+                console.info(file.name);
+            },
+            onComplete: function(response){           	  // 上传完成的回调方法
+                console.info("文件上传完成");
+                console.info(response);
+            }
+             **/
+        });
+
+        //富文本
+        //富文本编译器
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#school_describe',{
+                items:[
+                    'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+                    'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                    'anchor', 'link', 'unlink'
+                ],
+                uploadJson : '/home/img',
+            });
+        });
+
+        $("#sub").click(function(){
+            var formData = new FormData();
+            var school_face=$("#school_face").get(0).files[0];
+            var school_icon=$("#school_icon").get(0).files[0];
+            var school_location_x=$("#x_location").val();
+            var school_location_y=$("#y_location").val();
+            var school_location=$("#school_location").val();
+            var school_phone=$("#school_phone").val();
+            var school_code=$("#school_code").val();
+            var school_name=$("#school_name").val();
+            var school_id=$("#school_id").val();
+            var orders=$("#orders").val();
+            var school_describe=editor.html();
+
+
+            var message='';
+            if(ASSERT(school_name)){
+                message='驾校名称不能为空'
+            }else if (ASSERT(school_phone)){
+                message='驾校电话不能为空'
+            } else if(ASSERT(school_code)){
+                message='驾校编码不能为空'
+            } else if(ASSERT(school_location_x)){
+                message='驾校坐标不能为空'
+            }else if(ASSERT(school_location_y)){
+                message='驾校坐标不能为空'
+            }else if(ASSERT(school_location)){
+                message='驾校详细地址不能为空'
+            }else if(ASSERT(orders)){
+                message='输入驾校推荐排序'
+            }
+
+            if(message!=''){
+                layer.msg(message);
+                return false;
+            }
+            $.each(window.ZYFILE.uploadFile, function(k, v){
+                formData.append("files", v); //加入文件对象
+            } );
+            formData.append("id",school_id);
+            if(!ASSERT(school_face)) {
+                formData.append("school_face", school_face);
+            }
+            if(!ASSERT(school_icon)) {
+                formData.append("school_icon", school_icon);
+            }
+            formData.append("school_name",school_name);
+            formData.append("orders",orders);
+            formData.append("school_code",school_code);
+            formData.append("school_phone",school_phone);
+            formData.append("school_location",school_location);
+            formData.append("school_location_x",school_location_x);
+            formData.append("school_location_y",school_location_y);
+            formData.append("school_describe",school_describe);
+
+            $("#sub").hide();
+            $.ajax({
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "/home/save" ,//url
+                data:formData,
+                processData: false,//用于对data参数进行序列化处理 这里必须false
+                contentType: false, //必须
+                success: function (result) {
+                    cancelToast();
+                    //console.log(result);//打印服务端返回的数据(调试用)
+
+                },
+                error : function() {
+
+                    $("#sub").show();
+                }
+            });
+
+        })
+
+
+    });
+
+</script>
+</body>
+</html>
