@@ -4,6 +4,9 @@ import com.github.binarywang.wxpay.bean.notify.WxPayNotifyResponse;
 import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
+import com.project.controller.BaseController;
+import com.project.model.school.ErrorModel;
+import com.project.service.driver.OrderErrorService;
 import com.project.service.driver.PayService;
 import com.project.utils.DateUtils;
 import org.slf4j.Logger;
@@ -16,11 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/pay")
-public class PayController {
+public class PayController extends BaseController {
     @Autowired
     private WxPayService wxPayService;
     @Autowired
     private PayService payService;
+    @Autowired
+    OrderErrorService error;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -32,16 +37,27 @@ public class PayController {
         WxPayOrderNotifyResult notifyResult =null;
         try {
             notifyResult= wxPayService.parseOrderNotifyResult(xmlData);
-        }catch (WxPayException py){
+        }catch (Exception py){
             logger.error("校验解析微信回调信息异常：{}",xmlData);
-            return WxPayNotifyResponse.fail(py.getReturnMsg());
+            try {
+                error.saveErrorLog(new ErrorModel(null, "校验解析微信回调信息异常",
+                        py.getMessage(), xmlData));
+            }catch (Exception e1){}
+            return WxPayNotifyResponse.fail("处理失败");
         }
 
-        logger.info("开始处理微信回调,订单号:{} ",notifyResult.getOutTradeNo());
+        String order_sn=notifyResult.getOutTradeNo();
+        logger.info("开始处理微信回调,订单号:{} ",order_sn);
         try {
             payService.payNotify(notifyResult);
         }catch (Exception e){
+            try {
+                error.saveErrorLog(new ErrorModel(order_sn, "处理回调发生异常",
+                        e.getMessage(), xmlData));
+            }catch (Exception e1){}
             logger.error("处理回调异常：{},数据包：{}",e.getMessage(),xmlData);
+              return WxPayNotifyResponse.fail("处理失败");
+
         }
         return WxPayNotifyResponse.success("处理成功");
     }

@@ -18,6 +18,9 @@
             <if test="detail != null  and detail != '' ">
                 detail,
             </if>
+            <if test="exceptions != null  and exceptions != '' ">
+                exceptions,
+            </if>
 
 
         </trim>
@@ -33,7 +36,9 @@
             <if test="detail != null  and detail != '' ">
                 #{detail},
             </if>
-
+            <if test="exceptions != null  and exceptions != '' ">
+                exceptions,
+            </if>
 
         </trim>
     </insert>

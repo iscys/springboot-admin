@@ -4,4 +4,6 @@ import com.project.model.school.Order;
 
 public interface OrderMapper {
     Order getOrderDetil(Order order);
+
+    void updateOrder(Order order);
 }
