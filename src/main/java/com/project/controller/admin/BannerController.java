@@ -47,7 +47,7 @@ public class BannerController extends BaseController {
     @RequestMapping("/to_add")
     public ModelAndView addSchool(HttpServletRequest req){
         ModelAndView mv = this.getModelAndView();
-        mv.setViewName("page/banner/bannerbanner_add");
+        mv.setViewName("page/banner/banner_add");
         return mv;
     }
 

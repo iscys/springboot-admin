@@ -113,13 +113,9 @@
         var flag=$("input[name='flag']:checked").val();
         var banner=$("#banner").get(0).files[0];
         var message='';
-        if(ASSERT(mark)){
+        if(ASSERT(type)){
             message='请添加标签'
-        }else if(ASSERT(banner)){
-            message='请选择图片'
-
         }
-
         if(message!=''){
             layer.msg(message);
             return false;
@@ -127,8 +123,9 @@
 
         formData.append("type",type);
         formData.append("flag",flag);
-        formData.append("banner",banner);
-
+        if(!ASSERT(banner)) {
+            formData.append("banner", banner);
+        }
 
         $("#sub").hide();
         $.ajax({
