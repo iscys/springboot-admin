@@ -11,10 +11,24 @@ public class Const {
 
     public static final String MEMBER_ID_NULL="1001";
     public static final String MEMBER_ID_NULL_MESSAGE="用户参数不能为空";
+    public static final String PHONE_NULL="1002";
+    public static final String PHONE_NULL_MESSAGE="手机号码是不能为空";
+    public static final String PHOTO_NULL="1003";
+    public static final String PHOTO_NULL_MESSAGE="上传图片不能为空";
+    public static final String IDCARD_NULL="1004";
+    public static final String IDCARD_NULL_MESSAGE="身份ID不能为空";
+    public static final String ADDR_NULL="1005";
+    public static final String ADDR_NULL_MESSAGE="地址不能为空";
+
+
     public static final String SHOOL_ID_NULL="2001";
     public static final String SHOOL_ID_NULL_MESSAGE="驾校id不能为空";
     public static final String SUBJECT_ID_NULL="2002";
     public static final String SUBJECT_ID_NULL_MESSAGE="套餐id不能为空";
+    public static final String TRAINTYPE_NULL="2003";
+    public static final String TRAINTYPE_NULL_MESSAGE="报名类型不能为空";
+    public static final String ORGCODE_NULL="2004";
+    public static final String ORGCODE_NULL_MESSAGE="驾校编码不能为空";
 
 
 
