@@ -45,7 +45,7 @@ public class SchoolServiceImpl implements SchoolService {
 
         SchoolModel schoolDetail = homeMapper.getSchoolDetail(schoolModel);
 
-
+        schoolDetail.setStar("5");
         return ResultObject.success(schoolDetail);
     }
 
