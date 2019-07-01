@@ -13,6 +13,8 @@ import com.project.service.admin.MarkService;
 import com.project.service.driver.SchoolService;
 import com.project.utils.Page;
 import com.project.utils.PageData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +27,9 @@ import java.util.List;
 @Service
 @Transactional
 public class SchoolServiceImpl implements SchoolService {
-    
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
     @Autowired
     private DriverHomeMapper homeMapper;
     @Autowired

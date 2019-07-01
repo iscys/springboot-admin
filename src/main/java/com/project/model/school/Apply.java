@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Apply {
+    private int id;
 
     private String idcard;
     private String name;
@@ -22,6 +23,8 @@ public class Apply {
 
     private String school_id;//驾校ID
     private String subject_id;//科目ID
+    private String member_id;//科目ID
+
 
 
 

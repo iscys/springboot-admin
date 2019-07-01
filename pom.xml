@@ -85,6 +85,21 @@
                 <version>3.1.0</version>
             </dependency>
 
+
+            <!--小程序模块-->
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-miniapp</artifactId>
+                <version>3.1.0</version>
+            </dependency>
+
+            <!-- 微信开发Java SDK公共模块 -->
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-pay</artifactId>
+                <version>3.1.0</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>

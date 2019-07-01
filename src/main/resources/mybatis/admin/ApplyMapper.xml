@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.project.mapper.admin.OrderMapper">
+<mapper namespace="com.project.mapper.admin.ApplyMapper">
 
 
    <select id="getOrderCount" parameterType="com.project.utils.PageData" resultType="java.lang.Integer">
@@ -73,19 +73,18 @@
         limit 1
     </select>
 
-    <insert id="saveOrder" parameterType="com.project.model.school.Order">
-
-        insert into sdb_apply_order
+    <insert id="saveApply" parameterType="com.project.model.school.Apply">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into sdb_student_apply
         <trim prefix="(" suffix=")"  suffixOverrides=",">
 
-            <if test="order_sn != null  and order_sn != '' ">
-                order_sn,
-            </if>
             <if test="member_id != null  and member_id != '' ">
                 member_id,
             </if>
-            <if test="apply_id != null  and apply_id != '' ">
-                apply_id,
+            <if test="idcard != null  and idcard != '' ">
+                idcard,
             </if>
             <if test="school_id != null  and school_id != '' ">
                 school_id,
@@ -93,32 +92,44 @@
             <if test="subject_id != null  and subject_id != '' ">
                 subject_id,
             </if>
-            <if test="price != null  and price != '' ">
-                price,
+            <if test="name != null  and name != '' ">
+                name,
             </if>
-            <if test="status != null  and status != '' ">
-                status,
+            <if test="cardtype != null  and cardtype != '' ">
+                cardtype,
             </if>
-            <if test="time != null  and time != '' ">
-                time,
+            <if test="sex != null  and sex != '' ">
+                sex,
             </if>
-            <if test="subject_name != null  and subject_name != '' ">
-                subject_name,
+            <if test="birdate != null  and birdate != '' ">
+                birdate,
             </if>
-            <if test="pay_time != null  and pay_time != '' ">
-                pay_time,
+            <if test="phone != null  and phone != '' ">
+                phone,
             </if>
-            <if test="pay_method != null  and pay_method != '' ">
-                pay_method,
+            <if test="addr != null  and addr != '' ">
+                addr,
             </if>
-            <if test="confirm_time != null  and confirm_time != '' ">
-                confirm_time,
+            <if test="traintype != null  and traintype != '' ">
+                traintype,
             </if>
-            <if test="refund_time != null  and refund_time != '' ">
-                refund_time,
+            <if test="orgcode != null  and orgcode != '' ">
+                orgcode,
             </if>
-            <if test="cancel_time != null  and cancel_time != '' ">
-                cancel_time,
+            <if test="applydate != null  and applydate != '' ">
+                applydate,
+            </if>
+            <if test="perdritype != null  and perdritype != '' ">
+                perdritype,
+            </if>
+            <if test="drilicnum != null  and drilicnum != '' ">
+                drilicnum,
+            </if>
+            <if test="licencedate != null  and licencedate != '' ">
+                licencedate,
+            </if>
+            <if test="photo != null  and photo != '' ">
+                photo,
             </if>
 
 
@@ -126,14 +137,11 @@
 
         <trim prefix="values(" suffix=")"  suffixOverrides=",">
 
-            <if test="order_sn != null  and order_sn != '' ">
-                #{order_sn},
-            </if>
             <if test="member_id != null  and member_id != '' ">
                 #{member_id},
             </if>
-            <if test="apply_id != null  and apply_id != '' ">
-                #{apply_id},
+            <if test="idcard != null  and idcard != '' ">
+                #{idcard},
             </if>
             <if test="school_id != null  and school_id != '' ">
                 #{school_id},
@@ -141,32 +149,44 @@
             <if test="subject_id != null  and subject_id != '' ">
                 #{subject_id},
             </if>
-            <if test="price != null  and price != '' ">
-                #{price},
+            <if test="name != null  and name != '' ">
+                #{name},
             </if>
-            <if test="status != null  and status != '' ">
-                #{status},
+            <if test="cardtype != null  and cardtype != '' ">
+                #{cardtype},
             </if>
-            <if test="time != null  and time != '' ">
-                #{time},
+            <if test="sex != null  and sex != '' ">
+                #{sex},
             </if>
-            <if test="subject_name != null  and subject_name != '' ">
-                #{subject_name},
+            <if test="birdate != null  and birdate != '' ">
+                #{birdate},
             </if>
-            <if test="pay_time != null  and pay_time != '' ">
-                #{pay_time},
+            <if test="phone != null  and phone != '' ">
+                #{phone},
             </if>
-            <if test="pay_method != null  and pay_method != '' ">
-                #{pay_method},
+            <if test="addr != null  and addr != '' ">
+                #{addr},
             </if>
-            <if test="confirm_time != null  and confirm_time != '' ">
-                #{confirm_time},
+            <if test="traintype != null  and traintype != '' ">
+                #{traintype},
             </if>
-            <if test="refund_time != null  and refund_time != '' ">
-                #{refund_time},
+            <if test="orgcode != null  and orgcode != '' ">
+                #{orgcode},
             </if>
-            <if test="cancel_time != null  and cancel_time != '' ">
-                #{cancel_time},
+            <if test="applydate != null  and applydate != '' ">
+                #{applydate},
+            </if>
+            <if test="perdritype != null  and perdritype != '' ">
+                #{perdritype},
+            </if>
+            <if test="drilicnum != null  and drilicnum != '' ">
+                #{drilicnum},
+            </if>
+            <if test="licencedate != null  and licencedate != '' ">
+                #{licencedate},
+            </if>
+            <if test="photo != null  and photo != '' ">
+                #{photo},
             </if>
 
         </trim>
@@ -174,7 +194,7 @@
 
 
 
-    <update id="updateOrder" parameterType="com.project.model.school.Order">
+    <update id="updateApply" parameterType="com.project.model.school.Apply">
       update sdb_apply_order
         <trim prefix="SET"  suffixOverrides=",">
 
