@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.mapper.admin.OrderMapper">
+
+
+   <select id="getOrderCount" parameterType="com.project.utils.PageData" resultType="java.lang.Integer">
+       select count(1)
+       from
+       sdb_school_teacher a
+       , sdb_school b
+
+       where a.school_id =b.id
+       and a.flag ='1'
+       <if test="school_id !=null  and school_id != '' ">
+           and b.id=#{school_id}
+       </if>
+       <if test="school_name !=null  and school_name != '' ">
+           and b.school_name=#{school_name}
+       </if>
+       <if test="school_code !=null  and school_code != '' ">
+           and b.school_code=#{school_code}
+       </if>
+       <if test="teacher_phone !=null  and teacher_phone != '' ">
+           and a.teacher_phone=#{teacher_phone}
+       </if>
+       <if test="teacher_name !=null  and teacher_name != '' ">
+           and a.teacher_name=#{teacher_name}
+       </if>
+   </select>
+
+    <select id="getOrderList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
+
+      select a.id,a.school_id,b.school_name, a.teacher_name,a.teacher_phone,a.teacher_sex,a.teacher_img,
+      a.orders,
+      date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time from
+        sdb_school_teacher a
+        ,  sdb_school b
+      where a.school_id =b.id
+        and a.flag ='1'
+        <if test="school_id !=null  and school_id != '' ">
+            and b.id=#{school_id}
+        </if>
+        <if test="school_name !=null  and school_name != '' ">
+            and b.school_name=#{school_name}
+        </if>
+        <if test="school_code !=null  and school_code != '' ">
+            and b.school_code=#{school_code}
+        </if>
+        <if test="teacher_phone !=null  and teacher_phone != '' ">
+            and a.teacher_phone=#{teacher_phone}
+        </if>
+        <if test="teacher_name !=null  and teacher_name != '' ">
+            and a.teacher_name=#{teacher_name}
+        </if>
+        order by a.orders
+    limit #{startIndex},#{pageSize}
+
+   </select>
+
+    <select id="getOrderDetail" resultType="com.project.model.school.Order" parameterType="com.project.model.school.Order">
+        select a.*
+         from
+        sdb_apply_order a
+        where 1=1
+
+        <if test="id !=null  and id != '' ">
+            and a.id=#{id}
+        </if>
+        <if test="order_sn !=null  and order_sn != '' ">
+            and a.order_sn=#{order_sn}
+        </if>
+
+        limit 1
+    </select>
+
+    <insert id="saveOrder" parameterType="com.project.model.school.Order">
+
+        insert into sdb_apply_order
+        <trim prefix="(" suffix=")"  suffixOverrides=",">
+
+            <if test="order_sn != null  and order_sn != '' ">
+                order_sn,
+            </if>
+            <if test="member_id != null  and member_id != '' ">
+                member_id,
+            </if>
+            <if test="apply_id != null  and apply_id != '' ">
+                apply_id,
+            </if>
+            <if test="school_id != null  and school_id != '' ">
+                school_id,
+            </if>
+            <if test="subject_id != null  and subject_id != '' ">
+                subject_id,
+            </if>
+            <if test="price != null  and price != '' ">
+                price,
+            </if>
+            <if test="status != null  and status != '' ">
+                status,
+            </if>
+            <if test="time != null  and time != '' ">
+                time,
+            </if>
+            <if test="subject_name != null  and subject_name != '' ">
+                subject_name,
+            </if>
+            <if test="pay_time != null  and pay_time != '' ">
+                pay_time,
+            </if>
+            <if test="pay_method != null  and pay_method != '' ">
+                pay_method,
+            </if>
+            <if test="confirm_time != null  and confirm_time != '' ">
+                confirm_time,
+            </if>
+            <if test="refund_time != null  and refund_time != '' ">
+                refund_time,
+            </if>
+            <if test="cancel_time != null  and cancel_time != '' ">
+                cancel_time,
+            </if>
+
+
+        </trim>
+
+        <trim prefix="values(" suffix=")"  suffixOverrides=",">
+
+            <if test="order_sn != null  and order_sn != '' ">
+                #{order_sn},
+            </if>
+            <if test="member_id != null  and member_id != '' ">
+                #{member_id},
+            </if>
+            <if test="apply_id != null  and apply_id != '' ">
+                #{apply_id},
+            </if>
+            <if test="school_id != null  and school_id != '' ">
+                #{school_id},
+            </if>
+            <if test="subject_id != null  and subject_id != '' ">
+                #{subject_id},
+            </if>
+            <if test="price != null  and price != '' ">
+                #{price},
+            </if>
+            <if test="status != null  and status != '' ">
+                #{status},
+            </if>
+            <if test="time != null  and time != '' ">
+                #{time},
+            </if>
+            <if test="subject_name != null  and subject_name != '' ">
+                #{subject_name},
+            </if>
+            <if test="pay_time != null  and pay_time != '' ">
+                #{pay_time},
+            </if>
+            <if test="pay_method != null  and pay_method != '' ">
+                #{pay_method},
+            </if>
+            <if test="confirm_time != null  and confirm_time != '' ">
+                #{confirm_time},
+            </if>
+            <if test="refund_time != null  and refund_time != '' ">
+                #{refund_time},
+            </if>
+            <if test="cancel_time != null  and cancel_time != '' ">
+                #{cancel_time},
+            </if>
+
+        </trim>
+    </insert>
+
+
+
+    <update id="updateOrder" parameterType="com.project.model.school.Order">
+      update sdb_apply_order
+        <trim prefix="SET"  suffixOverrides=",">
+
+            <if test="status != null  and status != '' ">
+                status=  #{status},
+            </if>
+            <if test="time != null  and time != '' ">
+                time= #{time},
+            </if>
+            <if test="pay_time != null  and pay_time != '' ">
+                pay_time= #{pay_time},
+            </if>
+            <if test="refund_time != null  and refund_time != '' ">
+                refund_time= #{refund_time},
+            </if>
+            <if test="pay_method != null  and pay_method != '' ">
+                pay_method= #{pay_method},
+            </if>
+            <if test="apply_id != null  and apply_id != '' ">
+                apply_id= #{apply_id},
+            </if>
+            <if test="school_id != null  and school_id != '' ">
+                school_id= #{school_id},
+            </if>
+            <if test="subject_id != null  and subject_id != '' ">
+                subject_id= #{subject_id},
+            </if>
+
+        </trim>
+
+      where 1=1
+        <if test="id != null  and id != '' ">
+            and id= #{id}
+        </if>
+        <if test="order_sn != null  and order_sn != '' ">
+            and order_sn= #{order_sn}
+        </if>
+    </update>
+
+
+</mapper>
