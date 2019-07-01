@@ -8,4 +8,6 @@ import com.project.model.school.Apply;
 public interface ApplyMapper {
 
     void saveApply(Apply apply);
+
+    Apply getDeatilApply(Apply apply);
 }

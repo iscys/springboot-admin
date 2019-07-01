@@ -57,19 +57,15 @@
 
    </select>
 
-    <select id="getOrderDetail" resultType="com.project.model.school.Order" parameterType="com.project.model.school.Order">
+    <select id="getDeatilApply" resultType="com.project.model.school.Apply" parameterType="com.project.model.school.Apply">
         select a.*
          from
-        sdb_apply_order a
+        sdb_student_apply a
         where 1=1
 
         <if test="id !=null  and id != '' ">
             and a.id=#{id}
         </if>
-        <if test="order_sn !=null  and order_sn != '' ">
-            and a.order_sn=#{order_sn}
-        </if>
-
         limit 1
     </select>
 
