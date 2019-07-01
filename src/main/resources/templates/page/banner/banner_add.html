@@ -20,7 +20,7 @@
 
 
 
-    <form  class="layui-form" action="/mmark/save" method="post" enctype="multipart/form-data" >
+    <form  class="layui-form" action="/banner/save" method="post" enctype="multipart/form-data" >
 
 
         <div class="layui-form-item">
@@ -30,15 +30,25 @@
                 <input type="radio" name="flag" value="0" title="无效">
             </div>
         </div>
-
-
         <div class="layui-form-item">
-            <label class="layui-form-label">标签</label>
+            <label class="layui-form-label">图片类型</label>
             <div class="layui-input-block">
-                <input type="text" name="mark" id="mark"  placeholder="输入标签" required lay-verify="required"  class="layui-input">
+                <select id ="type" name="type" >
+                    <option value="1">首页轮播</option>
+                    <option value="2">广告位</option>
+
+                </select>
             </div>
         </div>
 
+        <div>
+            <h5>图片上传：</h5>
+            <img  src="" style="height: 300px;width: 640px;">
+            <span  onchange="c(this,'banner')" class="btn btn-success fileinput-button">
+	            <span>上传</span>
+	            <input id="banner" name="banner" type="file">
+	        </span>
+        </div>
 
         <div class="layui-form-item">
             <div class="layui-input-block">
@@ -98,11 +108,15 @@
 
     $("#sub").click(function(){
         var formData = new FormData();
-        var mark=$("#mark").val();
+        var type=$("#type").val();
         var flag=$("input[name='flag']:checked").val();
+        var banner=$("#banner").get(0).files[0];
         var message='';
         if(ASSERT(mark)){
             message='请添加标签'
+        }else if(ASSERT(banner)){
+            message='请选择图片'
+
         }
 
         if(message!=''){
@@ -110,14 +124,16 @@
             return false;
         }
 
-        formData.append("mark",mark);
+        formData.append("type",type);
         formData.append("flag",flag);
+        formData.append("banner",banner);
+
 
         $("#sub").hide();
         $.ajax({
             type: "POST",//方法类型
             dataType: "json",//预期服务器返回的数据类型
-            url: "/mark/save" ,//url
+            url: "/banner/save" ,//url
             data:formData,
             processData: false,//用于对data参数进行序列化处理 这里必须false
             contentType: false, //必须

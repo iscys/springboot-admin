@@ -9,7 +9,7 @@
 			<div class="row-fluid">
 				<br/>
 
-				<form action="/mark/index" method="post" class="form-inline" name="Form" id="Form">
+				<form action="/banner/index" method="post" class="form-inline" name="Form" id="Form">
 					<!-- ---+搜索条件 start+----- -->
 					<span  onclick="addInfo()" class="btn btn-info " style="float: right">配置驾校标签</span>
 
@@ -19,7 +19,7 @@
 						<thead>
 						<tr>
 							<th class='center' style="min-width:3%">No</th>
-							<th class='center' style="min-width: 10%">标签</th>
+							<th class='center' style="min-width: 10%">图片地址</th>
 							<th class='center' style="min-width: 7%">时间</th>
 							<th class='center' style="min-width: 7%">查看编辑</th>
 						</tr>
@@ -27,7 +27,9 @@
 						<tbody th:if="${dataPager.getRecords()!=null}">
 						<tr th:each="record,recordStat:${dataPager.getRecords()}">
 							<td class='center' th:text="${recordStat.index+1}"></td>
-							<td class='center' th:text="${record.mark}"></td>
+							<td class='center'>
+								<img th:src="${record.banner}" style="width: 200px;height: 120px;">
+							</td>
 							<td class='center' th:text="${record.create_time}"></td>
 							<td class='center'>
 								<span  class="btn btn-danger"  th:onclick="updateAndLook([[${record.id}]]);" >编辑查看</span>
@@ -73,7 +75,7 @@
 			area:["100%","100%"],
 			type: 2,
 			closeBtn: 0, //不显示关闭按钮
-			content: '/mark/to_add',
+			content: '/banner/to_add',
 			end:function(){
 				//窗口关闭触发
 				$("#Form").submit();
