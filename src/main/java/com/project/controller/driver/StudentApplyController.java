@@ -47,6 +47,31 @@ public class StudentApplyController {
             return ResultObject.build(Const.MEMBER_ID_NULL,Const.MEMBER_ID_NULL_MESSAGE,null);
         }
 
+        if(StringUtils.isEmpty(apply.getPhone())){
+            return ResultObject.build(Const.PHONE_NULL,Const.PHONE_NULL_MESSAGE,null);
+        }
+
+        if(StringUtils.isEmpty(apply.getAddr())){
+            return ResultObject.build(Const.ADDR_NULL,Const.ADDR_NULL_MESSAGE,null);
+        }
+
+        if(StringUtils.isEmpty(apply.getIdcard())){
+            return ResultObject.build(Const.IDCARD_NULL,Const.IDCARD_NULL_MESSAGE,null);
+        }
+
+        if(StringUtils.isEmpty(apply.getPhoto())){
+            return ResultObject.build(Const.PHOTO_NULL,Const.PHOTO_NULL_MESSAGE,null);
+        }
+
+        if(StringUtils.isEmpty(apply.getTraintype())){
+            return ResultObject.build(Const.TRAINTYPE_NULL,Const.TRAINTYPE_NULL_MESSAGE,null);
+        }
+        if(StringUtils.isEmpty(apply.getOrgcode())){
+            return ResultObject.build(Const.ORGCODE_NULL,Const.ORGCODE_NULL_MESSAGE,null);
+        }
+
+
+
         //String applyUrl = properties.getApplyUrl();
         //String result = HttpUtils.INSTANCE.doPost(applyUrl, GsonUtils.toJson(apply));
 
