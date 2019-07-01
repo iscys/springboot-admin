@@ -81,29 +81,44 @@
             <if test="order_sn != null  and order_sn != '' ">
                 order_sn,
             </if>
-            <if test="teacher_name != null  and teacher_name != '' ">
-                teacher_name,
+            <if test="member_id != null  and member_id != '' ">
+                member_id,
             </if>
-            <if test="teacher_sex != null  and teacher_sex != '' ">
-                teacher_sex,
+            <if test="apply_id != null  and apply_id != '' ">
+                apply_id,
             </if>
-            <if test="teacher_apply != null  and teacher_apply != '' ">
-                teacher_apply,
+            <if test="school_id != null  and school_id != '' ">
+                school_id,
             </if>
-            <if test="teacher_img != null  and teacher_img != '' ">
-                teacher_img,
+            <if test="subject_id != null  and subject_id != '' ">
+                subject_id,
             </if>
-            <if test="teacher_describe != null  and teacher_describe != '' ">
-                teacher_describe,
+            <if test="price != null  and price != '' ">
+                price,
             </if>
-            <if test="teacher_phone != null  and teacher_phone != '' ">
-                teacher_phone,
+            <if test="status != null  and status != '' ">
+                status,
             </if>
-            <if test="orders != null  and orders != '' ">
-                orders,
+            <if test="time != null  and time != '' ">
+                time,
             </if>
-            <if test="flag != null  and flag != '' ">
-                flag,
+            <if test="subject_name != null  and subject_name != '' ">
+                subject_name,
+            </if>
+            <if test="pay_time != null  and pay_time != '' ">
+                pay_time,
+            </if>
+            <if test="pay_method != null  and pay_method != '' ">
+                pay_method,
+            </if>
+            <if test="confirm_time != null  and confirm_time != '' ">
+                confirm_time,
+            </if>
+            <if test="refund_time != null  and refund_time != '' ">
+                refund_time,
+            </if>
+            <if test="cancel_time != null  and cancel_time != '' ">
+                cancel_time,
             </if>
 
 
@@ -111,32 +126,47 @@
 
         <trim prefix="values(" suffix=")"  suffixOverrides=",">
 
+            <if test="order_sn != null  and order_sn != '' ">
+                #{order_sn},
+            </if>
+            <if test="member_id != null  and member_id != '' ">
+                #{member_id},
+            </if>
+            <if test="apply_id != null  and apply_id != '' ">
+                #{apply_id},
+            </if>
             <if test="school_id != null  and school_id != '' ">
                 #{school_id},
             </if>
-            <if test="teacher_name != null  and teacher_name != '' ">
-                #{teacher_name},
+            <if test="subject_id != null  and subject_id != '' ">
+                #{subject_id},
             </if>
-            <if test="teacher_sex != null  and teacher_sex != '' ">
-                #{teacher_sex},
+            <if test="price != null  and price != '' ">
+                #{price},
             </if>
-            <if test="teacher_apply != null  and teacher_apply != '' ">
-                #{teacher_apply},
+            <if test="status != null  and status != '' ">
+                #{status},
             </if>
-            <if test="teacher_img != null  and teacher_img != '' ">
-                #{teacher_img},
+            <if test="time != null  and time != '' ">
+                #{time},
             </if>
-            <if test="teacher_describe != null  and teacher_describe != '' ">
-                #{teacher_describe},
+            <if test="subject_name != null  and subject_name != '' ">
+                #{subject_name},
             </if>
-            <if test="teacher_phone != null  and teacher_phone != '' ">
-                #{teacher_phone},
+            <if test="pay_time != null  and pay_time != '' ">
+                #{pay_time},
             </if>
-            <if test="orders != null  and orders != '' ">
-                #{orders},
+            <if test="pay_method != null  and pay_method != '' ">
+                #{pay_method},
             </if>
-            <if test="flag != null  and flag != '' ">
-                #{flag},
+            <if test="confirm_time != null  and confirm_time != '' ">
+                #{confirm_time},
+            </if>
+            <if test="refund_time != null  and refund_time != '' ">
+                #{refund_time},
+            </if>
+            <if test="cancel_time != null  and cancel_time != '' ">
+                #{cancel_time},
             </if>
 
         </trim>
