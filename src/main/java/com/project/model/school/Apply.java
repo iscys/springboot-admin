@@ -20,4 +20,9 @@ public class Apply {
     private String licencedate;//驾驶证初领日期
     private String photo;//base64
 
+    private String school_id;//驾校ID
+    private String subject_id;//科目ID
+
+
+
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.mapper.driver.OrderErrorMapper">
+
+
+
+    <insert id="saveError" parameterType="com.project.model.school.ErrorModel">
+
+        insert into sdb_order_error_log
+        <trim prefix="(" suffix=")"  suffixOverrides=",">
+
+            <if test="order_sn != null  and order_sn != '' ">
+                order_sn,
+            </if>
+            <if test="error != null  and error != '' ">
+                error,
+            </if>
+            <if test="detail != null  and detail != '' ">
+                detail,
+            </if>
+
+
+        </trim>
+
+        <trim prefix="values(" suffix=")"  suffixOverrides=",">
+
+            <if test="order_sn != null  and order_sn != '' ">
+                #{order_sn},
+            </if>
+            <if test="error != null  and error != '' ">
+                #{error},
+            </if>
+            <if test="detail != null  and detail != '' ">
+                #{detail},
+            </if>
+
+
+        </trim>
+    </insert>
+
+
+
+</mapper>

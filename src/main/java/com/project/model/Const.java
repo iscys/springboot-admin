@@ -11,6 +11,9 @@ public class Const {
 
     public static final String SHOOL_ID_NULL="2001";
     public static final String SHOOL_ID_NULL_MESSAGE="驾校id不能为空";
+    public static final String SUBJECT_ID_NULL="2002";
+    public static final String SUBJECT_ID_NULL_MESSAGE="套餐id不能为空";
+
 
 
 
