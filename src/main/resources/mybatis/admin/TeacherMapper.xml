@@ -7,9 +7,9 @@
        select count(1)
        from
        sdb_school_teacher a
-       LEFT join sdb_school b
-       on a.school_id =b.id
-       where 1=1
+       , sdb_school b
+
+       where a.school_id =b.id
        and a.flag ='1'
        <if test="school_id !=null  and school_id != '' ">
            and b.id=#{school_id}
@@ -34,9 +34,8 @@
       a.orders,
       date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time from
         sdb_school_teacher a
-        left  join  sdb_school b
-        on a.school_id =b.id
-      where 1=1
+        ,  sdb_school b
+      where a.school_id =b.id
         and a.flag ='1'
         <if test="school_id !=null  and school_id != '' ">
             and b.id=#{school_id}

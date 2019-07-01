@@ -6,7 +6,7 @@
    <select id="getSubjectCount" parameterType="com.project.utils.PageData" resultType="java.lang.Integer">
        select count(1)
        from
-       sdb_school_subject a
+       sdb_school_subject a,
        sdb_school b
        where a.school_id =b.id
        and a.flag ='1'

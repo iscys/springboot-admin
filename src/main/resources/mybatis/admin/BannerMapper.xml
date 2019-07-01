@@ -21,7 +21,7 @@
 
    </select>
 
-    <select id="getMarkDetail" resultType="com.project.model.school.Mark" parameterType="com.project.model.school.Mark">
+    <select id="getBannerDetail" resultType="com.project.model.school.Banner" parameterType="com.project.model.school.Banner">
         select a.*
          from
         sdb_banner_image a
@@ -37,7 +37,7 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             select LAST_INSERT_ID()
         </selectKey>
-        insert into sdb_school_mark
+        insert into sdb_banner_image
         <trim prefix="(" suffix=")"  suffixOverrides=",">
 
             <if test="banner != null  and banner != '' ">
