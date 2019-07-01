@@ -7,12 +7,15 @@ import com.project.model.school.ErrorModel;
 import com.project.model.school.Order;
 import com.project.service.driver.OrderErrorService;
 import com.project.service.driver.PayService;
+import com.project.utils.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class PayServiceImpl implements PayService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -39,12 +42,13 @@ public class PayServiceImpl implements PayService {
 
 
 
-
         if(null!=rstOrder){
             String price = rstOrder.getPrice();
             Integer dbFee = BaseWxPayRequest.yuanToFen(price);
             if(dbFee.equals(wxFee)){
-
+            order.setStatus("1");//设置为已经付款并持久化
+                order.setPay_time(DateUtils.getTimeInSecond());
+                orderMapper.updateOrder(order);
 
             }
 
