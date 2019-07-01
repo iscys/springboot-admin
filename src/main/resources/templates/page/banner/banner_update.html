@@ -33,6 +33,13 @@
         </div>
 
         <div class="layui-form-item">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-block">
+                <input type="number" name="orders" id="orders" th:value="${pd.getOrders()}" placeholder="输入图片排序"  class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
             <label class="layui-form-label">图片类型</label>
             <div class="layui-input-block">
                 <select id ="type" name="type" >
@@ -125,6 +132,8 @@
         formData.append("type",type);
         formData.append("flag",flag);
         formData.append("id",$("#id").val());
+        formData.append("orders",$("#orders").val());
+
 
         if(!ASSERT(banner)) {
             formData.append("banner", banner);

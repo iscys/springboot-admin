@@ -30,6 +30,13 @@
                 <input type="radio" name="flag" value="0" title="无效">
             </div>
         </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-block">
+                <input type="number" name="orders" id="orders"  placeholder="输入图片排序"  class="layui-input">
+            </div>
+        </div>
         <div class="layui-form-item">
             <label class="layui-form-label">图片类型</label>
             <div class="layui-input-block">
@@ -127,6 +134,8 @@
         formData.append("type",type);
         formData.append("flag",flag);
         formData.append("banner",banner);
+        formData.append("orders",$("#orders").val());
+
 
 
         $("#sub").hide();
