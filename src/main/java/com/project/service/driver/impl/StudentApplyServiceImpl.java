@@ -36,6 +36,7 @@ public class StudentApplyServiceImpl implements StudentApplyService {
      */
     @Override
     public ResultObject applyAndCreateOrder(Apply apply) throws Exception {
+        apply.setApplydate(DateUtils.stableYYYMMDD());
         logger.info("开始录入学员的信息");
         applyMapper.saveApply(apply);
         logger.info("--正在生成订单信息--");
@@ -52,4 +53,6 @@ public class StudentApplyServiceImpl implements StudentApplyService {
 
         return ResultObject.success(order);
     }
+
+
 }
