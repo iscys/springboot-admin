@@ -22,6 +22,7 @@
 
     <form  class="layui-form" action="/banner/save" method="post" enctype="multipart/form-data" >
 
+        <input type="hidden" name="id" id="id" th:value="${pd.getId()}" >
 
         <div class="layui-form-item">
             <label class="layui-form-label">是否有效</label>
@@ -35,8 +36,8 @@
             <label class="layui-form-label">图片类型</label>
             <div class="layui-input-block">
                 <select id ="type" name="type" >
-                    <option value="1" th:selected="${pd.getType().equals('1')}">首页轮播</option>
-                    <option value="2" th:selected="${pd.getType().equals('2')}">广告位</option>
+                    <option value="0" th:selected="${pd.getType().equals('0')}">首页轮播</option>
+                    <option value="1" th:selected="${pd.getType().equals('1')}">广告位</option>
 
                 </select>
             </div>
@@ -123,6 +124,8 @@
 
         formData.append("type",type);
         formData.append("flag",flag);
+        formData.append("id",$("#id").val());
+
         if(!ASSERT(banner)) {
             formData.append("banner", banner);
         }

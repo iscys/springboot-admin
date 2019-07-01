@@ -20,6 +20,7 @@
 						<tr>
 							<th class='center' style="min-width:3%">No</th>
 							<th class='center' style="min-width: 10%">图片地址</th>
+							<th class='center' style="min-width: 10%">图片类型</th>
 							<th class='center' style="min-width: 7%">时间</th>
 							<th class='center' style="min-width: 7%">查看编辑</th>
 						</tr>
@@ -30,6 +31,17 @@
 							<td class='center'>
 								<img th:src="${record.banner}" style="width: 200px;height: 120px;">
 							</td>
+							<div th:switch="${record.type}">
+								<div th:case="'0'">
+									<td class='center'> 轮播图</td>
+
+								</div>
+								<div th:case="'1'">
+									<td class='center'> 广告位</td>
+
+								</div>
+							</div>
+
 							<td class='center' th:text="${record.create_time}"></td>
 							<td class='center'>
 								<span  class="btn btn-danger"  th:onclick="updateAndLook([[${record.id}]]);" >编辑查看</span>
