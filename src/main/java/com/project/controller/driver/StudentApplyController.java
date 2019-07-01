@@ -35,6 +35,10 @@ public class StudentApplyController {
         String subject_id = apply.getSubject_id();
         String member_id = apply.getMember_id();
 
+        if(StringUtils.isEmpty(apply.getCardtype())){
+            return ResultObject.build(Const.CARDTYPE_NULL,Const.CARDTYPE_NULL_MESSAGE,null);
+        }
+
         if(StringUtils.isEmpty(school_id)){
             return ResultObject.build(Const.SHOOL_ID_NULL,Const.SHOOL_ID_NULL_MESSAGE,null);
         }
@@ -65,6 +69,9 @@ public class StudentApplyController {
 
         if(StringUtils.isEmpty(apply.getTraintype())){
             return ResultObject.build(Const.TRAINTYPE_NULL,Const.TRAINTYPE_NULL_MESSAGE,null);
+        }
+        if(StringUtils.isEmpty(apply.getOrgcode())){
+            return ResultObject.build(Const.ORGCODE_NULL,Const.ORGCODE_NULL_MESSAGE,null);
         }
         if(StringUtils.isEmpty(apply.getOrgcode())){
             return ResultObject.build(Const.ORGCODE_NULL,Const.ORGCODE_NULL_MESSAGE,null);
