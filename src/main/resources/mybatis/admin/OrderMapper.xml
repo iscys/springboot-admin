@@ -4,56 +4,69 @@
 
 
    <select id="getOrderCount" parameterType="com.project.utils.PageData" resultType="java.lang.Integer">
-       select count(1)
-       from
-       sdb_school_teacher a
-       , sdb_school b
-
-       where a.school_id =b.id
-       and a.flag ='1'
+       select
+       count(1)
+       from sdb_apply_order o
+       left join sdb_student_apply s on o.apply_id=s.id
+       left join sdb_school ol on o.school_id=ol.id
+       left join sdb_school_subject su on o.subject_id=su.id
+       where 1=1
+       <if test="phone !=null  and phone != '' ">
+           and s.phone=#{phone}
+       </if>
        <if test="school_id !=null  and school_id != '' ">
-           and b.id=#{school_id}
+           and o.school_id=#{school_id}
        </if>
-       <if test="school_name !=null  and school_name != '' ">
-           and b.school_name=#{school_name}
+       <if test="idcard !=null  and idcard != '' ">
+           and s.idcard=#{idcard}
        </if>
-       <if test="school_code !=null  and school_code != '' ">
-           and b.school_code=#{school_code}
+       <if test="name !=null  and name != '' ">
+           and s.name=#{name}
        </if>
-       <if test="teacher_phone !=null  and teacher_phone != '' ">
-           and a.teacher_phone=#{teacher_phone}
+       <if test="status !=null  and status != '' ">
+           and o.status=#{status}
        </if>
-       <if test="teacher_name !=null  and teacher_name != '' ">
-           and a.teacher_name=#{teacher_name}
+       <if test="order_sn !=null  and order_sn != '' ">
+           and o.order_sn=#{order_sn}
+       </if>
+       <if test="subject !=null  and subject != '' ">
+           and su.subject=#{subject}
        </if>
    </select>
 
     <select id="getOrderList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
 
-      select a.id,a.school_id,b.school_name, a.teacher_name,a.teacher_phone,a.teacher_sex,a.teacher_img,
-      a.orders,
-      date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time from
-        sdb_school_teacher a
-        ,  sdb_school b
-      where a.school_id =b.id
-        and a.flag ='1'
+   select o.member_id,
+    o.order_sn,o.price,o.status,s.`name`,s.phone,s.idcard,
+
+    ol.school_name,su.`subject`,su.subject_name,su.subject
+
+    from sdb_apply_order o
+    left join sdb_student_apply s on o.apply_id=s.id
+    left join sdb_school ol on o.school_id=ol.id
+    left join sdb_school_subject su on o.subject_id=su.id
+    where 1=1
+        <if test="phone !=null  and phone != '' ">
+            and s.phone=#{phone}
+        </if>
         <if test="school_id !=null  and school_id != '' ">
-            and b.id=#{school_id}
+            and o.school_id=#{school_id}
         </if>
-        <if test="school_name !=null  and school_name != '' ">
-            and b.school_name=#{school_name}
+        <if test="idcard !=null  and idcard != '' ">
+            and s.idcard=#{idcard}
         </if>
-        <if test="school_code !=null  and school_code != '' ">
-            and b.school_code=#{school_code}
+        <if test="name !=null  and name != '' ">
+            and s.name=#{name}
         </if>
-        <if test="teacher_phone !=null  and teacher_phone != '' ">
-            and a.teacher_phone=#{teacher_phone}
+        <if test="status !=null  and status != '' ">
+            and o.status=#{status}
         </if>
-        <if test="teacher_name !=null  and teacher_name != '' ">
-            and a.teacher_name=#{teacher_name}
+        <if test="order_sn !=null  and order_sn != '' ">
+            and o.order_sn=#{order_sn}
         </if>
-        order by a.orders
-    limit #{startIndex},#{pageSize}
+        <if test="subject !=null  and subject != '' ">
+            and su.subject=#{subject}
+        </if>
 
    </select>
 
