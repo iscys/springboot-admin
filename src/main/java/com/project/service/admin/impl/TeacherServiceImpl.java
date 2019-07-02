@@ -84,8 +84,8 @@ public class TeacherServiceImpl implements TeacherService {
 
             FileOutputStream iconOutputStream =new FileOutputStream(icon_dirs+icon_uuid+"."+icon_suffix);
             IOUtils.copy(icon,iconOutputStream);
-            icon.close();
-            iconOutputStream.close();
+
+            IOUtils.closeQuietly(icon,iconOutputStream);
             pd.put("teacher_img",properties.getImgUrl()+icon_dir+icon_uuid+"."+icon_suffix);
         }
         if(null==pd.get("id")) {
