@@ -58,10 +58,11 @@
    </select>
 
     <select id="getTeacherDetail" resultType="com.project.model.school.Teacher" parameterType="com.project.model.school.Teacher">
-        select a.*
+        select a.*,b.school_name
          from
-        sdb_school_teacher a
-        where 1=1
+        sdb_school_teacher a,
+        sdb_school b
+        where a.school_id =b.id
         and a.flag ='1'
         <if test="id !=null  and id != '' ">
             and a.id=#{id}

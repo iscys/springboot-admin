@@ -55,7 +55,8 @@ public class Const {
     public static final String ORGCODE_NULL="2004";
     public static final String ORGCODE_NULL_MESSAGE="驾校编码不能为空";
 
-
+    public static final String TEACHER_ID_NULL="2005";
+    public static final String TEACHER_ID_NULL_MESSAGE="教练id不能为空";
 
 
     public static final String ORDER_NULL="3001";

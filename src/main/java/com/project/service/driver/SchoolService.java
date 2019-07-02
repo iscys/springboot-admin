@@ -3,6 +3,7 @@ package com.project.service.driver;
 
 import com.project.model.ResultObject;
 import com.project.model.school.SchoolModel;
+import com.project.model.school.Teacher;
 import com.project.utils.PageData;
 
 public interface SchoolService {
@@ -19,4 +20,6 @@ public interface SchoolService {
     ResultObject subjectList(PageData pd) throws Exception;
 
     ResultObject teacherList(PageData pd) throws Exception;
+
+    ResultObject getTeacherDetail(Teacher teacher) throws Exception;
 }

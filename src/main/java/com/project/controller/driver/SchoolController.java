@@ -5,6 +5,7 @@ import com.project.model.Const;
 import com.project.model.ResultObject;
 import com.project.model.school.SchoolModel;
 import com.project.model.school.Subject;
+import com.project.model.school.Teacher;
 import com.project.service.driver.SchoolService;
 import com.project.utils.PageData;
 import org.apache.commons.lang3.StringUtils;
@@ -113,7 +114,7 @@ public class SchoolController extends BaseController {
 
 
     /**
-     * 教练接口
+     * 教练列表接口
      */
 
     @PostMapping("/teacher")
@@ -129,7 +130,23 @@ public class SchoolController extends BaseController {
         }
 
     }
+    /**
+     * 教练详情
+     */
+    @PostMapping("/teacherInfo")
+    public ResultObject schoolDetail(Teacher teacher) {
 
+        String id = teacher.getId();
+        if (StringUtils.isEmpty(id)) {
+            return ResultObject.build(Const.TEACHER_ID_NULL, Const.TEACHER_ID_NULL_MESSAGE, null);
+        }
+        try {
+            ResultObject result = schoolService.getTeacherDetail(teacher);
+            return result;
+        } catch (Exception e) {
+            return ResultObject.error(null);
+        }
+    }
 
 
 

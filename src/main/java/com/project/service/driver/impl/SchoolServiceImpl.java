@@ -7,10 +7,7 @@ import com.project.mapper.admin.SubjectMapper;
 import com.project.mapper.admin.TeacherMapper;
 import com.project.model.Const;
 import com.project.model.ResultObject;
-import com.project.model.school.Album;
-import com.project.model.school.Banner;
-import com.project.model.school.Mark;
-import com.project.model.school.SchoolModel;
+import com.project.model.school.*;
 import com.project.service.admin.MarkService;
 import com.project.service.driver.SchoolService;
 import com.project.utils.Page;
@@ -193,5 +190,12 @@ public class SchoolServiceImpl implements SchoolService {
         res.put("teacher_list",lists);
 
         return ResultObject.success(res);
+    }
+
+    @Override
+    public ResultObject getTeacherDetail(Teacher teacher) throws Exception {
+
+        Teacher te =teacherMapper.getTeacherDetail(teacher);
+        return ResultObject.success(te);
     }
 }
