@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.mapper.driver.UserMapper">
+
+    <select id="getUserInfo" parameterType="com.project.model.school.User" resultType="com.project.model.school.User">
+
+        select * from
+        sdb_user
+        where 1=1
+        <if test="phone !=null  and phone != '' ">
+            and phone=#{phone}
+        </if>
+        <if test="openid !=null  and openid != '' ">
+            and openid=#{openid}
+        </if>
+        <if test="unionid !=null  and unionid != '' ">
+            and unionid=#{unionid}
+        </if>
+        <if test="invite_code !=null  and invite_code != '' ">
+            and invite_code=#{invite_code}
+        </if>
+        <if test="password !=null  and password != '' ">
+            and password=#{password}
+        </if>
+        <if test="member_id !=null  and member_id != '' ">
+            and member_id=#{member_id}
+        </if>
+        limit 1
+    </select>
+
+
+    <insert id="saveNewUser" parameterType="com.project.model.school.User">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert  into
+        sdb_user
+        <trim prefix="(" suffix=")"  suffixOverrides=",">
+
+            <if test="member_id != null  and member_id != '' ">
+                member_id,
+            </if>
+            <if test="openid != null  and openid != '' ">
+                openid,
+            </if>
+            <if test="unionid != null  and unionid != '' ">
+                unionid,
+            </if>
+            <if test="nickname != null  and nickname != '' ">
+                nickname,
+            </if>
+            <if test="headimgurl != null  and headimgurl != '' ">
+                headimgurl,
+            </if>
+            <if test="sex != null  and sex != '' ">
+                sex,
+            </if>
+            <if test="invite_code != null  and invite_code != '' ">
+                invite_code,
+            </if>
+            <if test="origin != null  and origin != '' ">
+                origin,
+            </if>
+            <if test="master != null  and master != '' ">
+                master,
+            </if>
+            <if test="phone != null  and phone != '' ">
+                phone,
+            </if>
+            <if test="password != null  and password != '' ">
+                password,
+            </if>
+            <if test="time != null  and time != '' ">
+                time,
+            </if>
+            <if test="last_ip != null  and last_ip != '' ">
+                last_ip,
+            </if>
+            <if test="last_login != null  and last_login != '' ">
+                last_login,
+            </if>
+        </trim>
+
+        <trim prefix="values(" suffix=")"  suffixOverrides=",">
+
+            <if test="member_id != null  and member_id != '' ">
+                #{member_id},
+            </if>
+            <if test="openid != null  and openid != '' ">
+                #{openid},
+            </if>
+            <if test="unionid != null  and unionid != '' ">
+                #{unionid},
+            </if>
+            <if test="nickname != null  and nickname != '' ">
+                #{nickname},
+            </if>
+            <if test="headimgurl != null  and headimgurl != '' ">
+                #{headimgurl},
+            </if>
+            <if test="sex != null  and sex != '' ">
+                #{sex},
+            </if>
+            <if test="invite_code != null  and invite_code != '' ">
+                #{invite_code},
+            </if>
+            <if test="origin != null  and origin != '' ">
+                #{origin},
+            </if>
+            <if test="master != null  and master != '' ">
+                #{master},
+            </if>
+            <if test="phone != null  and phone != '' ">
+                #{phone},
+            </if>
+            <if test="password != null  and password != '' ">
+                #{password},
+            </if>
+            <if test="time != null  and time != '' ">
+                #{time},
+            </if>
+            <if test="last_ip != null  and last_ip != '' ">
+                #{last_ip},
+            </if>
+            <if test="last_login != null  and last_login != '' ">
+                #{last_login},
+            </if>
+
+        </trim>
+
+
+    </insert>
+
+
+
+
+    <update id="modifyUser" parameterType="com.project.model.school.User">
+        update
+        sdb_user
+        <trim prefix="SET"  suffixOverrides=",">
+
+            <if test="password != null  and password != '' ">
+                password=  #{password},
+            </if>
+            <if test="nickname != null  and nickname != '' ">
+                nickname= #{nickname},
+            </if>
+            <if test="headimgurl != null  and headimgurl != '' ">
+                headimgurl= #{headimgurl},
+            </if>
+            <if test="sex != null  and sex != '' ">
+                sex= #{sex},
+            </if>
+            <if test="username != null  and username != '' ">
+                username= #{username},
+            </if>
+            <if test="last_ip != null  and last_ip != '' ">
+                last_ip= #{last_ip},
+            </if>
+            <if test="last_login != null  and last_login != '' ">
+                last_login= #{last_login},
+            </if>
+        </trim>
+        where 1=1
+        <if test="member_id != null  and member_id != '' ">
+            and member_id=#{member_id}
+        </if>
+        <if test="phone != null  and phone != '' ">
+            and phone=#{phone}
+        </if>
+    </update>
+
+
+    <select id="getUserInfoAndVipInfo" parameterType="com.tuibei.model.user.User" resultType="com.tuibei.model.user.User">
+
+        select FROM_UNIXTIME(v.vip_expire_time,'%Y/%m/%d %H:%i') as vip_expire_time,
+        u.member_id,u.phone,u.time,u.openid,u.unionid,u.master,u.invite_code,u.nickname,
+        u.headimgurl,u.origin,u.invite_code_url,v.level_id,v.account,v.use_free
+        from
+        sdb_tuibei_user  u
+        left join sdb_tuibei_user_vip v
+        on u.member_id =v.member_id
+        where 1=1
+        <if test="member_id !=null and member_id !='' ">
+            and u.member_id=#{member_id}
+        </if>
+        <if test="phone !=null and phone !='' ">
+            and u.phone=#{phone}
+        </if>
+    </select>
+
+</mapper>

@@ -5,17 +5,24 @@ import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.project.controller.BaseController;
+import com.project.model.Const;
+import com.project.model.ResultObject;
 import com.project.model.school.ErrorModel;
+import com.project.model.school.Order;
 import com.project.service.driver.OrderErrorService;
 import com.project.service.driver.PayService;
 import com.project.utils.DateUtils;
+import com.project.utils.ToolsUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/pay")
@@ -28,6 +35,27 @@ public class PayController extends BaseController {
     OrderErrorService error;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
+
+    @PostMapping("/pay")
+    public ResultObject pay(Order order, HttpServletRequest request) throws Exception{
+
+        if(StringUtils.isEmpty(order.getOrder_sn())){
+            return ResultObject.build(Const.ORDER_NULL,Const.ORDER_NULL_MESSAGE,null);
+        }
+
+        String clientIp = ToolsUtils.getClientIp(request);
+        order.setClientIp(clientIp);
+        try {
+            ResultObject result = payService.createPay(order);
+            return result;
+        }catch (Exception e){
+            logger.error("微信支付异常：{}",e.getMessage());
+            return ResultObject.error(null);
+        }
+
+
+    }
 
 
     @PostMapping("/notify")

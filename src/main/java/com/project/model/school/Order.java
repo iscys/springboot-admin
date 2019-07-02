@@ -1,5 +1,6 @@
 package com.project.model.school;
 
+import com.project.utils.GsonUtils;
 import lombok.Data;
 
 @Data
@@ -23,9 +24,11 @@ public class Order {
             private String pay_method;
             private String origin;
             private String openid;
+            private String clientIp;
 
 
-
-
-
+    @Override
+    public String toString() {
+        return GsonUtils.toJson(this);
+    }
 }

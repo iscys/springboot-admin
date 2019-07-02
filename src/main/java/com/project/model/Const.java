@@ -23,6 +23,8 @@ public class Const {
     public static final String CARDTYPE_NULL_MESSAGE="ID 类型不能为空";
     public static final String BIRDATE_NULL="1007";
     public static final String BIRDATE_NULL_MESSAGE="出生年月日不能为空";
+    public static final String MEMBER_NULL="1008";
+    public static final String MEMBER_NULL_MESSAGE="无此用户";
 
 
     public static final String SHOOL_ID_NULL="2001";
@@ -33,6 +35,22 @@ public class Const {
     public static final String TRAINTYPE_NULL_MESSAGE="报名类型不能为空";
     public static final String ORGCODE_NULL="2004";
     public static final String ORGCODE_NULL_MESSAGE="驾校编码不能为空";
+
+
+
+
+    public static final String ORDER_NULL="3001";
+    public static final String ORDER_NULL_MESSAGE="订单不能为空";
+    public static final String ORDERINFO_NULL="3002";
+    public static final String ORDERINFO_NULL_MESSAGE="无此订单";
+
+    public static final String ORDER_STATUS_ERROR="3003";
+    public static final String ORDER_STATUS_ERROR_MESSAGE="订单状态错误";
+
+
+
+    public static final String WX_PAY_EXCEPTION="4001";
+    public static final String WX_PAY_EXCEPTION_MESSAGE="微信统一下单失败";
 
 
 

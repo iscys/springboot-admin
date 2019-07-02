@@ -3,14 +3,17 @@ package com.project.service.driver.impl;
 import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
 import com.github.binarywang.wxpay.bean.request.BaseWxPayRequest;
 import com.github.binarywang.wxpay.bean.request.WxPayRefundRequest;
+import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
+import com.github.binarywang.wxpay.constant.WxPayConstants;
+import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.project.config.ConfigProperties;
 import com.project.mapper.admin.ApplyMapper;
 import com.project.mapper.admin.OrderMapper;
-import com.project.model.school.Apply;
-import com.project.model.school.ErrorModel;
-import com.project.model.school.Order;
-import com.project.model.school.ThirdResult;
+import com.project.mapper.driver.UserMapper;
+import com.project.model.Const;
+import com.project.model.ResultObject;
+import com.project.model.school.*;
 import com.project.service.driver.OrderErrorService;
 import com.project.service.driver.PayService;
 import com.project.utils.DateUtils;
@@ -43,6 +46,72 @@ public class PayServiceImpl implements PayService {
     private WxPayService wxPayService;
     @Autowired
     private OrderErrorService errorService;
+    @Autowired
+    private UserMapper userMapper;
+
+
+
+    @Override
+    public ResultObject createPay(Order order) throws Exception {
+        Order orderInfo = orderMapper.getOrderDetil(order);
+        String member_id = orderInfo.getMember_id();
+
+        if(orderInfo==null){
+            return ResultObject.build(Const.ORDERINFO_NULL, Const.ORDERINFO_NULL_MESSAGE,null);
+        }
+        String order_sn = orderInfo.getOrder_sn();
+        if(!orderInfo.getStatus().equals("0")){
+            logger.warn("订单：{} 状态错误，无法进行微信平台下单");
+
+            try {
+                ErrorModel model = new ErrorModel(order_sn, "订单状态错误", orderInfo.toString());
+                errorService.saveErrorLog(model);
+            }catch (Exception e){}
+
+            return ResultObject.build(Const.ORDER_STATUS_ERROR,Const.ORDER_STATUS_ERROR_MESSAGE,null);
+
+
+        }
+        User user =new User();
+        user.setMember_id(member_id);
+        User userInfo = userMapper.getUserInfo(user);
+        if(null==userInfo){
+            return ResultObject.build(Const.MEMBER_NULL,Const.MEMBER_NULL_MESSAGE,null);
+        }
+        user=null;
+        String openid =userInfo.getOpenid();
+        logger.info("订单：{} 开始组装微信支付信息",order_sn);
+
+        WxPayUnifiedOrderRequest payOrder =new WxPayUnifiedOrderRequest();
+        payOrder.setSpbillCreateIp(order.getClientIp());
+
+        payOrder.setTradeType(WxPayConstants.TradeType.JSAPI);//小程序公众号支付
+
+        payOrder.setOutTradeNo(order.getOrder_sn());
+        payOrder.setOpenid(openid);
+        payOrder.setNotifyUrl(properties.getDomain()+"/api/pay/notify");
+
+        payOrder.setBody("驾校报名");
+
+        payOrder.setAttach("驾校报名");
+        payOrder.setTotalFee(BaseWxPayRequest.yuanToFen(orderInfo.getPrice()));
+        Object wxPackage = null;
+        try {
+            wxPackage = wxPayService.createOrder(payOrder);
+        } catch (WxPayException e) {
+            logger.error("时间：{} ,订单号：{}微信统一下单失败,reason:{}", DateUtils.stableTime(),order_sn,e.getMessage());
+            return ResultObject.build(Const.WX_PAY_EXCEPTION,Const.WX_PAY_EXCEPTION_MESSAGE,e.getMessage());
+        }
+
+        return ResultObject.success(wxPackage);
+    }
+
+
+
+
+
+
+
     /**
      * 微信支付回调通知
      * @param notifyResult
@@ -156,4 +225,6 @@ public class PayServiceImpl implements PayService {
         }
 
     }
+
+
 }
