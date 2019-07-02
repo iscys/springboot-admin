@@ -3,6 +3,8 @@ package com.project.service.driver.impl;
 
 import com.project.mapper.admin.BannerMapper;
 import com.project.mapper.admin.DriverHomeMapper;
+import com.project.mapper.admin.SubjectMapper;
+import com.project.mapper.admin.TeacherMapper;
 import com.project.model.Const;
 import com.project.model.ResultObject;
 import com.project.model.school.Album;
@@ -36,6 +38,10 @@ public class SchoolServiceImpl implements SchoolService {
     private MarkService markService;
     @Autowired
     private BannerMapper bannerMapper;
+    @Autowired
+    private SubjectMapper subjectMapper;
+    @Autowired
+    private TeacherMapper teacherMapper;
 
     /**
      * 查看驾校具体信息
@@ -119,6 +125,72 @@ public class SchoolServiceImpl implements SchoolService {
         res.put("pageNum",page.getPageNum());//c传过来到页数
         res.put("totalPage",page.getTotalPage());//总页数
         res.put("school_list",lists);
+
+        return ResultObject.success(res);
+    }
+
+    /**
+     * 驾校套餐列表
+     * @param pd
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public ResultObject subjectList(PageData pd) throws Exception {
+        String school_id = pd.getString("school_id");
+        if(StringUtils.isEmpty(school_id)){
+            return ResultObject.build(Const.SHOOL_ID_NULL,Const.SHOOL_ID_NULL_MESSAGE,null);
+        }
+
+        String pageNum = pd.getString("pageNum");
+        if(StringUtils.isEmpty(pageNum)||pageNum.equals("0")){
+            pageNum ="1";
+            pd.put("pageNum",pageNum);
+        }
+
+        int pageSize = Const.DEFAULT_PAGESIZE;
+        int total =subjectMapper.getSubjectCount(pd);
+
+        Page page =new Page(Integer.valueOf(pageNum),total,pageSize);
+        int startIndex = page.getStartIndex();
+        int pageSize1 = page.getPageSize();
+        pd.put("startIndex",startIndex);
+        pd.put("pageSize",pageSize1);
+        List<HashMap<String,String>> lists =subjectMapper.getSubjectList(pd);
+        HashMap<String,Object> res =new HashMap<String,Object>();
+        res.put("pageNum",page.getPageNum());//c传过来到页数
+        res.put("totalPage",page.getTotalPage());//总页数
+        res.put("subject_list",lists);
+
+        return ResultObject.success(res);
+    }
+
+    @Override
+    public ResultObject teacherList(PageData pd) throws Exception {
+        String school_id = pd.getString("school_id");
+        if(StringUtils.isEmpty(school_id)){
+            return ResultObject.build(Const.SHOOL_ID_NULL,Const.SHOOL_ID_NULL_MESSAGE,null);
+        }
+
+        String pageNum = pd.getString("pageNum");
+        if(StringUtils.isEmpty(pageNum)||pageNum.equals("0")){
+            pageNum ="1";
+            pd.put("pageNum",pageNum);
+        }
+
+        int pageSize = Const.DEFAULT_PAGESIZE;
+        int total =teacherMapper.getTeacherCount(pd);
+
+        Page page =new Page(Integer.valueOf(pageNum),total,pageSize);
+        int startIndex = page.getStartIndex();
+        int pageSize1 = page.getPageSize();
+        pd.put("startIndex",startIndex);
+        pd.put("pageSize",pageSize1);
+        List<HashMap<String,String>> lists =teacherMapper.getTeacherList(pd);
+        HashMap<String,Object> res =new HashMap<String,Object>();
+        res.put("pageNum",page.getPageNum());//c传过来到页数
+        res.put("totalPage",page.getTotalPage());//总页数
+        res.put("teacher_list",lists);
 
         return ResultObject.success(res);
     }

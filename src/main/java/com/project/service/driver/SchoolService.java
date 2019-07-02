@@ -15,4 +15,8 @@ public interface SchoolService {
     ResultObject index(PageData pd)throws Exception;
 
     ResultObject driverList(PageData pd)throws Exception;
+
+    ResultObject subjectList(PageData pd) throws Exception;
+
+    ResultObject teacherList(PageData pd) throws Exception;
 }
