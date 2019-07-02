@@ -48,6 +48,8 @@ public class StudentApplyServiceImpl implements StudentApplyService {
         order.setTime(DateUtils.getTimeInSecond());//录入时间
         order.setSchool_id(apply.getSchool_id());//驾校ID
         order.setSubject_id(apply.getSubject_id());//套餐ID
+        order.setPrice(apply.getPrice());//套餐ID
+
         orderMapper.saveOrder(order);
 
 
