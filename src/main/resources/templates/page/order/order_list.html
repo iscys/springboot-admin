@@ -70,23 +70,7 @@
 							<td class='center' th:text="${record.name}"></td>
 							<td class='center' th:text="${record.phone}"></td>
 
-							<div th:switch="${record.status}">
-								<div th:case="'0'">
-									<td class='center'>未付款</td>
-
-								</div>
-								<div th:case="'1'">
-									<td class='center'> 已付款</td>
-
-								</div>
-								<div th:case="'6'">
-									<td class='center'> 已退款</td>
-
-								</div>
-							</div>
-
-
-
+							<td class='center' th:text="${record.status}"></td>
 							<td class='center' th:text="${record.school_name}"></td>
 							<td class='center' th:text="${record.subject}"></td>
 							<td class='center' th:text="${record.subject_name}"></td>
