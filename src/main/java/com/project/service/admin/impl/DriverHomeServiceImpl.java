@@ -74,8 +74,7 @@ public class DriverHomeServiceImpl implements DriverHomeService {
 
         FileOutputStream iconOutputStream =new FileOutputStream(icon_dirs+icon_uuid+"."+icon_suffix);
         IOUtils.copy(icon,iconOutputStream);
-        icon.close();
-        iconOutputStream.close();
+        IOUtils.closeQuietly(icon,iconOutputStream);
         pd.put("school_icon",properties.getImgUrl()+icon_dir+icon_uuid+"."+icon_suffix);
         }
 
@@ -94,8 +93,9 @@ public class DriverHomeServiceImpl implements DriverHomeService {
             String face_suffix = ToolsUtils.getFileSuffix(school_face.getResource().getFilename());
             FileOutputStream faceOutputStream = new FileOutputStream(destDir + face_uuid + "." + face_suffix);
             IOUtils.copy(face, faceOutputStream);
-            face.close();
-            faceOutputStream.close();
+
+            IOUtils.closeQuietly(face,faceOutputStream);
+
             pd.put("school_face", properties.getImgUrl() + face_dir + face_uuid + "." + face_suffix);
         }
         if(null==pd.get("id")) {
@@ -128,8 +128,8 @@ public class DriverHomeServiceImpl implements DriverHomeService {
             String album_uuid=ToolsUtils.idGenerate();
             FileOutputStream albumOutputStream =new FileOutputStream(albums+album_uuid+"."+album_suffix);
             IOUtils.copy(album_input,albumOutputStream);
-            album_input.close();
-            albumOutputStream.close();
+
+            IOUtils.closeQuietly(album_input,albumOutputStream);
             album.setImg_url(properties.getImgUrl()+album_dir+album_uuid+"."+album_suffix);
             homeMapper.saveSchoolAlbum(album);
 

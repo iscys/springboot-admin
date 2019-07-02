@@ -21,6 +21,8 @@ public class Const {
     public static final String ADDR_NULL_MESSAGE="地址不能为空";
     public static final String CARDTYPE_NULL="1006";
     public static final String CARDTYPE_NULL_MESSAGE="ID 类型不能为空";
+    public static final String BIRDATE_NULL="1007";
+    public static final String BIRDATE_NULL_MESSAGE="出生年月日不能为空";
 
 
     public static final String SHOOL_ID_NULL="2001";

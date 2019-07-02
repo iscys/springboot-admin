@@ -34,6 +34,10 @@ public class DateUtils {
         String result = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         return result;
     }
+    public static String stableYYYMMDD(){
+        String result = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        return result;
+    }
 
     /**
      * 标准时间月YYYY-MM

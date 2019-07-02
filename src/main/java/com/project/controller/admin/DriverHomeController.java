@@ -144,14 +144,9 @@ public class DriverHomeController extends BaseController {
                 map.put("message", "图片上传异常");
                 return GsonUtils.toJson(map);
             }finally {
-                try {
-                    if (kind != null)
-                        kind.close();
-                    if (kindOutputStream != null)
-                        kindOutputStream.close();
-                }catch (Exception e){
-                    logger.error("流关闭异常");
-                }
+
+                IOUtils.closeQuietly(kind);
+                IOUtils.closeQuietly(kindOutputStream);
             }
 
     }
