@@ -55,9 +55,10 @@
 						   class="table ">
 						<thead>
 						<tr>
-							<th class='center' style="min-width:3%">No</th>
+							<th class='center' style="min-width:3%">订单号</th>
 							<th class='center' style="min-width: 10%">姓名</th>
 							<th class='center' style="min-width: 7%">手机</th>
+							<th class='center' style="min-width: 7%">订单状态</th>
 							<th class='center' style="min-width: 7%">报考驾校</th>
 							<th class='center' style="min-width: 7%">驾照类型</th>
 							<th class='center' style="min-width: 7%">驾照套餐</th>
@@ -65,9 +66,27 @@
 						</thead>
 						<tbody th:if="${dataPager.getRecords()!=null}">
 						<tr th:each="record,recordStat:${dataPager.getRecords()}">
-							<td class='center' th:text="${recordStat.index+1}"></td>
+							<td class='center' th:text="${record.order_sn}"></td>
 							<td class='center' th:text="${record.name}"></td>
 							<td class='center' th:text="${record.phone}"></td>
+
+							<div th:switch="${record.status}">
+								<div th:case="'0'">
+									<td class='center'>未付款</td>
+
+								</div>
+								<div th:case="'1'">
+									<td class='center'> 已付款</td>
+
+								</div>
+								<div th:case="'6'">
+									<td class='center'> 已退款</td>
+
+								</div>
+							</div>
+
+
+
 							<td class='center' th:text="${record.school_name}"></td>
 							<td class='center' th:text="${record.subject}"></td>
 							<td class='center' th:text="${record.subject_name}"></td>
