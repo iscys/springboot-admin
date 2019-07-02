@@ -76,8 +76,9 @@
 							<td class='center' th:text="${record.order_sn}"></td>
 							<td class='center' th:text="${record.name}"></td>
 							<td class='center' th:text="${record.phone}"></td>
-
-							<td class='center' th:text="${record.status}"></td>
+							<td th:if="${record.status eq '未付款'}" class='center' th:text="${record.status}"></td>
+							<td th:if="${record.status eq '已付款'}" class='center' th:text="${record.status}" style="color: #00FF00"></td>
+							<td class='center' th:if="${record.status eq '已退款'}" th:text="${record.status}" style="color: red"></td>
 							<td class='center' th:text="${record.school_name}"></td>
 							<td class='center' th:text="${record.subject}"></td>
 							<td class='center' th:text="${record.subject_name}"></td>
