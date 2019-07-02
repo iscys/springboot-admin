@@ -1,0 +1,8 @@
+package com.project.service.driver;
+
+import com.project.model.ResultObject;
+import com.project.model.school.User;
+
+public interface UserService {
+    ResultObject toLogin(User user) throws Exception;
+}

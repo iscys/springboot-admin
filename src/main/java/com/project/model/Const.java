@@ -9,6 +9,8 @@ public class Const {
     public static final int DEFAULT_PAGESIZE=15;
 
 
+    public static final String WX_ERROR="101";
+
     public static final String MEMBER_ID_NULL="1001";
     public static final String MEMBER_ID_NULL_MESSAGE="用户参数不能为空";
     public static final String PHONE_NULL="1002";
