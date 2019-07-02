@@ -1,5 +1,7 @@
 package com.project.utils;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -131,9 +133,39 @@ public class DateUtils {
     }
 
 
-    public static void main(String[] args)throws Exception {
-        System.out.println(getTimeInMillis());
-        System.out.println(getTimeInSecond());
-        System.out.println(milltamp2date(Long.valueOf(getTimeInMillis())));
+    /**
+     * YYYYMMDD 转时间格式
+     * @param YYYYMMDD
+     * @throws Exception
+     */
+
+    public static  Date parseYYYYMMDD(String YYYYMMDD) throws Exception{
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        Date date = simpleDateFormat.parse(YYYYMMDD);
+        return date;
     }
+
+    public static boolean checkAdult(Date date) {
+
+        Calendar current = Calendar.getInstance();
+        Calendar birthDay = Calendar.getInstance();
+        birthDay.setTime(date);
+        Integer year = current.get(Calendar.YEAR) - birthDay.get(Calendar.YEAR);
+        if (year > 18) {
+            return true;
+        } else if (year < 18) {
+            return false;
+        }
+        // 如果年相等，就比较月份
+        Integer month = current.get(Calendar.MONTH) - birthDay.get(Calendar.MONTH);
+        if (month > 0) {
+            return true;
+        } else if (month < 0) {
+            return false;
+        }
+        // 如果月也相等，就比较天
+        Integer day = current.get(Calendar.DAY_OF_MONTH) - birthDay.get(Calendar.DAY_OF_MONTH);
+        return day >= 0;
+    }
+
 }

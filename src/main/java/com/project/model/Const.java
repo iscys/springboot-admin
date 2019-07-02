@@ -39,6 +39,11 @@ public class Const {
     public static final String BIRDATE_NULL_MESSAGE="出生年月日不能为空";
     public static final String MEMBER_NULL="1008";
     public static final String MEMBER_NULL_MESSAGE="无此用户";
+    public static final String PHONE_EROR="1009";
+    public static final String PHONE_EROR_MESSAGE="手机不合法，输入合法手机号";
+
+    public static final String NO_ADULT="1010";
+    public static final String NO_ADULT_MESSAGE="未成年,不能报名";
 
 
     public static final String SHOOL_ID_NULL="2001";

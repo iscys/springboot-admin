@@ -7,8 +7,10 @@ import com.project.model.school.Apply;
 import com.project.model.school.Teacher;
 import com.project.model.school.ThirdResult;
 import com.project.service.driver.StudentApplyService;
+import com.project.utils.DateUtils;
 import com.project.utils.GsonUtils;
 import com.project.utils.HttpUtils;
+import com.project.utils.ToolsUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ import java.util.HashMap;
  */
 @RestController
 @RequestMapping("/api/student")
-public class StudentApplyController {
+public class StudentApplyController  {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -31,7 +33,7 @@ public class StudentApplyController {
     private StudentApplyService applyService;
 
     @RequestMapping("/apply")
-    public ResultObject applay(Apply apply){
+    public ResultObject applay(Apply apply) throws Exception{
         String school_id = apply.getSchool_id();
         String subject_id = apply.getSubject_id();
         String member_id = apply.getMember_id();
@@ -39,7 +41,6 @@ public class StudentApplyController {
         if(apply.getCardtype()==0){
             return ResultObject.build(Const.CARDTYPE_NULL,Const.CARDTYPE_NULL_MESSAGE,null);
         }
-
         if(StringUtils.isEmpty(school_id)){
             return ResultObject.build(Const.SHOOL_ID_NULL,Const.SHOOL_ID_NULL_MESSAGE,null);
         }
@@ -54,6 +55,10 @@ public class StudentApplyController {
 
         if(StringUtils.isEmpty(apply.getPhone())){
             return ResultObject.build(Const.PHONE_NULL,Const.PHONE_NULL_MESSAGE,null);
+        }
+
+        if(!ToolsUtils.checkMobileNumber(apply.getPhone())){
+            return ResultObject.build(Const.PHONE_EROR,Const.PHONE_EROR_MESSAGE,null);
         }
 
         if(StringUtils.isEmpty(apply.getAddr())){
@@ -82,6 +87,11 @@ public class StudentApplyController {
             if(StringUtils.isEmpty(apply.getBirdate())){
 
                 return ResultObject.build(Const.BIRDATE_NULL,Const.BIRDATE_NULL_MESSAGE,null);
+            }
+
+            if(!DateUtils.checkAdult(DateUtils.parseYYYYMMDD(apply.getBirdate()))){
+
+                return ResultObject.build(Const.NO_ADULT,Const.NO_ADULT_MESSAGE,null);
             }
 
         }
