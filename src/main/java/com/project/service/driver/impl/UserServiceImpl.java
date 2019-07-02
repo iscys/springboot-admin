@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultObject toLogin(User user) throws Exception {
 
+
         WxMaJscode2SessionResult wxsmallInfo = null;
         try {
             wxsmallInfo = wxsmall.jsCode2SessionInfo(user.getCode());
@@ -59,7 +60,6 @@ public class UserServiceImpl implements UserService {
 
         }
 
-
-
     }
+
 }

@@ -11,6 +11,18 @@ public class Const {
 
     public static final String WX_ERROR="101";
 
+
+    public static final String WX_NICKNAME_NULL="996";
+    public static final String WX_NICKNAME_NULL_MESSAGE="微信昵称为空";
+
+    public static final String WX_IMG_NULL="997";
+    public static final String WX_IMG_NULL_MESSAGE="微信头像为空";
+
+    public static final String WX_SEX="998";
+    public static final String WX_SEX_MESSAGE="性别不能为空";
+
+    public static final String WX_CODE_NULL="1000";
+    public static final String WX_CODE_NULL_MESSAGE="微信code不能为空";
     public static final String MEMBER_ID_NULL="1001";
     public static final String MEMBER_ID_NULL_MESSAGE="用户参数不能为空";
     public static final String PHONE_NULL="1002";

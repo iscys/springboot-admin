@@ -1,5 +1,6 @@
 package com.project.controller.driver;
 
+import com.project.model.Const;
 import com.project.model.ResultObject;
 import com.project.model.school.User;
 import com.project.service.driver.UserService;
@@ -30,31 +31,29 @@ public class UserController {
         String ip= ToolsUtils.getClientIp(request);
         logger.info("用户ip 为：{}" ,ip);
         user.setLast_ip(ip);
-        if(StringUtils.isEmpty(user.getPhone())){
-            return  ResultObject.build(Constant.PHONE_NULL,Constant.PHONE_NULL_MESSAGE,null);
-        }
-        if(!ToolsUtils.checkMobileNumber(user.getPhone())){
-            return  ResultObject.build(Constant.PHONE_ERROR,Constant.PHONE_ERROR_MESSAGE,null);
-        }
-        logger.info("用户：{} 进行注册",user.getPhone());
-        if(StringUtils.isEmpty(user.getPhone_code())){
-            return  ResultObject.build(Constant.PHONE_CODE_NULL,Constant.PHONE_CODE_NULL_MESSAGE,null);
-        }
+
         if(StringUtils.isEmpty(user.getCode())){
-            return  ResultObject.build(Constant.WX_CODE_NULL,Constant.WX_CODE_NULL_MESSAGE,null);
+            return  ResultObject.build(Const.WX_CODE_NULL,Const.WX_CODE_NULL_MESSAGE,null);
         }
-        if(StringUtils.isEmpty(user.getPassword())){
-            return  ResultObject.build(Constant.PASSWORD_NULL,Constant.PASSWORD_NULL_MESSAGE,null);
+
+        if(StringUtils.isEmpty(user.getSex())){
+            return  ResultObject.build(Const.WX_SEX,Const.WX_SEX_MESSAGE,null);
         }
-        if(StringUtils.isEmpty(user.getOrigin())){
-            return  ResultObject.build(Constant.ORIGIN_NULL, Constant.ORIGIN_NULL_MESSAGE,null);
+
+        if(StringUtils.isEmpty(user.getHeadimgurl())){
+            return  ResultObject.build(Const.WX_IMG_NULL,Const.WX_IMG_NULL_MESSAGE,null);
         }
+
+        if(StringUtils.isEmpty(user.getNickname())){
+            return  ResultObject.build(Const.WX_NICKNAME_NULL,Const.WX_NICKNAME_NULL_MESSAGE,null);
+        }
+
 
         try {
             ResultObject result = userService.toLogin(user);
             return result;
         }catch (Exception e){
-            logger.error("用户注册异常：{}" ,e.getMessage());
+            logger.error("用户登录注册异常：{}" ,e.getMessage());
             return ResultObject.error(null);
         }
 
