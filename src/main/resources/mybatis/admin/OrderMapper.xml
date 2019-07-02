@@ -37,7 +37,12 @@
     <select id="getOrderList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
 
    select o.member_id,
-    o.order_sn,o.price,o.status,s.`name`,s.phone,s.idcard,
+
+        case o.`status` when 0 then '未付款'
+        when 1 then '已付款'
+        WHEN 6 then '已退款' END as status,
+
+    o.order_sn,o.price,s.`name`,s.phone,s.idcard,
 
     ol.school_name,su.`subject`,su.subject_name,su.subject
 
