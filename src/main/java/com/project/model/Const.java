@@ -62,8 +62,10 @@ public class Const {
     public static final String ORDER_NULL_MESSAGE="订单不能为空";
     public static final String ORDERINFO_NULL="3002";
     public static final String ORDERINFO_NULL_MESSAGE="无此订单";
+    public static final String PRICE_NULL="3003";
+    public static final String PRICE_NULL_MESSAGE="订单价格错误";
 
-    public static final String ORDER_STATUS_ERROR="3003";
+    public static final String ORDER_STATUS_ERROR="3004";
     public static final String ORDER_STATUS_ERROR_MESSAGE="订单状态错误";
 
 

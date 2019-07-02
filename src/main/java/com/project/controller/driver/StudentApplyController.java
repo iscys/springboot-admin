@@ -37,7 +37,11 @@ public class StudentApplyController  {
         String school_id = apply.getSchool_id();
         String subject_id = apply.getSubject_id();
         String member_id = apply.getMember_id();
+        String price = apply.getPrice();
 
+        if(StringUtils.isEmpty(price)){
+            return ResultObject.build(Const.PRICE_NULL,Const.PRICE_NULL_MESSAGE,null);
+        }
         if(apply.getCardtype()==0){
             return ResultObject.build(Const.CARDTYPE_NULL,Const.CARDTYPE_NULL_MESSAGE,null);
         }
