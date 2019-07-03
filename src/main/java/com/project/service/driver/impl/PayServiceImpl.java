@@ -249,6 +249,7 @@ public class PayServiceImpl implements PayService {
                         refund.setOutRefundNo(DateUtils.getTimeInMillis()+ ToolsUtils.sixCode());
                         try {
                             wxPayService.refund(refund);
+                            logger.info("订单：{} 退款成功",outTradeNo);
                         }catch (Exception re){
                             logger.error("订单号:{} 退款异常：{}",outTradeNo,re.getMessage());
 
