@@ -67,6 +67,13 @@
     </div>
 
     <div class="layui-form-item">
+        <label class="layui-form-label">课时</label>
+        <div class="layui-input-block">
+            <input type="number" name="hours" id="hours"  placeholder="课时，请输入数字"  class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
         <label class="layui-form-label">价钱</label>
         <div class="layui-input-block">
             <input type="text" name="price" id="price" required  lay-verify="required" placeholder="请输入套餐价钱 示例：2899"  class="layui-input">
@@ -132,6 +139,8 @@
 
     $("#sub").click(function(){
         var formData = new FormData();
+
+        var hours=$("#hours").val();
         var school_id=$("#school_id").val();
         var subject=$("#subject").val();
         var subject_name=$("#subject_name").val();
@@ -148,6 +157,8 @@
             message='请配置套餐名字'
         }else if(ASSERT(price)){
             message='请输入套餐价格'
+        }else if(ASSERT(hours)){
+            message='请输入课时'
         }
 
         if(message!=''){
@@ -160,6 +171,7 @@
         formData.append("subject_name",subject_name);
         formData.append("price",price);
         formData.append("flag",flag);
+        formData.append("hours",hours);
 
         $("#sub").hide();
         $.ajax({

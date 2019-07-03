@@ -34,7 +34,7 @@
         when 2 then '科目三'
         when 3 then '科目二单学时'
         when 4 then '科目三单学时'
-        END as subject_name,
+        END as subject_name,a.hours,
       date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time from
         sdb_school_subject a,
         sdb_school b
@@ -107,6 +107,9 @@
             <if test="price != null  and price != '' ">
                 price,
             </if>
+            <if test="hours != null  and hours != '' ">
+                hours,
+            </if>
 
 
 
@@ -131,6 +134,9 @@
             </if>
             <if test="price != null  and price != '' ">
                 #{price},
+            </if>
+            <if test="hours != null  and hours != '' ">
+                #{hours},
             </if>
 
         </trim>
@@ -159,6 +165,9 @@
             </if>
             <if test="price != null  and price != '' ">
                 price= #{price},
+            </if>
+            <if test="hours != null  and hours != '' ">
+                hours= #{hours},
             </if>
 
         </trim>

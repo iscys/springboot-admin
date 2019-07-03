@@ -11,5 +11,7 @@ public class Subject {
     private String flag;
     private String mark;
     private String price;
+    private String hours;//课时
+
 
 }
