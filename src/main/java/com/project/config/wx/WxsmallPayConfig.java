@@ -8,6 +8,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.InputStream;
+import java.net.URL;
+
 @Configuration
 @EnableConfigurationProperties(WxsmallProperties.class)
 public class WxsmallPayConfig {
@@ -22,11 +25,13 @@ public class WxsmallPayConfig {
         WxPayConfig payConfig = new WxPayConfig();
         payConfig.setAppId(properties.getAppid());
         payConfig.setMchId(properties.getMchId());
+        payConfig.setKeyPath("classpsth:apiclient_cert.p12");
         payConfig.setMchKey(properties.getMchKey());
         WxPayService wxPayService = new WxPayServiceImpl();
         wxPayService.setConfig(payConfig);
         return wxPayService;
     }
+
 
 
 }
