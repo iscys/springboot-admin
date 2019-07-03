@@ -25,6 +25,8 @@ public class Order {
             private String origin;
             private String openid;
             private String clientIp;
+             private String num;
+
 
 
     @Override

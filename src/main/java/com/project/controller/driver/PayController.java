@@ -36,6 +36,13 @@ public class PayController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
+    /**
+     * 报名生成支付
+     * @param order
+     * @param request
+     * @return
+     * @throws Exception
+     */
 
     @PostMapping("/pay")
     public ResultObject pay(Order order, HttpServletRequest request) throws Exception{
@@ -48,6 +55,33 @@ public class PayController extends BaseController {
         order.setClientIp(clientIp);
         try {
             ResultObject result = payService.createPay(order);
+            return result;
+        }catch (Exception e){
+            logger.error("微信支付异常：{}",e.getMessage());
+            return ResultObject.error(null);
+        }
+
+
+    }
+
+    /**
+     * 购买课时生成支付
+     * @param order
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/paySubject")
+    public ResultObject paySubject(Order order, HttpServletRequest request) throws Exception{
+
+        if(StringUtils.isEmpty(order.getOrder_sn())){
+            return ResultObject.build(Const.ORDER_NULL,Const.ORDER_NULL_MESSAGE,null);
+        }
+
+        String clientIp = ToolsUtils.getClientIp(request);
+        order.setClientIp(clientIp);
+        try {
+            ResultObject result = payService.createPaySubject(order);
             return result;
         }catch (Exception e){
             logger.error("微信支付异常：{}",e.getMessage());

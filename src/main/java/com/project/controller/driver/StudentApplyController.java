@@ -4,6 +4,7 @@ import com.project.config.ConfigProperties;
 import com.project.model.Const;
 import com.project.model.ResultObject;
 import com.project.model.school.Apply;
+import com.project.model.school.ApplySubject;
 import com.project.model.school.Teacher;
 import com.project.model.school.ThirdResult;
 import com.project.service.driver.StudentApplyService;
@@ -20,9 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
-/**
- * 驾校报名接口Api
- */
+
 @RestController
 @RequestMapping("/api/student")
 public class StudentApplyController  {
@@ -31,7 +30,9 @@ public class StudentApplyController  {
 
     @Autowired
     private StudentApplyService applyService;
-
+    /**
+     * 驾校报名接口
+     */
     @RequestMapping("/apply")
     public ResultObject applay(Apply apply) throws Exception{
         String school_id = apply.getSchool_id();
@@ -129,6 +130,36 @@ public class StudentApplyController  {
        // String result = HttpUtils.INSTANCE.doPost("http://203.86.28.33:10089/File/SaveStudent", map);
 ThirdResult th =new ThirdResult();
 System.out.println(th.isSuccess());
+
+
+    }
+
+    /**
+     * 学员购买课时
+     */
+    @RequestMapping("/applySubject")
+    public ResultObject applySubject(ApplySubject applySubject){
+        if(StringUtils.isEmpty(applySubject.getMember_id())){
+            return ResultObject.build(Const.MEMBER_ID_NULL,Const.MEMBER_ID_NULL_MESSAGE,null);
+        }
+        if(StringUtils.isEmpty(applySubject.getPrice())){
+            return ResultObject.build(Const.PRICE_NULL,Const.PRICE_NULL_MESSAGE,null);
+        }
+
+        if(StringUtils.isEmpty(applySubject.getSchool_id())){
+            return ResultObject.build(Const.SHOOL_ID_NULL,Const.SHOOL_ID_NULL_MESSAGE,null);
+        }
+        if(StringUtils.isEmpty(applySubject.getSubject_id())){
+            return ResultObject.build(Const.SUBJECT_ID_NULL,Const.SUBJECT_ID_NULL_MESSAGE,null);
+        }
+
+
+        try {
+            ResultObject result = applyService.applySubjectOrder(applySubject);
+            return ResultObject.success(result);
+        }catch (Exception e){
+            return ResultObject.error(null);
+        }
 
 
     }

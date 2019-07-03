@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * 报名订单
+ * 驾校套餐订单
  */
-public interface OrderMapper {
+public interface SubjectOrderMapper {
     Order getOrderDetil(Order order);
 
     void updateOrder(Order order);

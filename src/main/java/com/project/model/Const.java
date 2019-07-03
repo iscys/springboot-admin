@@ -60,6 +60,8 @@ public class Const {
     public static final String TEACHER_ID_NULL="2005";
     public static final String TEACHER_ID_NULL_MESSAGE="教练id不能为空";
 
+    public static final String SUBJECT_ERROR="2006";
+    public static final String SUBJECT_ERROR_MESSAGE="无此套餐类型";
 
     public static final String ORDER_NULL="3001";
     public static final String ORDER_NULL_MESSAGE="订单不能为空";

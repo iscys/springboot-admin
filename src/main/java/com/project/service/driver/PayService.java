@@ -8,4 +8,6 @@ public interface PayService {
     void payNotify(WxPayOrderNotifyResult notifyResult) throws Exception;
 
     ResultObject createPay(Order order) throws Exception;
+
+    ResultObject createPaySubject(Order order) throws Exception;
 }
