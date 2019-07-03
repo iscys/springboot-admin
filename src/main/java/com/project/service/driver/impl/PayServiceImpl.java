@@ -265,7 +265,7 @@ public class PayServiceImpl implements PayService {
                 }else{
                     //success
                     try {
-                        ErrorModel model = new ErrorModel(outTradeNo, "微信支付成功,并且学员信息录入成功", null);
+                        ErrorModel model = new ErrorModel(outTradeNo, "微信支付成功,并且学员信息录入成功", result);
                         errorService.saveErrorLog(model);
                     }catch (Exception e){}
 
