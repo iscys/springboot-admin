@@ -101,6 +101,7 @@ public class StudentApplyController  {
             ResultObject result = applyService.applyAndCreateOrder(apply);
             return ResultObject.success(result);
         }catch (Exception e){
+            logger.error("驾校报名错误：{}",e.getMessage());
             return ResultObject.error(null);
         }
 
@@ -155,6 +156,7 @@ System.out.println(th.isSuccess());
             ResultObject result = applyService.applySubjectOrder(applySubject);
             return ResultObject.success(result);
         }catch (Exception e){
+            logger.error("驾校购买课时生成订单错误：{}",e.getMessage());
             return ResultObject.error(null);
         }
 

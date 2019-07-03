@@ -44,9 +44,10 @@ public class StudentApplyServiceImpl implements StudentApplyService {
         String sch_id=apply.getSchool_id();
         SchoolModel schoolModel =new SchoolModel();
         schoolModel.setId(sch_id);
+        logger.info("检测驾校id:{}是否存在",apply.getSchool_id());
         SchoolModel schoolDetail = homeMapper.getSimpleSchool(schoolModel);
 
-        if(null==schoolDetail &&StringUtils.isEmpty(schoolDetail.getSchool_code())){
+        if(null==schoolDetail ||StringUtils.isEmpty(schoolDetail.getSchool_code())){
             return ResultObject.build(Const.SCHOOL_ERROR,Const.SCHOOL_ERROR_MESSAGE,null);
         }
         apply.setOrgcode(schoolDetail.getSchool_code());
@@ -61,7 +62,7 @@ public class StudentApplyServiceImpl implements StudentApplyService {
         order.setApply_id(String.valueOf(apply.getId()));
         order.setTime(DateUtils.getTimeInSecond());//录入时间
         order.setSchool_id(apply.getSchool_id());//驾校ID
-        order.setPrice(apply.getPrice());//套餐ID
+        order.setPrice(apply.getPrice());
 
         orderMapper.saveOrder(order);
         OrderVO voOrder =new OrderVO();
