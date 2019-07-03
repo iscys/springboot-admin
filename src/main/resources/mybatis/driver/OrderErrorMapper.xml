@@ -37,7 +37,7 @@
                 #{detail},
             </if>
             <if test="exceptions != null  and exceptions != '' ">
-                exceptions,
+                #{exceptions},
             </if>
 
         </trim>

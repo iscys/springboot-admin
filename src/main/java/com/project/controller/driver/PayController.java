@@ -114,7 +114,7 @@ public class PayController extends BaseController {
             payService.payNotify(notifyResult);
         }catch (Exception e){
             try {
-                error.saveErrorLog(new ErrorModel(order_sn, "处理回调发生异常",
+                error.saveErrorLog(new ErrorModel(order_sn, "报名回调发生异常",
                         e.getMessage(), xmlData));
             }catch (Exception e1){}
             logger.error("处理回调异常：{},数据包：{}",e.getMessage(),xmlData);
