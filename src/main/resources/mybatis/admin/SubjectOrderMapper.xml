@@ -87,6 +87,15 @@
         <if test="order_sn !=null  and order_sn != '' ">
             and a.order_sn=#{order_sn}
         </if>
+        <if test="subject_name !=null  and subject_name != '' ">
+            and a.subject_name=#{subject_name}
+        </if>
+        <if test="status !=null  and status != '' ">
+            and a.status=#{status}
+        </if>
+        <if test="member_id !=null  and member_id != '' ">
+            and a.member_id=#{member_id}
+        </if>
 
         limit 1
     </select>
