@@ -21,6 +21,8 @@ public class Const {
     public static final String WX_SEX="998";
     public static final String WX_SEX_MESSAGE="性别不能为空";
 
+    public static final String MEMBER_ERROR="999";
+    public static final String MEMBER_ERROR_MESSAGE="错误的用户";
     public static final String WX_CODE_NULL="1000";
     public static final String WX_CODE_NULL_MESSAGE="微信code不能为空";
     public static final String MEMBER_ID_NULL="1001";

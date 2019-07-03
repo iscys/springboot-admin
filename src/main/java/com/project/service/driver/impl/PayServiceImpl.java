@@ -55,6 +55,10 @@ public class PayServiceImpl implements PayService {
     public ResultObject createPay(Order order) throws Exception {
         Order orderInfo = orderMapper.getOrderDetil(order);
         String member_id = orderInfo.getMember_id();
+        if(!member_id.equals(order.getMember_id())){
+            return ResultObject.build(Const.MEMBER_ERROR, Const.MEMBER_ERROR_MESSAGE,null);
+
+        }
 
         if(orderInfo==null){
             return ResultObject.build(Const.ORDERINFO_NULL, Const.ORDERINFO_NULL_MESSAGE,null);
@@ -157,6 +161,10 @@ public class PayServiceImpl implements PayService {
                 map.put("applydate",applys.getApplydate());
                 map.put("orgcode",applys.getOrgcode());
                 map.put("photo",apply.getPhoto());
+                if(applys.getCardtype()!=1){
+                    map.put("birdate",apply.getBirdate());
+
+                }
 
                 String result = HttpUtils.INSTANCE.doPost(properties.getApplyUrl(), map);
 

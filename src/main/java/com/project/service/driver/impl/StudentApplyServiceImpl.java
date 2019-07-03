@@ -7,12 +7,14 @@ import com.project.mapper.admin.SubjectMapper;
 import com.project.model.ResultObject;
 import com.project.model.school.Apply;
 import com.project.model.school.Order;
+import com.project.model.school.OrderVO;
 import com.project.model.school.Subject;
 import com.project.service.driver.StudentApplyService;
 import com.project.utils.DateUtils;
 import com.project.utils.ToolsUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -56,9 +58,10 @@ public class StudentApplyServiceImpl implements StudentApplyService {
         order.setPrice(apply.getPrice());//套餐ID
 
         orderMapper.saveOrder(order);
+        OrderVO voOrder =new OrderVO();
+        BeanUtils.copyProperties(order,voOrder);
 
-
-        return ResultObject.success(order);
+        return ResultObject.success(voOrder);
     }
 
 

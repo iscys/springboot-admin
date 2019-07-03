@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api/pay")
+@RequestMapping("/api/wx")
 public class PayController extends BaseController {
     @Autowired
     private WxPayService wxPayService;
