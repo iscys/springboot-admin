@@ -3,9 +3,11 @@ package com.project.service.driver.impl;
 
 import com.project.mapper.admin.ApplyMapper;
 import com.project.mapper.admin.OrderMapper;
+import com.project.mapper.admin.SubjectMapper;
 import com.project.model.ResultObject;
 import com.project.model.school.Apply;
 import com.project.model.school.Order;
+import com.project.model.school.Subject;
 import com.project.service.driver.StudentApplyService;
 import com.project.utils.DateUtils;
 import com.project.utils.ToolsUtils;
@@ -25,6 +27,8 @@ public class StudentApplyServiceImpl implements StudentApplyService {
     private ApplyMapper applyMapper;
     @Autowired
     private OrderMapper orderMapper;
+    @Autowired
+    private SubjectMapper subjectMapper;
 
 
     /**
@@ -36,6 +40,8 @@ public class StudentApplyServiceImpl implements StudentApplyService {
      */
     @Override
     public ResultObject applyAndCreateOrder(Apply apply) throws Exception {
+
+
         apply.setApplydate(DateUtils.stableYYYMMDD());
         logger.info("开始录入学员的信息");
         applyMapper.saveApply(apply);

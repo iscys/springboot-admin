@@ -35,7 +35,6 @@ public class StudentApplyController  {
     @RequestMapping("/apply")
     public ResultObject applay(Apply apply) throws Exception{
         String school_id = apply.getSchool_id();
-        String subject_id = apply.getSubject_id();
         String member_id = apply.getMember_id();
         String price = apply.getPrice();
 
@@ -49,9 +48,7 @@ public class StudentApplyController  {
             return ResultObject.build(Const.SHOOL_ID_NULL,Const.SHOOL_ID_NULL_MESSAGE,null);
         }
 
-        if(StringUtils.isEmpty(subject_id)){
-            return ResultObject.build(Const.SUBJECT_ID_NULL,Const.SUBJECT_ID_NULL_MESSAGE,null);
-        }
+
 
         if(StringUtils.isEmpty(member_id)){
             return ResultObject.build(Const.MEMBER_ID_NULL,Const.MEMBER_ID_NULL_MESSAGE,null);
@@ -80,9 +77,7 @@ public class StudentApplyController  {
         if(StringUtils.isEmpty(apply.getTraintype())){
             return ResultObject.build(Const.TRAINTYPE_NULL,Const.TRAINTYPE_NULL_MESSAGE,null);
         }
-        if(StringUtils.isEmpty(apply.getOrgcode())){
-            return ResultObject.build(Const.ORGCODE_NULL,Const.ORGCODE_NULL_MESSAGE,null);
-        }
+
         if(StringUtils.isEmpty(apply.getOrgcode())){
             return ResultObject.build(Const.ORGCODE_NULL,Const.ORGCODE_NULL_MESSAGE,null);
         }

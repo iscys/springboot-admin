@@ -9,7 +9,6 @@
        from sdb_apply_order o
        left join sdb_student_apply s on o.apply_id=s.id
        left join sdb_school ol on o.school_id=ol.id
-       left join sdb_school_subject su on o.subject_id=su.id
        where 1=1
        <if test="phone !=null  and phone != '' ">
            and s.phone=#{phone}
@@ -29,9 +28,10 @@
        <if test="order_sn !=null  and order_sn != '' ">
            and o.order_sn=#{order_sn}
        </if>
-       <if test="subject !=null  and subject != '' ">
-           and su.subject=#{subject}
+       <if test="traintype !=null  and traintype != '' ">
+           and s.traintype=#{traintype}
        </if>
+
    </select>
 
     <select id="getOrderList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
@@ -44,12 +44,11 @@
 
     o.order_sn,o.price,s.`name`,s.phone,s.idcard,
 
-    ol.school_name,su.`subject`,su.subject_name,su.subject
+    ol.school_name,s.traintype
 
     from sdb_apply_order o
     left join sdb_student_apply s on o.apply_id=s.id
     left join sdb_school ol on o.school_id=ol.id
-    left join sdb_school_subject su on o.subject_id=su.id
     where 1=1
         <if test="phone !=null  and phone != '' ">
             and s.phone=#{phone}
@@ -69,9 +68,10 @@
         <if test="order_sn !=null  and order_sn != '' ">
             and o.order_sn=#{order_sn}
         </if>
-        <if test="subject !=null  and subject != '' ">
-            and su.subject=#{subject}
+        <if test="traintype !=null  and traintype != '' ">
+            and s.traintype=#{traintype}
         </if>
+
 
    </select>
 

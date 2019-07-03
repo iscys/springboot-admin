@@ -6,6 +6,7 @@ import com.project.model.ResultObject;
 import com.project.model.school.SchoolModel;
 import com.project.model.school.Subject;
 import com.project.model.school.Teacher;
+import com.project.service.admin.TeacherService;
 import com.project.service.driver.SchoolService;
 import com.project.utils.PageData;
 import org.apache.commons.lang3.StringUtils;
@@ -14,11 +15,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/school")
 public class SchoolController extends BaseController {
     @Autowired
     private SchoolService schoolService;
+    @Autowired
+    private TeacherService teacherService;
 
     /**
      * 小程序首页信息，轮播广告位
@@ -143,6 +148,22 @@ public class SchoolController extends BaseController {
         try {
             ResultObject result = schoolService.getTeacherDetail(teacher);
             return result;
+        } catch (Exception e) {
+            return ResultObject.error(null);
+        }
+    }
+
+    /**
+     * 教练详情
+     */
+    @PostMapping("/schoolList")
+    public ResultObject schoolList() {
+
+        PageData pd = this.getPageData();
+        try {
+            List<SchoolModel> allSchoolList = teacherService.getAllSchoolList(pd);
+
+            return ResultObject.success(allSchoolList);
         } catch (Exception e) {
             return ResultObject.error(null);
         }

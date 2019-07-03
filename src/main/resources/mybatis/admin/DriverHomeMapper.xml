@@ -71,6 +71,25 @@
         limit 1
     </select>
 
+
+    <select id="getSimpleSchool" resultType="com.project.model.school.SchoolModel" parameterType="com.project.model.school.SchoolModel">
+        select a.school_code,a.school_name,a.school_id
+        from
+        sdb_school a
+        where 1=1
+        and flag ='1'
+        <if test="id !=null  and id != '' ">
+            and a.id=#{id}
+        </if>
+        <if test="school_name !=null  and school_name != '' ">
+            and a.school_name=#{school_name}
+        </if>
+        <if test="school_code !=null  and school_code != '' ">
+            and a.school_code=#{school_code}
+        </if>
+        limit 1
+    </select>
+
     <insert id="save" parameterType="com.project.utils.PageData">
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             select LAST_INSERT_ID()
@@ -259,7 +278,7 @@
 
     <select id="getAllSchoolList" parameterType="com.project.utils.PageData" resultType="com.project.model.school.SchoolModel">
 
-        select id ,school_name
+        select id ,school_name,school_code
         from
         sdb_school
         where

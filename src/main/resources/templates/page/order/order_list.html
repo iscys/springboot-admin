@@ -68,7 +68,6 @@
 							<th class='center' style="min-width: 7%">订单状态</th>
 							<th class='center' style="min-width: 7%">报考驾校</th>
 							<th class='center' style="min-width: 7%">驾照类型</th>
-							<th class='center' style="min-width: 7%">驾照套餐</th>
 						</tr>
 						</thead>
 						<tbody th:if="${dataPager.getRecords()!=null}">
@@ -80,8 +79,8 @@
 							<td th:if="${record.status eq '已付款'}" class='center' th:text="${record.status}" style="color: #00FF00"></td>
 							<td class='center' th:if="${record.status eq '已退款'}" th:text="${record.status}" style="color: red"></td>
 							<td class='center' th:text="${record.school_name}"></td>
-							<td class='center' th:text="${record.subject}"></td>
-							<td class='center' th:text="${record.subject_name}"></td>
+							<td class='center' th:text="${record.traintype}"></td>
+
 
 
 
