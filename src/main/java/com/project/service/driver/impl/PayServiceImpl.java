@@ -245,10 +245,9 @@ public class PayServiceImpl implements PayService {
                 //{Code :1 ,Message:success}
                 if(StringUtils.isEmpty(thirdResult.getCode()) || !thirdResult.isSuccess()){
                     logger.error("学员信息插入第三方库失败，信息：{}",result);
-                    try {
                         error.saveErrorLog(new ErrorModel(outTradeNo, "学员报名失败",
                                 result, notifyResult.toString()));
-                    }catch (Exception err){}
+
                     //todo refund 第三方库插入失败，执行退款操作
                         logger.info("订单：{} 开始微信退款--",outTradeNo);
                         WxPayRefundRequest refund = new WxPayRefundRequest();
@@ -260,7 +259,7 @@ public class PayServiceImpl implements PayService {
                             wxPayService.refund(refund);
                             Order refundOrder =new Order();
                             refundOrder.setOrder_sn(outTradeNo);
-                            order.setStatus("6");
+                            refundOrder.setStatus("6");
                             orderMapper.updateOrder(refundOrder);
                             logger.info("订单：{} 退款成功",outTradeNo);
                             ErrorModel model = new ErrorModel(outTradeNo, "退款成功",null ,result);
@@ -270,10 +269,10 @@ public class PayServiceImpl implements PayService {
 
                 }else{
                     //success
-                    try {
+
                         ErrorModel model = new ErrorModel(outTradeNo, "微信支付成功,并且学员信息录入成功", result);
                         errorService.saveErrorLog(model);
-                    }catch (Exception e){}
+
 
                 }
             }
