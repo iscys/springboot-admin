@@ -57,15 +57,16 @@ public class PayServiceImpl implements PayService {
     @Override
     public ResultObject createPay(Order order) throws Exception {
         Order orderInfo = orderMapper.getOrderDetil(order);
+        if(orderInfo==null){
+            return ResultObject.build(Const.ORDERINFO_NULL, Const.ORDERINFO_NULL_MESSAGE,null);
+        }
         String member_id = orderInfo.getMember_id();
         if(!member_id.equals(order.getMember_id())){
             return ResultObject.build(Const.MEMBER_ERROR, Const.MEMBER_ERROR_MESSAGE,null);
 
         }
 
-        if(orderInfo==null){
-            return ResultObject.build(Const.ORDERINFO_NULL, Const.ORDERINFO_NULL_MESSAGE,null);
-        }
+
         String order_sn = orderInfo.getOrder_sn();
         if(!orderInfo.getStatus().equals("0")){
             logger.warn("订单：{} 状态错误，无法进行微信平台下单");
@@ -96,7 +97,7 @@ public class PayServiceImpl implements PayService {
 
         payOrder.setOutTradeNo(order.getOrder_sn());
         payOrder.setOpenid(openid);
-        payOrder.setNotifyUrl(properties.getDomain()+"/api/pay/notify");
+        payOrder.setNotifyUrl(properties.getDomain()+"/api/wx/notify");
 
         payOrder.setBody("驾校报名");
 
@@ -107,6 +108,10 @@ public class PayServiceImpl implements PayService {
             wxPackage = wxPayService.createOrder(payOrder);
         } catch (WxPayException e) {
             logger.error("时间：{} ,订单号：{}微信统一下单失败,reason:{}", DateUtils.stableTime(),order_sn,e.getMessage());
+            try {
+                ErrorModel model = new ErrorModel(null, "微信统一下单异常", e.getMessage());
+                errorService.saveErrorLog(model);
+            }catch (Exception or){}
             return ResultObject.build(Const.WX_PAY_EXCEPTION,Const.WX_PAY_EXCEPTION_MESSAGE,e.getMessage());
         }
 
@@ -208,9 +213,9 @@ public class PayServiceImpl implements PayService {
                 orderMapper.updateOrder(order);
                 Apply apply =new Apply();
 
-                apply.setId(Integer.valueOf(order.getApply_id()));
+                apply.setId(Integer.valueOf(rstOrder.getApply_id()));
 
-
+                logger.info("处理学员信息录入--");
                 //通知第三方进行学员信息的录入
                 Apply applys =applyMapper.getDeatilApply(apply);
 

@@ -25,7 +25,7 @@ public class WxsmallPayConfig {
         WxPayConfig payConfig = new WxPayConfig();
         payConfig.setAppId(properties.getAppid());
         payConfig.setMchId(properties.getMchId());
-        payConfig.setKeyPath("classpsth:apiclient_cert.p12");
+        payConfig.setKeyPath("classpath:apiclient_cert.p12");
         payConfig.setMchKey(properties.getMchKey());
         WxPayService wxPayService = new WxPayServiceImpl();
         wxPayService.setConfig(payConfig);

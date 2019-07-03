@@ -75,7 +75,7 @@
 
    </select>
 
-    <select id="getOrderDetail" resultType="com.project.model.school.Order" parameterType="com.project.model.school.Order">
+    <select id="getOrderDetil" resultType="com.project.model.school.Order" parameterType="com.project.model.school.Order">
         select a.*
          from
         sdb_apply_order a
