@@ -247,7 +247,18 @@ public class PayServiceImpl implements PayService {
                         refund.setTotalFee(wxFee);
                         refund.setRefundFee(wxFee);
                         refund.setOutRefundNo(DateUtils.getTimeInMillis()+ ToolsUtils.sixCode());
-                        wxPayService.refund(refund);
+                        try {
+                            wxPayService.refund(refund);
+                        }catch (Exception re){
+                            logger.error("订单号:{} 退款异常：{}",outTradeNo,re.getMessage());
+
+                            try {
+                                ErrorModel model = new ErrorModel(outTradeNo, "退款异常失败", re.getMessage(),null);
+                                errorService.saveErrorLog(model);
+                            }catch (Exception e){}
+
+
+                        }
 
 
                 }else{
