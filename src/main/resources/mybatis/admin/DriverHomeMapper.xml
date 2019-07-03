@@ -73,7 +73,7 @@
 
 
     <select id="getSimpleSchool" resultType="com.project.model.school.SchoolModel" parameterType="com.project.model.school.SchoolModel">
-        select a.school_code,a.school_name,a.school_id
+        select a.school_code,a.school_name,a.id
         from
         sdb_school a
         where 1=1

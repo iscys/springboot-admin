@@ -79,9 +79,6 @@ public class StudentApplyController  {
             return ResultObject.build(Const.TRAINTYPE_NULL,Const.TRAINTYPE_NULL_MESSAGE,null);
         }
 
-        if(StringUtils.isEmpty(apply.getOrgcode())){
-            return ResultObject.build(Const.ORGCODE_NULL,Const.ORGCODE_NULL_MESSAGE,null);
-        }
         if(apply.getCardtype()!=1){
 
             if(StringUtils.isEmpty(apply.getBirdate())){

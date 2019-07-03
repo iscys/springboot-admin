@@ -25,4 +25,6 @@ public interface DriverHomeMapper  {
     List<Album> getSchoolAlbum(Album album);
 
     List<SchoolModel> getAllSchoolList(PageData pd);
+
+    SchoolModel getSimpleSchool(SchoolModel schoolModel);
 }

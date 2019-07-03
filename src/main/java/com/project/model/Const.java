@@ -63,6 +63,9 @@ public class Const {
     public static final String SUBJECT_ERROR="2006";
     public static final String SUBJECT_ERROR_MESSAGE="无此套餐类型";
 
+    public static final String SCHOOL_ERROR="2007";
+    public static final String SCHOOL_ERROR_MESSAGE="找不到此驾校";
+
     public static final String ORDER_NULL="3001";
     public static final String ORDER_NULL_MESSAGE="订单不能为空";
     public static final String ORDERINFO_NULL="3002";
@@ -72,7 +75,8 @@ public class Const {
 
     public static final String ORDER_STATUS_ERROR="3004";
     public static final String ORDER_STATUS_ERROR_MESSAGE="订单状态错误";
-
+    public static final String SUBJECT_ORDER_ERROR="3005";
+    public static final String SUBJECT_ORDER_ERROR_MESSAGE="请先进行主课时单学习";
 
 
     public static final String WX_PAY_EXCEPTION="4001";

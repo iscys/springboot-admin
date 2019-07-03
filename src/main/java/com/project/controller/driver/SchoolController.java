@@ -11,10 +11,13 @@ import com.project.service.driver.SchoolService;
 import com.project.utils.PageData;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -162,8 +165,16 @@ public class SchoolController extends BaseController {
         PageData pd = this.getPageData();
         try {
             List<SchoolModel> allSchoolList = teacherService.getAllSchoolList(pd);
+            List<String> str =new ArrayList<>();
+            if(!CollectionUtils.isEmpty(allSchoolList)){
+                for(SchoolModel sh :allSchoolList)
+                str.add(sh.getSchool_name());
+            }
+            HashMap<String,Object>  map =new HashMap<>();
+            map.put("school_str",str);
+            map.put("school_detail",allSchoolList);
 
-            return ResultObject.success(allSchoolList);
+            return ResultObject.success(map);
         } catch (Exception e) {
             return ResultObject.error(null);
         }
