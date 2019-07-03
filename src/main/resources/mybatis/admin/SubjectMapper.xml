@@ -29,7 +29,7 @@
 
     <select id="getSubjectList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
 
-      select a.id, a.subject_name,a.subject,a.price,a.discount_price,
+      select a.id, b.school_name,a.subject,a.price,a.discount_price,
         case a.subject_name when 1 then '科目二'
         when 2 then '科目三'
         END as subject_name,
