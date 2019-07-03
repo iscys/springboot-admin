@@ -99,7 +99,25 @@ public class SchoolServiceImpl implements SchoolService {
         pd.put("startIndex",startIndex);
         pd.put("pageSize",pageSize1);
         List<HashMap<String,Object>> lists =homeMapper.getHomeList(pd);
+
+
         for(HashMap<String,Object> map :lists){
+
+            //驾校科目
+            String id = map.get("id").toString();
+            Subject su =new Subject();
+            su.setSchool_id(id);
+            su.setSubject_name("1");
+            su.setSubject("C1");
+            Subject subjectDetail = subjectMapper.getSubjectDetail(su);
+            if(null !=subjectDetail){
+                map.put("subject_name","科目二");
+                map.put("subject",subjectDetail.getSubject());
+                map.put("price",subjectDetail.getPrice());
+
+            }
+
+            //驾校标签
             Object mark=map.get("mark");
             List<String> strL =new ArrayList<>();
             if(null !=mark){
