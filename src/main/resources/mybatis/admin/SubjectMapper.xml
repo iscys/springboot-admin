@@ -70,6 +70,15 @@
         <if test="id !=null  and id != '' ">
             and a.id=#{id}
         </if>
+        <if test="school_id !=null  and school_id != '' ">
+            and a.school_id=#{school_id}
+        </if>
+        <if test="subject_name !=null  and subject_name != '' ">
+            and a.subject_name=#{subject_name}
+        </if>
+        <if test="subject !=null  and subject != '' ">
+            and a.subject=#{subject}
+        </if>
         limit 1
     </select>
 
