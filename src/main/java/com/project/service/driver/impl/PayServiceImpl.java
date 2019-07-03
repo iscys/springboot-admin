@@ -260,6 +260,7 @@ public class PayServiceImpl implements PayService {
                             Order refundOrder =new Order();
                             refundOrder.setOrder_sn(outTradeNo);
                             refundOrder.setStatus("6");
+                            refundOrder.setRefund_time(DateUtils.getTimeInSecond());
                             orderMapper.updateOrder(refundOrder);
                             logger.info("订单：{} 退款成功",outTradeNo);
                             ErrorModel model = new ErrorModel(outTradeNo, "退款成功",null ,result);
