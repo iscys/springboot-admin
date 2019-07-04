@@ -66,6 +66,12 @@
         <if test="id !=null  and id != '' ">
             and a.id=#{id}
         </if>
+        <if test="idcard !=null  and idcard != '' ">
+            and a.idcard=#{idcard}
+        </if>
+        <if test="traintype !=null  and traintype != '' ">
+            and a.traintype=#{traintype}
+        </if>
         limit 1
     </select>
 

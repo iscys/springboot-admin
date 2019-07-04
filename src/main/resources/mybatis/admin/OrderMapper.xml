@@ -87,6 +87,9 @@
         <if test="order_sn !=null  and order_sn != '' ">
             and a.order_sn=#{order_sn}
         </if>
+        <if test="apply_id !=null  and apply_id != '' ">
+            and a.apply_id=#{apply_id}
+        </if>
 
         limit 1
     </select>
