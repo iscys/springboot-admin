@@ -4,11 +4,10 @@
 
 
    <select id="getOrderCount" parameterType="com.project.utils.PageData" resultType="java.lang.Integer">
-       select
-       count(1)
-       from sdb_apply_order o
-       left join sdb_student_apply s on o.apply_id=s.id
+       select count(1)
+       from sdb_subject_order o
        left join sdb_school ol on o.school_id=ol.id
+       left join sdb_user u on u.member_id =o.member_id
        where 1=1
        <if test="phone !=null  and phone != '' ">
            and s.phone=#{phone}
@@ -16,20 +15,15 @@
        <if test="school_id !=null  and school_id != '' ">
            and o.school_id=#{school_id}
        </if>
-       <if test="idcard !=null  and idcard != '' ">
-           and s.idcard=#{idcard}
-       </if>
-       <if test="name !=null  and name != '' ">
-           and s.name=#{name}
-       </if>
+
        <if test="status !=null  and status != '' ">
            and o.status=#{status}
        </if>
        <if test="order_sn !=null  and order_sn != '' ">
            and o.order_sn=#{order_sn}
        </if>
-       <if test="traintype !=null  and traintype != '' ">
-           and s.traintype=#{traintype}
+       <if test="subject !=null  and subject != '' ">
+           and o.subject=#{subject}
        </if>
 
    </select>
@@ -42,13 +36,18 @@
         when 1 then '已付款'
         WHEN 6 then '已退款' END as status,
 
-    o.order_sn,o.price,s.`name`,s.phone,s.idcard,
+    o.order_sn,o.price,o.school_id,o.subject,o.num
 
-    ol.school_name,s.traintype
+    ol.school_name,u.phone,
+        case o.subject_name when 1 then '科目二'
+        when 2 then '科目二单学时'
+        when 3 then '科目三'
+        when 4 then '科目三单学时'
+        END as subject_name
 
-    from sdb_apply_order o
-    left join sdb_student_apply s on o.apply_id=s.id
+    from sdb_subject_order o
     left join sdb_school ol on o.school_id=ol.id
+    left join sdb_user u on u.member_id =o.member_id
     where 1=1
         <if test="phone !=null  and phone != '' ">
             and s.phone=#{phone}
@@ -56,20 +55,15 @@
         <if test="school_id !=null  and school_id != '' ">
             and o.school_id=#{school_id}
         </if>
-        <if test="idcard !=null  and idcard != '' ">
-            and s.idcard=#{idcard}
-        </if>
-        <if test="name !=null  and name != '' ">
-            and s.name=#{name}
-        </if>
+
         <if test="status !=null  and status != '' ">
             and o.status=#{status}
         </if>
         <if test="order_sn !=null  and order_sn != '' ">
             and o.order_sn=#{order_sn}
         </if>
-        <if test="traintype !=null  and traintype != '' ">
-            and s.traintype=#{traintype}
+        <if test="subject !=null  and subject != '' ">
+            and o.subject=#{subject}
         </if>
 
 
