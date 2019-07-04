@@ -288,7 +288,9 @@ public class PayServiceImpl implements PayService {
                          user.setSubject(applys.getTraintype());
                          user.setMember_id(member_id);
                          user.setSchool_id(school_id);
+                         user.setPhone(applys.getPhone());
                         userMapper.modifyUser(user);
+
 
                         ErrorModel model = new ErrorModel(outTradeNo, "微信支付成功,并且学员信息录入成功", result);
                         errorService.saveErrorLog(model);

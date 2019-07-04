@@ -87,7 +87,7 @@ public class Const {
     public static final String ORDER_STATUS_ERROR="3004";
     public static final String ORDER_STATUS_ERROR_MESSAGE="订单状态错误";
     public static final String SUBJECT_ORDER_ERROR="3005";
-    public static final String SUBJECT_ORDER_ERROR_MESSAGE="请先进行主课时单学习";
+    public static final String SUBJECT_ORDER_ERROR_MESSAGE="请先进行主课时的学习";
 
 
     public static final String WX_PAY_EXCEPTION="4001";

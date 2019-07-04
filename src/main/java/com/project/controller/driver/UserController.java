@@ -58,4 +58,27 @@ public class UserController {
         }
 
     }
+
+    /**
+     * 获取用户信息接口
+     * @param user
+     * @param request
+     * @return
+     */
+
+    @PostMapping("/userInfo")
+    public ResultObject userInfo(User user, HttpServletRequest request){
+
+        try {
+            String member_id = user.getMember_id();
+            if(StringUtils.isEmpty(member_id)){
+                return ResultObject.build(Const.MEMBER_ID_NULL,Const.MEMBER_ID_NULL_MESSAGE,null);
+            }
+            ResultObject result = userService.getUserInfo(user);
+            return result;
+        }catch (Exception e){
+            logger.error("获取用户信息异常：{}" ,e.getMessage());
+            return ResultObject.error(null);
+        }
+    }
 }

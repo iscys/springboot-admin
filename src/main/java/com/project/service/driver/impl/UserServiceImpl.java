@@ -2,9 +2,11 @@ package com.project.service.driver.impl;
 
 import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
+import com.project.mapper.admin.DriverHomeMapper;
 import com.project.mapper.driver.UserMapper;
 import com.project.model.Const;
 import com.project.model.ResultObject;
+import com.project.model.school.SchoolModel;
 import com.project.model.school.User;
 import com.project.service.driver.UserService;
 import com.project.utils.DateUtils;
@@ -26,6 +28,8 @@ public class UserServiceImpl implements UserService {
     private WxMaServiceImpl wxsmall;//微信小程序服务
     @Autowired
     private UserMapper userMapper;//微信小程序服务
+    @Autowired
+    private DriverHomeMapper homeMapper;
 
     @Override
     public ResultObject toLogin(User user) throws Exception {
@@ -60,6 +64,27 @@ public class UserServiceImpl implements UserService {
 
         }
 
+    }
+
+    @Override
+    public ResultObject getUserInfo(User user) throws Exception {
+        User userInfo = userMapper.getUserInfo(user);
+        if(null ==userInfo){
+            return ResultObject.build(Const.MEMBER_ERROR,Const.MEMBER_ERROR_MESSAGE,null);
+
+        }
+        String school_id = userInfo.getSchool_id();
+        if(StringUtils.isEmpty(school_id)){
+            userInfo.setIsBind("0");
+        }else{
+            userInfo.setIsBind("1");
+            SchoolModel sm =new SchoolModel();
+            sm.setId(school_id);
+            SchoolModel schoolDetail = homeMapper.getSchoolDetail(sm);
+            userInfo.setSchool_name(schoolDetail.getSchool_name());
+        }
+
+        return ResultObject.success(userInfo);
     }
 
 }

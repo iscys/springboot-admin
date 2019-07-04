@@ -52,5 +52,6 @@ public class User implements Serializable {
     private String school_id;
     private String school_name;
     private String subject;
+    private String isBind;
 
 }
