@@ -90,6 +90,9 @@
         <if test="apply_id !=null  and apply_id != '' ">
             and a.apply_id=#{apply_id}
         </if>
+        <if test="status !=null  and status != '' ">
+            and a.status=#{status}
+        </if>
 
         limit 1
     </select>

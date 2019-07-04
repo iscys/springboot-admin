@@ -231,7 +231,7 @@ public class PayServiceImpl implements PayService {
                 map.put("traintype",applys.getTraintype());
                 map.put("applydate",applys.getApplydate());
                 map.put("orgcode",applys.getOrgcode());
-                map.put("photo",apply.getPhoto());
+                map.put("photo",applys.getPhoto());
                 if(applys.getCardtype()!=1){
                     map.put("birdate",apply.getBirdate());
 
