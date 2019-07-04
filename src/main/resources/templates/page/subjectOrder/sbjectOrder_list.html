@@ -16,7 +16,7 @@
 			<div class="row-fluid">
 				<br/>
 
-				<form action="/order/index" method="post" class="form-inline" name="Form" id="Form">
+				<form action="/subjectOrder/index" method="post" class="form-inline" name="Form" id="Form">
 					<!-- ---+搜索条件 start+----- -->
 					<div class="form-group">
 						<label>驾校名称</label>
@@ -46,7 +46,7 @@
 
 
 					<div class="form-group">
-						<label >学员手机号</label>
+						<label >学员报名手机号</label>
 						<input type="text" name="phone" th:value="${pd.get('phone')}" class="form-control" id="phone" placeholder="学员手机">
 					</div>
 
@@ -63,6 +63,8 @@
 							<th class='center' style="min-width: 7%">手机号</th>
 							<th class='center' style="min-width: 7%">订单状态</th>
 							<th class='center' style="min-width: 7%">类型</th>
+							<th class='center' style="min-width: 7%">价格</th>
+							<th class='center' style="min-width: 7%">学时</th>
 							<th class='center' style="min-width: 7%">数量</th>
 							<th class='center' style="min-width: 7%">报考驾校</th>
 							<th class='center' style="min-width: 7%">驾照类型</th>
@@ -77,6 +79,8 @@
 							<td th:if="${record.status eq '已付款'}" class='center' th:text="${record.status}" style="color: #00FF00"></td>
 							<td class='center' th:if="${record.status eq '已退款'}" th:text="${record.status}" style="color: red"></td>
 							<td class='center' th:text="${record.subject_name}"></td>
+							<td class='center' th:text="${record.price}"></td>
+							<td class='center' th:text="${record.hours}"></td>
 							<td class='center' th:text="${record.num}"></td>
 							<td class='center' th:text="${record.school_name}"></td>
 							<td class='center' th:text="${record.subject}"></td>

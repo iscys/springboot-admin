@@ -43,11 +43,12 @@
         when 2 then '科目二单学时'
         when 3 then '科目三'
         when 4 then '科目三单学时'
-        END as subject_name
+        END as subject_name,su.hours
 
     from sdb_subject_order o
     left join sdb_school ol on o.school_id=ol.id
     left join sdb_user u on u.member_id =o.member_id
+    left join sdb_school_subject su on su.id =o.subject_id
     where 1=1
         <if test="phone !=null  and phone != '' ">
             and s.phone=#{phone}
