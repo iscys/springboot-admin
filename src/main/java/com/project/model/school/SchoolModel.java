@@ -2,6 +2,8 @@ package com.project.model.school;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+
 @Data
 public class SchoolModel {
     
@@ -22,6 +24,7 @@ public class SchoolModel {
             private String star;//驾校星级
             private String orders;//驾校星级
             private String mark;//标签
+            private ArrayList<String> tag;//标签format集合
 
 
 

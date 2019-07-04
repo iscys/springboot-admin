@@ -49,5 +49,7 @@ public class User implements Serializable {
     private String last_ip;
     //用户最后一次登录时间
     private String last_login;
+    private String school_id;
+    private String school_name;
 
 }

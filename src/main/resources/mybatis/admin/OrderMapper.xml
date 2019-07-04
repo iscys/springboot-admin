@@ -229,6 +229,9 @@
             <if test="subject_id != null  and subject_id != '' ">
                 subject_id= #{subject_id},
             </if>
+            <if test="remarks != null  and remarks != '' ">
+                remarks= #{remarks},
+            </if>
 
         </trim>
 

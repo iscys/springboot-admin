@@ -48,6 +48,7 @@ public class MarkServiceImpl implements MarkService, InitializingBean {
         }else{
             markMapper.updateMark(pd);
         }
+        buildCacheMark();
         return ResultObject.success(null);
 
     }
@@ -58,6 +59,17 @@ public class MarkServiceImpl implements MarkService, InitializingBean {
         return markMapper.getAllMark(pd);
 
     }
+
+    @Override
+    public void buildCacheMark()throws Exception {
+        afterPropertiesSet();
+    }
+
+    @Override
+    public HashMap<String, String> getCacheMarkList() {
+        return this.markList;
+    }
+
 
     @Override
     public void afterPropertiesSet() throws Exception {

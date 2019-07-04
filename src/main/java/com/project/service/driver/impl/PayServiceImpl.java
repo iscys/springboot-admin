@@ -4,6 +4,7 @@ import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
 import com.github.binarywang.wxpay.bean.request.BaseWxPayRequest;
 import com.github.binarywang.wxpay.bean.request.WxPayRefundRequest;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
+import com.github.binarywang.wxpay.bean.result.WxPayRefundResult;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
@@ -198,12 +199,16 @@ public class PayServiceImpl implements PayService {
         Order order =new Order();
         order.setOrder_sn(outTradeNo);
         Order rstOrder =orderMapper.getOrderDetil(order);
+        String member_id =rstOrder.getMember_id();
+        String school_id = rstOrder.getSchool_id();
 
 
 
         if(null!=rstOrder){
             String price = rstOrder.getPrice();
             Integer dbFee = BaseWxPayRequest.yuanToFen(price);
+
+
             if(dbFee.equals(wxFee)){
             order.setStatus("1");//设置为已经付款并持久化
                 order.setPay_time(DateUtils.getTimeInSecond());
@@ -253,7 +258,11 @@ public class PayServiceImpl implements PayService {
                         refund.setRefundFee(wxFee);
                         refund.setOutRefundNo(DateUtils.getTimeInMillis()+ ToolsUtils.sixCode());
 
-                            wxPayService.refund(refund);
+                            WxPayRefundResult resRefunf = wxPayService.refund(refund);
+                            ErrorModel tui = new ErrorModel(outTradeNo, "退款信息",null ,resRefunf.toString());
+                            errorService.saveErrorLog(tui);
+
+                            logger.info("标记订单：{}为退款状态",outTradeNo);
                             Order refundOrder =new Order();
                             refundOrder.setOrder_sn(outTradeNo);
                             refundOrder.setStatus("6");
@@ -273,7 +282,12 @@ public class PayServiceImpl implements PayService {
 
 
                 }else{
-                    //success
+                    //success 学员绑定驾校
+                    logger.info("用户：{} 绑定驾校信息",member_id);
+                         User user =new User();
+                         user.setMember_id(member_id);
+                         user.setSchool_id(school_id);
+                        userMapper.modifyUser(user);
 
                         ErrorModel model = new ErrorModel(outTradeNo, "微信支付成功,并且学员信息录入成功", result);
                         errorService.saveErrorLog(model);

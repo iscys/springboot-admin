@@ -79,6 +79,9 @@
             <if test="last_login != null  and last_login != '' ">
                 last_login,
             </if>
+            <if test="school_id != null  and school_id != '' ">
+                school_id,
+            </if>
         </trim>
 
         <trim prefix="values(" suffix=")"  suffixOverrides=",">
@@ -125,6 +128,9 @@
             <if test="last_login != null  and last_login != '' ">
                 #{last_login},
             </if>
+            <if test="school_id != null  and school_id != '' ">
+                #{school_id},
+            </if>
 
         </trim>
 
@@ -160,6 +166,10 @@
             <if test="last_login != null  and last_login != '' ">
                 last_login= #{last_login},
             </if>
+            <if test="school_id != null  and school_id != '' ">
+                school_id= #{school_id},
+            </if>
+
         </trim>
         where 1=1
         <if test="member_id != null  and member_id != '' ">

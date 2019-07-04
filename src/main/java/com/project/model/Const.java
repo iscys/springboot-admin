@@ -66,6 +66,9 @@ public class Const {
     public static final String SCHOOL_ERROR="2007";
     public static final String SCHOOL_ERROR_MESSAGE="找不到此驾校";
 
+    public static final String APPLY_EXIST="2008";
+    public static final String APPLY_EXIST_MESSAGE="已经进行了报名";
+
     public static final String ORDER_NULL="3001";
     public static final String ORDER_NULL_MESSAGE="订单不能为空";
     public static final String ORDERINFO_NULL="3002";

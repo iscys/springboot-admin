@@ -5,6 +5,7 @@ import com.project.model.school.Mark;
 import com.project.utils.DataPager;
 import com.project.utils.PageData;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface MarkService {
@@ -15,4 +16,7 @@ public interface MarkService {
     ResultObject saveMark(PageData pd)throws Exception;
 
     List<Mark> allMark(PageData pd);
+
+    void buildCacheMark() throws Exception;
+    HashMap<String,String> getCacheMarkList();
 }

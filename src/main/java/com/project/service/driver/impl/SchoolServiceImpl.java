@@ -39,6 +39,8 @@ public class SchoolServiceImpl implements SchoolService {
     private SubjectMapper subjectMapper;
     @Autowired
     private TeacherMapper teacherMapper;
+    @Autowired
+    private MarkService mark;
 
     /**
      * 查看驾校具体信息
@@ -53,6 +55,25 @@ public class SchoolServiceImpl implements SchoolService {
         SchoolModel schoolDetail = homeMapper.getSchoolDetail(schoolModel);
 
         schoolDetail.setStar("5");
+
+
+         //驾校标签
+         HashMap<String, String> cacheMarkList = mark.getCacheMarkList();
+        String mark = schoolDetail.getMark();
+        ArrayList<String> strL =new ArrayList<>();
+         if(!StringUtils.isEmpty(mark)){
+         String[] arr = mark.split(",");
+         for(String m:arr){
+         String cachMark= cacheMarkList.get(m);
+
+         if(!StringUtils.isEmpty(cachMark)) {
+         strL.add(cachMark);
+         }
+
+         }
+         }
+        schoolDetail.setTag(strL);
+
         return ResultObject.success(schoolDetail);
     }
 
@@ -117,25 +138,27 @@ public class SchoolServiceImpl implements SchoolService {
 
             }
 
+            /**
             //驾校标签
+            HashMap<String, String> cacheMarkList = mark.getCacheMarkList();
             Object mark=map.get("mark");
             List<String> strL =new ArrayList<>();
             if(null !=mark){
                 String marks = mark.toString();
                 String[] arr = marks.split(",");
                 for(String m:arr){
-                    Mark mark1 =new Mark();
-                    mark1.setId(m);
-                    Mark markDetail = markService.getMarkDetail(mark1);
-                    mark1=null;
-                    if(null !=markDetail) {
-                        strL.add(markDetail.getMark());
+                    String cachMark= cacheMarkList.get(m);
+
+                    if(!StringUtils.isEmpty(cachMark)) {
+                        strL.add(cachMark);
                     }
 
                 }
             }
             map.put("tag",strL);
+            **/
         }
+
         HashMap<String,Object> res =new HashMap<String,Object>();
         res.put("pageNum",page.getPageNum());//c传过来到页数
         res.put("totalPage",page.getTotalPage());//总页数
