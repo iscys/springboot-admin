@@ -71,7 +71,7 @@
         <if test="traintype !=null  and traintype != '' ">
             and s.traintype=#{traintype}
         </if>
-
+        limit #{startIndex},#{pageSize}
 
    </select>
 
