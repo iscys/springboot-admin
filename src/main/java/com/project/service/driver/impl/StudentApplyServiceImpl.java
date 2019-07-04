@@ -50,6 +50,27 @@ public class StudentApplyServiceImpl implements StudentApplyService {
         if(null==schoolDetail ||StringUtils.isEmpty(schoolDetail.getSchool_code())){
             return ResultObject.build(Const.SCHOOL_ERROR,Const.SCHOOL_ERROR_MESSAGE,null);
         }
+
+        //检查此人是否在平台下报名了
+        logger.info("检测学员在平台下是否报名");
+        Apply check =new Apply();
+        check.setIdcard(apply.getIdcard());
+        check.setTraintype(apply.getTraintype());
+        Apply detailApply = applyMapper.getDeatilApply(check);
+        if(null !=detailApply){
+            Order order =new Order();
+            order.setApply_id(String.valueOf(detailApply.getId()));
+            order.setStatus("1");
+            Order orderDetil = orderMapper.getOrderDetil(order);
+            if(null !=orderDetil){
+                logger.info("身份：{} 的学员已经报名了驾照类型：{}",apply.getIdcard(),apply.getTraintype());
+
+                return ResultObject.build(Const.APPLY_EXIST,Const.APPLY_EXIST_MESSAGE,null);
+
+            }
+        }
+
+
         apply.setOrgcode(schoolDetail.getSchool_code());
         apply.setApplydate(DateUtils.stableYYYMMDD());
         logger.info("开始录入驾校报名学员的信息");
