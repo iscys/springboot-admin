@@ -285,6 +285,7 @@ public class PayServiceImpl implements PayService {
                     //success 学员绑定驾校
                     logger.info("用户：{} 绑定驾校信息",member_id);
                          User user =new User();
+                         user.setSubject(applys.getTraintype());
                          user.setMember_id(member_id);
                          user.setSchool_id(school_id);
                         userMapper.modifyUser(user);
@@ -294,6 +295,7 @@ public class PayServiceImpl implements PayService {
 
 
                 }
+
             }
 
 

@@ -82,6 +82,9 @@
             <if test="school_id != null  and school_id != '' ">
                 school_id,
             </if>
+            <if test="subject != null  and subject != '' ">
+                subject,
+            </if>
         </trim>
 
         <trim prefix="values(" suffix=")"  suffixOverrides=",">
@@ -131,6 +134,9 @@
             <if test="school_id != null  and school_id != '' ">
                 #{school_id},
             </if>
+            <if test="subject != null  and subject != '' ">
+                #{subject},
+            </if>
 
         </trim>
 
@@ -168,6 +174,9 @@
             </if>
             <if test="school_id != null  and school_id != '' ">
                 school_id= #{school_id},
+            </if>
+            <if test="subject != null  and subject != '' ">
+                subject= #{subject},
             </if>
 
         </trim>

@@ -51,5 +51,6 @@ public class User implements Serializable {
     private String last_login;
     private String school_id;
     private String school_name;
+    private String subject;
 
 }

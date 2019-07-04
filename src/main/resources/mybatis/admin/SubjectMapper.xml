@@ -31,8 +31,8 @@
 
       select a.id, b.school_name,a.subject,a.price,a.discount_price,
         case a.subject_name when 1 then '科目二'
-        when 2 then '科目三'
-        when 3 then '科目二单学时'
+        when 2 then '科目二单学时'
+        when 3 then '科目三'
         when 4 then '科目三单学时'
         END as subject_name,a.hours,
       date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time from

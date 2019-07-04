@@ -2,6 +2,7 @@ package com.project.service.driver.impl;
 
 
 import com.project.mapper.admin.*;
+import com.project.mapper.driver.UserMapper;
 import com.project.model.Const;
 import com.project.model.ResultObject;
 import com.project.model.school.*;
@@ -31,6 +32,8 @@ public class StudentApplyServiceImpl implements StudentApplyService {
     private SubjectOrderMapper subjectOrderMapper;
     @Autowired
     private DriverHomeMapper homeMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 1.学员信息录入
@@ -95,14 +98,38 @@ public class StudentApplyServiceImpl implements StudentApplyService {
     @Override
     public ResultObject applySubjectOrder(ApplySubject applySubject) throws Exception {
 
+        String school_id=applySubject.getSchool_id();
+        String member_id=applySubject.getMember_id();
+        /**
+         * 此人必须绑定了驾校
+         */
+        User user =new User();
+        user.setMember_id(member_id);
+        User userInfo = userMapper.getUserInfo(user);
+        if(null==userInfo||StringUtils.isEmpty(userInfo.getSchool_id())){
+            return ResultObject.build(Const.NO_BIND_JIAXIAO,Const.NO_BIND_JIAXIAO_MESSAGE,null);
+
+        }
+        /**
+         * 驾校报名ID 要与套餐一致
+         */
+        if(!school_id.equals(userInfo.getSchool_id())){
+            return ResultObject.build(Const.BIND_SHOOL_NO_MATCH,Const.BIND_SHOOL_NO_MATCH_MESSAGE,null);
+
+        }
 
         Subject subject =new Subject();
         subject.setId(applySubject.getSubject_id());
-        subject.setSchool_id(applySubject.getSchool_id());
+        subject.setSchool_id(school_id);
         Subject subjectDetail = subjectMapper.getSubjectDetail(subject);
         if(null==subjectDetail){
             return ResultObject.build(Const.SUBJECT_ERROR,Const.SUBJECT_ERROR_MESSAGE,null);
         }
+        if(!userInfo.getSubject().equals(subjectDetail.getSubject())){
+            return ResultObject.build(Const.SUBJECT_NO_MATCH,Const.SUBJECT_NO_MATCH_MESSAGE,null);
+
+        }
+
         String db_subname= subjectDetail.getSubject_name();
         String db_subject =subjectDetail.getSubject();
         /**
@@ -112,7 +139,7 @@ public class StudentApplyServiceImpl implements StudentApplyService {
             Order order =new Order();
             order.setStatus("1");
             order.setSubject(db_subject);
-            order.setMember_id(applySubject.getMember_id());
+            order.setMember_id(member_id);
             int zhukeshi =Integer.valueOf(db_subname)-2;
             order.setSubject_name(String.valueOf(zhukeshi));
             Order orderDetil = subjectOrderMapper.getOrderDetil(order);
@@ -127,7 +154,7 @@ public class StudentApplyServiceImpl implements StudentApplyService {
         logger.info("用户：{} 正在购买科目课时订单信息",applySubject.getMember_id());
         Order order =new Order();
         //生成订单
-        order.setMember_id(applySubject.getMember_id());
+        order.setMember_id(member_id);
         order.setOrder_sn(DateUtils.getTimeInMillis()+ ToolsUtils.sixCode());
         order.setTime(DateUtils.getTimeInSecond());//录入时间
         order.setSchool_id(applySubject.getSchool_id());//驾校ID

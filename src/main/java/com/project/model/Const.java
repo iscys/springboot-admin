@@ -69,6 +69,14 @@ public class Const {
     public static final String APPLY_EXIST="2008";
     public static final String APPLY_EXIST_MESSAGE="已经进行了报名";
 
+    public static final String NO_BIND_JIAXIAO="2009";
+    public static final String NO_BIND_JIAXIAO_MESSAGE="请报名绑定驾校";
+    public static final String BIND_SHOOL_NO_MATCH="2010";
+    public static final String BIND_SHOOL_NO_MATCH_MESSAGE="请到报名的驾校购买学时";
+
+    public static final String SUBJECT_NO_MATCH="2011";
+    public static final String SUBJECT_NO_MATCH_MESSAGE="驾照类型与所选科目不一致";
+
     public static final String ORDER_NULL="3001";
     public static final String ORDER_NULL_MESSAGE="订单不能为空";
     public static final String ORDERINFO_NULL="3002";
