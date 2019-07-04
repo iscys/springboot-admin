@@ -26,6 +26,7 @@ public class Order {
             private String openid;
             private String clientIp;
              private String num;
+            private String subject;
 
 
 

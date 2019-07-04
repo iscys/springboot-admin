@@ -44,7 +44,8 @@
 
     o.order_sn,o.price,s.`name`,s.phone,s.idcard,
 
-    ol.school_name,s.traintype
+    ol.school_name,s.traintype,
+        date_format(0.create_time, '%Y-%m-%d %H:%i:%s') as create_time,
 
     from sdb_apply_order o
     left join sdb_student_apply s on o.apply_id=s.id
@@ -71,6 +72,7 @@
         <if test="traintype !=null  and traintype != '' ">
             and s.traintype=#{traintype}
         </if>
+        order by create_time desc
         limit #{startIndex},#{pageSize}
 
    </select>

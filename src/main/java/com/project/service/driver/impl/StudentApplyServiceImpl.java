@@ -104,18 +104,20 @@ public class StudentApplyServiceImpl implements StudentApplyService {
             return ResultObject.build(Const.SUBJECT_ERROR,Const.SUBJECT_ERROR_MESSAGE,null);
         }
         String db_subname= subjectDetail.getSubject_name();
+        String db_subject =subjectDetail.getSubject();
         /**
          * 必须先购买主课时，才能够单买课时
          */
         if(db_subname.equals("3")||db_subname.equals(4)){
             Order order =new Order();
             order.setStatus("1");
+            order.setSubject(db_subject);
             order.setMember_id(applySubject.getMember_id());
             int zhukeshi =Integer.valueOf(db_subname)-2;
             order.setSubject_name(String.valueOf(zhukeshi));
             Order orderDetil = subjectOrderMapper.getOrderDetil(order);
 
-            if(null!=orderDetil){
+            if(null==orderDetil){
                 return ResultObject.build(Const.SUBJECT_ORDER_ERROR,Const.SUBJECT_ORDER_ERROR_MESSAGE,null);
 
             }
@@ -133,6 +135,7 @@ public class StudentApplyServiceImpl implements StudentApplyService {
         order.setSubject_id(applySubject.getSubject_id());//套餐
         order.setSubject_name(subjectDetail.getSubject_name());
         order.setNum(applySubject.getNum());
+        order.setSubject(db_subject);
         subjectOrderMapper.saveOrder(order);
         OrderVO voOrder =new OrderVO();
         BeanUtils.copyProperties(order,voOrder);
