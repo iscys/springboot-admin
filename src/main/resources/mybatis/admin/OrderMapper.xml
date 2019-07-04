@@ -45,7 +45,7 @@
     o.order_sn,o.price,s.`name`,s.phone,s.idcard,
 
     ol.school_name,s.traintype,
-        date_format(0.create_time, '%Y-%m-%d %H:%i:%s') as create_time,
+        date_format(o.create_time, '%Y-%m-%d %H:%i:%s') as create_time
 
     from sdb_apply_order o
     left join sdb_student_apply s on o.apply_id=s.id
