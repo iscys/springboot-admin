@@ -135,12 +135,12 @@ public class StudentApplyServiceImpl implements StudentApplyService {
         /**
          * 必须先购买主课时，才能够单买课时
          */
-        if(db_subname.equals("3")||db_subname.equals(4)){
+        if(Integer.valueOf(db_subname)%2==0){
             Order order =new Order();
             order.setStatus("1");
             order.setSubject(db_subject);
             order.setMember_id(member_id);
-            int zhukeshi =Integer.valueOf(db_subname)-2;
+            int zhukeshi =Integer.valueOf(db_subname)-1;
             order.setSubject_name(String.valueOf(zhukeshi));
             Order orderDetil = subjectOrderMapper.getOrderDetil(order);
 
