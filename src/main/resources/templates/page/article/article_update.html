@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="head::common_js_css_bootstrap"></head>
+<head th:insert="head::kindeditor"></head>
+<style>
+
+    .layui-form-label {
+        width: 130px;
+    }
+    .layui-input-block {
+        margin-left: 130px;
+    }
+</style>
+<body>
+
+<div>
+    <span onclick="cancelToast()" class="btn btn-lg btn-default " style="border: 0px">返回</span>
+</div>
+<div class="container-fluid"  style="width:880px; margin: auto">
+
+
+
+    <form  class="layui-form" action="/article/save" method="post" enctype="multipart/form-data" >
+
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">文章标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" id="title" required lay-verify="required"  placeholder="文章标题"  class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否有效</label>
+            <div class="layui-input-block">
+                <input type="radio" name="flag" value="1" title="有效" checked="">
+                <input type="radio" name="flag" value="0" title="无效">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">定时发布时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="publish_time" id="publish_time"  placeholder="不选择默认即使发布" required lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+
+        <div>
+            <label class="layui-form-label">文章门面缩略图上传：</label>
+            <img  src="" style="height: 300px;width: 540px;">
+            <span  onchange="c(this,'thumb')" class="btn btn-success fileinput-button">
+	            <span>上传</span>
+	            <input id="thumb" name="thumb" type="file">
+	        </span>
+        </div>
+
+
+        <br>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">文章内容</label>
+            <div class="layui-input-block">
+                <textarea name="content"  id="content" style="width:100%;height:550px;"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <span class="layui-btn" id="sub">立即提交</span>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+<script>
+
+    layui.use(['form','laydate', 'laypage', 'layer', 'table', 'carousel', 'element', 'slider'], function() {
+        var laydate = layui.laydate //日期
+            , laypage = layui.laypage //分页
+            , layer = layui.layer //弹层
+            , table = layui.table //表格
+            , element = layui.element //元素操作
+            , slider = layui.slider //滑块
+            ,form = layui.form
+
+        //日期
+        laydate.render({
+            elem: '#publish_time'
+        });
+
+
+
+    });
+
+
+
+
+
+
+
+
+
+    function c(event, previewid) {
+        var r = new FileReader();
+        f = document.getElementById(previewid).files[0];
+
+        r.readAsDataURL(f);
+        r.onload = function (e) {
+            var imgurl = this.result;
+            $(event).siblings("img").prop("src" , imgurl);
+        };
+    }
+
+    //取消
+    function cancelToast(){
+
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index);
+
+    }
+
+    $("#sub").click(function(){
+        var formData = new FormData();
+        var thumb=$("#thumb").get(0).files[0];
+        var title=$("#title").val();
+        var publish_time=$("#publish_time").val();
+        var flag=$("input[name='flag']:checked").val();
+        var content=editor.html();
+        var message='';
+        if(ASSERT(thumb)){
+            message='请上传文章缩略图'
+        }else if (ASSERT(title)){
+            message='输入文章标题'
+        } else if(ASSERT(content)){
+            message='文章内容不能为空'
+        }
+
+        if(message!=''){
+            layer.msg(message);
+            return false;
+        }
+
+        formData.append("thumb",thumb);
+        formData.append("title",title);
+        formData.append("publish_time",publish_time);
+        formData.append("flag",flag);
+        formData.append("content",content);
+
+        $("#sub").hide();
+        $.ajax({
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/article/save" ,//url
+            data:formData,
+            processData: false,//用于对data参数进行序列化处理 这里必须false
+            contentType: false, //必须
+            success: function (result) {
+                //console.log(result);//打印服务端返回的数据(调试用)
+                if(result.flag =="1"){
+                    layer.msg("提交成功");
+                    window.setTimeout(cancelToast(),2100);
+                }else{
+                    layer.msg("提交失败，请稍后再试");
+                    $("#sub").show();
+                }
+
+
+            },
+            error : function() {
+
+                $("#sub").show();
+            }
+        });
+
+    })
+
+
+</script>
+
+<script type="text/javascript">
+
+    $(function(){
+
+
+
+
+        //富文本
+        //富文本编译器
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#teacher_describe',{
+                items:[
+                    'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+                    'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                    'anchor', 'link', 'unlink'
+                ],
+                uploadJson : '/home/img',
+            });
+        });
+
+
+
+    });
+
+</script>
+</body>
+</html>
