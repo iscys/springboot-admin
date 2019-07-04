@@ -178,6 +178,9 @@
             <if test="subject != null  and subject != '' ">
                 subject= #{subject},
             </if>
+            <if test="phone != null  and phone != '' ">
+                phone= #{phone},
+            </if>
 
         </trim>
         where 1=1
