@@ -201,9 +201,6 @@ public class PayServiceImpl implements PayService {
 
 
 
-
-
-
         if(null!=rstOrder){
             String price = rstOrder.getPrice();
             Integer dbFee = BaseWxPayRequest.yuanToFen(price);
@@ -261,6 +258,13 @@ public class PayServiceImpl implements PayService {
                             refundOrder.setOrder_sn(outTradeNo);
                             refundOrder.setStatus("6");
                             refundOrder.setRefund_time(DateUtils.getTimeInSecond());
+                            if(StringUtils.isEmpty(thirdResult.getCode()) ) {
+                                refundOrder.setRemarks("第三方系统异常");
+                            }else{
+                                refundOrder.setRemarks(thirdResult.getMessage());
+
+                            }
+
                             orderMapper.updateOrder(refundOrder);
                             logger.info("订单：{} 退款成功",outTradeNo);
                             ErrorModel model = new ErrorModel(outTradeNo, "退款成功",null ,result);

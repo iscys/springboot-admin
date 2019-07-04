@@ -138,6 +138,9 @@
             <if test="cancel_time != null  and cancel_time != '' ">
                 cancel_time,
             </if>
+            <if test="remarks != null  and remarks != '' ">
+                remarks,
+            </if>
 
 
         </trim>
@@ -185,6 +188,9 @@
             </if>
             <if test="cancel_time != null  and cancel_time != '' ">
                 #{cancel_time},
+            </if>
+            <if test="remarks != null  and remarks != '' ">
+                #{remarks},
             </if>
 
         </trim>
