@@ -14,9 +14,13 @@
 
     <select id="getArticleList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
 
-      select * from sdb_school_article a
+      select a.id,a.title,a.thumb,a.like,a.view,a.feedback,
+      date_format(a.create_time,'%Y-%m-%d %H:%i:%s') as create_time,
+      publish_time
+      from sdb_school_article a
       where 1=1
       and flag ='1'
+      order by a.create_time desc
       limit #{startIndex},#{pageSize}
 
    </select>
@@ -33,24 +37,30 @@
         limit 1
     </select>
 
-    <insert id="saveBanner" parameterType="com.project.utils.PageData">
+    <insert id="saveArticle" parameterType="com.project.utils.PageData">
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             select LAST_INSERT_ID()
         </selectKey>
-        insert into sdb_banner_image
+        insert into sdb_school_article
         <trim prefix="(" suffix=")"  suffixOverrides=",">
 
-            <if test="banner != null  and banner != '' ">
-                banner,
+            <if test="title != null  and title != '' ">
+                title,
             </if>
             <if test="flag != null  and flag != '' ">
                 flag,
             </if>
-            <if test="orders != null  and orders != '' ">
-                orders,
+            <if test="thumb != null  and thumb != '' ">
+                thumb,
             </if>
-            <if test="type != null  and type != '' ">
-                type,
+            <if test="content != null  and content != '' ">
+                content,
+            </if>
+            <if test="author != null  and author != '' ">
+                author,
+            </if>
+            <if test="publish_time != null  and publish_time != '' ">
+                publish_time,
             </if>
 
 
@@ -59,17 +69,23 @@
 
         <trim prefix="values(" suffix=")"  suffixOverrides=",">
 
-            <if test="banner != null  and banner != '' ">
-                #{banner},
+            <if test="title != null  and title != '' ">
+                #{title},
             </if>
             <if test="flag != null  and flag != '' ">
                 #{flag},
             </if>
-            <if test="orders != null  and orders != '' ">
-                #{orders},
+            <if test="thumb != null  and thumb != '' ">
+                #{thumb},
             </if>
-            <if test="type != null  and type != '' ">
-                #{type},
+            <if test="content != null  and content != '' ">
+                #{content},
+            </if>
+            <if test="author != null  and author != '' ">
+                #{author},
+            </if>
+            <if test="publish_time != null  and publish_time != '' ">
+                #{publish_time},
             </if>
 
         </trim>
@@ -77,21 +93,27 @@
 
 
 
-    <update id="updateBanner" parameterType="com.project.utils.PageData">
+    <update id="updateArticle" parameterType="com.project.utils.PageData">
       update sdb_banner_image
         <trim prefix="SET"  suffixOverrides=",">
 
-            <if test="banner != null  and banner != '' ">
-                banner=#{banner},
+            <if test="title != null  and title != '' ">
+                title=#{title},
             </if>
             <if test="flag != null  and flag != '' ">
                 flag=#{flag},
             </if>
-            <if test="orders != null  and orders != '' ">
-                orders=#{orders},
+            <if test="content != null  and content != '' ">
+                content=#{content},
             </if>
-            <if test="type != null  and type != '' ">
-                type=#{type},
+            <if test="thumb != null  and thumb != '' ">
+                thumb=#{thumb},
+            </if>
+            <if test="publish_time != null  and publish_time != '' ">
+                publish_time=#{publish_time},
+            </if>
+            <if test="author != null  and author != '' ">
+                author=#{author},
             </if>
         </trim>
 
@@ -102,15 +124,6 @@
     </update>
 
 
-    <select id="getAllBanner" parameterType="com.project.model.school.Banner" resultType="com.project.model.school.Banner">
-    select id,banner,flag,orders,create_time
-    from
-    sdb_banner_image
-    where flag ='1'
-        <if test="type != null  and type != '' ">
-            and type= #{type}
-        </if>
-    order by orders
-    </select>
+
 
 </mapper>
