@@ -94,7 +94,7 @@
 
 
     <update id="updateArticle" parameterType="com.project.utils.PageData">
-      update sdb_banner_image
+      update sdb_school_article
         <trim prefix="SET"  suffixOverrides=",">
 
             <if test="title != null  and title != '' ">

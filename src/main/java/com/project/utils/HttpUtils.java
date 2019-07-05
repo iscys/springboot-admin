@@ -1,6 +1,7 @@
 package com.project.utils;
 
 import com.project.model.JiaoXiaoApiModel;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -16,6 +17,14 @@ import java.util.List;
 import java.util.Map;
 
 public class HttpUtils {
+    /**
+     * http请求连接超时时间.
+     */
+    public  int connectionTimeout =4000;
+    /**
+     * http请求数据读取等待时间.
+     */
+    private int httpTimeout = 5000;
 
 
 
@@ -54,7 +63,7 @@ public class HttpUtils {
      */
     public String doPost(String url,String param){
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpPost httppost =new HttpPost(url);
+        HttpPost httppost =createHttpPost(url);
         try {
             httppost.addHeader("accept", "*/*");
             httppost.addHeader("connection", "Keep-Alive");
@@ -84,7 +93,8 @@ public class HttpUtils {
      */
     public String doPost(String url, HashMap<String,String> param) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpPost httppost =new HttpPost(url);
+        HttpPost httppost =createHttpPost(url);
+        //httppost.set
         try {
             //httppost.addHeader("accept", "*/*");
             //httppost.addHeader("connection", "Keep-Alive");
@@ -113,6 +123,16 @@ public class HttpUtils {
         JiaoXiaoApiModel apiResult = GsonUtils.fromJson(s, JiaoXiaoApiModel.class);
         System.out.println(apiResult.getResult().size());
 
+    }
+
+    public HttpPost createHttpPost(String url){
+        HttpPost httpPost=new HttpPost(url);
+        httpPost.setConfig(RequestConfig.custom()
+                .setConnectionRequestTimeout(connectionTimeout)
+                .setConnectTimeout(connectionTimeout)
+                .setSocketTimeout(httpTimeout)
+                .build());
+        return httpPost;
     }
 
 }

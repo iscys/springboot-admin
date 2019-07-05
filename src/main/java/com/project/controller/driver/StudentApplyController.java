@@ -125,9 +125,8 @@ public class StudentApplyController  {
 
 
 
-       // String result = HttpUtils.INSTANCE.doPost("http://203.86.28.33:10089/File/SaveStudent", map);
-ThirdResult th =new ThirdResult();
-System.out.println(th.isSuccess());
+      //  String result = HttpUtils.INSTANCE.doPost("http://203.86.28.33:10089/File/SaveStudent", map);
+        //System.out.println(result);
 
 
     }

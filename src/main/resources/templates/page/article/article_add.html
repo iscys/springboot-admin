@@ -135,6 +135,8 @@
             message='输入文章标题'
         } else if(ASSERT(content)){
             message='文章内容不能为空'
+        }else if(ASSERT(publish_time)){
+            message='发布时间不能为空'
         }
 
         if(message!=''){
