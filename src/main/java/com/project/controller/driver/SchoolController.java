@@ -3,13 +3,13 @@ package com.project.controller.driver;
 import com.project.controller.BaseController;
 import com.project.model.Const;
 import com.project.model.ResultObject;
-import com.project.model.school.SchoolModel;
-import com.project.model.school.Subject;
-import com.project.model.school.Teacher;
+import com.project.model.school.*;
 import com.project.service.admin.TeacherService;
 import com.project.service.driver.SchoolService;
 import com.project.utils.PageData;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +23,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/school")
 public class SchoolController extends BaseController {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private SchoolService schoolService;
     @Autowired
@@ -157,7 +159,8 @@ public class SchoolController extends BaseController {
     }
 
     /**
-     * 教练详情
+     * 驾校名字列表
+     * @return
      */
     @PostMapping("/schoolList")
     public ResultObject schoolList() {
@@ -180,6 +183,58 @@ public class SchoolController extends BaseController {
         }
     }
 
+    /**
+     * 学员对驾校评价
+     */
+    @PostMapping ("/schfbk")
+    public ResultObject feedback_school(FeedBackSchool fda){
+        if(org.springframework.util.StringUtils.isEmpty(fda.getFrom_member_id())){
+            return ResultObject.build(Const.MEMBER_ID_NULL,Const.MEMBER_ID_NULL_MESSAGE,null);
+        }
 
+        if(org.springframework.util.StringUtils.isEmpty(fda.getFeedback())){
+            return ResultObject.build(Const.FEED_BACK_NULL,Const.FEED_BACK_NULL_MESSAGE,null);
+        }
+
+        if(org.springframework.util.StringUtils.isEmpty(fda.getSchool_id())){
+            return ResultObject.build(Const.SHOOL_ID_NULL,Const.SHOOL_ID_NULL_MESSAGE,null);
+        }
+
+        try{
+            ResultObject rest= schoolService.saveSchoolFeedback(fda);
+            return rest;
+
+        }catch (Exception e){
+            logger.error("api保存用户评论驾校：{}",e.getMessage());
+            return ResultObject.error(null);
+        }
+
+    }
+
+
+
+    /**
+     * 驾校评价列表
+     */
+    @PostMapping ("/schfbkList")
+    public ResultObject feedback_school_list(){
+        PageData pd = this.getPageData();
+        String school_id = pd.getString("school_id");
+
+
+        if(org.springframework.util.StringUtils.isEmpty(school_id)){
+            return ResultObject.build(Const.SHOOL_ID_NULL,Const.SHOOL_ID_NULL_MESSAGE,null);
+        }
+
+        try{
+            ResultObject rest= schoolService.getSchoolFeedbackList(pd);
+            return rest;
+
+        }catch (Exception e){
+            logger.error("获取驾校评论列表异常：{}",e.getMessage());
+            return ResultObject.error(null);
+        }
+
+    }
 
 }

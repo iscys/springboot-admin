@@ -77,6 +77,8 @@ public class Const {
     public static final String SUBJECT_NO_MATCH="2011";
     public static final String SUBJECT_NO_MATCH_MESSAGE="驾照类型与所选科目不一致";
 
+
+
     public static final String ORDER_NULL="3001";
     public static final String ORDER_NULL_MESSAGE="订单不能为空";
     public static final String ORDERINFO_NULL="3002";
@@ -100,6 +102,12 @@ public class Const {
     public static final String FEED_BACK_NULL_MESSAGE="评论不能为空";
     public static final String ATRICLE_ID_NULL="5002";
     public static final String ATRICLE_ID_NULL_MESSAGE="文章ID不能为空";
+
+    public static final String TO_ID_NULL="5003";
+    public static final String TO_ID_NULL_MESSAGE="回复的主ID不能为空";
+
+    public static final String STAR_NULL="5004";
+    public static final String STAR_NULL_MESSAGE="星级不能为空";
 
 
 

@@ -138,25 +138,6 @@ public class SchoolServiceImpl implements SchoolService {
 
             }
 
-            /**
-            //驾校标签
-            HashMap<String, String> cacheMarkList = mark.getCacheMarkList();
-            Object mark=map.get("mark");
-            List<String> strL =new ArrayList<>();
-            if(null !=mark){
-                String marks = mark.toString();
-                String[] arr = marks.split(",");
-                for(String m:arr){
-                    String cachMark= cacheMarkList.get(m);
-
-                    if(!StringUtils.isEmpty(cachMark)) {
-                        strL.add(cachMark);
-                    }
-
-                }
-            }
-            map.put("tag",strL);
-            **/
         }
 
         HashMap<String,Object> res =new HashMap<String,Object>();
@@ -203,6 +184,12 @@ public class SchoolServiceImpl implements SchoolService {
         return ResultObject.success(res);
     }
 
+    /**
+     * 获取驾校教师全部列表信息
+     * @param pd
+     * @return
+     * @throws Exception
+     */
     @Override
     public ResultObject teacherList(PageData pd) throws Exception {
         String school_id = pd.getString("school_id");
@@ -232,11 +219,71 @@ public class SchoolServiceImpl implements SchoolService {
 
         return ResultObject.success(res);
     }
-
+    /**
+     * 获取教师详细信息
+     * @return
+     * @throws Exception
+     */
     @Override
     public ResultObject getTeacherDetail(Teacher teacher) throws Exception {
 
         Teacher te =teacherMapper.getTeacherDetail(teacher);
         return ResultObject.success(te);
+    }
+
+    /**
+     * 保存学员对驾校的评论
+     * @param fda
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public ResultObject saveSchoolFeedback(FeedBackSchool fda)throws Exception {
+
+        if(!StringUtils.isEmpty(fda.getTo_member_id())){
+            if(StringUtils.isEmpty(fda.getTo_id())){
+                return ResultObject.build(Const.TO_ID_NULL,Const.TO_ID_NULL_MESSAGE,null);
+            }
+
+            fda.setType("2");//属于to-from之间的会话，不属于主评论的内容
+        }else{
+            String star = fda.getStar();
+            if(StringUtils.isEmpty(star)){
+                return ResultObject.build(Const.STAR_NULL,Const.STAR_NULL_MESSAGE,null);
+            }
+        }
+        homeMapper.saveSchoolFeedBack(fda);
+        return ResultObject.success(null);
+    }
+
+    /**
+     * 驾校评论列表
+     * @param pd
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public ResultObject getSchoolFeedbackList(PageData pd) throws Exception {
+        String pageNum = pd.getString("pageNum");
+        if(StringUtils.isEmpty(pageNum)||pageNum.equals("0")){
+            pageNum ="1";
+            pd.put("pageNum",pageNum);
+        }
+
+        int pageSize = Const.DEFAULT_PAGESIZE;
+        int total =homeMapper.getSchoolFeedBackCount(pd);
+
+        Page page =new Page(Integer.valueOf(pageNum),total,pageSize);
+        int startIndex = page.getStartIndex();
+        int pageSize1 = page.getPageSize();
+        pd.put("startIndex",startIndex);
+        pd.put("pageSize",pageSize1);
+        List<HashMap<String,String>> lists =homeMapper.getSchoolFeedBackList(pd);
+        HashMap<String,Object> res =new HashMap<String,Object>();
+        res.put("pageNum",page.getPageNum());//c传过来到页数
+        res.put("totalPage",page.getTotalPage());//总页数
+        res.put("feedback_list",lists);
+
+        return ResultObject.success(res);
     }
 }

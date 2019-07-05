@@ -115,6 +115,7 @@
             <if test="author != null  and author != '' ">
                 author=#{author},
             </if>
+
         </trim>
 
       where 1=1

@@ -2,6 +2,7 @@ package com.project.mapper.admin;
 
 
 import com.project.model.school.Album;
+import com.project.model.school.FeedBackSchool;
 import com.project.model.school.SchoolModel;
 import com.project.utils.PageData;
 
@@ -27,4 +28,10 @@ public interface DriverHomeMapper  {
     List<SchoolModel> getAllSchoolList(PageData pd);
 
     SchoolModel getSimpleSchool(SchoolModel schoolModel);
+
+    void saveSchoolFeedBack(FeedBackSchool fda);
+
+    int getSchoolFeedBackCount(PageData pd);
+
+    List<HashMap<String, String>> getSchoolFeedBackList(PageData pd);
 }

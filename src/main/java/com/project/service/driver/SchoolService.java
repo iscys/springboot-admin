@@ -2,6 +2,7 @@ package com.project.service.driver;
 
 
 import com.project.model.ResultObject;
+import com.project.model.school.FeedBackSchool;
 import com.project.model.school.SchoolModel;
 import com.project.model.school.Teacher;
 import com.project.utils.PageData;
@@ -22,4 +23,8 @@ public interface SchoolService {
     ResultObject teacherList(PageData pd) throws Exception;
 
     ResultObject getTeacherDetail(Teacher teacher) throws Exception;
+
+    ResultObject saveSchoolFeedback(FeedBackSchool fda) throws Exception;
+
+    ResultObject getSchoolFeedbackList(PageData pd) throws Exception;
 }
