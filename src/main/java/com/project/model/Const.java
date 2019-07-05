@@ -96,6 +96,13 @@ public class Const {
 
 
 
+    public static final String FEED_BACK_NULL="5001";
+    public static final String FEED_BACK_NULL_MESSAGE="评论不能为空";
+    public static final String ATRICLE_ID_NULL="5002";
+    public static final String ATRICLE_ID_NULL_MESSAGE="文章ID不能为空";
+
+
+
 
     public static final String JIAPXIAPI="http://v.juhe.cn/jztk/query?key=f3653c439947f2d03a672e74c01c5d99&model=%s&subject=%s&format=true&testType=order";
 }
