@@ -283,6 +283,7 @@ public class SchoolServiceImpl implements SchoolService {
         if(StringUtils.isEmpty(to_id)){
         lists =homeMapper.getSchoolFeedBackList(pd);
         }else{
+            //to-from 之间的子评论
             lists= homeMapper.getSchoolSubFeedBackList(pd);
         }
 
