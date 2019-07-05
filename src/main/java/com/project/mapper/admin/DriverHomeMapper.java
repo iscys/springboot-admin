@@ -34,4 +34,6 @@ public interface DriverHomeMapper  {
     int getSchoolFeedBackCount(PageData pd);
 
     List<HashMap<String, String>> getSchoolFeedBackList(PageData pd);
+
+    List<HashMap<String, String>> getSchoolSubFeedBackList(PageData pd);
 }

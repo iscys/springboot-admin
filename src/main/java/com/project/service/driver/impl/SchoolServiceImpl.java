@@ -264,13 +264,14 @@ public class SchoolServiceImpl implements SchoolService {
      */
     @Override
     public ResultObject getSchoolFeedbackList(PageData pd) throws Exception {
+        String to_id = pd.getString("to_id");
         String pageNum = pd.getString("pageNum");
         if(StringUtils.isEmpty(pageNum)||pageNum.equals("0")){
             pageNum ="1";
             pd.put("pageNum",pageNum);
         }
 
-        int pageSize = Const.DEFAULT_PAGESIZE;
+        int pageSize = 10;
         int total =homeMapper.getSchoolFeedBackCount(pd);
 
         Page page =new Page(Integer.valueOf(pageNum),total,pageSize);
@@ -278,7 +279,13 @@ public class SchoolServiceImpl implements SchoolService {
         int pageSize1 = page.getPageSize();
         pd.put("startIndex",startIndex);
         pd.put("pageSize",pageSize1);
-        List<HashMap<String,String>> lists =homeMapper.getSchoolFeedBackList(pd);
+        List<HashMap<String,String>> lists;
+        if(StringUtils.isEmpty(to_id)){
+        lists =homeMapper.getSchoolFeedBackList(pd);
+        }else{
+            lists= homeMapper.getSchoolSubFeedBackList(pd);
+        }
+
         HashMap<String,Object> res =new HashMap<String,Object>();
         res.put("pageNum",page.getPageNum());//c传过来到页数
         res.put("totalPage",page.getTotalPage());//总页数
