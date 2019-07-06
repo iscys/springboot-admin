@@ -97,6 +97,16 @@
                 <optional>true</optional>
             </dependency>
 
+
+
+
+            <!--baidu api-->
+            <dependency>
+                <groupId>com.baidu.aip</groupId>
+                <artifactId>java-sdk</artifactId>
+                <version>4.3.2</version>
+            </dependency>
+
         </dependencies>
 
 <!--打包插件-->

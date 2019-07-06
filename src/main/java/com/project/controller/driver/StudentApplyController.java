@@ -1,7 +1,9 @@
 package com.project.controller.driver;
 
+import com.baidu.aip.ocr.AipOcr;
 import com.project.config.ConfigProperties;
 import com.project.model.Const;
+import com.project.model.IDCard.IDFront;
 import com.project.model.ResultObject;
 import com.project.model.school.Apply;
 import com.project.model.school.ApplySubject;
@@ -12,6 +14,8 @@ import com.project.utils.DateUtils;
 import com.project.utils.GsonUtils;
 import com.project.utils.HttpUtils;
 import com.project.utils.ToolsUtils;
+import org.apache.commons.io.FileUtils;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.HashMap;
 
 
@@ -107,7 +113,7 @@ public class StudentApplyController  {
 
 
     }
-
+/**
     public static void main(String[] args) {
 
         HashMap<String,String> map  =new HashMap<>();
@@ -130,6 +136,7 @@ public class StudentApplyController  {
 
 
     }
+    **/
 
     /**
      * 学员购买课时
@@ -160,5 +167,33 @@ public class StudentApplyController  {
         }
 
 
+    }
+
+
+    public static void main(String[] args)throws Exception {
+        String appid ="16726104";
+        String apiKey ="gkk0uqFVgEPefG7oYWMEqMSE";
+        String apiSecret ="XkWuFCtvLTD2bQVS53u09cAfZxWNtSo5";
+
+        AipOcr aip =new AipOcr(appid,apiKey,apiSecret);
+
+        // 可选：设置网络连接参数
+        aip.setConnectionTimeoutInMillis(2000);
+        aip.setSocketTimeoutInMillis(60000);
+
+        HashMap<String, String> options = new HashMap<String, String>();
+        options.put("detect_direction", "true");
+        options.put("detect_risk", "false");
+
+        //String idCardSide = "back";
+        String idCardSide = "front";
+        File file =new File("/Users/iscys/Desktop/21560748145_.pic.jpg");
+        byte[] b=FileUtils.readFileToByteArray(file);
+        // 参数为本地路径
+        String image = "/Users/iscys/Desktop/21560748145_.pic.jpg";
+        JSONObject res = aip.idcard(b, idCardSide, options);
+        System.out.println(res.toString());
+        IDFront idFront = GsonUtils.fromJson(res.toString(), IDFront.class);
+        System.err.println(idFront.getWords_result().get公民身份号码().getWords());
     }
 }

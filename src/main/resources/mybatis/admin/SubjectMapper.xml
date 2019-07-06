@@ -66,7 +66,7 @@
          from
         sdb_school_subject a
         where 1=1
-        and a.flag ='1'
+
         <if test="id !=null  and id != '' ">
             and a.id=#{id}
         </if>
@@ -79,6 +79,7 @@
         <if test="subject !=null  and subject != '' ">
             and a.subject=#{subject}
         </if>
+        and a.flag ='1'
         limit 1
     </select>
 
