@@ -89,7 +89,7 @@ public class Const {
     public static final String ORDER_STATUS_ERROR="3004";
     public static final String ORDER_STATUS_ERROR_MESSAGE="订单状态错误";
     public static final String SUBJECT_ORDER_ERROR="3005";
-    public static final String SUBJECT_ORDER_ERROR_MESSAGE="请先进行主课时的学习";
+    public static final String SUBJECT_ORDER_ERROR_MESSAGE="请先进行主学时的学习";
 
 
     public static final String WX_PAY_EXCEPTION="4001";
@@ -108,6 +108,9 @@ public class Const {
 
     public static final String STAR_NULL="5004";
     public static final String STAR_NULL_MESSAGE="星级不能为空";
+
+    public static final String TO_MEMBER_ID_NULL="5005";
+    public static final String TO_MEMBER_ID_NULL_MESSAGE="被回复者不能为空";
 
 
 

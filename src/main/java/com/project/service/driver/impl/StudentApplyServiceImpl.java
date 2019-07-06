@@ -117,7 +117,9 @@ public class StudentApplyServiceImpl implements StudentApplyService {
             return ResultObject.build(Const.BIND_SHOOL_NO_MATCH,Const.BIND_SHOOL_NO_MATCH_MESSAGE,null);
 
         }
-
+        /**
+         * 驾照类型必须匹配
+         */
         Subject subject =new Subject();
         subject.setId(applySubject.getSubject_id());
         subject.setSchool_id(school_id);
@@ -151,7 +153,7 @@ public class StudentApplyServiceImpl implements StudentApplyService {
         }
 
 
-        logger.info("用户：{} 正在购买科目课时订单信息",applySubject.getMember_id());
+        logger.info("用户：{} 正在购买科目学时订单信息",applySubject.getMember_id());
         Order order =new Order();
         //生成订单
         order.setMember_id(member_id);

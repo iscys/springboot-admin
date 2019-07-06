@@ -5,6 +5,7 @@ import com.project.mapper.admin.BannerMapper;
 import com.project.mapper.admin.DriverHomeMapper;
 import com.project.mapper.admin.SubjectMapper;
 import com.project.mapper.admin.TeacherMapper;
+import com.project.mapper.driver.UserMapper;
 import com.project.model.Const;
 import com.project.model.ResultObject;
 import com.project.model.school.*;
@@ -41,6 +42,8 @@ public class SchoolServiceImpl implements SchoolService {
     private TeacherMapper teacherMapper;
     @Autowired
     private MarkService mark;
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 查看驾校具体信息
@@ -149,7 +152,7 @@ public class SchoolServiceImpl implements SchoolService {
     }
 
     /**
-     * 驾校套餐列表
+     * 驾校套餐列表,根据用户报考的驾照类型推荐出套餐
      * @param pd
      * @return
      * @throws Exception
@@ -157,8 +160,19 @@ public class SchoolServiceImpl implements SchoolService {
     @Override
     public ResultObject subjectList(PageData pd) throws Exception {
         String school_id = pd.getString("school_id");
+        String member_id = pd.getString("member_id");
         if(StringUtils.isEmpty(school_id)){
             return ResultObject.build(Const.SHOOL_ID_NULL,Const.SHOOL_ID_NULL_MESSAGE,null);
+        }
+        if(StringUtils.isEmpty(member_id)){
+            return ResultObject.build(Const.MEMBER_ID_NULL,Const.MEMBER_ID_NULL_MESSAGE,null);
+        }
+        User user =new User();
+        user.setMember_id(member_id);
+        User userInfo = userMapper.getUserInfo(user);
+        String subject = userInfo.getSubject();
+        if(!StringUtils.isEmpty(subject)){
+            pd.put("subject",subject);
         }
 
         String pageNum = pd.getString("pageNum");
