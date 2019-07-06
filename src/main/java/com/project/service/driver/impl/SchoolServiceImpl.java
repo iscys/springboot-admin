@@ -251,6 +251,16 @@ public class SchoolServiceImpl implements SchoolService {
             if(StringUtils.isEmpty(star)){
                 return ResultObject.build(Const.STAR_NULL,Const.STAR_NULL_MESSAGE,null);
             }
+
+            Double int_star =Double.valueOf(star);
+            if(int_star<=1<<1){
+                fda.setLevel("1");
+            }else if(int_star<=1<<2){
+                fda.setLevel("2");
+            }else{
+                fda.setLevel("3");
+
+            }
         }
         homeMapper.saveSchoolFeedBack(fda);
         return ResultObject.success(null);
@@ -294,4 +304,85 @@ public class SchoolServiceImpl implements SchoolService {
 
         return ResultObject.success(res);
     }
+
+    /**
+     * 保存学员对教练对评价
+     * @param fda
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public ResultObject saveTeacherFeedback(FeedBackTeacher fda) throws Exception {
+
+        if(!StringUtils.isEmpty(fda.getTo_member_id())){
+            if(StringUtils.isEmpty(fda.getTo_id())){
+                return ResultObject.build(Const.TO_ID_NULL,Const.TO_ID_NULL_MESSAGE,null);
+            }
+
+            fda.setType("2");//属于to-from之间的会话，不属于主评论的内容
+        }else{
+            String star = fda.getStar();
+            if(StringUtils.isEmpty(star)){
+                return ResultObject.build(Const.STAR_NULL,Const.STAR_NULL_MESSAGE,null);
+            }
+            Double int_star =Double.valueOf(star);
+            if(int_star<=1<<1){
+                fda.setLevel("1");
+            }else if(int_star<=1<<2){
+                fda.setLevel("2");
+            }else{
+                fda.setLevel("3");
+
+            }
+        }
+        homeMapper.saveTeacherFeedBack(fda);
+        return ResultObject.success(null);
+    }
+
+    /**
+     * 教练评论列表
+     * @param pd
+     * @return
+     * @throws Exception
+     */
+
+    @Override
+    public ResultObject getTeacherFeedbackList(PageData pd) throws Exception {
+        String to_id = pd.getString("to_id");
+        String pageNum = pd.getString("pageNum");
+        if(StringUtils.isEmpty(pageNum)||pageNum.equals("0")){
+            pageNum ="1";
+            pd.put("pageNum",pageNum);
+        }
+
+        int pageSize = 10;
+        int total =homeMapper.getTeacherFeedBackCount(pd);
+
+        Page page =new Page(Integer.valueOf(pageNum),total,pageSize);
+        int startIndex = page.getStartIndex();
+        int pageSize1 = page.getPageSize();
+        pd.put("startIndex",startIndex);
+        pd.put("pageSize",pageSize1);
+        List<HashMap<String,String>> lists;
+        if(StringUtils.isEmpty(to_id)){
+            lists =homeMapper.getTeacherFeedBackList(pd);
+        }else{
+            //to-from 之间的子评论
+            lists= homeMapper.getTeacherSubFeedBackList(pd);
+        }
+
+        HashMap<String,Object> res =new HashMap<String,Object>();
+        res.put("pageNum",page.getPageNum());//c传过来到页数
+        res.put("totalPage",page.getTotalPage());//总页数
+        res.put("feedback_list",lists);
+
+        return ResultObject.success(res);
+
+
+
+
+    }
+
+
+
 }

@@ -237,4 +237,66 @@ public class SchoolController extends BaseController {
 
     }
 
+
+
+
+
+
+
+
+
+    /**
+     * 学员对驾校评价
+     */
+    @PostMapping ("/techerfbk")
+    public ResultObject feedback_teacher(FeedBackTeacher fda){
+        if(org.springframework.util.StringUtils.isEmpty(fda.getFrom_member_id())){
+            return ResultObject.build(Const.MEMBER_ID_NULL,Const.MEMBER_ID_NULL_MESSAGE,null);
+        }
+
+        if(org.springframework.util.StringUtils.isEmpty(fda.getFeedback())){
+            return ResultObject.build(Const.FEED_BACK_NULL,Const.FEED_BACK_NULL_MESSAGE,null);
+        }
+
+        if(org.springframework.util.StringUtils.isEmpty(fda.getTeacher_id())){
+            return ResultObject.build(Const.TEACHER_ID_NULL,Const.TEACHER_ID_NULL_MESSAGE,null);
+        }
+
+        try{
+            ResultObject rest= schoolService.saveTeacherFeedback(fda);
+            return rest;
+
+        }catch (Exception e){
+            logger.error("api保存用户评论教练异常：{}",e.getMessage());
+            return ResultObject.error(null);
+        }
+
+    }
+
+
+
+    /**
+     * 教练评价列表
+     */
+    @PostMapping ("/techerfbkList")
+    public ResultObject feedback_teacher_list(){
+        PageData pd = this.getPageData();
+        String teacher_id = pd.getString("teacher_id");
+
+
+        if(org.springframework.util.StringUtils.isEmpty(teacher_id)){
+            return ResultObject.build(Const.TEACHER_ID_NULL,Const.TEACHER_ID_NULL_MESSAGE,null);
+        }
+
+        try{
+            ResultObject rest= schoolService.getTeacherFeedbackList(pd);
+            return rest;
+
+        }catch (Exception e){
+            logger.error("获取教练评论列表异常：{}",e.getMessage());
+            return ResultObject.error(null);
+        }
+
+    }
+
 }
