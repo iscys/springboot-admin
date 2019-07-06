@@ -367,6 +367,9 @@
     select count(1)
     from sdb_school_feedback a
     where 1=1
+        <if test="school_id != null  and school_id != '' ">
+            and  a.school_id =#{school_id}
+        </if>
         <choose>
             <when test="to_id != null  and to_id != '' ">
                 and a.type ='2'
@@ -378,9 +381,7 @@
         </choose>
 
 
-        <if test="school_id != null  and school_id != '' ">
-           and  a.school_id =#{school_id}
-        </if>
+
 
     </select>
 
@@ -394,10 +395,10 @@
         from sdb_school_feedback a
         left join  sdb_user u on u.member_id =a.from_member_id
         where 1=1
-        and a.type ='0'
         <if test="school_id != null  and school_id != '' ">
             and  a.school_id =#{school_id}
         </if>
+        and a.type ='0'
         <if test="level != null  and level != '' ">
             and  a.level =#{level}
         </if>
@@ -418,10 +419,10 @@
         left join  sdb_user u on u.member_id =a.from_member_id
         left join  sdb_user u2 on u2.member_id =a.to_member_id
        where 1=1
-        and a.type ='2'
         <if test="school_id != null  and school_id != '' ">
             and  a.school_id =#{school_id}
         </if>
+        and a.type ='2'
         <if test="to_id != null  and to_id != '' ">
             and  a.to_id =#{to_id}
         </if>
@@ -566,8 +567,8 @@
         left join  sdb_user u2 on u2.member_id =a.to_member_id
         where 1=1
         and a.type ='2'
-        <if test="teacher != null  and teacher != '' ">
-            and  a.teacher =#{teacher}
+        <if test="teacher_id != null  and teacher_id != '' ">
+            and  a.teacher_id =#{teacher_id}
         </if>
         <if test="to_id != null  and to_id != '' ">
             and  a.to_id =#{to_id}
