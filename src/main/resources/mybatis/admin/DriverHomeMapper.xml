@@ -286,6 +286,9 @@
     </select>
 
 
+
+
+    <!--驾校评价-->
     <insert id="saveSchoolFeedBack" parameterType="com.project.model.school.FeedBackSchool">
         insert into sdb_school_feedback
         <trim prefix="(" suffix=")"  suffixOverrides=",">
@@ -313,6 +316,9 @@
             </if>
             <if test="star != null  and star != '' ">
                 star,
+            </if>
+            <if test="level != null  and level != '' ">
+                level,
             </if>
 
         </trim>
@@ -343,6 +349,9 @@
             <if test="star != null  and star != '' ">
                 #{star},
             </if>
+            <if test="level != null  and level != '' ">
+                #{level},
+            </if>
 
 
         </trim>
@@ -358,6 +367,7 @@
         <choose>
             <when test="to_id != null  and to_id != '' ">
                 and a.type ='2'
+                and  a.to_id =#{to_id}
             </when>
             <otherwise>
                 and a.type ='0'
@@ -369,24 +379,199 @@
            and  a.school_id =#{school_id}
         </if>
 
-        <if test="to_id != null  and to_id != '' ">
-            and  a.to_id =#{to_id}
-        </if>
-
     </select>
 
 
     <select id="getSchoolFeedBackList" parameterType="com.project.utils.PageData" resultType="com.project.utils.PageData">
 
 
-        select a.* , (select count(1) from sdb_school_feedback b WHERE b.to_id =a.id )as counts
+        select a.feedback ,a.id,a.to_id,a.from_member_id,a.star,a.level,
+        date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time,
+        u.nickname as fromUser,u.headimgurl as fromImgUrl, (select count(1) from sdb_school_feedback b WHERE b.to_id =a.id )as counts
         from sdb_school_feedback a
+        left join  sdb_user u on u.member_id =a.from_member_id
         where 1=1
         and a.type ='0'
         <if test="school_id != null  and school_id != '' ">
             and  a.school_id =#{school_id}
         </if>
+        <if test="level != null  and level != '' ">
+            and  a.level =#{level}
+        </if>
 
+        order by a.id desc
+        limit #{startIndex},#{pageSize}
+    </select>
+
+
+    <select id="getSchoolSubFeedBackList" parameterType="com.project.utils.PageData" resultType="com.project.utils.PageData">
+
+
+       select a.id, a.feedback,a.to_id,a.from_member_id,a.to_member_id,
+       u.nickname as fromUser,u.headimgurl as fromImgUrl,
+        u2.nickname as toUser,u2.headimgurl as toImgUrl,
+        date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time
+        from sdb_school_feedback a
+        left join  sdb_user u on u.member_id =a.from_member_id
+        left join  sdb_user u2 on u2.member_id =a.to_member_id
+       where 1=1
+        and a.type ='2'
+        <if test="school_id != null  and school_id != '' ">
+            and  a.school_id =#{school_id}
+        </if>
+        <if test="to_id != null  and to_id != '' ">
+            and  a.to_id =#{to_id}
+        </if>
+
+
+        limit #{startIndex},#{pageSize}
+    </select>
+
+
+
+
+
+
+
+<!--教练评价-->
+
+
+    <insert id="saveTeacherFeedBack" parameterType="com.project.model.school.FeedBackTeacher">
+        insert into sdb_school_teacher_feedback
+        <trim prefix="(" suffix=")"  suffixOverrides=",">
+
+            <if test="from_member_id != null  and from_member_id != '' ">
+                from_member_id,
+            </if>
+            <if test="flag != null  and flag != '' ">
+                flag,
+            </if>
+            <if test="to_member_id != null  and to_member_id != '' ">
+                to_member_id,
+            </if>
+            <if test="teacher_id != null  and teacher_id != '' ">
+                teacher_id,
+            </if>
+            <if test="feedback != null  and feedback != '' ">
+                feedback,
+            </if>
+            <if test="type != null  and type != '' ">
+                type,
+            </if>
+            <if test="to_id != null  and to_id != '' ">
+                to_id,
+            </if>
+            <if test="star != null  and star != '' ">
+                star,
+            </if>
+            <if test="level != null  and level != '' ">
+                level,
+            </if>
+
+        </trim>
+
+        <trim prefix="values(" suffix=")"  suffixOverrides=",">
+
+            <if test="from_member_id != null  and from_member_id != '' ">
+                #{from_member_id},
+            </if>
+            <if test="flag != null  and flag != '' ">
+                #{flag},
+            </if>
+            <if test="to_member_id != null  and to_member_id != '' ">
+                #{to_member_id},
+            </if>
+            <if test="teacher_id != null  and teacher_id != '' ">
+                #{teacher_id},
+            </if>
+            <if test="feedback != null  and feedback != '' ">
+                #{feedback},
+            </if>
+            <if test="type != null  and type != '' ">
+                #{type},
+            </if>
+            <if test="to_id != null  and to_id != '' ">
+                #{to_id},
+            </if>
+            <if test="star != null  and star != '' ">
+                #{star},
+            </if>
+            <if test="level != null  and level != '' ">
+                #{level},
+            </if>
+
+
+        </trim>
+
+    </insert>
+
+
+    <select id="getTeacherFeedBackCount" parameterType="com.project.utils.PageData" resultType="java.lang.Integer">
+
+        select count(1)
+        from sdb_school_teacher_feedback a
+        where 1=1
+        <choose>
+            <when test="to_id != null  and to_id != '' ">
+                and a.type ='2'
+                and  a.to_id =#{to_id}
+            </when>
+            <otherwise>
+                and a.type ='0'
+            </otherwise>
+        </choose>
+
+
+        <if test="teacher_id != null  and teacher_id != '' ">
+            and  a.teacher_id =#{teacher_id}
+        </if>
 
     </select>
+
+
+    <select id="getTeacherFeedBackList" parameterType="com.project.utils.PageData" resultType="com.project.utils.PageData">
+
+
+        select a.feedback ,a.id,a.to_id,a.from_member_id,a.star,a.level,
+        date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time,
+        u.nickname as fromUser,u.headimgurl as fromImgUrl, (select count(1) from sdb_school_teacher_feedback b WHERE b.to_id =a.id )as counts
+        from sdb_school_teacher_feedback a
+        left join  sdb_user u on u.member_id =a.from_member_id
+        where 1=1
+        and a.type ='0'
+        <if test="teacher_id != null  and teacher_id != '' ">
+            and  a.teacher_id =#{teacher_id}
+        </if>
+        <if test="level != null  and level != '' ">
+            and  a.level =#{level}
+        </if>
+
+        order by a.id desc
+        limit #{startIndex},#{pageSize}
+    </select>
+
+
+    <select id="getTeacherSubFeedBackList" parameterType="com.project.utils.PageData" resultType="com.project.utils.PageData">
+
+
+        select a.id, a.feedback,a.to_id,a.from_member_id,a.to_member_id,
+        u.nickname as fromUser,u.headimgurl as fromImgUrl,
+        u2.nickname as toUser,u2.headimgurl as toImgUrl,
+        date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time
+        from sdb_school_teacher_feedback a
+        left join  sdb_user u on u.member_id =a.from_member_id
+        left join  sdb_user u2 on u2.member_id =a.to_member_id
+        where 1=1
+        and a.type ='2'
+        <if test="teacher != null  and teacher != '' ">
+            and  a.teacher =#{teacher}
+        </if>
+        <if test="to_id != null  and to_id != '' ">
+            and  a.to_id =#{to_id}
+        </if>
+
+
+        limit #{startIndex},#{pageSize}
+    </select>
+
 </mapper>
