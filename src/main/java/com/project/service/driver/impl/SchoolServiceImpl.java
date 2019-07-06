@@ -107,8 +107,23 @@ public class SchoolServiceImpl implements SchoolService {
         return ResultObject.success(res);
     }
 
+    /**
+     * 驾校列表
+     * @param pd
+     * @return
+     * @throws Exception
+     */
     @Override
     public ResultObject driverList(PageData pd)throws Exception {
+        String member_id = pd.getString("member_id");
+        if(StringUtils.isEmpty(member_id)){
+            return ResultObject.build(Const.MEMBER_ID_NULL,Const.MEMBER_ID_NULL_MESSAGE,null);
+        }
+        User user =new User();
+        user.setMember_id(member_id);
+        User userInfo = userMapper.getUserInfo(user);
+
+
         String pageNum = pd.getString("pageNum");
         if(StringUtils.isEmpty(pageNum)||pageNum.equals("0")){
             pageNum ="1";
@@ -132,7 +147,7 @@ public class SchoolServiceImpl implements SchoolService {
             Subject su =new Subject();
             su.setSchool_id(id);
             su.setSubject_name("1");
-            su.setSubject("C1");
+            su.setSubject(StringUtils.isEmpty(userInfo.getSubject())?"C1":userInfo.getSubject());
             Subject subjectDetail = subjectMapper.getSubjectDetail(su);
             if(null !=subjectDetail){
                 map.put("subject_name","科目二");
