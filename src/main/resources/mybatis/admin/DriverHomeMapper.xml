@@ -22,10 +22,12 @@
         date_format(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time,
         a.school_location_x,a.school_location_y,a.mark,
 
+<!--
         ROUND((select sum(star) from sdb_school_feedback f WHERE f.school_id=a.id)
         /(select count(1) from sdb_school_feedback f1 WHERE f1.school_id=a.id),1)
         as star,
-
+-->
+        '5' as star,
         (select count(1) from sdb_school_album al where al.school_id=a.id and al.flag='1')
         as album_count
         from
@@ -48,11 +50,12 @@
 
     <select id="getSchoolDetail" resultType="com.project.model.school.SchoolModel" parameterType="com.project.model.school.SchoolModel">
         select a.*,
-
+<!--
         ROUND((select sum(star) from sdb_school_feedback f WHERE f.school_id=a.id)
         /(select count(1) from sdb_school_feedback f1 WHERE f1.school_id=a.id),1)
         as star,
-
+-->
+        '5' as star,
         (select count(1) from sdb_school_feedback f1 WHERE f1.school_id=a.id)
         as feedback_count
          from
