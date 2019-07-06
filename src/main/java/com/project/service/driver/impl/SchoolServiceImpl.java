@@ -239,6 +239,13 @@ public class SchoolServiceImpl implements SchoolService {
      */
     @Override
     public ResultObject saveSchoolFeedback(FeedBackSchool fda)throws Exception {
+        if(!StringUtils.isEmpty(fda.getTo_id())){
+            if(StringUtils.isEmpty(fda.getTo_member_id())){
+                return ResultObject.build(Const.TO_MEMBER_ID_NULL,Const.TO_MEMBER_ID_NULL_MESSAGE,null);
+            }
+
+        }
+
 
         if(!StringUtils.isEmpty(fda.getTo_member_id())){
             if(StringUtils.isEmpty(fda.getTo_id())){
@@ -313,6 +320,13 @@ public class SchoolServiceImpl implements SchoolService {
      */
     @Override
     public ResultObject saveTeacherFeedback(FeedBackTeacher fda) throws Exception {
+
+        if(!StringUtils.isEmpty(fda.getTo_id())){
+            if(StringUtils.isEmpty(fda.getTo_member_id())){
+                return ResultObject.build(Const.TO_MEMBER_ID_NULL,Const.TO_MEMBER_ID_NULL_MESSAGE,null);
+            }
+
+        }
 
         if(!StringUtils.isEmpty(fda.getTo_member_id())){
             if(StringUtils.isEmpty(fda.getTo_id())){
