@@ -48,6 +48,10 @@ public class UserServiceImpl implements UserService {
         User userExist=userMapper.getUserInfo(openidExist);
 
         if(null!=userExist){
+
+            applySchoolInfo(userExist);
+
+
             return ResultObject.success(userExist);
         }else{
             logger.info("开始保存新用户到信息");
@@ -60,6 +64,7 @@ public class UserServiceImpl implements UserService {
             user.setMember_id(ToolsUtils.idGenerate());
             user.setTime(DateUtils.getTimeInSecond());
             userMapper.saveNewUser(user);//保存新用户
+            user.setIsBind("0");
             return ResultObject.success(user);
 
         }
@@ -73,6 +78,12 @@ public class UserServiceImpl implements UserService {
             return ResultObject.build(Const.MEMBER_ERROR,Const.MEMBER_ERROR_MESSAGE,null);
 
         }
+       applySchoolInfo(userInfo);
+
+        return ResultObject.success(userInfo);
+    }
+
+    private void applySchoolInfo(User userInfo) {
         String school_id = userInfo.getSchool_id();
         if(StringUtils.isEmpty(school_id)){
             userInfo.setIsBind("0");
@@ -84,7 +95,6 @@ public class UserServiceImpl implements UserService {
             userInfo.setSchool_name(schoolDetail.getSchool_name());
         }
 
-        return ResultObject.success(userInfo);
     }
 
 }
