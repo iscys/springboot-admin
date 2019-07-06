@@ -168,7 +168,7 @@ public class PayServiceImpl implements PayService {
 
         payOrder.setOutTradeNo(order.getOrder_sn());
         payOrder.setOpenid(openid);
-        payOrder.setNotifyUrl(properties.getDomain()+"/api/pay/notify");
+        payOrder.setNotifyUrl(properties.getDomain()+"/api/pay/subjectNotify");
 
         payOrder.setBody("课时购买");
 
@@ -183,6 +183,37 @@ public class PayServiceImpl implements PayService {
         }
 
         return ResultObject.success(wxPackage);
+    }
+
+    @Override
+    public void paySubjectNotify(WxPayOrderNotifyResult notifyResult) {
+        String outTradeNo = notifyResult.getOutTradeNo();
+        Integer wxFee = notifyResult.getTotalFee();
+        Order order =new Order();
+        order.setOrder_sn(outTradeNo);
+        Order rstOrder =subjectOrderMapper.getOrderDetil(order);
+        if(null!=rstOrder){
+            String price = rstOrder.getPrice();
+            Integer dbFee = BaseWxPayRequest.yuanToFen(price);
+            if(dbFee.equals(wxFee)){
+                order.setStatus("1");//设置为已经付款并持久化
+                order.setPay_time(DateUtils.getTimeInSecond());
+                subjectOrderMapper.updateOrder(order);
+            }else{
+                logger.error("学时：微信回调钱数与数据库价钱不一致，订单：{}微信：{},db:{}",outTradeNo,wxFee,dbFee);
+                try {
+                    ErrorModel errorModel = new ErrorModel(outTradeNo, "学时订单微信回调钱数与数据库价钱不一致", notifyResult.toString());
+                    error.saveErrorLog(errorModel);
+                }catch (Exception e){}
+            }
+        }else{
+            logger.error("学时 :获取不到订单：{}信息",outTradeNo);
+            try {
+                ErrorModel errorModel = new ErrorModel(outTradeNo, "学时订单获取不到订单的信息", notifyResult.toString());
+                error.saveErrorLog(errorModel);
+            }catch (Exception e){}
+        }
+
     }
 
 

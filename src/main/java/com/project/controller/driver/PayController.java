@@ -127,6 +127,39 @@ public class PayController extends BaseController {
 
 
 
+    @PostMapping("/subjectNotify")
+    public String subjectNotify(@RequestBody String xmlData) {
+
+        logger.info("时间：{}接收到微信支付回调通知", DateUtils.stableTime());
+        WxPayOrderNotifyResult notifyResult =null;
+        try {
+            notifyResult= wxPayService.parseOrderNotifyResult(xmlData);
+        }catch (Exception py){
+            logger.error("校验解析微信回调信息异常：{}",xmlData);
+            try {
+                error.saveErrorLog(new ErrorModel(null, "校验解析微信回调信息异常",
+                        py.getMessage(), xmlData));
+            }catch (Exception e1){}
+            return WxPayNotifyResponse.fail("处理失败");
+        }
+
+        String order_sn=notifyResult.getOutTradeNo();
+        logger.info("开始处理微信购买学时回调,订单号:{} ",order_sn);
+        try {
+            payService.paySubjectNotify(notifyResult);
+        }catch (Exception e){
+            try {
+                error.saveErrorLog(new ErrorModel(order_sn, "报名回调发生异常",
+                        e.getMessage(), xmlData));
+            }catch (Exception e1){}
+            logger.error("处理回调异常：{},数据包：{}",e.getMessage(),xmlData);
+            return WxPayNotifyResponse.fail("处理失败");
+
+        }
+        return WxPayNotifyResponse.success("处理成功");
+    }
+
+
 
 
 
