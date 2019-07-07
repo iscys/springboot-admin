@@ -1,6 +1,8 @@
 package com.project.controller.admin;
 
 import com.project.controller.BaseController;
+import com.project.model.Const;
+import com.project.model.User;
 import com.project.model.school.SchoolModel;
 import com.project.service.admin.MarkService;
 import com.project.service.admin.OrderService;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -26,9 +29,19 @@ public class OrderController extends BaseController {
     private TeacherService teacherService;
 
     @RequestMapping("/index")
-    public ModelAndView markList(HttpServletRequest req){
-        ModelAndView mv = this.getModelAndView();
+    public ModelAndView markList(HttpServletRequest req ,HttpSession session){
         PageData pd = this.getPageData();
+        User user = (User) session.getAttribute(Const.USER);
+        String school_id = user.getSchool_id();
+
+        if(school_id.equals("0")){
+
+        }else{
+            pd.put("school_id",school_id);
+        }
+
+        ModelAndView mv = this.getModelAndView();
+
         DataPager dataPager= orderService.getOrderList(pd);
         List<SchoolModel> slist= teacherService.getAllSchoolList(pd);
         mv.addObject("list",slist);
