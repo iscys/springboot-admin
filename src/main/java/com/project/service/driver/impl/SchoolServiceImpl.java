@@ -122,6 +122,9 @@ public class SchoolServiceImpl implements SchoolService {
         User user =new User();
         user.setMember_id(member_id);
         User userInfo = userMapper.getUserInfo(user);
+        if(null==userInfo){
+            return ResultObject.build(Const.MEMBER_ERROR,Const.MEMBER_ERROR_MESSAGE,null);
+        }
 
 
         String pageNum = pd.getString("pageNum");
@@ -146,7 +149,7 @@ public class SchoolServiceImpl implements SchoolService {
             String id = map.get("id").toString();
             Subject su =new Subject();
             su.setSchool_id(id);
-            su.setSubject_name("1");
+            su.setSubject_name("1");//科目二总课时套餐
             su.setSubject(StringUtils.isEmpty(userInfo.getSubject())?"C1":userInfo.getSubject());
             Subject subjectDetail = subjectMapper.getSubjectDetail(su);
             if(null !=subjectDetail){
