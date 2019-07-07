@@ -1,10 +1,12 @@
 package com.project.controller.admin;
 
 import com.project.controller.BaseController;
+import com.project.model.Menu;
 import com.project.model.ResultObject;
 import com.project.model.User;
 import com.project.model.school.Mark;
 import com.project.service.admin.AdminUserService;
+import com.project.service.system.SystemService;
 import com.project.utils.DataPager;
 import com.project.utils.PageData;
 import org.slf4j.Logger;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -23,6 +26,8 @@ public class AdminUserController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private AdminUserService adminUserService;
+    @Autowired
+    private SystemService systemService;
 
     @RequestMapping("/index")
     public ModelAndView AdminList(HttpServletRequest req){
@@ -46,6 +51,8 @@ public class AdminUserController extends BaseController {
     @RequestMapping("/to_add")
     public ModelAndView addSchool(HttpServletRequest req){
         ModelAndView mv = this.getModelAndView();
+        List<Menu> menuList = systemService.listMenu();
+        mv.addObject("menuList",menuList);
         mv.setViewName("page/adminUser/adminUser_add");
         return mv;
     }
