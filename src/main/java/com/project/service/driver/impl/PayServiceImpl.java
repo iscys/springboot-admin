@@ -320,6 +320,7 @@ public class PayServiceImpl implements PayService {
                          user.setMember_id(member_id);
                          user.setSchool_id(school_id);
                          user.setPhone(applys.getPhone());
+                         user.setUsername(applys.getName());
                             user.setUsername(applys.getName());
                         userMapper.modifyUser(user);
 
