@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="head::common_js_css_bootstrap"></head>
+<head th:insert="head::common_uploadFile"></head>
+<head th:insert="head::kindeditor"></head>
+<style>
+    .layui-form-label {
+        width: 130px;
+    }
+    .layui-input-block {
+        margin-left: 130px;
+    }
+</style>
+<body>
+
+<div>
+    <span onclick="cancelToast()" class="btn btn-lg btn-default " style="border: 0px">返回</span>
+</div>
+<div class="container-fluid"  style="width:880px; margin: auto">
+
+
+
+    <form  action="/ocard/update" method="post" enctype="multipart/form-data" class="layui-form" >
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">登录账号</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" id="username"  placeholder="输入登录账号"  class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">登录密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="password" id="password"  placeholder="输入登录账号"  class="layui-input">
+            </div>
+        </div>
+
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名字</label>
+            <div class="layui-input-block">
+                <input type="text" name="nickname" id="nickname" required  lay-verify="required" placeholder="请输入驾校联系电话"  class="layui-input">
+            </div>
+        </div>
+
+        <!--
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">驾校标签</label>
+                <div class="layui-input-block mark">
+                    <input type="checkbox"  th:each="mark :${marks}" th:value="${mark.getId()}" th:title="${mark.getMark()}" lay-skin="primary" >
+                </div>
+            </div>
+
+        -->
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <div class="layui-btn" id="sub">立即提交</div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=TJHBZ-A56CV-5J6P5-UDCKM-POXQK-YZBG2"></script>
+<script>
+
+    layui.use(['form','laydate', 'laypage', 'layer', 'table', 'carousel', 'element', 'slider'], function() {
+        var laydate = layui.laydate //日期
+            , laypage = layui.laypage //分页
+            , layer = layui.layer //弹层
+            , table = layui.table //表格
+            , element = layui.element //元素操作
+            , slider = layui.slider //滑块
+            ,form = layui.form
+
+        /**
+         laydate.render({
+            elem: '#teacher_apply'
+        });
+         **/
+
+
+    });
+
+    function c(event, previewid) {
+        var r = new FileReader();
+        f = document.getElementById(previewid).files[0];
+
+        r.readAsDataURL(f);
+        r.onload = function (e) {
+            var imgurl = this.result;
+            $(event).siblings("img").prop("src" , imgurl);
+        };
+    }
+
+    //取消
+    function cancelToast(){
+
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index);
+
+    }
+</script>
+
+<script type="text/javascript">
+    $(function(){
+
+        $("#sub").click(function(){
+            var arr=[];
+            $(".mark input[type='checkbox']:checked").each(function(index,item){
+                arr.push($(this).val());
+            })
+
+            var formData = new FormData();
+            var school_face=$("#school_face").get(0).files[0];
+            var school_icon=$("#school_icon").get(0).files[0];
+            var school_location_x=$("#x_location").val();
+            var school_location_y=$("#y_location").val();
+            var school_location=$("#school_location").val();
+            var school_phone=$("#school_phone").val();
+            var school_code=$("#school_code").val();
+            var school_name=$("#school_name").val();
+            var orders=$("#orders").val();
+            var school_describe=editor.html();
+            var flag=$("input[name='flag']:checked").val();
+
+            var message='';
+            if(ASSERT(school_name)){
+                message='驾校名称不能为空'
+            }else if (ASSERT(school_phone)){
+                message='驾校电话不能为空'
+            } else if(ASSERT(school_code)){
+                message='驾校编码不能为空'
+            }else if(ASSERT(school_face)){
+                message='驾校门面图片不能为空'
+            }else if(ASSERT(school_icon)){
+                message='驾校icon图片不能为空'
+            }else if(ASSERT(school_location_x)){
+                message='驾校坐标不能为空'
+            }else if(ASSERT(school_location_y)){
+                message='驾校坐标不能为空'
+            }else if(ASSERT(school_location)){
+                message='驾校详细地址不能为空'
+            }else if(ASSERT(school_describe)){
+                message='驾校简介不能为空';
+            }else if(ASSERT(orders)){
+                message='输入驾校推荐排序'
+            }
+
+            if(message!=''){
+                layer.msg(message);
+                return false;
+            }
+            $.each(window.ZYFILE.uploadFile, function(k, v){
+                formData.append("files", v); //加入文件对象
+            } );
+            formData.append("school_face",school_face);
+            formData.append("flag",flag);
+
+            formData.append("orders",orders);
+            formData.append("school_icon",school_icon);
+            formData.append("school_name",school_name);
+            formData.append("school_code",school_code);
+            formData.append("school_phone",school_phone);
+            formData.append("school_location",school_location);
+            formData.append("school_location_x",school_location_x);
+            formData.append("school_location_y",school_location_y);
+            formData.append("school_describe",school_describe);
+            formData.append("mark",arr);
+
+            $("#sub").hide();
+            $.ajax({
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "/home/save" ,//url
+                data:formData,
+                processData: false,//用于对data参数进行序列化处理 这里必须false
+                contentType: false, //必须
+                success: function (result) {
+                    //console.log(result);//打印服务端返回的数据(调试用)
+                    if(result.flag =="1"){
+                        layer.msg("提交成功");
+                        window.setTimeout(cancelToast(),2100);
+                    }else{
+                        layer.msg("提交失败，请稍后再试");
+                        $("#sub").show();
+                    }
+
+
+                },
+                error : function() {
+
+                    $("#sub").show();
+                }
+            });
+
+        })
+
+
+
+
+    });
+
+</script>
+</body>
+</html>

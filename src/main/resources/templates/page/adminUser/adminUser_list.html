@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="head::common_js_css_bootstrap"></head>
+<style>
+	.form-group ,.btn{
+		margin-top: 10px;
+		margin-right: 5px;
+
+	}
+</style>
+<body>
+<div class="container-fluid" id="main-container">
+	<div id="page-content" class="clearfix">
+		<div class="row-fluid">
+			<div class="row-fluid">
+				<br/>
+
+				<form action="/admin/index" method="post" class="form-inline" name="Form" id="Form">
+
+					<span  onclick="addInfo()" class="btn btn-info " style="float: right">添加系统用户</span>
+
+					<!--列表数据 start-->
+					<table id="table_report"
+						   class="table ">
+						<thead>
+						<tr>
+							<th class='center' style="min-width:3%">No</th>
+							<th class='center' style="min-width: 10%">账号</th>
+							<th class='center' style="min-width: 10%">姓名</th>
+							<th class='center' style="min-width: 7%">添加时间</th>
+							<th class='center' style="min-width: 7%">查看编辑</th>
+						</tr>
+						</thead>
+						<tbody th:if="${dataPager.getRecords()!=null}">
+						<tr th:each="record,recordStat:${dataPager.getRecords()}">
+							<td class='center' th:text="${recordStat.index+1}"></td>
+							<td class='center' th:text="${record.username}"></td>
+							<td class='center' th:text="${record.nickname}"></td>
+							<td class='center' th:text="${record.createtime}"></td>
+							<td class='center'>
+								<span  class="btn btn-danger"  th:onclick="updateAndLook([[${record.id}]]);" >编辑查看</span>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<div th:if="${dataPager.getRecords()!=null}">
+						<span th:insert="page::page_common"></span>
+					</div>
+
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+	<!--/#page-content-->
+</div>
+
+<!--/.fluid-container#main-container-->
+<!-- 返回顶部  -->
+<a href="#" id="btn-scroll-up" class="btn btn-small btn-inverse"> <i
+		class="icon-double-angle-up icon-only"></i>
+</a>
+
+
+<script type="text/javascript">
+
+	layui.use(['laydate','layer',], function() {
+		var laydate = layui.laydate //日期
+				, layer = layui.layer //弹层
+	});
+
+
+	function addInfo(){
+
+		layer.open({
+			title:false,
+			area:["100%","100%"],
+			type: 2,
+			closeBtn: 0, //不显示关闭按钮
+			content: '/admin/to_add',
+			end:function(){
+				//窗口关闭触发
+				$("#Form").submit();
+
+			}
+		})
+	}
+
+	function updateAndLook(ids){
+		layer.open({
+			title:false,
+			area:["100%","100%"],
+			type: 2,
+			closeBtn: 0, //不显示关闭按钮
+			content: '/admin/to_update?id='+ids,
+			end:function(){
+				//窗口关闭触发
+				$("#Form").submit();
+
+			}
+		})
+
+	}
+</script>
+
+</body>
+
+</html>

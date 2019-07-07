@@ -11,4 +11,6 @@ public interface SystemService {
     List<Menu> getMenuList(User user);
 
     User checkUser(User user);
+
+    List<Menu> listMenu();
 }

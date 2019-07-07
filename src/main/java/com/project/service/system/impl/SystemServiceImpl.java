@@ -64,6 +64,14 @@ public class SystemServiceImpl implements SystemService {
         User isExist = systemMapper.checkUser(user);
         return isExist;
     }
+    /**
+     * 获取所有菜单
+     */
+
+    public List<Menu> listMenu(){
+        List<Menu> menuList =systemMapper.getAllMenuList();
+        return menuList;
+    }
 
 
 

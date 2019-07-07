@@ -18,6 +18,9 @@
         order  by orders
     </select>
 
+    <select id="getAllMenuList" resultType="com.project.model.Menu">
+            select * from system_menu
+    </select>
 
     <select id="checkUser" parameterType="com.project.model.User" resultType="com.project.model.User">
         select * from sys_user
@@ -25,6 +28,34 @@
         and password =#{password}
         limit 1
     </select>
+
+    <select id="getAdminUserCount" parameterType="com.project.utils.PageData" resultType="java.lang.Integer">
+       select count(1)
+       from
+       sys_user
+
+
+   </select>
+
+    <select id="getAdminUserList" parameterType="com.project.utils.PageData" resultType="java.util.Map">
+
+      select * from sys_user
+
+      limit #{startIndex},#{pageSize}
+
+   </select>
+
+
+    <select id="getAdminUserDetail" resultType="com.project.model.User" parameterType="com.project.model.User">
+        select * from sys_user a
+        where 1=1
+        <if test="id !=null  and id != '' ">
+            and a.id=#{id}
+        </if>
+        limit 1
+    </select>
+
+
 
 
 
