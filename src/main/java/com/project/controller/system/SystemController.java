@@ -5,6 +5,8 @@ import com.project.model.Const;
 import com.project.model.Menu;
 import com.project.model.ResultObject;
 import com.project.model.User;
+import com.project.model.school.SchoolModel;
+import com.project.service.admin.TeacherService;
 import com.project.service.system.SystemService;
 import com.project.utils.DataPager;
 import com.project.utils.PageData;
@@ -33,6 +35,8 @@ public class SystemController extends BaseController {
 
     @Autowired
     private SystemService sysService;
+    @Autowired
+    private TeacherService teacherService;
 
     /**
      * 获取用户对应的菜单列表Tab
@@ -62,9 +66,13 @@ public class SystemController extends BaseController {
 
     @RequestMapping("/to_add")
     public ModelAndView addUser(HttpServletRequest req){
+        PageData pd = this.getPageData();
         ModelAndView mv = this.getModelAndView();
+        List<SchoolModel> slist = teacherService.getAllSchoolList(pd);
+
         List<Menu> menuList = sysService.listMenu();
         mv.addObject("menuList",menuList);
+        mv.addObject("list",slist);
         mv.setViewName("page/adminUser/adminUser_add");
         return mv;
     }
@@ -72,7 +80,10 @@ public class SystemController extends BaseController {
 
     @RequestMapping("/to_update")
     public ModelAndView to_update(User user){
+            PageData pd = this.getPageData();
+            List<SchoolModel> slist = teacherService.getAllSchoolList(pd);
             ModelAndView mv = this.getModelAndView();
+
             //PageData pd = this.getPageData();
             User adminUser= sysService.getUserDetail(user);
             String pri = adminUser.getPri();
@@ -97,7 +108,7 @@ public class SystemController extends BaseController {
                 menu.setChildren(subMenu);
 
             }
-
+        mv.addObject("list",slist);
         mv.addObject("menuList",listMenu);
         mv.addObject("pd",adminUser);
         mv.setViewName("page/adminUser/adminUser_update");

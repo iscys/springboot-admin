@@ -47,7 +47,7 @@
 
 
     <select id="getAdminUserDetail" resultType="com.project.model.User" parameterType="com.project.model.User">
-        select id,username,nickname,pri from sys_user a
+        select id,username,nickname,pri,school_id from sys_user a
         where 1=1
         <if test="id !=null  and id != '' ">
             and a.id=#{id}
@@ -72,6 +72,9 @@
           <if test="pri != null  and pri != '' ">
               pri,
           </if>
+          <if test="school_id != null  and school_id != '' ">
+              school_id,
+          </if>
       </trim>
       <trim prefix="values(" suffix=")" suffixOverrides=",">
           <if test="username != null  and username != '' ">
@@ -86,6 +89,9 @@
           <if test="pri != null  and pri != '' ">
               #{pri},
           </if>
+          <if test="school_id != null  and school_id != '' ">
+              #{school_id},
+          </if>
       </trim>
 
     </insert>
@@ -99,6 +105,9 @@
             </if>
             <if test="password != null  and password != '' ">
                 password= #{password},
+            </if>
+            <if test="school_id != null  and school_id != '' ">
+                school_id= #{school_id},
             </if>
         </trim>
         where id =#{id}

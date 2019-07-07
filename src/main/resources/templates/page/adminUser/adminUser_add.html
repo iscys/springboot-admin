@@ -4,15 +4,15 @@
 <head th:insert="head::common_uploadFile"></head>
 <head th:insert="head::kindeditor"></head>
 <style>
-.layui-form-label {
-width: 130px;
-}
-.layui-input-block {
-margin-left: 130px;
-}
-.mainMenu .layui-form-checkbox[lay-skin=primary] span{
-    color: red;
-}
+    .layui-form-label {
+        width: 130px;
+    }
+    .layui-input-block {
+        margin-left: 130px;
+    }
+    .mainMenu .layui-form-checkbox[lay-skin=primary] span{
+        color: red;
+    }
 </style>
 <body>
 
@@ -23,62 +23,73 @@ margin-left: 130px;
 
 
 
-<form  action="/ocard/update" method="post" enctype="multipart/form-data" class="layui-form" >
+    <form  action="/ocard/update" method="post" enctype="multipart/form-data" class="layui-form" >
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">登录账号</label>
-        <div class="layui-input-block">
-            <input type="text" name="username" id="username"  placeholder="输入登录账号"  class="layui-input">
-        </div>
-    </div>
-
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">登录密码</label>
-        <div class="layui-input-block">
-            <input type="password" name="password" id="password"  placeholder="输入登录账号"  class="layui-input">
-        </div>
-    </div>
-
-
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">用户名字</label>
-        <div class="layui-input-block">
-            <input type="text" name="nickname" id="nickname" required  lay-verify="required" placeholder="输入用户姓名"  class="layui-input">
-        </div>
-    </div>
-
-
-    <h5>权限页面分配</h5>
-    <div class="layui-form-item layui-form-text">
-
-        <div class="layui-input-block menu">
-            <div th:each="menu :${menuList}">
-                <div class="mainMenu">
-                <input type="checkbox"
-                       th:value="${menu.getId()}"
-                       th:title="${menu.getTitle()}" lay-skin="primary">
-                </div>
-                <br>
-                <div style="margin-left: 40px;">
-                <input type="checkbox"
-                      th:each="subMenu:${menu.getChildren()}" th:value="${subMenu.getId()}"
-                       th:title="${subMenu.getTitle()}" lay-skin="primary">
-                </div>
-                <hr>
-
+        <div class="layui-form-item">
+            <label class="layui-form-label">登录账号</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" id="username"  placeholder="输入登录账号"  class="layui-input">
             </div>
         </div>
-    </div>
 
 
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <div class="layui-btn" id="sub">立即提交</div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">登录密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="password" id="password"  placeholder="输入登录账号"  class="layui-input">
+            </div>
         </div>
-    </div>
-</form>
+
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名字</label>
+            <div class="layui-input-block">
+                <input type="text" name="nickname" id="nickname" required  lay-verify="required" placeholder="输入用户姓名"  class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属驾校</label>
+            <div class="layui-input-block">
+                <select id ="school_id" name="school_id" >
+                    <option th:each="sc,scStat:${list}" th:value="${sc.getId()}" th:text="${sc.getSchool_name()}"></option>
+
+                </select>
+            </div>
+        </div>
+
+
+        <h5>权限页面分配</h5>
+        <div class="layui-form-item layui-form-text">
+
+            <div class="layui-input-block menu">
+                <div th:each="menu :${menuList}">
+                    <div class="mainMenu">
+                        <input type="checkbox"
+                               th:value="${menu.getId()}"
+                               th:title="${menu.getTitle()}" lay-skin="primary">
+                    </div>
+                    <br>
+                    <div style="margin-left: 40px;">
+                        <input type="checkbox"
+                               th:each="subMenu:${menu.getChildren()}" th:value="${subMenu.getId()}"
+                               th:title="${subMenu.getTitle()}" lay-skin="primary">
+                    </div>
+                    <hr>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <div class="layui-btn" id="sub">立即提交</div>
+            </div>
+        </div>
+    </form>
 </div>
 </body>
 
@@ -95,10 +106,10 @@ margin-left: 130px;
             ,form = layui.form
 
         /**
-        laydate.render({
+         laydate.render({
             elem: '#teacher_apply'
         });
-**/
+         **/
 
 
     });
@@ -137,7 +148,7 @@ margin-left: 130px;
             var username=$("#username").val();
             var password=$("#password").val();
             var nickname=$("#nickname").val();
-
+            var school_id=$("#school_id").val();
 
             var message='';
             if(ASSERT(username)){
@@ -156,33 +167,34 @@ margin-left: 130px;
             formData.append("username",username);
             formData.append("password",password);
             formData.append("nickname",nickname);
+            formData.append("school_id",school_id);
             formData.append("pri",arr);
 
             $("#sub").hide();
             $.ajax({
-            			type: "POST",//方法类型
-            			dataType: "json",//预期服务器返回的数据类型
-            			url: "/sys/save" ,//url
-            			data:formData,
-                        processData: false,//用于对data参数进行序列化处理 这里必须false
-                        contentType: false, //必须
-            			success: function (result) {
-                            //console.log(result);//打印服务端返回的数据(调试用)
-                            if(result.flag =="1"){
-                                layer.msg("提交成功");
-                                window.setTimeout(cancelToast(),2100);
-                            }else{
-                                layer.msg("提交失败，请稍后再试");
-                                $("#sub").show();
-                            }
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "/sys/save" ,//url
+                data:formData,
+                processData: false,//用于对data参数进行序列化处理 这里必须false
+                contentType: false, //必须
+                success: function (result) {
+                    //console.log(result);//打印服务端返回的数据(调试用)
+                    if(result.flag =="1"){
+                        layer.msg("提交成功");
+                        window.setTimeout(cancelToast(),2100);
+                    }else{
+                        layer.msg("提交失败，请稍后再试");
+                        $("#sub").show();
+                    }
 
 
-            			},
-            			error : function() {
+                },
+                error : function() {
 
-                            $("#sub").show();
-            			}
-            		});
+                    $("#sub").show();
+                }
+            });
 
         })
 

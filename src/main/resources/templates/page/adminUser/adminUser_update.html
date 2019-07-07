@@ -26,6 +26,24 @@
     <form  action="/ocard/update" method="post" enctype="multipart/form-data" class="layui-form" >
         <input type="hidden" id="id" name="id" th:value="${pd.getId()}">
 
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属驾校</label>
+            <div class="layui-input-block">
+                <select id ="school_id" name="school_id" >
+                    <option
+                            th:each="sc,scStat:${list}"
+                            th:selected="${pd.getSchool_id().equals(sc.getId())}"
+                            th:value="${sc.getId()}"
+                            th:text="${sc.getSchool_name()}"
+
+                            >
+
+                    </option>
+
+                </select>
+            </div>
+        </div>
+
         <h5>权限页面分配</h5>
         <div class="layui-form-item layui-form-text">
 
@@ -114,7 +132,7 @@
             var formData = new FormData();
 
 
-
+            formData.append("school_id",$("#school_id").val());
             formData.append("pri",arr);
             formData.append("id",$("#id").val());
             $("#sub").hide();
