@@ -16,7 +16,7 @@
 			<div class="row-fluid">
 				<br/>
 
-				<form action="/admin/index" method="post" class="form-inline" name="Form" id="Form">
+				<form action="/sys/index" method="post" class="form-inline" name="Form" id="Form">
 
 					<span  onclick="addInfo()" class="btn btn-info " style="float: right">添加系统用户</span>
 
@@ -82,7 +82,7 @@
 			area:["100%","100%"],
 			type: 2,
 			closeBtn: 0, //不显示关闭按钮
-			content: '/admin/to_add',
+			content: '/sys/to_add',
 			end:function(){
 				//窗口关闭触发
 				$("#Form").submit();
@@ -97,7 +97,7 @@
 			area:["100%","100%"],
 			type: 2,
 			closeBtn: 0, //不显示关闭按钮
-			content: '/admin/to_update?id='+ids,
+			content: '/sys/to_update?id='+ids,
 			end:function(){
 				//窗口关闭触发
 				$("#Form").submit();

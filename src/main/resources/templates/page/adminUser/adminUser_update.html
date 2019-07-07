@@ -10,6 +10,9 @@
     .layui-input-block {
         margin-left: 130px;
     }
+    .mainMenu .layui-form-checkbox[lay-skin=primary] span{
+        color: red;
+    }
 </style>
 <body>
 
@@ -42,19 +45,34 @@
         <div class="layui-form-item">
             <label class="layui-form-label">用户名字</label>
             <div class="layui-input-block">
-                <input type="text" name="nickname" id="nickname" required  lay-verify="required" placeholder="请输入驾校联系电话"  class="layui-input">
+                <input type="text" name="nickname" id="nickname" required  lay-verify="required" placeholder="输入用户姓名"  class="layui-input">
             </div>
         </div>
 
-        <!--
-            <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">驾校标签</label>
-                <div class="layui-input-block mark">
-                    <input type="checkbox"  th:each="mark :${marks}" th:value="${mark.getId()}" th:title="${mark.getMark()}" lay-skin="primary" >
+
+        <h5>权限页面分配</h5>
+        <div class="layui-form-item layui-form-text">
+
+            <div class="layui-input-block menu">
+                <div th:each="menu :${menuList}">
+                    <div class="mainMenu">
+                        <input type="checkbox"
+                               th:value="${menu.getId()}"
+                               th:title="${menu.getTitle()}" lay-skin="primary">
+                    </div>
+                    <br>
+                    <div style="margin-left: 40px;">
+                        <input type="checkbox"
+                               th:each="subMenu:${menu.getChildren()}" th:value="${subMenu.getId()}"
+                               th:title="${subMenu.getTitle()}" lay-skin="primary">
+                    </div>
+                    <hr>
+
                 </div>
             </div>
+        </div>
 
-        -->
+
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <div class="layui-btn" id="sub">立即提交</div>
@@ -110,72 +128,41 @@
 
         $("#sub").click(function(){
             var arr=[];
-            $(".mark input[type='checkbox']:checked").each(function(index,item){
+            $(".menu input[type='checkbox']:checked").each(function(index,item){
                 arr.push($(this).val());
             })
 
             var formData = new FormData();
-            var school_face=$("#school_face").get(0).files[0];
-            var school_icon=$("#school_icon").get(0).files[0];
-            var school_location_x=$("#x_location").val();
-            var school_location_y=$("#y_location").val();
-            var school_location=$("#school_location").val();
-            var school_phone=$("#school_phone").val();
-            var school_code=$("#school_code").val();
-            var school_name=$("#school_name").val();
-            var orders=$("#orders").val();
-            var school_describe=editor.html();
-            var flag=$("input[name='flag']:checked").val();
+
+            var username=$("#username").val();
+            var password=$("#password").val();
+            var nickname=$("#nickname").val();
+
 
             var message='';
-            if(ASSERT(school_name)){
-                message='驾校名称不能为空'
-            }else if (ASSERT(school_phone)){
-                message='驾校电话不能为空'
-            } else if(ASSERT(school_code)){
-                message='驾校编码不能为空'
-            }else if(ASSERT(school_face)){
-                message='驾校门面图片不能为空'
-            }else if(ASSERT(school_icon)){
-                message='驾校icon图片不能为空'
-            }else if(ASSERT(school_location_x)){
-                message='驾校坐标不能为空'
-            }else if(ASSERT(school_location_y)){
-                message='驾校坐标不能为空'
-            }else if(ASSERT(school_location)){
-                message='驾校详细地址不能为空'
-            }else if(ASSERT(school_describe)){
-                message='驾校简介不能为空';
-            }else if(ASSERT(orders)){
-                message='输入驾校推荐排序'
+            if(ASSERT(username)){
+                message='用户账号不能为空'
+            }else if (ASSERT(password)){
+                message='请设置用户密码'
+            } else if(ASSERT(nickname)){
+                message='用户姓名不能为空'
             }
 
             if(message!=''){
                 layer.msg(message);
                 return false;
             }
-            $.each(window.ZYFILE.uploadFile, function(k, v){
-                formData.append("files", v); //加入文件对象
-            } );
-            formData.append("school_face",school_face);
-            formData.append("flag",flag);
 
-            formData.append("orders",orders);
-            formData.append("school_icon",school_icon);
-            formData.append("school_name",school_name);
-            formData.append("school_code",school_code);
-            formData.append("school_phone",school_phone);
-            formData.append("school_location",school_location);
-            formData.append("school_location_x",school_location_x);
-            formData.append("school_location_y",school_location_y);
-            formData.append("school_describe",school_describe);
-            formData.append("mark",arr);
+            formData.append("username",username);
+            formData.append("password",password);
+            formData.append("nickname",nickname);
+            formData.append("pri",arr);
 
             $("#sub").hide();
             $.ajax({
                 type: "POST",//方法类型
                 dataType: "json",//预期服务器返回的数据类型
-                url: "/home/save" ,//url
+                url: "/sys/save" ,//url
                 data:formData,
                 processData: false,//用于对data参数进行序列化处理 这里必须false
                 contentType: false, //必须

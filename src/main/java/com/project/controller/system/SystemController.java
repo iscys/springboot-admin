@@ -6,6 +6,7 @@ import com.project.model.Menu;
 import com.project.model.ResultObject;
 import com.project.model.User;
 import com.project.service.system.SystemService;
+import com.project.utils.DataPager;
 import com.project.utils.PageData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -39,6 +41,40 @@ public class SystemController extends BaseController {
         User user = (User) session.getAttribute(Const.USER);
         List<Menu> menuList = sysService.getMenuList(user);
         return menuList;
+    }
+
+
+
+    @RequestMapping("/index")
+    public ModelAndView userList(HttpServletRequest req){
+        ModelAndView mv = this.getModelAndView();
+        PageData pd = this.getPageData();
+        DataPager dataPager= sysService.getUserList(pd);
+        mv.addObject("dataPager",dataPager);
+        mv.addObject("pd",pd);
+        mv.setViewName("page/adminUser/adminUser_list");
+        return mv;
+    }
+
+
+    @RequestMapping("/to_add")
+    public ModelAndView addUser(HttpServletRequest req){
+        ModelAndView mv = this.getModelAndView();
+        List<Menu> menuList = sysService.listMenu();
+        mv.addObject("menuList",menuList);
+        mv.setViewName("page/adminUser/adminUser_add");
+        return mv;
+    }
+
+
+    @RequestMapping("/to_update")
+    public ModelAndView to_update(User user){
+        ModelAndView mv = this.getModelAndView();
+        //PageData pd = this.getPageData();
+        User adminUser= sysService.getUserDetail(user);
+        mv.addObject("pd",adminUser);
+        mv.setViewName("page/adminUser/adminUser_update");
+        return mv;
     }
 
     @RequestMapping("save")

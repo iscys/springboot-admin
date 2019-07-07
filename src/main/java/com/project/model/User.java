@@ -2,7 +2,7 @@ package com.project.model;
 
 public class User {
 
-
+    private String id;
     private String nickname;
     private String sex;
     private String relname;

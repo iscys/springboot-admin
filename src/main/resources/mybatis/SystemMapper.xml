@@ -47,7 +47,7 @@
 
 
     <select id="getAdminUserDetail" resultType="com.project.model.User" parameterType="com.project.model.User">
-        select * from sys_user a
+        select id,username,nickname,pri from sys_user a
         where 1=1
         <if test="id !=null  and id != '' ">
             and a.id=#{id}

@@ -5,6 +5,7 @@ import com.project.model.MessageModel;
 import com.project.model.ResultObject;
 import com.project.model.User;
 import com.project.service.system.SystemService;
+import com.project.utils.DataPager;
 import com.project.utils.PageData;
 import com.project.utils.ToolsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +98,21 @@ public class SystemServiceImpl implements SystemService {
 
         }
         return ResultObject.success(null);
+    }
+
+    @Override
+    public DataPager getUserList(PageData pd) {
+        Integer total = systemMapper.getAdminUserCount(pd);
+        DataPager dataPager = DataPager.page_self(1,50,pd,total);
+        List<HashMap<String,String>> result= systemMapper.getAdminUserList(pd);
+        dataPager.setRecords(result);
+        dataPager.setFormId("Form");
+        return dataPager;
+    }
+
+    @Override
+    public User getUserDetail(User user) {
+        return systemMapper.getAdminUserDetail(user);
     }
 
 
