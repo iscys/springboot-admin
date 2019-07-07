@@ -25,13 +25,6 @@
 
     <form  action="/ocard/update" method="post" enctype="multipart/form-data" class="layui-form" >
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">用户名字</label>
-            <div class="layui-input-block">
-                <input type="text" name="nickname" id="nickname" required  lay-verify="required" placeholder="输入用户姓名"  class="layui-input">
-            </div>
-        </div>
-
 
         <h5>权限页面分配</h5>
         <div class="layui-form-item layui-form-text">
@@ -115,30 +108,16 @@
                 arr.push($(this).val());
             })
 
-            var formData = new FormData();
-
-            var username=$("#username").val();
-            var password=$("#password").val();
-            var nickname=$("#nickname").val();
-
-
-            var message='';
-            if(ASSERT(username)){
-                message='用户账号不能为空'
-            }else if (ASSERT(password)){
-                message='请设置用户密码'
-            } else if(ASSERT(nickname)){
-                message='用户姓名不能为空'
+            if(arr.length==0){
+                arr.push(0);
             }
+            var formData = new FormData();
 
             if(message!=''){
                 layer.msg(message);
                 return false;
             }
 
-            formData.append("username",username);
-            formData.append("password",password);
-            formData.append("nickname",nickname);
             formData.append("pri",arr);
 
             $("#sub").hide();
