@@ -6,6 +6,7 @@ import com.project.model.User;
 import com.project.utils.DataPager;
 import com.project.utils.PageData;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface SystemService {
@@ -16,6 +17,7 @@ public interface SystemService {
 
     List<Menu> listMenu();
 
+    List<Menu> listMenu(HashMap<String,String> param);
     ResultObject saveSystemUser(PageData pd) throws Exception;
 
     DataPager getUserList(PageData pd);

@@ -10,6 +10,7 @@ import com.project.utils.PageData;
 import com.project.utils.ToolsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 
 import java.util.*;
@@ -87,6 +88,15 @@ public class SystemServiceImpl implements SystemService {
         return listMenu;
     }
 
+
+    public List<Menu> listMenu(HashMap<String,String> param){
+        return systemMapper.getMenuList(param);
+    }
+
+
+
+
+
     @Override
     public ResultObject saveSystemUser(PageData pd) throws Exception {
         String password = pd.getString("password");
@@ -112,7 +122,10 @@ public class SystemServiceImpl implements SystemService {
 
     @Override
     public User getUserDetail(User user) {
-        return systemMapper.getAdminUserDetail(user);
+        User adminUserDetail = systemMapper.getAdminUserDetail(user);
+
+
+        return adminUserDetail;
     }
 
 

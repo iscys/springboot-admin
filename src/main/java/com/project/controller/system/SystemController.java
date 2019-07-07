@@ -11,6 +11,7 @@ import com.project.utils.PageData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -69,9 +72,33 @@ public class SystemController extends BaseController {
 
     @RequestMapping("/to_update")
     public ModelAndView to_update(User user){
-        ModelAndView mv = this.getModelAndView();
-        //PageData pd = this.getPageData();
-        User adminUser= sysService.getUserDetail(user);
+            ModelAndView mv = this.getModelAndView();
+            //PageData pd = this.getPageData();
+            User adminUser= sysService.getUserDetail(user);
+            String pri = adminUser.getPri();
+            String[] split = pri.split(",");
+            List<String> prives = Arrays.asList(split);
+            HashMap<String,String> param =new HashMap<>();
+            //父级菜单
+            List<Menu> listMenu= sysService.listMenu(param);
+            for(Menu menu:listMenu){
+                String parentId = menu.getId();
+                if(prives.contains(parentId)) {
+                    menu.setPri("1");
+                }
+                param.put("parentId", parentId);
+                List<Menu> subMenu= sysService.listMenu(param);
+                for(Menu sm:subMenu){
+                    String subId = sm.getId();
+                    if(prives.contains(subId)) {
+                        menu.setPri("1");
+                    }
+                }
+                menu.setChildren(subMenu);
+
+            }
+
+        mv.addObject("menuList",listMenu);
         mv.addObject("pd",adminUser);
         mv.setViewName("page/adminUser/adminUser_update");
         return mv;
