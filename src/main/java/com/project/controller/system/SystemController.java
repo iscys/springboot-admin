@@ -91,7 +91,7 @@ public class SystemController extends BaseController {
                 for(Menu sm:subMenu){
                     String subId = sm.getId();
                     if(prives.contains(subId)) {
-                        menu.setPri("1");
+                        sm.setPri("1");
                     }
                 }
                 menu.setChildren(subMenu);
