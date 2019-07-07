@@ -2,8 +2,11 @@ package com.project.service.system.impl;
 import com.project.model.Menu;
 import com.project.mapper.SystemMapper;
 import com.project.model.MessageModel;
+import com.project.model.ResultObject;
 import com.project.model.User;
 import com.project.service.system.SystemService;
+import com.project.utils.PageData;
+import com.project.utils.ToolsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +19,7 @@ public class SystemServiceImpl implements SystemService {
     @Autowired
     private SystemMapper systemMapper;
     /**
-     * 菜单menu
+     * 用户匹配菜单menu
      * @return
      */
     @Override
@@ -69,12 +72,32 @@ public class SystemServiceImpl implements SystemService {
      */
 
     public List<Menu> listMenu(){
-        List<Menu> menuList =systemMapper.getAllMenuList();
-        return menuList;
+        HashMap<String,String> param =new HashMap<>();
+
+        //父级菜单
+        List<Menu> listMenu= systemMapper.getMenuList(param);
+        for(Menu menu:listMenu){
+            String parentId = menu.getId();
+            param.put("parentId", parentId);
+            List<Menu> subMenu= systemMapper.getMenuList(param);
+            menu.setChildren(subMenu);
+
+        }
+        return listMenu;
     }
 
+    @Override
+    public ResultObject saveSystemUser(PageData pd) throws Exception {
+        String password = pd.getString("password");
+        pd.put("password", MessageModel.getMD5String(password));
+        if(null==pd.get("id")) {
+            systemMapper.saveSystemUser(pd);
+        }else{
+            systemMapper.updateSystemUser(pd);
 
-
+        }
+        return ResultObject.success(null);
+    }
 
 
 }

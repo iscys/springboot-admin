@@ -21,4 +21,8 @@ public interface SystemMapper {
     User getAdminUserDetail(User user);
 
     List<Menu> getAllMenuList();
+
+    void updateSystemUser(PageData pd);
+
+    void saveSystemUser(PageData pd);
 }

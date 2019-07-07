@@ -57,6 +57,51 @@
 
 
 
+    <insert id="saveSystemUser" parameterType="com.project.utils.PageData">
+      insert into sys_user
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="username != null  and username != '' ">
+              username,
+          </if>
+          <if test="password != null  and password != '' ">
+              password,
+          </if>
+          <if test="nickname != null  and nickname != '' ">
+              nickname,
+          </if>
+          <if test="pri != null  and pri != '' ">
+              pri,
+          </if>
+      </trim>
+      <trim prefix="values(" suffix=")" suffixOverrides=",">
+          <if test="username != null  and username != '' ">
+              #{username},
+          </if>
+          <if test="password != null  and password != '' ">
+              #{password},
+          </if>
+          <if test="nickname != null  and nickname != '' ">
+              #{nickname},
+          </if>
+          <if test="pri != null  and pri != '' ">
+              #{pri},
+          </if>
+      </trim>
 
+    </insert>
+
+    <update id="updateSystemUser" parameterType="com.project.utils.PageData">
+        update
+        sys_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pri != null  and pri != '' ">
+                pri=  #{pri},
+            </if>
+            <if test="password != null  and password != '' ">
+                password= #{password},
+            </if>
+        </trim>
+        where id =#{id}
+    </update>
 
 </mapper>
