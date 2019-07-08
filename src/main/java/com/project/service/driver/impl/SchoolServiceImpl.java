@@ -154,7 +154,7 @@ public class SchoolServiceImpl implements SchoolService {
 
         Subject subjectDetail = subjectMapper.getSubjectDetail(su);
         for(HashMap<String,Object> map :lists){
-
+            map.put("space","0.1km");//写死距离
             if(null !=subjectDetail){
                 map.put("subject_name",Subject.parseSubjectName(subjectDetail.getSubject_name()));
                 map.put("subject",subjectDetail.getSubject());
