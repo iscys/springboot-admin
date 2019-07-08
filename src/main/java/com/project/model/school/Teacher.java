@@ -15,6 +15,8 @@ public class Teacher {
             private String teacher_img;
             private String teacher_describe;
             private String teacher_phone;
+            private String star;
+            private String counts;
             private String flag;
             private String orders;
             private String create_time;
