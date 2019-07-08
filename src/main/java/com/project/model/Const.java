@@ -77,6 +77,9 @@ public class Const {
     public static final String SUBJECT_NO_MATCH="2011";
     public static final String SUBJECT_NO_MATCH_MESSAGE="驾照类型与所选科目不一致";
 
+    public static final String SUBJECT_NULL="2012";
+    public static final String SUBJECT_NULL_MESSAGE="驾照类型不能为空";
+
 
 
     public static final String ORDER_NULL="3001";

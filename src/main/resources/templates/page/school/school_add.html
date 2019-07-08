@@ -52,6 +52,27 @@ margin-left: 130px;
             <input type="text" name="school_phone" id="school_phone" required  lay-verify="required" placeholder="请输入驾校联系电话"  class="layui-input">
         </div>
     </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">驾校注册时间</label>
+        <div class="layui-input-block">
+            <input type="text" name="school_regist_time" id="school_regist_time" required  lay-verify="required" placeholder="驾校注册时间"  class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">驾校核准机构</label>
+        <div class="layui-input-block">
+            <input type="text" name="school_check_organization" id="school_check_organization" required  lay-verify="required" placeholder="驾校核准机构"  class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">驾校工商注册号</label>
+        <div class="layui-input-block">
+            <input type="text" name="school_regist_code" id="school_regist_code" required  lay-verify="required" placeholder="驾校工商注册号"  class="layui-input">
+        </div>
+    </div>
+
+
     <div class="layui-form-item">
         <label class="layui-form-label">驾校推荐排序</label>
         <div class="layui-input-block">
@@ -139,11 +160,11 @@ margin-left: 130px;
             , slider = layui.slider //滑块
             ,form = layui.form
 
-        /**
+
         laydate.render({
-            elem: '#teacher_apply'
+            elem: '#school_regist_time'
         });
-**/
+
 
 
     });
@@ -281,6 +302,10 @@ margin-left: 130px;
             var school_describe=editor.html();
             var flag=$("input[name='flag']:checked").val();
 
+            var school_check_organization =$("#school_check_organization").val();
+            var school_regist_code =$("#school_regist_code").val();
+            var school_regist_time =$("#school_regist_time").val();
+
             var message='';
             if(ASSERT(school_name)){
                 message='驾校名称不能为空'
@@ -302,6 +327,12 @@ margin-left: 130px;
                 message='驾校简介不能为空';
             }else if(ASSERT(orders)){
                 message='输入驾校推荐排序'
+            }else if(ASSERT(school_check_organization)){
+                message='输入驾校核准机构'
+            }else if(ASSERT(school_regist_code)){
+                message='输入驾校工商注册号'
+            }else if(ASSERT(school_regist_time)){
+                message='输入驾校注册时间'
             }
 
             if(message!=''){
@@ -313,6 +344,10 @@ margin-left: 130px;
             } );
             formData.append("school_face",school_face);
             formData.append("flag",flag);
+
+            formData.append("school_regist_time",school_regist_time);
+            formData.append("school_regist_code",school_regist_code);
+            formData.append("school_check_organization",school_check_organization);
 
             formData.append("orders",orders);
             formData.append("school_icon",school_icon);

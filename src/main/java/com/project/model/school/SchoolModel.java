@@ -18,7 +18,13 @@ public class SchoolModel {
             private String school_location;
             private String school_location_x;
             private String school_location_y;
-            private String flag;
+
+            private String school_regist_time;//标签
+            private String school_check_organization;//标签
+            private String school_regist_code;//标签
+
+
+         private String flag;
             private String create_time;
             private int feedback_count;//驾校评论数
             private String star;//驾校星级

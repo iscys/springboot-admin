@@ -139,6 +139,15 @@
             <if test="flag != null  and flag != '' ">
                 flag,
             </if>
+            <if test="school_regist_time != null  and school_regist_time != '' ">
+                school_regist_time,
+            </if>
+            <if test="school_regist_code != null  and school_regist_code != '' ">
+                school_regist_code,
+            </if>
+            <if test="school_check_organization != null  and school_check_organization != '' ">
+                school_check_organization,
+            </if>
 
         </trim>
 
@@ -182,6 +191,15 @@
             </if>
             <if test="flag != null  and flag != '' ">
                 #{flag},
+            </if>
+            <if test="school_regist_time != null  and school_regist_time != '' ">
+                #{school_regist_time},
+            </if>
+            <if test="school_regist_code != null  and school_regist_code != '' ">
+                #{school_regist_code},
+            </if>
+            <if test="school_check_organization != null  and school_check_organization != '' ">
+                #{school_check_organization},
             </if>
         </trim>
     </insert>
@@ -256,6 +274,17 @@
             <if test="mark != null  and mark != '' ">
                 mark= #{mark},
             </if>
+            <if test="school_regist_time != null  and school_regist_time != '' ">
+                school_regist_time= #{school_regist_time},
+            </if>
+            <if test="school_regist_code != null  and school_regist_code != '' ">
+                school_regist_code= #{school_regist_code},
+            </if>
+            <if test="school_check_organization != null  and school_check_organization != '' ">
+                school_check_organization= #{school_check_organization},
+            </if>
+
+
         </trim>
 
       where 1=1

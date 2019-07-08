@@ -83,6 +83,13 @@ public class UserServiceImpl implements UserService {
         return ResultObject.success(userInfo);
     }
 
+    @Override
+    public ResultObject bindSubject(User user) throws Exception {
+        user.setSubject(user.getSubject().toUpperCase());
+        userMapper.modifyUser(user);
+        return ResultObject.success(null);
+    }
+
     private void applySchoolInfo(User userInfo) {
         String school_id = userInfo.getSchool_id();
         if(StringUtils.isEmpty(school_id)){
