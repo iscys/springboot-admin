@@ -81,6 +81,7 @@ public class SchoolController extends BaseController {
             ResultObject result = schoolService.getSchoolDetail(schoolModel);
             return result;
         } catch (Exception e) {
+            logger.error("获取驾校详情信息异常{}",e.getMessage());
             return ResultObject.error(null);
         }
     }
