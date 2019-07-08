@@ -128,6 +128,9 @@ public class SchoolServiceImpl implements SchoolService {
         String subject=userInfo.getSubject();
         if(!StringUtils.isEmpty(subject)){
             pd.put("subject",subject);
+        }else{
+            pd.put("subject","C1");
+
         }
 
         String pageNum = pd.getString("pageNum");
@@ -191,6 +194,9 @@ public class SchoolServiceImpl implements SchoolService {
         String subject = userInfo.getSubject();
         if(!StringUtils.isEmpty(subject)){
             pd.put("subject",subject);
+        }else{
+            pd.put("subject","C1");
+
         }
 
         String pageNum = pd.getString("pageNum");
