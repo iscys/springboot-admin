@@ -14,4 +14,27 @@ public class Subject {
     private String hours;//课时
 
 
+    public static Object parseSubjectName(String subject_name) {
+        String parse="";
+        switch (subject_name){
+            case "1":
+                parse="科目二";
+                break;
+            case "2":
+                parse="科目二单学时";
+                break;
+            case "3":
+                parse="科目三";
+                break;
+            case "4":
+                parse="科目三单学时";
+                break;
+            case "5":
+                parse="总收费";
+                break;
+
+
+        }
+        return parse;
+    }
 }
