@@ -4,12 +4,12 @@
 <head th:insert="head::common_uploadFile"></head>
 <head th:insert="head::kindeditor"></head>
 <style>
-.layui-form-label {
-width: 130px;
-}
-.layui-input-block {
-margin-left: 130px;
-}
+    .layui-form-label {
+        width: 130px;
+    }
+    .layui-input-block {
+        margin-left: 130px;
+    }
 </style>
 <body>
 
@@ -20,131 +20,139 @@ margin-left: 130px;
 
 
 
-<form  action="/ocard/update" method="post" enctype="multipart/form-data" class="layui-form" >
+    <form  action="/ocard/update" method="post" enctype="multipart/form-data" class="layui-form" >
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">驾校名称</label>
-        <div class="layui-input-block">
-            <input type="text" name="school_name" id="school_name"  placeholder="请输入驾校名称"  class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">驾校名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="school_name" id="school_name"  placeholder="请输入驾校名称"  class="layui-input">
+            </div>
         </div>
-    </div>
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">是否有效</label>
-        <div class="layui-input-block">
-            <input type="radio" name="flag" value="1" title="有效" checked="">
-            <input type="radio" name="flag" value="0" title="无效">
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否有效</label>
+            <div class="layui-input-block">
+                <input type="radio" name="flag" value="1" title="有效" checked="">
+                <input type="radio" name="flag" value="0" title="无效">
+            </div>
         </div>
-    </div>
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">驾校编码</label>
-        <div class="layui-input-block">
-            <input type="text" name="school_code" id="school_code"  placeholder="请输入驾校code"  class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">驾校编码</label>
+            <div class="layui-input-block">
+                <input type="text" name="school_code" id="school_code"  placeholder="请输入驾校code"  class="layui-input">
+            </div>
         </div>
-    </div>
 
 
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">驾校联系电话</label>
-        <div class="layui-input-block">
-            <input type="text" name="school_phone" id="school_phone" required  lay-verify="required" placeholder="请输入驾校联系电话"  class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">驾校联系电话</label>
+            <div class="layui-input-block">
+                <input type="text" name="school_phone" id="school_phone" required  lay-verify="required" placeholder="请输入驾校联系电话"  class="layui-input">
+            </div>
         </div>
-    </div>
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">驾校注册时间</label>
-        <div class="layui-input-block">
-            <input type="text" name="school_regist_time" id="school_regist_time" required  lay-verify="required" placeholder="驾校注册时间"  class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">驾校注册时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="school_regist_time" id="school_regist_time" required  lay-verify="required" placeholder="驾校注册时间"  class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">驾校核准机构</label>
-        <div class="layui-input-block">
-            <input type="text" name="school_check_organization" id="school_check_organization" required  lay-verify="required" placeholder="驾校核准机构"  class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">驾校核准机构</label>
+            <div class="layui-input-block">
+                <input type="text" name="school_check_organization" id="school_check_organization" required  lay-verify="required" placeholder="驾校核准机构"  class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">驾校工商注册号</label>
-        <div class="layui-input-block">
-            <input type="text" name="school_regist_code" id="school_regist_code" required  lay-verify="required" placeholder="驾校工商注册号"  class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">驾校工商注册号</label>
+            <div class="layui-input-block">
+                <input type="text" name="school_regist_code" id="school_regist_code" required  lay-verify="required" placeholder="驾校工商注册号"  class="layui-input">
+            </div>
         </div>
-    </div>
 
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">驾校推荐排序</label>
-        <div class="layui-input-block">
-            <input type="number" name="orders" id="orders"  placeholder="输入驾校推荐的排序"  class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">驾校推荐排序</label>
+            <div class="layui-input-block">
+                <input type="number" name="orders" id="orders"  placeholder="输入驾校推荐的排序"  class="layui-input">
+            </div>
         </div>
-    </div>
 
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">驾校标签</label>
-        <div class="layui-input-block mark">
-            <input type="checkbox"  th:each="mark :${marks}" th:value="${mark.getId()}" th:title="${mark.getMark()}" lay-skin="primary" >
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">驾校标签</label>
+            <div class="layui-input-block mark">
+                <input type="checkbox"  th:each="mark :${marks}" th:value="${mark.getId()}" th:title="${mark.getMark()}" lay-skin="primary" >
+            </div>
         </div>
-    </div>
 
-    <div>
-        <h5>驾校icon图标上传：</h5>
-        <img  src="" style="height: 130px;width: 130px;">
-        <span  onchange="c(this,'school_icon')" class="btn btn-success fileinput-button">
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">可报考类型</label>
+            <div class="layui-input-block subjectType">
+                <input type="checkbox"  th:each="sb :${sub}" th:value="${sb.getSubject_type()}" th:title="${sb.getSubject_type()}" lay-skin="primary" >
+            </div>
+        </div>
+
+        <div>
+            <h5>驾校icon图标上传：</h5>
+            <img  src="" style="height: 130px;width: 130px;">
+            <span  onchange="c(this,'school_icon')" class="btn btn-success fileinput-button">
 	            <span>上传</span>
 	            <input id="school_icon" name="school_icon" type="file">
 	        </span>
-    </div>
+        </div>
 
-    <div>
-        <h5>驾校门面图片上传：</h5>
-        <img  src="" style="height: 300px;width: 640px;">
-        <span  onchange="c(this,'school_face')" class="btn btn-success fileinput-button">
+        <div>
+            <h5>驾校门面图片上传：</h5>
+            <img  src="" style="height: 300px;width: 640px;">
+            <span  onchange="c(this,'school_face')" class="btn btn-success fileinput-button">
 	            <span>上传</span>
 	            <input id="school_face" name="school_face" type="file">
 	        </span>
-    </div>
-
-   <h5>驾校图片相册上传：</h5>
-    <div id="zyupload" class="zyupload"></div>
-    <h5>驾校位置(请选择详细坐标地址，以便更好的定位距离)：</h5>
-    <div id="container" style="height: 360px;width: 100%; margin: auto"></div>
-    <br>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">纬度坐标</label>
-        <div class="layui-input-inline">
-            <input type="text"  name="school_location_x" id="x_location"  disabled class="layui-input">
         </div>
-        <label class="layui-form-label">经度坐标</label>
-        <div class="layui-input-inline">
-            <input type="text" name="school_location_y" id="y_location"  disabled class="layui-input">
-        </div>
-    </div>
 
-    <br>
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">驾校详细地址(请手动输入)</label>
-        <div class="layui-input-block">
-            <textarea name="school_location" id="school_location" placeholder="请输入完整的驾校地址" class="layui-textarea"></textarea>
+        <h5>驾校图片相册上传：</h5>
+        <div id="zyupload" class="zyupload"></div>
+        <h5>驾校位置(请选择详细坐标地址，以便更好的定位距离)：</h5>
+        <div id="container" style="height: 360px;width: 100%; margin: auto"></div>
+        <br>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">纬度坐标</label>
+            <div class="layui-input-inline">
+                <input type="text"  name="school_location_x" id="x_location"  disabled class="layui-input">
+            </div>
+            <label class="layui-form-label">经度坐标</label>
+            <div class="layui-input-inline">
+                <input type="text" name="school_location_y" id="y_location"  disabled class="layui-input">
+            </div>
         </div>
-    </div>
-    <br>
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">驾校简介描述</label>
-        <div class="layui-input-block">
-            <textarea name="school_describe" id="school_describe" style="width:100%;height:400px;"></textarea>
+
+        <br>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">驾校详细地址(请手动输入)</label>
+            <div class="layui-input-block">
+                <textarea name="school_location" id="school_location" placeholder="请输入完整的驾校地址" class="layui-textarea"></textarea>
+            </div>
         </div>
-    </div>
+        <br>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">驾校简介描述</label>
+            <div class="layui-input-block">
+                <textarea name="school_describe" id="school_describe" style="width:100%;height:400px;"></textarea>
+            </div>
+        </div>
 
 
 
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <div class="layui-btn" id="sub">立即提交</div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <div class="layui-btn" id="sub">立即提交</div>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
 </div>
 </body>
 
@@ -233,26 +241,26 @@ margin-left: 130px;
 
             /**
 
-            onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+             onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
                 console.info("当前选择了以下文件：");
                 console.info(selectFiles);
             },
-            onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+             onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
                 console.info("当前删除了此文件：");
                 console.info(file.name);
             },
-            onSuccess: function(file, response){          // 文件上传成功的回调方法
+             onSuccess: function(file, response){          // 文件上传成功的回调方法
                 console.info("此文件上传成功：");
                 console.info(file.name);
                 console.info("此文件上传到服务器地址：");
                 console.info(response);
                 $("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
             },
-            onFailure: function(file, response){          // 文件上传失败的回调方法
+             onFailure: function(file, response){          // 文件上传失败的回调方法
                 console.info("此文件上传失败：");
                 console.info(file.name);
             },
-            onComplete: function(response){           	  // 上传完成的回调方法
+             onComplete: function(response){           	  // 上传完成的回调方法
                 console.info("文件上传完成");
                 console.info(response);
             }
@@ -271,7 +279,7 @@ margin-left: 130px;
                     'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
                     'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
                     'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
-                     'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                    'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
                     'anchor', 'link', 'unlink'
                 ],
                 uploadJson : '/home/img',
@@ -287,7 +295,11 @@ margin-left: 130px;
             var arr=[];
             $(".mark input[type='checkbox']:checked").each(function(index,item){
                 arr.push($(this).val());
-            })
+            });
+            var subjectArr =[];
+            $(".subjectType input[type='checkbox']:checked").each(function(index,item){
+                subjectArr.push($(this).val());
+            });
 
             var formData = new FormData();
             var school_face=$("#school_face").get(0).files[0];
@@ -333,6 +345,8 @@ margin-left: 130px;
                 message='输入驾校工商注册号'
             }else if(ASSERT(school_regist_time)){
                 message='输入驾校注册时间'
+            }else if(subjectArr.length==0){
+                message='请选择驾校可报考类型'
             }
 
             if(message!=''){
@@ -359,32 +373,34 @@ margin-left: 130px;
             formData.append("school_location_y",school_location_y);
             formData.append("school_describe",school_describe);
             formData.append("mark",arr);
+            formData.append("subjectType",subjectArr);
+
 
             $("#sub").hide();
             $.ajax({
-            			type: "POST",//方法类型
-            			dataType: "json",//预期服务器返回的数据类型
-            			url: "/home/save" ,//url
-            			data:formData,
-                        processData: false,//用于对data参数进行序列化处理 这里必须false
-                        contentType: false, //必须
-            			success: function (result) {
-                            //console.log(result);//打印服务端返回的数据(调试用)
-                            if(result.flag =="1"){
-                                layer.msg("提交成功");
-                                window.setTimeout(cancelToast(),2100);
-                            }else{
-                                layer.msg("提交失败，请稍后再试");
-                                $("#sub").show();
-                            }
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "/home/save" ,//url
+                data:formData,
+                processData: false,//用于对data参数进行序列化处理 这里必须false
+                contentType: false, //必须
+                success: function (result) {
+                    //console.log(result);//打印服务端返回的数据(调试用)
+                    if(result.flag =="1"){
+                        layer.msg("提交成功");
+                        window.setTimeout(cancelToast(),2100);
+                    }else{
+                        layer.msg("提交失败，请稍后再试");
+                        $("#sub").show();
+                    }
 
 
-            			},
-            			error : function() {
+                },
+                error : function() {
 
-                            $("#sub").show();
-            			}
-            		});
+                    $("#sub").show();
+                }
+            });
 
         })
 

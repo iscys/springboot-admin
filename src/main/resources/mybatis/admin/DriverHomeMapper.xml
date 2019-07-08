@@ -6,7 +6,9 @@
    <select id="getHomeCount" parameterType="com.project.utils.PageData" resultType="java.lang.Integer">
     select count(1)
     from
-       sdb_school
+       sdb_school  a
+       left join sdb_school_support s
+       on a.id =s.school_id
        where 1=1
        and flag ='1'
        <if test="school_name !=null  and school_name != '' ">
@@ -14,6 +16,9 @@
        </if>
        <if test="school_code !=null  and school_code != '' ">
            and school_code=#{school_code}
+       </if>
+       <if test="subject !=null  and subject != '' ">
+           and ${subject}='1'
        </if>
    </select>
 
@@ -32,7 +37,9 @@
         as album_count
         from
         sdb_school a
-    where 1=1
+        left join sdb_school_support s
+        on a.id =s.school_id
+        where 1=1
         and flag ='1'
         <if test="school_name !=null  and school_name != '' ">
             and a.school_name=#{school_name}
@@ -42,6 +49,9 @@
         </if>
         <if test="school_phone !=null  and school_phone != '' ">
             and a.school_phone=#{school_phone}
+        </if>
+        <if test="subject !=null  and subject != '' ">
+            and ${subject}='1'
         </if>
         order by a.orders
     limit #{startIndex},#{pageSize}
@@ -605,6 +615,42 @@
 
 
         limit #{startIndex},#{pageSize}
+    </select>
+
+
+
+
+
+    <select id="getAllSubjectType" resultType="com.project.model.school.SubjectType">
+
+        select subject_type
+        from sdb_subject_type
+    </select>
+
+
+    <insert id="saveSubjectSupport" parameterType="com.project.model.school.SchoolSupport">
+     insert  into
+     sdb_school_support (school_id,A1,A2,A3,B1,B2,C1,C2,D,E,F)
+     values(#{school_id},#{A1},#{A2}
+     ,#{A3},#{B1},#{B2},#{C1}
+     ,#{C2},#{D},#{E},#{F})
+
+    </insert>
+
+    <insert id="updateSubjectSupport" parameterType="com.project.model.school.SchoolSupport">
+    update
+    sdb_school_support
+    set A1=#{A1},A2=#{A2},
+    A3=#{A3},B1=#{B1},B2=#{B2},C1=#{C1},C2=#{C2},D=#{D},E=#{E},
+    F=#{F}
+    WHERE school_id=#{school_id}
+
+    </insert>
+
+    <select id="getSchoolSupport" parameterType="com.project.model.school.SchoolSupport" resultType="com.project.model.school.SchoolSupport">
+    select * from   sdb_school_support
+    where school_id =#{school_id}
+
     </select>
 
 </mapper>

@@ -125,7 +125,10 @@ public class SchoolServiceImpl implements SchoolService {
         if(null==userInfo){
             return ResultObject.build(Const.MEMBER_ERROR,Const.MEMBER_ERROR_MESSAGE,null);
         }
-
+        String subject=userInfo.getSubject();
+        if(!StringUtils.isEmpty(subject)){
+            pd.put("subject",subject);
+        }
 
         String pageNum = pd.getString("pageNum");
         if(StringUtils.isEmpty(pageNum)||pageNum.equals("0")){

@@ -5,6 +5,8 @@ import com.project.controller.BaseController;
 import com.project.model.ResultObject;
 import com.project.model.school.Mark;
 import com.project.model.school.SchoolModel;
+import com.project.model.school.SchoolSupport;
+import com.project.model.school.SubjectType;
 import com.project.service.admin.DriverHomeService;
 import com.project.service.admin.MarkService;
 import com.project.utils.DataPager;
@@ -63,8 +65,11 @@ public class DriverHomeController extends BaseController {
     public ModelAndView addSchool(HttpServletRequest req){
         PageData pd = this.getPageData();
         List<Mark> marks = markService.allMark(pd);
+        List<SubjectType> subjectType = homeService.allSubjectType();
         ModelAndView mv = this.getModelAndView();
         mv.addObject("marks",marks);
+        mv.addObject("sub",subjectType);
+
         mv.setViewName("page/school/school_add");
         return mv;
     }
@@ -74,9 +79,15 @@ public class DriverHomeController extends BaseController {
         PageData pd = this.getPageData();
         ModelAndView mv = this.getModelAndView();
         List<Mark> marks = markService.allMark(pd);
+        List<SubjectType> subjectType = homeService.allSubjectType();
+        mv.addObject("sub",subjectType);
         mv.addObject("marks",marks);
         //PageData pd = this.getPageData();
         SchoolModel schoolModel=homeService.getSchoolDetail(school);
+        SchoolSupport tmpSupport =new SchoolSupport();
+        tmpSupport.setSchool_id(school.getId());
+
+        SchoolSupport support=homeService.getSchoolSupport(tmpSupport);
         String mark = schoolModel.getMark();
         if(!StringUtils.isEmpty(mark)){
             String[] split = mark.split(",");
@@ -89,6 +100,12 @@ public class DriverHomeController extends BaseController {
             }
             }
         }
+        if(support!=null) {
+            for (SubjectType sub : subjectType) {
+                SubjectType.covert(sub, support);
+            }
+        }
+
         mv.addObject("pd",schoolModel);
         mv.setViewName("page/school/school_update");
         return mv;

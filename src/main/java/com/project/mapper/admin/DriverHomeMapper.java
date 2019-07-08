@@ -1,10 +1,7 @@
 package com.project.mapper.admin;
 
 
-import com.project.model.school.Album;
-import com.project.model.school.FeedBackSchool;
-import com.project.model.school.FeedBackTeacher;
-import com.project.model.school.SchoolModel;
+import com.project.model.school.*;
 import com.project.utils.PageData;
 
 import java.util.HashMap;
@@ -45,4 +42,12 @@ public interface DriverHomeMapper  {
     List<HashMap<String, String>> getTeacherFeedBackList(PageData pd);
 
     int getTeacherFeedBackCount(PageData pd);
+
+    List<SubjectType> getAllSubjectType();
+
+    void saveSubjectSupport(SchoolSupport support);
+
+    void updateSubjectSupport(SchoolSupport support);
+
+    SchoolSupport getSchoolSupport(SchoolSupport tmpSupport);
 }

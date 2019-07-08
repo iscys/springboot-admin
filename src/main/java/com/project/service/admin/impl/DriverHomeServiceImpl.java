@@ -4,6 +4,8 @@ import com.project.config.ConfigProperties;
 import com.project.mapper.admin.DriverHomeMapper;
 import com.project.model.school.Album;
 import com.project.model.school.SchoolModel;
+import com.project.model.school.SchoolSupport;
+import com.project.model.school.SubjectType;
 import com.project.service.admin.DriverHomeService;
 import com.project.utils.DataPager;
 import com.project.utils.PageData;
@@ -14,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -100,9 +103,31 @@ public class DriverHomeServiceImpl implements DriverHomeService {
         }
         if(null==pd.get("id")) {
             homeMapper.save(pd);
+            SchoolSupport support =new SchoolSupport();
+            support.setSchool_id(String.valueOf(pd.get("id")));
+            String subjectType=pd.getString("subjectType");
+            String[] split = subjectType.split(",");
+            for(String sub:split){
+                applySchoolSupport(sub,support);
+
+            }
+            homeMapper.saveSubjectSupport(support);
         }else{
             //todo update
             homeMapper.updateShool(pd);
+            SchoolSupport support =new SchoolSupport();
+            support.setSchool_id(pd.getString("id"));
+            String subjectType=pd.getString("subjectType");
+            if(!StringUtils.isEmpty(subjectType)) {
+
+                String[] split = subjectType.split(",");
+                for (String sub : split) {
+                    applySchoolSupport(sub, support);
+
+                }
+                homeMapper.updateSubjectSupport(support);
+            }
+
         }
 
 
@@ -135,5 +160,54 @@ public class DriverHomeServiceImpl implements DriverHomeService {
 
         }
         return pd;
+    }
+
+    private void applySchoolSupport(String sub, SchoolSupport support) {
+
+        switch (sub){
+            case "A1":
+                support.setA1("1");
+                break;
+            case "A2":
+                support.setA2("1");
+                break;
+            case "A3":
+                support.setA3("1");
+                break;
+            case "B1":
+                support.setB1("1");
+                break;
+            case "B2":
+                support.setB2("1");
+                break;
+            case "C1":
+                support.setC1("1");
+                break;
+            case "C2":
+                support.setC2("1");
+                break;
+            case "D":
+                support.setD("1");
+                break;
+            case "E":
+                support.setE("1");
+                break;
+            case "F":
+                support.setF("1");
+                break;
+
+        }
+
+    }
+
+    @Override
+    public List<SubjectType> allSubjectType()  {
+
+        return homeMapper.getAllSubjectType();
+    }
+
+    @Override
+    public SchoolSupport getSchoolSupport(SchoolSupport tmpSupport) {
+        return homeMapper.getSchoolSupport(tmpSupport);
     }
 }
