@@ -4,7 +4,9 @@ import com.project.controller.BaseController;
 import com.project.model.ResultObject;
 import com.project.model.school.SchoolModel;
 import com.project.model.school.Subject;
+import com.project.model.school.SubjectType;
 import com.project.model.school.Teacher;
+import com.project.service.admin.DriverHomeService;
 import com.project.service.admin.SubjectService;
 import com.project.service.admin.TeacherService;
 import com.project.utils.DataPager;
@@ -32,15 +34,17 @@ public class SubjectController extends BaseController {
     private SubjectService subjectService;
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private DriverHomeService homeService;
     @RequestMapping("/index")
     public ModelAndView teacherList(HttpServletRequest req){
         ModelAndView mv = this.getModelAndView();
         PageData pd = this.getPageData();
         DataPager dataPager= subjectService.getSubjectList(pd);
-        List<SchoolModel> slist= teacherService.getAllSchoolList(pd);
+      //  List<SchoolModel> slist= teacherService.getAllSchoolList(pd);
         mv.addObject("dataPager",dataPager);
         mv.addObject("pd",pd);
-        mv.addObject("list",slist);
+       // mv.addObject("list",slist);
         mv.setViewName("page/subject/subject_list");
         return mv;
     }
@@ -53,6 +57,8 @@ public class SubjectController extends BaseController {
         //DataPager dataPager= homeService.getHomeList(pd);
         //mv.addObject("dataPager",dataPager);
         mv.addObject("pd",pd);
+        List<SubjectType> subjectType = homeService.allSubjectType();
+        mv.addObject("sub",subjectType);
         mv.addObject("list",slist);
 
         mv.setViewName("page/subject/subject_add");
@@ -68,6 +74,8 @@ public class SubjectController extends BaseController {
         mv.addObject("pd",pd);
         mv.addObject("list",slist);
         Subject resT=subjectService.getSubjectDetail(subject);
+        List<SubjectType> subjectType = homeService.allSubjectType();
+        mv.addObject("sub",subjectType);
         mv.addObject("subject",resT);
         //  mv.addObject("pd",schoolModel);
         mv.setViewName("page/subject/subject_update");
