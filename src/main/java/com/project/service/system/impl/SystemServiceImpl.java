@@ -10,6 +10,8 @@ import com.project.utils.PageData;
 import com.project.utils.ToolsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 
@@ -25,6 +27,8 @@ public class SystemServiceImpl implements SystemService {
      * @return
      */
     @Override
+   // @Transactional(propagation=Propagation.NEVER)
+
     public List<Menu> getMenuList(User user) {
         //权限数组
         String priStr = user.getPri();
@@ -64,6 +68,8 @@ public class SystemServiceImpl implements SystemService {
      * @return
      */
     @Override
+    @Transactional(propagation=Propagation.REQUIRED)
+
     public User checkUser(User user) {
         user.setPassword(MessageModel.getMD5String(user.getPassword()));
         User isExist = systemMapper.checkUser(user);
