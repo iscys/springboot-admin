@@ -27,8 +27,6 @@ public class SystemServiceImpl implements SystemService {
      * @return
      */
     @Override
-   // @Transactional(propagation=Propagation.NEVER)
-
     public List<Menu> getMenuList(User user) {
         //权限数组
         String priStr = user.getPri();
