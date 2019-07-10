@@ -71,6 +71,7 @@ public class SystemServiceImpl implements SystemService {
     public User checkUser(User user) {
         user.setPassword(MessageModel.getMD5String(user.getPassword()));
         User isExist = systemMapper.checkUser(user);
+        System.out.println("test ......cys");
         return isExist;
     }
     /**
